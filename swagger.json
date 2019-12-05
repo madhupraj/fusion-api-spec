@@ -14,7 +14,7 @@
     "/api/v1/ifi/{ifiID}/accountHolders/{accountHolderID}" : {
       "get" : {
         "tags" : [ "AccountHolder Management" ],
-        "summary" : "Get AccountHolder by ID",
+        "summary" : "Get AccountHolder by accountHolderID",
         "description" : "",
         "operationId" : "getAccountHolder",
         "parameters" : [ {
