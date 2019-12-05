@@ -879,63 +879,6 @@
         }
       }
     },
-    "/api/v1/ifi/{ifiID}/cards/list" : {
-      "post" : {
-        "operationId" : "getCards",
-        "consumes" : [ "application/json;charset=UTF-8" ],
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/ListCardsRequest"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "type" : "array",
-              "items" : {
-                "$ref" : "#/definitions/CardView"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/ifi/{ifiID}/cards/orders" : {
-      "post" : {
-        "operationId" : "placeOrder",
-        "consumes" : [ "application/json;charset=UTF-8" ],
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/CardOrder"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/CardOrder"
-            }
-          }
-        }
-      }
-    },
     "/api/v1/ifi/{ifiID}/cards/orders/{orderID}" : {
       "get" : {
         "operationId" : "getOrder",
@@ -1016,32 +959,6 @@
             "description" : "successful operation",
             "schema" : {
               "$ref" : "#/definitions/CardView"
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/ifi/{ifiID}/form_factor_products" : {
-      "post" : {
-        "operationId" : "addFormFactorProduct",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/Builder"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/InsertFormFactorProductResponse"
             }
           }
         }
@@ -1341,27 +1258,6 @@
             "description" : "successful operation",
             "schema" : {
               "$ref" : "#/definitions/AccountHolderVector"
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/ifi/{ifiID}/individuals" : {
-      "get" : {
-        "tags" : [ "AccountHolder Management" ],
-        "operationId" : "getAccountHolders",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/GetAllAccountHoldersResponse"
             }
           }
         }
@@ -1798,32 +1694,6 @@
         }
       }
     },
-    "/api/v1/ifi/{ifiID}/payment_products" : {
-      "post" : {
-        "operationId" : "createPaymentProduct",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/Builder"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/InsertPaymentProductResponse"
-            }
-          }
-        }
-      }
-    },
     "/api/v1/ifi/{ifiID}/payment_products/{paymentProductID}" : {
       "get" : {
         "operationId" : "getPaymentProduct",
@@ -1843,49 +1713,6 @@
             "description" : "successful operation",
             "schema" : {
               "$ref" : "#/definitions/PaymentProduct"
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/ifi/{ifiID}/resource_products" : {
-      "get" : {
-        "operationId" : "getResourceProducts",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/ResourceProduct"
-            }
-          }
-        }
-      },
-      "post" : {
-        "operationId" : "createResourceProduct",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/Builder"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/InsertResourceProductResponse"
             }
           }
         }
@@ -1915,56 +1742,6 @@
         }
       }
     },
-    "/api/v1/ifi/{ifiID}/resource_products/{resourceProductID}/resources" : {
-      "post" : {
-        "operationId" : "createResource",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "resourceProductID",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/Builder"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/InsertResourceResponse"
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/ifi/{ifiID}/resources" : {
-      "get" : {
-        "operationId" : "getResources",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/Resource"
-            }
-          }
-        }
-      }
-    },
     "/api/v1/ifi/{ifiID}/resources/{resourceID}" : {
       "get" : {
         "operationId" : "getResource",
@@ -1984,37 +1761,6 @@
             "description" : "successful operation",
             "schema" : {
               "$ref" : "#/definitions/Resource"
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/ifi/{ifiID}/resources/{resourceID}/form_factors" : {
-      "post" : {
-        "operationId" : "insertFormFactor",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "resourceID",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/Builder"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/InsertFormFactorResponse"
             }
           }
         }
@@ -2705,6 +2451,7 @@
       "type" : "object",
       "properties" : {
         "accountProduct" : {
+          "description" : "The account product which will be a part of the bundle",
           "$ref" : "#/definitions/ProductInfoRequest"
         },
         "headers" : {
@@ -2831,24 +2578,43 @@
       "required" : [ "name" ],
       "properties" : {
         "name" : {
-          "type" : "string"
+          "type" : "string",
+          "example" : "Savings Bundle",
+          "description" : "The name which would be assigned to the bundle"
+        },
+        "shortCode" : {
+          "type" : "string",
+          "example" : "SVNG",
+          "description" : "The short code to identify the bundle"
+        },
+        "picURL" : {
+          "type" : "string",
+          "description" : "The URL to get the bundle's display pic"
+        },
+        "description" : {
+          "type" : "string",
+          "example" : "Bundle related to savings accounts. Consists of a savings account product and a related debit card",
+          "description" : "The detailed description of the bundle"
         },
         "accountProducts" : {
           "type" : "array",
+          "description" : "The list of account products which will be a part of the bundle",
           "items" : {
             "$ref" : "#/definitions/ProductInfoRequest"
           }
         },
         "paymentProducts" : {
           "type" : "array",
+          "description" : "The list of payment products which will be a part of the bundle",
           "items" : {
             "$ref" : "#/definitions/ProductInfoRequest"
           }
         },
         "attributes" : {
           "type" : "object",
+          "description" : "Any additional information which is specific to the bundle",
           "additionalProperties" : {
-            "type" : "string"
+            "type" : "object"
           }
         },
         "headers" : {
@@ -2863,6 +2629,7 @@
       "type" : "object",
       "properties" : {
         "paymentProduct" : {
+          "description" : "The payment product which will be a part of the bundle",
           "$ref" : "#/definitions/ProductInfoRequest"
         }
       }
@@ -3401,7 +3168,7 @@
         "attributes" : {
           "type" : "object",
           "additionalProperties" : {
-            "type" : "string"
+            "type" : "object"
           }
         },
         "createdAt" : {
@@ -3411,6 +3178,15 @@
         "updatedAt" : {
           "type" : "string",
           "format" : "date-time"
+        },
+        "shortCode" : {
+          "type" : "string"
+        },
+        "picURL" : {
+          "type" : "string"
+        },
+        "description" : {
+          "type" : "string"
         }
       }
     },
@@ -3422,54 +3198,6 @@
         },
         "range" : {
           "type" : "string"
-        }
-      }
-    },
-    "CardOrder" : {
-      "type" : "object",
-      "properties" : {
-        "quantity" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "orderID" : {
-          "type" : "string"
-        },
-        "cardSkuID" : {
-          "type" : "string"
-        },
-        "plasticCode" : {
-          "type" : "string"
-        },
-        "expiry" : {
-          "$ref" : "#/definitions/Expiry"
-        },
-        "thirdLineEmbossing" : {
-          "type" : "string"
-        },
-        "fourthLineEmbossing" : {
-          "type" : "string"
-        },
-        "deliveryAddress" : {
-          "$ref" : "#/definitions/Address"
-        },
-        "additionalAttributes" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "string"
-          }
-        },
-        "tenantAttributes" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "string"
-          }
-        },
-        "vendorAttributes" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "string"
-          }
         }
       }
     },
@@ -3920,23 +3648,6 @@
         }
       }
     },
-    "GetAllAccountHoldersResponse" : {
-      "type" : "object",
-      "properties" : {
-        "headers" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "string"
-          }
-        },
-        "accountHolder" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/AccountHolder"
-          }
-        }
-      }
-    },
     "GetBeneficiaryTransactionListResponse" : {
       "type" : "object",
       "properties" : {
@@ -3968,274 +3679,6 @@
           "items" : {
             "$ref" : "#/definitions/POP"
           }
-        }
-      }
-    },
-    "InsertFormFactorProductResponse" : {
-      "type" : "object",
-      "properties" : {
-        "headers" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "string"
-          }
-        },
-        "ifi" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "id" : {
-          "type" : "string"
-        },
-        "code" : {
-          "type" : "string"
-        },
-        "name" : {
-          "type" : "string"
-        },
-        "description" : {
-          "type" : "string"
-        },
-        "type" : {
-          "type" : "string"
-        },
-        "policies" : {
-          "$ref" : "#/definitions/Policies"
-        },
-        "provider" : {
-          "type" : "string"
-        },
-        "skuID" : {
-          "type" : "string"
-        },
-        "attributes" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "object"
-          }
-        },
-        "issuanceStatus" : {
-          "type" : "string",
-          "enum" : [ "ACTIVE", "INACTIVE", "DELETED" ]
-        },
-        "paymentStatus" : {
-          "type" : "string",
-          "enum" : [ "ACTIVE", "INACTIVE", "DELETED" ]
-        },
-        "createdAt" : {
-          "type" : "string",
-          "format" : "date-time"
-        },
-        "modifiedAt" : {
-          "type" : "string",
-          "format" : "date-time"
-        }
-      }
-    },
-    "InsertFormFactorResponse" : {
-      "type" : "object",
-      "properties" : {
-        "headers" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "string"
-          }
-        },
-        "id" : {
-          "type" : "string"
-        },
-        "ifi" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "formFactorProductID" : {
-          "type" : "string"
-        },
-        "formFactorID" : {
-          "type" : "string"
-        },
-        "targetURI" : {
-          "type" : "string"
-        },
-        "attributes" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "object"
-          }
-        },
-        "policies" : {
-          "$ref" : "#/definitions/Policies"
-        },
-        "status" : {
-          "type" : "string",
-          "enum" : [ "ACTIVE", "INACTIVE", "DELETED" ]
-        },
-        "createdAt" : {
-          "type" : "string",
-          "format" : "date-time"
-        },
-        "modifiedAt" : {
-          "type" : "string",
-          "format" : "date-time"
-        }
-      }
-    },
-    "InsertPaymentProductResponse" : {
-      "type" : "object",
-      "properties" : {
-        "headers" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "string"
-          }
-        },
-        "ifi" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "id" : {
-          "type" : "string"
-        },
-        "code" : {
-          "type" : "string"
-        },
-        "name" : {
-          "type" : "string"
-        },
-        "description" : {
-          "type" : "string"
-        },
-        "channels" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/Channel"
-          }
-        },
-        "resourceProduct" : {
-          "type" : "string"
-        },
-        "attributes" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "object"
-          }
-        },
-        "status" : {
-          "type" : "string",
-          "enum" : [ "ACTIVE", "INACTIVE", "DELETED" ]
-        },
-        "createdAt" : {
-          "type" : "string",
-          "format" : "date-time"
-        },
-        "modifiedAt" : {
-          "type" : "string",
-          "format" : "date-time"
-        }
-      }
-    },
-    "InsertResourceProductResponse" : {
-      "type" : "object",
-      "properties" : {
-        "headers" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "string"
-          }
-        },
-        "ifi" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "id" : {
-          "type" : "string"
-        },
-        "code" : {
-          "type" : "string"
-        },
-        "name" : {
-          "type" : "string"
-        },
-        "description" : {
-          "type" : "string"
-        },
-        "formFactorProducts" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/FormFactorProduct"
-          }
-        },
-        "policies" : {
-          "$ref" : "#/definitions/Policies"
-        },
-        "attributes" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "object"
-          }
-        },
-        "status" : {
-          "type" : "string",
-          "enum" : [ "ACTIVE", "INACTIVE", "DELETED" ]
-        },
-        "createdAt" : {
-          "type" : "string",
-          "format" : "date-time"
-        },
-        "modifiedAt" : {
-          "type" : "string",
-          "format" : "date-time"
-        }
-      }
-    },
-    "InsertResourceResponse" : {
-      "type" : "object",
-      "properties" : {
-        "headers" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "string"
-          }
-        },
-        "ifi" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "id" : {
-          "type" : "string"
-        },
-        "resourceProduct" : {
-          "$ref" : "#/definitions/ResourceProduct"
-        },
-        "targetURI" : {
-          "type" : "string"
-        },
-        "formFactors" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/FormFactor"
-          }
-        },
-        "policies" : {
-          "$ref" : "#/definitions/Policies"
-        },
-        "attributes" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "object"
-          }
-        },
-        "status" : {
-          "type" : "string",
-          "enum" : [ "ACTIVE", "INACTIVE", "DELETED" ]
-        },
-        "createdAt" : {
-          "type" : "string",
-          "format" : "date-time"
-        },
-        "modifiedAt" : {
-          "type" : "string",
-          "format" : "date-time"
         }
       }
     },
@@ -4593,57 +4036,6 @@
         }
       }
     },
-    "ListCardsFilter" : {
-      "type" : "object",
-      "properties" : {
-        "cardID" : {
-          "type" : "string"
-        },
-        "cguid" : {
-          "type" : "string"
-        },
-        "account" : {
-          "$ref" : "#/definitions/Account"
-        },
-        "crn" : {
-          "type" : "string"
-        },
-        "orderID" : {
-          "type" : "string"
-        },
-        "productCode" : {
-          "type" : "string"
-        },
-        "plasticCode" : {
-          "type" : "string"
-        },
-        "cardSkuID" : {
-          "type" : "string"
-        }
-      }
-    },
-    "ListCardsRequest" : {
-      "type" : "object",
-      "properties" : {
-        "limit" : {
-          "type" : "integer",
-          "format" : "int32",
-          "example" : 123123
-        },
-        "offset" : {
-          "type" : "integer",
-          "format" : "int32",
-          "example" : 123123
-        },
-        "view" : {
-          "type" : "string",
-          "enum" : [ "BASIC", "EXPANDED", "EXPANDED_SENSITIVE" ]
-        },
-        "filters" : {
-          "$ref" : "#/definitions/ListCardsFilter"
-        }
-      }
-    },
     "Money" : {
       "type" : "object",
       "properties" : {
@@ -4897,12 +4289,27 @@
       "required" : [ "productID" ],
       "properties" : {
         "productID" : {
-          "type" : "string"
+          "type" : "string",
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db",
+          "description" : "The UUID of the account product which will be a part of the bundle"
+        },
+        "productFamilyID" : {
+          "type" : "string",
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db",
+          "description" : "The UUID of the product's family which will be a part of the bundle"
         },
         "programIDs" : {
           "type" : "array",
+          "description" : "The UUIDs of the programs which will be associated to the account product at the time of issuance",
           "items" : {
             "type" : "string"
+          }
+        },
+        "attributes" : {
+          "type" : "object",
+          "description" : "Any additional information which is specific to the product info",
+          "additionalProperties" : {
+            "type" : "object"
           }
         }
       }
@@ -4926,6 +4333,15 @@
         "ifiID" : {
           "type" : "integer",
           "format" : "int64"
+        },
+        "shortCode" : {
+          "type" : "string"
+        },
+        "attributes" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "object"
+          }
         }
       }
     },
@@ -5116,16 +4532,20 @@
       "type" : "object",
       "properties" : {
         "name" : {
-          "type" : "string"
+          "type" : "string",
+          "example" : "Savings Bundle",
+          "description" : "The name which would be assigned to the bundle"
         },
         "accountProducts" : {
           "type" : "array",
+          "description" : "The list of account products which will be a part of the bundle",
           "items" : {
             "$ref" : "#/definitions/ProductInfoRequest"
           }
         },
         "paymentProducts" : {
           "type" : "array",
+          "description" : "The list of payment products which will be a part of the bundle",
           "items" : {
             "$ref" : "#/definitions/ProductInfoRequest"
           }
@@ -5135,9 +4555,24 @@
         },
         "attributes" : {
           "type" : "object",
+          "description" : "Any additional information which is specific to the bundle",
           "additionalProperties" : {
-            "type" : "string"
+            "type" : "object"
           }
+        },
+        "shortCode" : {
+          "type" : "string",
+          "example" : "SVNG",
+          "description" : "The short code to identify the bundle"
+        },
+        "picURL" : {
+          "type" : "string",
+          "description" : "The URL to get the bundle's display pic"
+        },
+        "description" : {
+          "type" : "string",
+          "example" : "Bundle related to savings accounts. Consists of a savings account product and a related debit card",
+          "description" : "The detailed description of the bundle"
         },
         "headers" : {
           "type" : "object",
