@@ -14,7 +14,7 @@
     "/api/v1/ifi/{ifiID}/accountHolders/{accountHolderID}" : {
       "get" : {
         "tags" : [ "AccountHolder Management" ],
-        "summary" : "Get AccountHolder by accountHolderID",
+        "summary" : "Get AccountHolder by ID",
         "description" : "",
         "operationId" : "getAccountHolder",
         "parameters" : [ {
@@ -3975,23 +3975,23 @@
         "serviceInstanceJID" : {
           "type" : "boolean"
         },
+        "primaryServiceName" : {
+          "type" : "string"
+        },
+        "serviceViewName" : {
+          "type" : "string"
+        },
+        "bareJID" : {
+          "$ref" : "#/definitions/JID"
+        },
         "serviceViewJID" : {
           "type" : "boolean"
         },
         "defaultServiceNode" : {
           "type" : "boolean"
         },
-        "serviceViewName" : {
-          "type" : "string"
-        },
         "jidOfAGroup" : {
           "type" : "boolean"
-        },
-        "primaryServiceName" : {
-          "type" : "string"
-        },
-        "bareJID" : {
-          "$ref" : "#/definitions/JID"
         },
         "proxyServiceJID" : {
           "type" : "boolean"
