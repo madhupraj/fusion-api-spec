@@ -4,9 +4,6 @@
     "title" : "API Reference",
     "version" : "v1"
   },
-  "servers" : [ {
-    "url" : "/"
-  } ],
   "tags" : [ {
     "name" : "Account Management"
   } ],
