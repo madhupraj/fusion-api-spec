@@ -2,14 +2,13 @@
   "swagger" : "2.0",
   "info" : {
     "version" : "v1",
-    "title" : "Fusion APIs"
+    "title" : "API Reference"
   },
   "tags" : [ {
     "name" : "Account Management"
   }, {
     "name" : "AccountHolder Management"
   } ],
-  "schemes" : [ "http", "https" ],
   "paths" : {
     "/api/v1/ifi/{ifiID}/accountHolders/{accountHolderID}" : {
       "get" : {
@@ -3975,23 +3974,23 @@
         "serviceInstanceJID" : {
           "type" : "boolean"
         },
-        "primaryServiceName" : {
-          "type" : "string"
-        },
-        "serviceViewName" : {
-          "type" : "string"
-        },
-        "bareJID" : {
-          "$ref" : "#/definitions/JID"
-        },
         "serviceViewJID" : {
           "type" : "boolean"
         },
         "defaultServiceNode" : {
           "type" : "boolean"
         },
+        "serviceViewName" : {
+          "type" : "string"
+        },
         "jidOfAGroup" : {
           "type" : "boolean"
+        },
+        "primaryServiceName" : {
+          "type" : "string"
+        },
+        "bareJID" : {
+          "$ref" : "#/definitions/JID"
         },
         "proxyServiceJID" : {
           "type" : "boolean"
