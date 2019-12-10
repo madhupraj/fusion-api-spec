@@ -2873,23 +2873,23 @@
           "serviceInstanceJID" : {
             "type" : "boolean"
           },
+          "primaryServiceName" : {
+            "type" : "string"
+          },
+          "serviceViewName" : {
+            "type" : "string"
+          },
+          "bareJID" : {
+            "$ref" : "#/components/schemas/JID"
+          },
           "serviceViewJID" : {
             "type" : "boolean"
           },
           "defaultServiceNode" : {
             "type" : "boolean"
           },
-          "serviceViewName" : {
-            "type" : "string"
-          },
           "jidOfAGroup" : {
             "type" : "boolean"
-          },
-          "primaryServiceName" : {
-            "type" : "string"
-          },
-          "bareJID" : {
-            "$ref" : "#/components/schemas/JID"
           },
           "proxyServiceJID" : {
             "type" : "boolean"
