@@ -6607,11 +6607,11 @@
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
         },
-        "asJsonPrimitive" : {
-          "$ref" : "#/definitions/JsonPrimitive"
-        },
         "asJsonObject" : {
           "$ref" : "#/definitions/JsonObject"
+        },
+        "asJsonPrimitive" : {
+          "$ref" : "#/definitions/JsonPrimitive"
         },
         "jsonArray" : {
           "type" : "boolean"
@@ -6639,11 +6639,11 @@
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
         },
-        "asJsonPrimitive" : {
-          "$ref" : "#/definitions/JsonPrimitive"
-        },
         "asJsonObject" : {
           "$ref" : "#/definitions/JsonObject"
+        },
+        "asJsonPrimitive" : {
+          "$ref" : "#/definitions/JsonPrimitive"
         },
         "jsonArray" : {
           "type" : "boolean"
@@ -6710,11 +6710,11 @@
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
         },
-        "asJsonPrimitive" : {
-          "$ref" : "#/definitions/JsonPrimitive"
-        },
         "asJsonObject" : {
           "$ref" : "#/definitions/JsonObject"
+        },
+        "asJsonPrimitive" : {
+          "$ref" : "#/definitions/JsonPrimitive"
         },
         "jsonArray" : {
           "type" : "boolean"
@@ -6775,13 +6775,10 @@
         "number" : {
           "type" : "boolean"
         },
-        "boolean" : {
-          "type" : "boolean"
-        },
         "asBoolean" : {
           "type" : "boolean"
         },
-        "string" : {
+        "boolean" : {
           "type" : "boolean"
         },
         "asNumber" : {
@@ -6820,6 +6817,9 @@
           "type" : "integer",
           "format" : "int32"
         },
+        "string" : {
+          "type" : "boolean"
+        },
         "asString" : {
           "type" : "string"
         },
@@ -6829,11 +6829,11 @@
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
         },
-        "asJsonPrimitive" : {
-          "$ref" : "#/definitions/JsonPrimitive"
-        },
         "asJsonObject" : {
           "$ref" : "#/definitions/JsonObject"
+        },
+        "asJsonPrimitive" : {
+          "$ref" : "#/definitions/JsonPrimitive"
         },
         "jsonArray" : {
           "type" : "boolean"
