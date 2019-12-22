@@ -8,26 +8,74 @@
     "name" : "AccountHolder Management"
   } ],
   "paths" : {
-    "/api/v1/ifi/{ifiID}/accountHolders/{accountHolderID}" : {
-      "get" : {
+    "/api/v1/ifi/{ifiID}/accountHolder/headless" : {
+      "post" : {
         "tags" : [ "AccountHolder Management" ],
-        "summary" : "Get AccountHolder by ID",
-        "operationId" : "getAccountHolder",
+        "summary" : "Create a headless account holder",
+        "operationId" : "createHeadlessAccountHolder",
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the headless account holder is being created",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
+          },
+          "example" : 123123
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CreateAccountHolderRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAccountHolderRelationListResponse"
+                }
+              }
+            }
+          },
+          "201" : {
+            "description" : "",
+            "content" : { }
           }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/accountHolders/{accountHolderID}" : {
+      "get" : {
+        "tags" : [ "AccountHolder Management" ],
+        "summary" : "Get all details of the account holder",
+        "operationId" : "getAccountHolderByID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
         }, {
           "name" : "accountHolderID",
           "in" : "path",
+          "description" : "ID of the account holder whose details are being retrieved",
           "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
         } ],
         "responses" : {
           "200" : {
@@ -46,15 +94,18 @@
     "/api/v1/ifi/{ifiID}/applications/newIndividual" : {
       "post" : {
         "tags" : [ "AccountHolder Management" ],
+        "summary" : "Create an application for creating new individual",
         "operationId" : "createAccountHolder",
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account holder is being created",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         } ],
         "requestBody" : {
           "content" : {
@@ -87,22 +138,27 @@
     "/api/v1/ifi/{ifiID}/individualApplications/{applicationID}" : {
       "get" : {
         "tags" : [ "AccountHolder Management" ],
+        "summary" : "Get the application details for an individual by ID",
         "operationId" : "getAccountHolder",
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the application exists",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         }, {
           "name" : "applicationID",
           "in" : "path",
+          "description" : "ID of the application which is being fetched",
           "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "123123"
         } ],
         "responses" : {
           "200" : {
@@ -121,22 +177,27 @@
     "/api/v1/ifi/{ifiID}/individualApplications/{applicationID}/pops" : {
       "get" : {
         "tags" : [ "AccountHolder Management" ],
+        "summary" : "Get all the Point of Presence(POP)s of an individual",
         "operationId" : "getAccountHolderPops",
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account holder POP exists",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         }, {
           "name" : "applicationID",
           "in" : "path",
+          "description" : "ID of the application for which the account holder POP is being retrieved",
           "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "123123"
         } ],
         "responses" : {
           "200" : {
@@ -153,22 +214,27 @@
       },
       "post" : {
         "tags" : [ "AccountHolder Management" ],
+        "summary" : "Create the Point of Presence(POP) of an individual",
         "operationId" : "addAccountHolderPop",
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the individual's POPs exist",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         }, {
           "name" : "applicationID",
           "in" : "path",
+          "description" : "ID of the application for which the POP is being created",
           "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "123123"
         } ],
         "requestBody" : {
           "content" : {
@@ -201,29 +267,36 @@
     "/api/v1/ifi/{ifiID}/individualApplications/{applicationID}/pops/{popID}" : {
       "get" : {
         "tags" : [ "AccountHolder Management" ],
+        "summary" : "Get the Point of Presence(POP) of an individual by ID",
         "operationId" : "getAccountHolderPopsByID",
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the individual's POP exists",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         }, {
           "name" : "applicationID",
           "in" : "path",
+          "description" : "ID of the application for which the account holder POP is being retrieved",
           "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "123123"
         }, {
           "name" : "popID",
           "in" : "path",
+          "description" : "ID of the POP whose details are being retrieved",
           "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
         } ],
         "responses" : {
           "200" : {
@@ -242,22 +315,27 @@
     "/api/v1/ifi/{ifiID}/individualApplications/{applicationID}/relationships" : {
       "get" : {
         "tags" : [ "AccountHolder Management" ],
+        "summary" : "Get all relationships of an individual",
         "operationId" : "getAccountHolderRelationships",
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account holder relationships exist",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         }, {
           "name" : "applicationID",
           "in" : "path",
+          "description" : "ID of the application for which the account holder relationships are being retrieved",
           "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "123123"
         } ],
         "responses" : {
           "200" : {
@@ -274,22 +352,27 @@
       },
       "post" : {
         "tags" : [ "AccountHolder Management" ],
+        "summary" : "Create the relationship for an individual",
         "operationId" : "addAccountHolderRelationship",
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account holder relation is being created",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         }, {
           "name" : "applicationID",
           "in" : "path",
+          "description" : "ID of the application for which the account holder relation is being created",
           "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "123123"
         } ],
         "requestBody" : {
           "content" : {
@@ -322,29 +405,36 @@
     "/api/v1/ifi/{ifiID}/individualApplications/{applicationID}/relationships/{relationshipID}" : {
       "get" : {
         "tags" : [ "AccountHolder Management" ],
+        "summary" : "Get a specific individual's relationship by ID",
         "operationId" : "getAccountHolderRelationshipByID",
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account holder relationship exists",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         }, {
           "name" : "applicationID",
           "in" : "path",
+          "description" : "ID of the application for which the account holder relationship is being created",
           "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "123123"
         }, {
           "name" : "relationshipID",
           "in" : "path",
+          "description" : "ID of the relationship whose details are being retrieved",
           "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
         } ],
         "responses" : {
           "200" : {
@@ -363,22 +453,27 @@
     "/api/v1/ifi/{ifiID}/individualApplications/{applicationID}/vectors" : {
       "post" : {
         "tags" : [ "AccountHolder Management" ],
+        "summary" : "Create the vector for an individual",
         "operationId" : "addAccountHolderVector",
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account holder vector is being created",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         }, {
           "name" : "applicationID",
           "in" : "path",
+          "description" : "ID of the application for which the account holder vector is being created",
           "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "123123"
         } ],
         "requestBody" : {
           "content" : {
@@ -411,29 +506,36 @@
     "/api/v1/ifi/{ifiID}/individualApplications/{applicationID}/vectors/{vectorID}" : {
       "get" : {
         "tags" : [ "AccountHolder Management" ],
+        "summary" : "Get the vector of an individual by ID",
         "operationId" : "getAccountHolderVector",
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account holder",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         }, {
           "name" : "applicationID",
           "in" : "path",
+          "description" : "ID of the application for which the account holder vector is being retrieved",
           "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "123123"
         }, {
           "name" : "vectorID",
           "in" : "path",
+          "description" : "ID of the vector whose details are being retrieved",
           "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
         } ],
         "responses" : {
           "200" : {
@@ -449,25 +551,73 @@
         }
       }
     },
-    "/api/v1/ifi/{ifiID}/individuals/{individualID}" : {
+    "/api/v1/ifi/{ifiID}/individualByVector/{vectorType}/{vectorValue}" : {
       "get" : {
         "tags" : [ "AccountHolder Management" ],
-        "operationId" : "getAccountHolders",
+        "operationId" : "getAccountHolderByVector",
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account holder",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         }, {
-          "name" : "individualID",
+          "name" : "vectorType",
           "in" : "path",
           "required" : true,
           "schema" : {
             "type" : "string"
           }
+        }, {
+          "name" : "vectorValue",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AccountHolder"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/individuals/{individualID}" : {
+      "get" : {
+        "tags" : [ "AccountHolder Management" ],
+        "summary" : "Get details of an individual by ID",
+        "operationId" : "getAccountHolders",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the individual exists",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "description" : "ID of the individual whose details are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
         } ],
         "responses" : {
           "200" : {
@@ -545,6 +695,18 @@
           },
           "mothersMaidenName" : {
             "type" : "string"
+          },
+          "pops" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/POP"
+            }
+          },
+          "tags" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Tag"
+            }
           },
           "attributes" : {
             "type" : "object",
@@ -657,10 +819,14 @@
         "type" : "object",
         "properties" : {
           "accountHolderID" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "ID of the account holder for whom the account belongs",
+            "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
           },
           "label" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "ID of the account holder for whom the account belongs",
+            "example" : "My-Home"
           },
           "address" : {
             "$ref" : "#/components/schemas/Address"
@@ -675,7 +841,8 @@
             "type" : "object",
             "additionalProperties" : {
               "type" : "string"
-            }
+            },
+            "description" : "Any additional information which you would like to provide"
           }
         }
       },
@@ -683,16 +850,21 @@
         "type" : "object",
         "properties" : {
           "relatedAccountHolderID" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "ID of the account holder with whom the relationship is being established",
+            "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
           },
           "relationshipType" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Definition of the relationship type with the related Account Holder",
+            "example" : "Brother"
           },
           "attributes" : {
             "type" : "object",
             "additionalProperties" : {
               "type" : "string"
-            }
+            },
+            "description" : "Any additional information which you would like to provide"
           }
         }
       },
@@ -700,16 +872,21 @@
         "type" : "object",
         "properties" : {
           "type" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Type of the vector being defined for the account holder",
+            "example" : "PhoneNumber"
           },
           "value" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Value of the vector being defined for the account holder",
+            "example" : "+911234567890"
           },
           "attributes" : {
             "type" : "object",
             "additionalProperties" : {
               "type" : "string"
-            }
+            },
+            "description" : "Any additional information which you would like to provide"
           },
           "verified" : {
             "type" : "boolean"
@@ -812,34 +989,45 @@
               "$ref" : "#/components/schemas/AccountHolderVector"
             }
           },
-          "ifiID" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
           "salutation" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Salutation of the account holder being created",
+            "example" : "Mrs"
           },
           "firstName" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "First name of the account holder being created",
+            "example" : "Chandler"
           },
           "middleName" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Middle name of the account holder being created",
+            "example" : "Muriel"
           },
           "lastName" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Last name of the account holder being created",
+            "example" : "Bing"
           },
           "profilePicURL" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "URL  of the pic of the account holder being created",
+            "example" : "http://abc.com/test"
           },
           "dob" : {
             "type" : "string",
+            "description" : "Date of Birth of the account holder being created",
             "format" : "date-time"
           },
           "gender" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Gender of the account holder being created",
+            "example" : "MALE"
           },
           "mothersMaidenName" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Mother's maiden name of the account holder being created",
+            "example" : "Margaret"
           }
         }
       },
@@ -968,6 +1156,23 @@
           },
           "default" : {
             "type" : "boolean"
+          }
+        }
+      },
+      "Tag" : {
+        "type" : "object",
+        "properties" : {
+          "type" : {
+            "type" : "string"
+          },
+          "value" : {
+            "type" : "string"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
           }
         }
       }

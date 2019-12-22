@@ -8,6 +8,88 @@
     "name" : "Default"
   } ],
   "paths" : {
+    "/api/v1/ifi/{ifiID}/applications/addCorporate" : {
+      "post" : {
+        "summary" : "Create an application for creating a new corporate",
+        "operationId" : "createCorporateApplication",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CreateAddCorporateApplicationRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CreateApplicationResponse"
+                }
+              }
+            }
+          },
+          "201" : {
+            "description" : "",
+            "content" : { }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/applications/editCorporate" : {
+      "post" : {
+        "summary" : "Create an application for editing an existing corporate",
+        "operationId" : "createEditCorporateApplication",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CreateEditCorporateApplicationRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GenericCreateApplicationResponse"
+                }
+              }
+            }
+          },
+          "201" : {
+            "description" : "",
+            "content" : { }
+          }
+        }
+      }
+    },
     "/api/v1/ifi/{ifiID}/bundles" : {
       "get" : {
         "operationId" : "getAllBundles",
@@ -274,6 +356,7 @@
     },
     "/api/v1/ifi/{ifiID}/bundles/{bundleID}/issueAccount" : {
       "post" : {
+        "summary" : "Issue specific Account from a bundle ",
         "operationId" : "issueAccountProduct",
         "parameters" : [ {
           "name" : "ifiID",
@@ -319,6 +402,7 @@
     },
     "/api/v1/ifi/{ifiID}/bundles/{bundleID}/issueBundle" : {
       "post" : {
+        "summary" : "Issue bundle to a specific individual/company",
         "operationId" : "issueBundle",
         "parameters" : [ {
           "name" : "ifiID",
@@ -364,6 +448,7 @@
     },
     "/api/v1/ifi/{ifiID}/bundles/{bundleID}/issueFormFactor" : {
       "post" : {
+        "summary" : "Issue specific form factor of a resource to a specific individual/company",
         "operationId" : "issueFormFactor",
         "parameters" : [ {
           "name" : "ifiID",
@@ -409,6 +494,7 @@
     },
     "/api/v1/ifi/{ifiID}/bundles/{bundleID}/issueResource" : {
       "post" : {
+        "summary" : "Issue specific resource of a bundle to a specific individual/company",
         "operationId" : "issueResource",
         "parameters" : [ {
           "name" : "ifiID",
@@ -542,6 +628,7 @@
     },
     "/api/v1/ifi/{ifiID}/cards/orders/{orderID}" : {
       "get" : {
+        "summary" : "Get order details by ID",
         "operationId" : "getOrder",
         "parameters" : [ {
           "name" : "ifiID",
@@ -574,6 +661,7 @@
     },
     "/api/v1/ifi/{ifiID}/cards/{cardID}/setPin" : {
       "post" : {
+        "summary" : "Set Pin to the card details",
         "operationId" : "setPin",
         "parameters" : [ {
           "name" : "ifiID",
@@ -616,6 +704,7 @@
     },
     "/api/v1/ifi/{ifiID}/cards/{cguid}" : {
       "get" : {
+        "summary" : "Get card details by ID",
         "operationId" : "getCard",
         "parameters" : [ {
           "name" : "ifiID",
@@ -652,8 +741,722 @@
         }
       }
     },
+    "/api/v1/ifi/{ifiID}/companies" : {
+      "get" : {
+        "summary" : "Get all the companies of a specific IFI",
+        "operationId" : "getCompaniesByIFI",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "type" : "object",
+                    "properties" : { }
+                  }
+                }
+              }
+            }
+          },
+          "201" : {
+            "description" : "",
+            "content" : { }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/companies/{companyID}" : {
+      "get" : {
+        "summary" : "Get details of a specific company by ID",
+        "operationId" : "getCompanyById",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "companyID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Company"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/corporate/applications" : {
+      "get" : {
+        "summary" : "Get all the applications of an IFI of a specific applicationType ",
+        "operationId" : "getApplicationsByIFI",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "type" : "string"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GenericFetchApplicationResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/corporate/applications/{applicationID}" : {
+      "get" : {
+        "summary" : "Get application details by ID",
+        "operationId" : "getApplicationByID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "type" : "string"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetApplicationDetailsResponse"
+                }
+              }
+            }
+          },
+          "201" : {
+            "description" : "",
+            "content" : { }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/corporate/applications/{applicationID}/action/{action}" : {
+      "post" : {
+        "summary" : "Perform action on the application",
+        "operationId" : "actionOnApplication",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "action",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ActionOnApplicationRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EmptyPayload"
+                }
+              }
+            }
+          },
+          "201" : {
+            "description" : "",
+            "content" : { }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/corporate/applications/{applicationID}/addCompanySection/{addCompanySectionID}" : {
+      "put" : {
+        "summary" : "Perform action on the company section of the application",
+        "operationId" : "addCompanySection",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "addCompanySectionID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ActionOnAddCompanySectionRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ActionOnSectionResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/corporate/applications/{applicationID}/addCompanySections/{addCompanySectionID}" : {
+      "get" : {
+        "summary" : "Get the company section of an application by ID",
+        "operationId" : "getCompanySectionByID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "addCompanySectionID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "type" : "string"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AddCompanyDataObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/corporate/applications/{applicationID}/addCorporateSection/{addCorporateSectionID}" : {
+      "get" : {
+        "summary" : "Get the corporate section of an application by ID",
+        "operationId" : "getAddCorporateSectionByID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "addCorporateSectionID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AddCorporateDataObject"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "summary" : "Perform action on the corporate section of the application",
+        "operationId" : "addCorporateSection",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "addCorporateSectionID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ActionOnAddCorporateSectionRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ActionOnSectionResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/corporate/applications/{applicationID}/editCompanySection/{editCompanySectionID}" : {
+      "put" : {
+        "summary" : "Perform action on the company section of the application",
+        "operationId" : "editCompanySection",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "editCompanySectionID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ActionOnEditCompanySectionRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetApplicationDetailsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/corporate/applications/{applicationID}/editCompanySections/{editCompanySectionID}" : {
+      "get" : {
+        "summary" : "Get the company section of an application by ID",
+        "operationId" : "getCompanySectionByID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "editCompanySectionID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EditCompanySectionDataObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/corporate/applications/{applicationID}/editCorporateSection/{editCorporateSectionID}" : {
+      "get" : {
+        "summary" : "Get the corporate section of an application by ID",
+        "operationId" : "getEditCorporateSectionByID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "editCorporateSectionID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EditCorporateDataObject"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "summary" : "Perform action on the corporate section of the application",
+        "operationId" : "editCorporateSection",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "editCorporateSectionID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ActionOnEditCorporateSectionRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetApplicationDetailsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/corporate/{corporateID}" : {
+      "get" : {
+        "summary" : "Get details of a specific corporate",
+        "operationId" : "getCorporateById",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "corporateID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/DeferredResultCorporate"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/corporate/{corporateID}/companies" : {
+      "get" : {
+        "summary" : "Get details of all the companies of a specific corporate",
+        "operationId" : "getAllCompaniesOfCorporate",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "corporateID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/DeferredResultListCompany"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/corporate/{corporateID}/companies/{companyID}" : {
+      "get" : {
+        "summary" : "Get details of a specific company of a specific corporate",
+        "operationId" : "getCompanyOfCorporateById",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "corporateID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "companyID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/DeferredResultCompany"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/ifi/{ifiID}/form_factor_products/{formFactorProductID}" : {
       "get" : {
+        "summary" : "Get Form Factor Product details by ID",
         "operationId" : "getFormFactorProduct",
         "parameters" : [ {
           "name" : "ifiID",
@@ -686,22 +1489,27 @@
     },
     "/api/v1/ifi/{ifiID}/individuals/{individualID}/beneficiaries" : {
       "get" : {
+        "summary" : "Get all the beneficiaries of an individual",
         "operationId" : "getBeneficiaries",
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary details are being retrieved",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         }, {
           "name" : "individualID",
           "in" : "path",
+          "description" : "ID of the individual for whom the beneficiaries list are being retrieved",
           "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
         } ],
         "responses" : {
           "200" : {
@@ -717,22 +1525,27 @@
         }
       },
       "post" : {
+        "summary" : "Create a new beneficiary of an individual",
         "operationId" : "createBeneficiary",
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary is being created",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         }, {
           "name" : "individualID",
           "in" : "path",
+          "description" : "ID of the individual for whom the beneficiary is being created",
           "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
         } ],
         "requestBody" : {
           "content" : {
@@ -760,29 +1573,36 @@
     },
     "/api/v1/ifi/{ifiID}/individuals/{individualID}/beneficiaries/{beneficiaryID}" : {
       "get" : {
+        "summary" : "Get details of a beneficiary by ID",
         "operationId" : "getBeneficiaryByID",
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary exists",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         }, {
           "name" : "individualID",
           "in" : "path",
+          "description" : "ID of the individual for whom the beneficiary details are being retrieved",
           "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
         }, {
           "name" : "beneficiaryID",
           "in" : "path",
+          "description" : "ID of the beneficiary whose details are being retrieved",
           "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
         } ],
         "responses" : {
           "200" : {
@@ -800,22 +1620,27 @@
     },
     "/api/v1/ifi/{ifiID}/individuals/{individualID}/beneficiaries/{beneficiaryID}/accounts" : {
       "get" : {
+        "summary" : "Get all the accounts of a beneficiary",
         "operationId" : "getBeneficiaryAccounts",
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary accounts are being retrieved",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         }, {
           "name" : "individualID",
           "in" : "path",
+          "description" : "ID of the individual for whom the beneficiary accounts are being retrieved",
           "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
         }, {
           "name" : "beneficiaryID",
           "in" : "path",
@@ -838,22 +1663,27 @@
         }
       },
       "post" : {
+        "summary" : "Creation of a beneficiary account",
         "operationId" : "createBeneficiaryAccount",
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary account is being created",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         }, {
           "name" : "individualID",
           "in" : "path",
+          "description" : "ID of the individual for whom the beneficiary account is being created",
           "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
         }, {
           "name" : "beneficiaryID",
           "in" : "path",
@@ -888,36 +1718,45 @@
     },
     "/api/v1/ifi/{ifiID}/individuals/{individualID}/beneficiaries/{beneficiaryID}/accounts/{accountID}" : {
       "get" : {
+        "summary" : "Get details of a specific beneficiary account of an individual's beneficiary ",
         "operationId" : "getBeneficiaryAccountByID",
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary account being retrieved exists",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         }, {
           "name" : "individualID",
           "in" : "path",
+          "description" : "ID of the individual for whom the beneficiary account being retrieved exists",
           "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
         }, {
           "name" : "beneficiaryID",
           "in" : "path",
+          "description" : "ID of the beneficiary whose beneficiary account details are being retrieved",
           "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
         }, {
           "name" : "accountID",
           "in" : "path",
+          "description" : "ID of the beneficiary account whose details are being retrieved",
           "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
         } ],
         "responses" : {
           "200" : {
@@ -935,29 +1774,36 @@
     },
     "/api/v1/ifi/{ifiID}/individuals/{individualID}/beneficiaries/{beneficiaryID}/accounts/{accountID}/transfers" : {
       "post" : {
+        "summary" : "Perform transfer to a beneficiary account of an individual's beneficiary",
         "operationId" : "transferToBeneficiaryAccount",
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary transfer is being performed",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         }, {
           "name" : "individualID",
           "in" : "path",
+          "description" : "ID of the individual who is performing the beneficiary transfer",
           "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
         }, {
           "name" : "beneficiaryID",
           "in" : "path",
+          "description" : "ID of the beneficiary to whom the transfer is being performed",
           "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
         } ],
         "requestBody" : {
           "content" : {
@@ -985,29 +1831,36 @@
     },
     "/api/v1/ifi/{ifiID}/individuals/{individualID}/beneficiaries/{beneficiaryID}/transfers" : {
       "post" : {
+        "summary" : "Perform transfer to an individual's beneficiary's default account",
         "operationId" : "transferToDefaultBeneficiaryAccount",
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary transfer is being performed",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         }, {
           "name" : "individualID",
           "in" : "path",
+          "description" : "ID of the individual who is performing the beneficiary transfer",
           "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
         }, {
           "name" : "beneficiaryID",
           "in" : "path",
+          "description" : "ID of the beneficiary to whom the transfer is being performed",
           "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
         } ],
         "requestBody" : {
           "content" : {
@@ -1035,22 +1888,27 @@
     },
     "/api/v1/ifi/{ifiID}/individuals/{individualID}/beneficiaryTransfers" : {
       "get" : {
+        "summary" : "Get all the beneficiary transfers of an individual",
         "operationId" : "getAllBeneficiaryTransfers",
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary whose transfers are being retrieved",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         }, {
           "name" : "individualID",
           "in" : "path",
+          "description" : "ID of the individual for whom the beneficiary transfers are being retrieved",
           "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
         }, {
           "name" : "pageSize",
           "in" : "query",
@@ -1082,22 +1940,27 @@
     },
     "/api/v1/ifi/{ifiID}/individuals/{individualID}/beneficiaryTransfers/{transferID}" : {
       "get" : {
+        "summary" : "Get the details of a transfer by ID",
         "operationId" : "getBeneficiaryTransferByID",
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary transfer exists",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         }, {
           "name" : "individualID",
           "in" : "path",
+          "description" : "ID of the individual for whom the beneficiary transfer details are being fetched",
           "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
         }, {
           "name" : "transferID",
           "in" : "path",
@@ -1122,6 +1985,7 @@
     },
     "/api/v1/ifi/{ifiID}/payment_products/{paymentProductID}" : {
       "get" : {
+        "summary" : "Get Payment Product details by ID",
         "operationId" : "getPaymentProduct",
         "parameters" : [ {
           "name" : "ifiID",
@@ -1154,6 +2018,7 @@
     },
     "/api/v1/ifi/{ifiID}/resource_products/{resourceProductID}" : {
       "get" : {
+        "summary" : "Get Resource Product details by ID",
         "operationId" : "getResourceProduct",
         "parameters" : [ {
           "name" : "ifiID",
@@ -1184,8 +2049,51 @@
         }
       }
     },
+    "/api/v1/ifi/{ifiID}/resource_products/{resourceProductID}/resources/list" : {
+      "post" : {
+        "operationId" : "filterResourceProductBasedResources",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "resourceProductID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Builder"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ListResourceResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/ifi/{ifiID}/resources/{resourceID}" : {
       "get" : {
+        "summary" : "Get resource details by ID",
         "operationId" : "getResource",
         "parameters" : [ {
           "name" : "ifiID",
@@ -1216,50 +2124,9 @@
         }
       }
     },
-    "/api/v1/ifi/{ifiID}/resources/{resourceID}/form_factors/create" : {
-      "post" : {
-        "operationId" : "provisionFormFactor",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "resourceID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "*/*" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/Builder"
-              }
-            }
-          },
-          "required" : false
-        },
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/CreateAndLinkFormFactorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/v1/ifi/{ifiID}/resources/{resourceID}/form_factors/{formFactorID}" : {
       "get" : {
+        "summary" : "Get form factor details by ID",
         "operationId" : "getFormFactor",
         "parameters" : [ {
           "name" : "ifiID",
@@ -1299,6 +2166,7 @@
     },
     "/api/v1/ifi/{ifiID}/resources/{resourceID}/target" : {
       "patch" : {
+        "summary" : "Change the resource target account",
         "operationId" : "updateResourceTarget",
         "parameters" : [ {
           "name" : "ifiID",
@@ -1332,6 +2200,408 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/Resource"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/applications" : {
+      "get" : {
+        "summary" : "Get All Applications",
+        "operationId" : "getAllApplications",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "status",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Account"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/applications/editIndividual" : {
+      "post" : {
+        "summary" : "Edit Individual Application",
+        "operationId" : "editApplication",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/EditIndividualApplicationRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Account"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/applications/newIndividual" : {
+      "post" : {
+        "summary" : "Create Individual Application",
+        "operationId" : "createApplication",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CreateAccountHolderApplicationRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Account"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/applications/newIndividualWithAutoApproval" : {
+      "post" : {
+        "summary" : "Create Individual Application With Auto Approval",
+        "operationId" : "createApplicationWithAutoApproval",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CreateAccountHolderApplicationWithAutoApprovalRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Account"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/applications/{applicationID}" : {
+      "get" : {
+        "summary" : "Get Individual Application",
+        "operationId" : "getApplication",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Account"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "summary" : "Update Individual Application",
+        "operationId" : "updateApplication",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateAccountHolderApplicationRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Account"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "Delete Individual Application",
+        "operationId" : "deleteApplication",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Account"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/applications/{applicationID}/kycStatus/{kycStatus}" : {
+      "put" : {
+        "summary" : "Update Application Status",
+        "operationId" : "updateApplicationKYCStatus",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "kycStatus",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateKycStatusRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Account"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/applications/{applicationID}/spool/{spoolID}" : {
+      "put" : {
+        "summary" : "Update Application Spool",
+        "operationId" : "updateApplicationSpool",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "spoolID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Account"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/applications/{applicationID}/status/{newStatus}" : {
+      "put" : {
+        "summary" : "Update Application Status",
+        "operationId" : "updateApplicationStatus",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "newStatus",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Account"
                 }
               }
             }
@@ -1473,6 +2743,12 @@
           },
           "status" : {
             "type" : "string"
+          },
+          "tags" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Tag"
+            }
           },
           "attributes" : {
             "type" : "object",
@@ -1622,6 +2898,258 @@
           }
         }
       },
+      "ActionOnAddCompanySectionRequest" : {
+        "required" : [ "opsActionOnSection", "remarks", "type" ],
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "description" : "Name of the action being performed",
+            "example" : "Contract Change"
+          },
+          "logoURL" : {
+            "type" : "string",
+            "description" : "URL for the logo of the company",
+            "example" : "https://abc.com/logo.png"
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "Identification for the type of company which is being created",
+            "example" : "PRIVATE_LIMITED",
+            "enum" : [ "LLP", "SOLE_PROPRIETOR", "TRUST", "PRIVATE_LIMITED", "PARTNER_FIRM", "PUBLIC", "NPO_NGO", "BRANCH_OFFICE", "LIAISON_OFFICE", "PUBLIC_COMPANY" ]
+          },
+          "pointsOfPresence" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/POP"
+            }
+          },
+          "kycStatus" : {
+            "$ref" : "#/components/schemas/KYCStatus"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object",
+              "properties" : { }
+            },
+            "description" : "Additional information for this entity",
+            "example" : "myCode : ABC"
+          },
+          "remarks" : {
+            "type" : "string",
+            "description" : "Additional remarks for the executing the action on the application",
+            "example" : "Application looks good"
+          },
+          "opsActionOnSection" : {
+            "type" : "string",
+            "description" : "Action to be performed on this specific section",
+            "example" : "SAVE",
+            "enum" : [ "SAVE", "MARK_AS_COMPLETE", "REJECT", "ACCEPT" ]
+          }
+        }
+      },
+      "ActionOnAddCorporateSectionRequest" : {
+        "required" : [ "opsActionOnSection", "remarks" ],
+        "type" : "object",
+        "properties" : {
+          "corporateName" : {
+            "type" : "string",
+            "description" : "Name of the Corporate which needs to be added",
+            "example" : "My Company"
+          },
+          "agreementNumber" : {
+            "type" : "string",
+            "description" : "Number of the agreement between the corporate and the issuer/VBO",
+            "example" : "123456"
+          },
+          "agreementURL" : {
+            "type" : "string",
+            "description" : "URL of the agreement between the corporate and the issuer/VBO",
+            "example" : "abc.com/agreement"
+          },
+          "agreementStartDate" : {
+            "type" : "string",
+            "description" : "Date from which the validity of the agreement starts",
+            "example" : "01/01/2019"
+          },
+          "agreementEndDate" : {
+            "type" : "string",
+            "description" : "Date on which the validity of the agreement ends",
+            "example" : "01/01/2019"
+          },
+          "signingAuthority" : {
+            "$ref" : "#/components/schemas/SigningAuthority"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object",
+              "properties" : { }
+            },
+            "description" : "Additional information for this entity",
+            "example" : "myCode : ABC"
+          },
+          "remarks" : {
+            "type" : "string",
+            "description" : "Additional remarks for the executing the action on the application",
+            "example" : "Application looks good"
+          },
+          "opsActionOnSection" : {
+            "type" : "string",
+            "description" : "Action to be performed on this specific section",
+            "example" : "SAVE",
+            "enum" : [ "SAVE", "MARK_AS_COMPLETE", "REJECT", "ACCEPT" ]
+          }
+        }
+      },
+      "ActionOnApplicationRequest" : {
+        "required" : [ "moderatedApplicationType", "remarks" ],
+        "type" : "object",
+        "properties" : {
+          "moderatedApplicationType" : {
+            "type" : "string",
+            "description" : "Type of the application on which the action is to be performed",
+            "example" : "SIGN_UP",
+            "enum" : [ "SIGN_UP", "EDIT_CORPORATE" ]
+          },
+          "remarks" : {
+            "type" : "string",
+            "description" : "Additional remarks for the executing the action on the application",
+            "example" : "Application looks good"
+          }
+        }
+      },
+      "ActionOnEditCompanySectionRequest" : {
+        "required" : [ "companyId", "opsActionOnSection", "remarks", "type" ],
+        "type" : "object",
+        "properties" : {
+          "companyId" : {
+            "type" : "string",
+            "description" : "Identifier of the company which is being acted upon",
+            "example" : "ee64c930-c06f-49cb-9443-84b132b9d4e2"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Name of the action being performed",
+            "example" : "Contract Change"
+          },
+          "logoURL" : {
+            "type" : "string",
+            "description" : "URL for the logo of the company",
+            "example" : "https://abc.com/logo.png"
+          },
+          "shortCode" : {
+            "type" : "string",
+            "description" : "Short code to be used as identifier for the company",
+            "example" : "ABCXYZ"
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "Identification for the type of company which is being created",
+            "example" : "PRIVATE_LIMITED",
+            "enum" : [ "LLP", "SOLE_PROPRIETOR", "TRUST", "PRIVATE_LIMITED", "PARTNER_FIRM", "PUBLIC", "NPO_NGO", "BRANCH_OFFICE", "LIAISON_OFFICE", "PUBLIC_COMPANY" ]
+          },
+          "pointsOfPresence" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/POP"
+            }
+          },
+          "kycStatus" : {
+            "$ref" : "#/components/schemas/KYCStatus"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object",
+              "properties" : { }
+            },
+            "description" : "Additional information for this entity",
+            "example" : "myCode : ABC"
+          },
+          "remarks" : {
+            "type" : "string",
+            "description" : "Additional remarks for the executing the action on the application",
+            "example" : "Application looks good"
+          },
+          "opsActionOnSection" : {
+            "type" : "string",
+            "description" : "Action to be performed on this specific section",
+            "example" : "SAVE",
+            "enum" : [ "SAVE", "MARK_AS_COMPLETE", "REJECT", "ACCEPT" ]
+          }
+        }
+      },
+      "ActionOnEditCorporateSectionRequest" : {
+        "required" : [ "opsActionOnSection", "remarks" ],
+        "type" : "object",
+        "properties" : {
+          "corporateId" : {
+            "type" : "string",
+            "description" : "Identifier of the corporate which is being edited",
+            "example" : "4baf7564-f2c4-4300-b27b-cdee926146e6"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Name of the action being performed",
+            "example" : "Contract Change"
+          },
+          "agreementNumber" : {
+            "type" : "string",
+            "description" : "Number of the agreement between the corporate and the issuer/VBO",
+            "example" : "123456"
+          },
+          "agreementURL" : {
+            "type" : "string",
+            "description" : "URL of the agreement between the corporate and the issuer/VBO",
+            "example" : "abc.com/agreement"
+          },
+          "agreementStartDate" : {
+            "type" : "string",
+            "description" : "Date from which the validity of the agreement starts",
+            "example" : "01/01/2019"
+          },
+          "agreementEndDate" : {
+            "type" : "string",
+            "description" : "Date on which the validity of the agreement ends",
+            "example" : "01/01/2019"
+          },
+          "signingAuthority" : {
+            "$ref" : "#/components/schemas/SigningAuthority"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object",
+              "properties" : { }
+            },
+            "description" : "Additional information for this entity",
+            "example" : "myCode : ABC"
+          },
+          "remarks" : {
+            "type" : "string",
+            "description" : "Additional remarks for the executing the action on the application",
+            "example" : "Application looks good"
+          },
+          "opsActionOnSection" : {
+            "type" : "string",
+            "description" : "Action to be performed on this specific section",
+            "example" : "SAVE",
+            "enum" : [ "SAVE", "MARK_AS_COMPLETE", "REJECT", "ACCEPT" ]
+          }
+        }
+      },
+      "ActionOnSectionResponse" : {
+        "type" : "object",
+        "properties" : {
+          "status" : {
+            "type" : "string",
+            "description" : "Current status of the section after action is perfromed",
+            "example" : "TEMP_SUBMITTED"
+          }
+        }
+      },
       "AddAccountProductInBundleRequest" : {
         "type" : "object",
         "properties" : {
@@ -1731,6 +3259,173 @@
             "additionalProperties" : {
               "type" : "string"
             }
+          }
+        }
+      },
+      "AddCompanyDataObject" : {
+        "required" : [ "remarks", "sectionStatus", "type" ],
+        "type" : "object",
+        "properties" : {
+          "sectionId" : {
+            "type" : "integer",
+            "description" : "Identifier of the specific section",
+            "format" : "int32",
+            "example" : 143
+          },
+          "sectionType" : {
+            "type" : "string",
+            "description" : "Identifier of the specific section",
+            "example" : "ADD_COMPANY",
+            "enum" : [ "ADD_COMPANY", "ADD_CORPORATE", "EDIT_CORPORATE", "EDIT_COMPANY" ]
+          },
+          "entityId" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Name of the action being performed",
+            "example" : "Contract Change"
+          },
+          "logoURL" : {
+            "type" : "string",
+            "description" : "URL for the logo of the company",
+            "example" : "https://abc.com/logo.png"
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "Identification for the type of company which is being created",
+            "example" : "PRIVATE_LIMITED",
+            "enum" : [ "LLP", "SOLE_PROPRIETOR", "TRUST", "PRIVATE_LIMITED", "PARTNER_FIRM", "PUBLIC", "NPO_NGO", "BRANCH_OFFICE", "LIAISON_OFFICE", "PUBLIC_COMPANY" ]
+          },
+          "pointsOfPresence" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/POP"
+            }
+          },
+          "kycStatus" : {
+            "$ref" : "#/components/schemas/KYCStatus"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object",
+              "properties" : { }
+            },
+            "description" : "Additional information for this entity",
+            "example" : "myCode : ABC"
+          },
+          "sectionStatus" : {
+            "type" : "string",
+            "description" : "Current status of the section",
+            "example" : "IN_REVIEW",
+            "enum" : [ "NEW", "PENDING", "TEMP_COMPLETED", "APPROVED", "REJECTED", "IN_REVIEW", "ACCEPTED" ]
+          },
+          "createdOn" : {
+            "type" : "string",
+            "description" : "Date on which this entity was created",
+            "format" : "date-time"
+          },
+          "updatedOn" : {
+            "type" : "string",
+            "description" : "Latest date on which this entity was updated",
+            "format" : "date-time"
+          },
+          "remarks" : {
+            "type" : "string",
+            "description" : "Additional remarks for the executing the action on the application",
+            "example" : "Application looks good"
+          },
+          "revisionId" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
+      "AddCorporateDataObject" : {
+        "required" : [ "remarks", "sectionStatus" ],
+        "type" : "object",
+        "properties" : {
+          "sectionId" : {
+            "type" : "integer",
+            "description" : "Identifier of the specific section",
+            "format" : "int32",
+            "example" : 143
+          },
+          "sectionType" : {
+            "type" : "string",
+            "description" : "Identifier of the specific section",
+            "example" : "ADD_COMPANY",
+            "enum" : [ "ADD_COMPANY", "ADD_CORPORATE", "EDIT_CORPORATE", "EDIT_COMPANY" ]
+          },
+          "entityId" : {
+            "type" : "string"
+          },
+          "revisionId" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "corporateName" : {
+            "type" : "string"
+          },
+          "agreementNumber" : {
+            "type" : "string",
+            "description" : "Number of the agreement between the corporate and the issuer/VBO",
+            "example" : "123456"
+          },
+          "agreementURL" : {
+            "type" : "string",
+            "description" : "URL of the agreement between the corporate and the issuer/VBO",
+            "example" : "abc.com/agreement"
+          },
+          "agreementStartDate" : {
+            "type" : "string",
+            "description" : "Date from which the validity of the agreement starts",
+            "example" : "01/01/2019"
+          },
+          "agreementEndDate" : {
+            "type" : "string",
+            "description" : "Date on which the validity of the agreement ends",
+            "example" : "01/01/2019"
+          },
+          "signingAuthority" : {
+            "$ref" : "#/components/schemas/SigningAuthority"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object",
+              "properties" : { }
+            },
+            "description" : "Additional information for this entity",
+            "example" : "myCode : ABC"
+          },
+          "sectionStatus" : {
+            "type" : "string",
+            "description" : "Current status of the section",
+            "example" : "IN_REVIEW",
+            "enum" : [ "NEW", "PENDING", "TEMP_COMPLETED", "APPROVED", "REJECTED", "IN_REVIEW", "ACCEPTED" ]
+          },
+          "ifiId" : {
+            "type" : "integer",
+            "description" : "ID of the IFI (on-boarded organization) under which the corporate exists",
+            "format" : "int64",
+            "example" : 123456
+          },
+          "createdOn" : {
+            "type" : "string",
+            "description" : "Date on which this entity was created",
+            "format" : "date-time"
+          },
+          "updatedOn" : {
+            "type" : "string",
+            "description" : "Latest date on which this entity was updated",
+            "format" : "date-time"
+          },
+          "remarks" : {
+            "type" : "string",
+            "description" : "Additional remarks for adding the corporate data",
+            "example" : "Application looks good"
           }
         }
       },
@@ -2103,7 +3798,8 @@
             "format" : "int64"
           },
           "status" : {
-            "type" : "string"
+            "type" : "string",
+            "enum" : [ "SUCCESS", "FAILED" ]
           },
           "transactionID" : {
             "type" : "string"
@@ -2398,19 +4094,52 @@
           }
         }
       },
-      "CreateAndLinkFormFactorResponse" : {
+      "Company" : {
         "type" : "object",
         "properties" : {
-          "headers" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
+          "id" : {
+            "type" : "string"
+          },
+          "corporateId" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "ifiId" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "string"
+          },
+          "companyLogoURL" : {
+            "type" : "string"
+          },
+          "pointsOfPresence" : {
+            "uniqueItems" : true,
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/POP"
             }
           },
-          "resource" : {
-            "$ref" : "#/components/schemas/Resource"
+          "kycStatus" : {
+            "$ref" : "#/components/schemas/KYCStatus"
           },
-          "provisionFormFactorResponse" : {
+          "companyType" : {
+            "type" : "string",
+            "enum" : [ "LLP", "SOLE_PROPRIETOR", "TRUST", "PRIVATE_LIMITED", "PARTNER_FIRM", "PUBLIC", "NPO_NGO", "BRANCH_OFFICE", "LIAISON_OFFICE", "PUBLIC_COMPANY" ]
+          },
+          "createdOn" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "updatedOn" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "attributes" : {
             "type" : "object",
             "additionalProperties" : {
               "type" : "object",
@@ -2419,8 +4148,282 @@
           }
         }
       },
+      "Contact" : {
+        "type" : "object",
+        "properties" : {
+          "firstName" : {
+            "type" : "string"
+          },
+          "lastName" : {
+            "type" : "string"
+          },
+          "vectors" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/AccountHolderVector"
+            }
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "CreateAccountHolderApplicationRequest" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "ifiID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "formID" : {
+            "type" : "string"
+          },
+          "spoolID" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "individualType" : {
+            "type" : "string"
+          },
+          "applicationType" : {
+            "type" : "string",
+            "enum" : [ "KYC", "CREATE_ACCOUNT_HOLDER", "EDIT_ACCOUNT_HOLDER" ]
+          },
+          "individualID" : {
+            "type" : "string"
+          },
+          "salutation" : {
+            "type" : "string"
+          },
+          "firstName" : {
+            "type" : "string"
+          },
+          "middleName" : {
+            "type" : "string"
+          },
+          "lastName" : {
+            "type" : "string"
+          },
+          "profilePicURL" : {
+            "type" : "string"
+          },
+          "dob" : {
+            "type" : "string",
+            "format" : "date"
+          },
+          "gender" : {
+            "type" : "string"
+          },
+          "mothersMaidenName" : {
+            "type" : "string"
+          },
+          "kycDetails" : {
+            "$ref" : "#/components/schemas/KYCDetails"
+          },
+          "vectors" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Vector"
+            }
+          },
+          "pops" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/POP"
+            }
+          },
+          "customFields" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object",
+              "properties" : { }
+            }
+          },
+          "tags" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Tag"
+            }
+          },
+          "source" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CreateAccountHolderApplicationWithAutoApprovalRequest" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "ifiID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "formID" : {
+            "type" : "string"
+          },
+          "spoolID" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "individualType" : {
+            "type" : "string"
+          },
+          "applicationType" : {
+            "type" : "string",
+            "enum" : [ "KYC", "CREATE_ACCOUNT_HOLDER", "EDIT_ACCOUNT_HOLDER" ]
+          },
+          "individualID" : {
+            "type" : "string"
+          },
+          "salutation" : {
+            "type" : "string"
+          },
+          "firstName" : {
+            "type" : "string"
+          },
+          "middleName" : {
+            "type" : "string"
+          },
+          "lastName" : {
+            "type" : "string"
+          },
+          "profilePicURL" : {
+            "type" : "string"
+          },
+          "dob" : {
+            "type" : "string",
+            "format" : "date"
+          },
+          "gender" : {
+            "type" : "string"
+          },
+          "mothersMaidenName" : {
+            "type" : "string"
+          },
+          "kycDetails" : {
+            "$ref" : "#/components/schemas/KYCDetails"
+          },
+          "vectors" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Vector"
+            }
+          },
+          "pops" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/POP"
+            }
+          },
+          "customFields" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object",
+              "properties" : { }
+            }
+          },
+          "tags" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Tag"
+            }
+          },
+          "source" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CreateAddCorporateApplicationRequest" : {
+        "type" : "object",
+        "properties" : {
+          "ifiParams" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          }
+        }
+      },
+      "CreateApplicationResponse" : {
+        "type" : "object",
+        "properties" : {
+          "applicationId" : {
+            "type" : "integer",
+            "description" : "Identifier of the application that has been created",
+            "format" : "int32",
+            "example" : 142
+          },
+          "applicationType" : {
+            "type" : "string",
+            "description" : "Type of the application that has been created",
+            "example" : "SIGN_UP",
+            "enum" : [ "SIGN_UP", "EDIT_CORPORATE" ]
+          }
+        }
+      },
       "CreateBeneficiaryRequest" : {
         "type" : "object"
+      },
+      "CreateEditCorporateApplicationRequest" : {
+        "type" : "object",
+        "properties" : {
+          "corporateId" : {
+            "type" : "integer",
+            "description" : "Identifier of the corporate which is being edited",
+            "format" : "int32"
+          }
+        }
+      },
+      "DeferredResultCompany" : {
+        "type" : "object",
+        "properties" : {
+          "result" : {
+            "type" : "object",
+            "properties" : { }
+          },
+          "setOrExpired" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "DeferredResultCorporate" : {
+        "type" : "object",
+        "properties" : {
+          "result" : {
+            "type" : "object",
+            "properties" : { }
+          },
+          "setOrExpired" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "DeferredResultListCompany" : {
+        "type" : "object",
+        "properties" : {
+          "result" : {
+            "type" : "object",
+            "properties" : { }
+          },
+          "setOrExpired" : {
+            "type" : "boolean"
+          }
+        }
       },
       "ECDHEncryptedCardPayload" : {
         "type" : "object",
@@ -2435,6 +4438,232 @@
             "type" : "string"
           }
         }
+      },
+      "EditCompanySectionDataObject" : {
+        "required" : [ "companyId", "remarks", "sectionStatus", "type" ],
+        "type" : "object",
+        "properties" : {
+          "sectionId" : {
+            "type" : "integer",
+            "description" : "Identifier of the specific section",
+            "format" : "int32",
+            "example" : 143
+          },
+          "sectionType" : {
+            "type" : "string",
+            "description" : "Identifier of the specific section",
+            "example" : "ADD_COMPANY",
+            "enum" : [ "ADD_COMPANY", "ADD_CORPORATE", "EDIT_CORPORATE", "EDIT_COMPANY" ]
+          },
+          "entityId" : {
+            "type" : "string"
+          },
+          "companyId" : {
+            "type" : "string",
+            "description" : "Identifier of the company which is being edited",
+            "example" : "ee64c930-c06f-49cb-9443-84b132b9d4e2"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Name of the action being performed",
+            "example" : "Contract Change"
+          },
+          "logoURL" : {
+            "type" : "string",
+            "description" : "URL for the logo of the company",
+            "example" : "https://abc.com/logo.png"
+          },
+          "shortCode" : {
+            "type" : "string",
+            "description" : "Short code to be used as identifier for the company",
+            "example" : "ABCXYZ"
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "Identification for the type of company which is being edited",
+            "example" : "PRIVATE_LIMITED",
+            "enum" : [ "LLP", "SOLE_PROPRIETOR", "TRUST", "PRIVATE_LIMITED", "PARTNER_FIRM", "PUBLIC", "NPO_NGO", "BRANCH_OFFICE", "LIAISON_OFFICE", "PUBLIC_COMPANY" ]
+          },
+          "pointsOfPresence" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/POP"
+            }
+          },
+          "kycStatus" : {
+            "$ref" : "#/components/schemas/KYCStatus"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object",
+              "properties" : { }
+            },
+            "description" : "Additional information for this entity",
+            "example" : "myCode : ABC"
+          },
+          "sectionStatus" : {
+            "type" : "string",
+            "description" : "Current status of the section",
+            "example" : "IN_REVIEW",
+            "enum" : [ "EDIT_INITIATED", "PENDING", "TEMP_COMPLETED", "APPROVED", "REJECTED", "IN_REVIEW", "ACCEPTED" ]
+          },
+          "createdOn" : {
+            "type" : "string",
+            "description" : "Date on which this entity was created",
+            "format" : "date-time"
+          },
+          "updatedOn" : {
+            "type" : "string",
+            "description" : "Latest date on which this entity was updated",
+            "format" : "date-time"
+          },
+          "remarks" : {
+            "type" : "string",
+            "description" : "Additional remarks for the executing the action on the application",
+            "example" : "Application looks good"
+          },
+          "revisionId" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "company" : {
+            "$ref" : "#/components/schemas/Company"
+          }
+        }
+      },
+      "EditCorporateDataObject" : {
+        "required" : [ "corporateId", "remarks", "sectionStatus" ],
+        "type" : "object",
+        "properties" : {
+          "sectionId" : {
+            "type" : "integer",
+            "description" : "Identifier of the specific section",
+            "format" : "int32",
+            "example" : 143
+          },
+          "sectionType" : {
+            "type" : "string",
+            "description" : "Identifier of the specific section",
+            "example" : "ADD_COMPANY",
+            "enum" : [ "ADD_COMPANY", "ADD_CORPORATE", "EDIT_CORPORATE", "EDIT_COMPANY" ]
+          },
+          "entityId" : {
+            "type" : "string"
+          },
+          "corporateId" : {
+            "type" : "integer",
+            "description" : "Identifier of the corporate which is being edited",
+            "format" : "int32"
+          },
+          "revisionId" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "ifiId" : {
+            "type" : "integer",
+            "description" : "ID of the IFI (on-boarded organization) under which the corporate exists",
+            "format" : "int64",
+            "example" : 123456
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Name of the corporate",
+            "example" : "MYCOMPANY"
+          },
+          "agreementNumber" : {
+            "type" : "string",
+            "description" : "Number of the agreement between the corporate and the issuer/VBO",
+            "example" : "123456"
+          },
+          "agreementURL" : {
+            "type" : "string",
+            "description" : "URL of the agreement between the corporate and the issuer/VBO",
+            "example" : "abc.com/agreement"
+          },
+          "agreementStartDate" : {
+            "type" : "string",
+            "description" : "Date from which the validity of the agreement starts",
+            "example" : "01/01/2019"
+          },
+          "agreementEndDate" : {
+            "type" : "string",
+            "description" : "Date on which the validity of the agreement ends",
+            "example" : "01/01/2019"
+          },
+          "signingAuthority" : {
+            "$ref" : "#/components/schemas/SigningAuthority"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object",
+              "properties" : { }
+            },
+            "description" : "Additional information for this entity",
+            "example" : "myCode : ABC"
+          },
+          "sectionStatus" : {
+            "type" : "string",
+            "description" : "Current status of the section",
+            "example" : "IN_REVIEW",
+            "enum" : [ "EDIT_INITIATED", "PENDING", "TEMP_COMPLETED", "APPROVED", "REJECTED", "IN_REVIEW", "ACCEPTED" ]
+          },
+          "createdOn" : {
+            "type" : "string",
+            "description" : "Date on which this entity was created",
+            "format" : "date-time"
+          },
+          "updatedOn" : {
+            "type" : "string",
+            "description" : "Latest date on which this entity was updated",
+            "format" : "date-time"
+          },
+          "remarks" : {
+            "type" : "string",
+            "description" : "Additional remarks for the executing the action on the application",
+            "example" : "Application looks good"
+          }
+        }
+      },
+      "EditIndividualApplicationRequest" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "ifiID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "formID" : {
+            "type" : "string"
+          },
+          "spoolID" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "individualID" : {
+            "type" : "string"
+          },
+          "tags" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Tag"
+            }
+          },
+          "source" : {
+            "type" : "string"
+          }
+        }
+      },
+      "EmptyPayload" : {
+        "type" : "object"
       },
       "Expiry" : {
         "type" : "object",
@@ -2560,6 +4789,48 @@
           }
         }
       },
+      "GenericCreateApplicationResponse" : {
+        "type" : "object",
+        "properties" : {
+          "applicationID" : {
+            "type" : "integer",
+            "description" : "Identifier of the application that has been created",
+            "format" : "int32",
+            "example" : 142
+          },
+          "applicationType" : {
+            "type" : "string",
+            "description" : "Type of the application that has been created",
+            "example" : "SIGN_UP",
+            "enum" : [ "SIGN_UP", "EDIT_CORPORATE" ]
+          }
+        }
+      },
+      "GenericFetchApplicationResponse" : {
+        "type" : "object",
+        "properties" : {
+          "signUpRequests" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "properties" : { }
+            }
+          },
+          "totalRequestCount" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }
+      },
+      "GetApplicationDetailsResponse" : {
+        "type" : "object",
+        "properties" : {
+          "applicationDetails" : {
+            "type" : "object",
+            "properties" : { }
+          }
+        }
+      },
       "GetBeneficiaryTransactionListResponse" : {
         "type" : "object",
         "properties" : {
@@ -2612,6 +4883,12 @@
             "type" : "array",
             "items" : {
               "$ref" : "#/components/schemas/AccountRelation"
+            }
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
             }
           },
           "headers" : {
@@ -2765,7 +5042,8 @@
             "type" : "object",
             "additionalProperties" : {
               "type" : "string"
-            }
+            },
+            "description" : "Any additional information which you would like to provide"
           }
         }
       },
@@ -2791,7 +5069,8 @@
             "type" : "object",
             "additionalProperties" : {
               "type" : "string"
-            }
+            },
+            "description" : "Any additional information which you would like to provide"
           }
         }
       },
@@ -2851,7 +5130,8 @@
             "type" : "object",
             "additionalProperties" : {
               "type" : "string"
-            }
+            },
+            "description" : "Any additional information which you would like to provide"
           }
         }
       },
@@ -2895,6 +5175,392 @@
             "type" : "boolean"
           }
         }
+      },
+      "JsonArray" : {
+        "type" : "object",
+        "properties" : {
+          "asBoolean" : {
+            "type" : "boolean"
+          },
+          "asNumber" : {
+            "$ref" : "#/components/schemas/Number"
+          },
+          "asDouble" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "asFloat" : {
+            "type" : "number",
+            "format" : "float"
+          },
+          "asLong" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "asInt" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "asByte" : {
+            "pattern" : "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
+            "type" : "string",
+            "format" : "byte"
+          },
+          "asCharacter" : {
+            "type" : "string"
+          },
+          "asBigDecimal" : {
+            "type" : "number"
+          },
+          "asBigInteger" : {
+            "type" : "integer"
+          },
+          "asShort" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "asString" : {
+            "type" : "string"
+          },
+          "jsonNull" : {
+            "type" : "boolean"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "jsonPrimitive" : {
+            "type" : "boolean"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
+          "jsonArray" : {
+            "type" : "boolean"
+          },
+          "asJsonNull" : {
+            "$ref" : "#/components/schemas/JsonNull"
+          }
+        }
+      },
+      "JsonNull" : {
+        "type" : "object",
+        "properties" : {
+          "asBoolean" : {
+            "type" : "boolean"
+          },
+          "jsonNull" : {
+            "type" : "boolean"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "jsonPrimitive" : {
+            "type" : "boolean"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
+          "jsonArray" : {
+            "type" : "boolean"
+          },
+          "asJsonNull" : {
+            "$ref" : "#/components/schemas/JsonNull"
+          },
+          "asNumber" : {
+            "$ref" : "#/components/schemas/Number"
+          },
+          "asDouble" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "asFloat" : {
+            "type" : "number",
+            "format" : "float"
+          },
+          "asLong" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "asInt" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "asByte" : {
+            "pattern" : "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
+            "type" : "string",
+            "format" : "byte"
+          },
+          "asCharacter" : {
+            "type" : "string"
+          },
+          "asBigDecimal" : {
+            "type" : "number"
+          },
+          "asBigInteger" : {
+            "type" : "integer"
+          },
+          "asShort" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "asString" : {
+            "type" : "string"
+          }
+        }
+      },
+      "JsonObject" : {
+        "type" : "object",
+        "properties" : {
+          "asBoolean" : {
+            "type" : "boolean"
+          },
+          "jsonNull" : {
+            "type" : "boolean"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "jsonPrimitive" : {
+            "type" : "boolean"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
+          "jsonArray" : {
+            "type" : "boolean"
+          },
+          "asJsonNull" : {
+            "$ref" : "#/components/schemas/JsonNull"
+          },
+          "asNumber" : {
+            "$ref" : "#/components/schemas/Number"
+          },
+          "asDouble" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "asFloat" : {
+            "type" : "number",
+            "format" : "float"
+          },
+          "asLong" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "asInt" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "asByte" : {
+            "pattern" : "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
+            "type" : "string",
+            "format" : "byte"
+          },
+          "asCharacter" : {
+            "type" : "string"
+          },
+          "asBigDecimal" : {
+            "type" : "number"
+          },
+          "asBigInteger" : {
+            "type" : "integer"
+          },
+          "asShort" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "asString" : {
+            "type" : "string"
+          }
+        }
+      },
+      "JsonPrimitive" : {
+        "type" : "object",
+        "properties" : {
+          "number" : {
+            "type" : "boolean"
+          },
+          "boolean" : {
+            "type" : "boolean"
+          },
+          "asBoolean" : {
+            "type" : "boolean"
+          },
+          "string" : {
+            "type" : "boolean"
+          },
+          "asNumber" : {
+            "$ref" : "#/components/schemas/Number"
+          },
+          "asDouble" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "asFloat" : {
+            "type" : "number",
+            "format" : "float"
+          },
+          "asLong" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "asInt" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "asByte" : {
+            "pattern" : "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
+            "type" : "string",
+            "format" : "byte"
+          },
+          "asCharacter" : {
+            "type" : "string"
+          },
+          "asBigDecimal" : {
+            "type" : "number"
+          },
+          "asBigInteger" : {
+            "type" : "integer"
+          },
+          "asShort" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "asString" : {
+            "type" : "string"
+          },
+          "jsonNull" : {
+            "type" : "boolean"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "jsonPrimitive" : {
+            "type" : "boolean"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
+          "jsonArray" : {
+            "type" : "boolean"
+          },
+          "asJsonNull" : {
+            "$ref" : "#/components/schemas/JsonNull"
+          }
+        }
+      },
+      "KYCDetails" : {
+        "type" : "object",
+        "properties" : {
+          "kycStatus" : {
+            "type" : "string"
+          },
+          "updateTime" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "expiryTime" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "kycStatusPostExpiry" : {
+            "type" : "string"
+          },
+          "authType" : {
+            "type" : "string"
+          },
+          "authData" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
+          "kycAttributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "KYCStatus" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "ifiID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "accountHolderID" : {
+            "type" : "string"
+          },
+          "kycStatus" : {
+            "type" : "string"
+          },
+          "updateTime" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "expiryTime" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "kycStatusPostExpiry" : {
+            "type" : "string"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "ListResourceResponse" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "resources" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Resource"
+            }
+          }
+        }
+      },
+      "Number" : {
+        "type" : "object"
       },
       "OrderDetails" : {
         "type" : "object",
@@ -3002,6 +5668,62 @@
           },
           "orderedAt" : {
             "type" : "string"
+          }
+        }
+      },
+      "POP" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "id" : {
+            "type" : "string"
+          },
+          "ifiID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "label" : {
+            "type" : "string"
+          },
+          "entityID" : {
+            "type" : "string"
+          },
+          "entityType" : {
+            "type" : "string"
+          },
+          "address" : {
+            "$ref" : "#/components/schemas/Address"
+          },
+          "contactList" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Contact"
+            }
+          },
+          "status" : {
+            "type" : "string"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "modifiedAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "default" : {
+            "type" : "boolean"
           }
         }
       },
@@ -3271,6 +5993,86 @@
           }
         }
       },
+      "SigningAuthority" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "description" : "Name of the signing authority",
+            "example" : "Victor"
+          },
+          "email" : {
+            "type" : "string",
+            "description" : "Email ID of the signing authority",
+            "example" : "Victor@victor.com"
+          },
+          "phoneNumber" : {
+            "type" : "string",
+            "description" : "Phone number of the signing authority",
+            "example" : "+919876543210"
+          }
+        }
+      },
+      "Tag" : {
+        "type" : "object",
+        "properties" : {
+          "type" : {
+            "type" : "string"
+          },
+          "value" : {
+            "type" : "string"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "UpdateAccountHolderApplicationRequest" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "applicationID" : {
+            "type" : "string"
+          },
+          "ifiID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "salutation" : {
+            "type" : "string"
+          },
+          "firstName" : {
+            "type" : "string"
+          },
+          "middleName" : {
+            "type" : "string"
+          },
+          "lastName" : {
+            "type" : "string"
+          },
+          "profilePicURL" : {
+            "type" : "string"
+          },
+          "dob" : {
+            "type" : "string",
+            "format" : "date"
+          },
+          "gender" : {
+            "type" : "string"
+          },
+          "mothersMaidenName" : {
+            "type" : "string"
+          }
+        }
+      },
       "UpdateBundleRequest" : {
         "type" : "object",
         "properties" : {
@@ -3323,6 +6125,64 @@
             "additionalProperties" : {
               "type" : "string"
             }
+          }
+        }
+      },
+      "UpdateKycStatusRequest" : {
+        "type" : "object",
+        "properties" : {
+          "kycStatus" : {
+            "type" : "string"
+          },
+          "expiryTime" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "kycStatusPostExpiry" : {
+            "type" : "string"
+          },
+          "kycAttributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "authType" : {
+            "type" : "string"
+          },
+          "authData" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          }
+        }
+      },
+      "Vector" : {
+        "type" : "object",
+        "properties" : {
+          "type" : {
+            "type" : "string"
+          },
+          "value" : {
+            "type" : "string"
+          },
+          "aetherID" : {
+            "type" : "string"
+          },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "updatedAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "verified" : {
+            "type" : "boolean"
           }
         }
       },
