@@ -6604,9 +6604,6 @@
         "jsonNull" : {
           "type" : "boolean"
         },
-        "jsonObject" : {
-          "type" : "boolean"
-        },
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
         },
@@ -6617,6 +6614,9 @@
           "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
+          "type" : "boolean"
+        },
+        "jsonObject" : {
           "type" : "boolean"
         },
         "jsonPrimitive" : {
@@ -6636,9 +6636,6 @@
         "jsonNull" : {
           "type" : "boolean"
         },
-        "jsonObject" : {
-          "type" : "boolean"
-        },
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
         },
@@ -6649,6 +6646,9 @@
           "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
+          "type" : "boolean"
+        },
+        "jsonObject" : {
           "type" : "boolean"
         },
         "jsonPrimitive" : {
@@ -6707,9 +6707,6 @@
         "jsonNull" : {
           "type" : "boolean"
         },
-        "jsonObject" : {
-          "type" : "boolean"
-        },
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
         },
@@ -6720,6 +6717,9 @@
           "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
+          "type" : "boolean"
+        },
+        "jsonObject" : {
           "type" : "boolean"
         },
         "jsonPrimitive" : {
@@ -6775,10 +6775,10 @@
         "number" : {
           "type" : "boolean"
         },
-        "asBoolean" : {
+        "boolean" : {
           "type" : "boolean"
         },
-        "boolean" : {
+        "asBoolean" : {
           "type" : "boolean"
         },
         "string" : {
@@ -6826,9 +6826,6 @@
         "jsonNull" : {
           "type" : "boolean"
         },
-        "jsonObject" : {
-          "type" : "boolean"
-        },
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
         },
@@ -6839,6 +6836,9 @@
           "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
+          "type" : "boolean"
+        },
+        "jsonObject" : {
           "type" : "boolean"
         },
         "jsonPrimitive" : {
