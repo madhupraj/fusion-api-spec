@@ -6546,8 +6546,14 @@
         "serviceInstanceJID" : {
           "type" : "boolean"
         },
+        "primaryServiceName" : {
+          "type" : "string"
+        },
         "serviceViewName" : {
           "type" : "string"
+        },
+        "bareJID" : {
+          "$ref" : "#/definitions/JID"
         },
         "serviceViewJID" : {
           "type" : "boolean"
@@ -6557,12 +6563,6 @@
         },
         "jidOfAGroup" : {
           "type" : "boolean"
-        },
-        "primaryServiceName" : {
-          "type" : "string"
-        },
-        "bareJID" : {
-          "$ref" : "#/definitions/JID"
         },
         "proxyServiceJID" : {
           "type" : "boolean"
@@ -6785,13 +6785,13 @@
     "JsonPrimitive" : {
       "type" : "object",
       "properties" : {
+        "asBoolean" : {
+          "type" : "boolean"
+        },
         "number" : {
           "type" : "boolean"
         },
         "boolean" : {
-          "type" : "boolean"
-        },
-        "asBoolean" : {
           "type" : "boolean"
         },
         "string" : {
