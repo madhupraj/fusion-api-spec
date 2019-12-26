@@ -91,7 +91,7 @@
         }
       }
     },
-    "/api/v1/ifi/{ifiID}/applications/newIndividual" : {
+    "/api/v1/ifi/{ifiID}/applications/newIndividualDirect" : {
       "post" : {
         "tags" : [ "AccountHolder Management" ],
         "summary" : "Create an application for creating new individual",

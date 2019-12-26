@@ -630,6 +630,45 @@
         }
       }
     },
+    "/api/v1/ifi/{ifiID}/applications" : {
+      "get" : {
+        "summary" : "Get All Applications",
+        "description" : "",
+        "operationId" : "getAllApplications",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "status",
+          "in" : "query",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Account"
+            }
+          }
+        }
+      }
+    },
     "/api/v1/ifi/{ifiID}/applications/addCorporate" : {
       "post" : {
         "summary" : "Create an application for creating a new corporate",
@@ -694,7 +733,94 @@
         }
       }
     },
+    "/api/v1/ifi/{ifiID}/applications/editIndividual" : {
+      "post" : {
+        "summary" : "Edit Individual Application",
+        "description" : "",
+        "operationId" : "editApplication",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/EditIndividualApplicationRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Account"
+            }
+          }
+        }
+      }
+    },
     "/api/v1/ifi/{ifiID}/applications/newIndividual" : {
+      "post" : {
+        "summary" : "Create Individual Application With Auto Approval",
+        "description" : "",
+        "operationId" : "createApplicationWithAutoApproval",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/CreateAccountHolderApplicationWithAutoApprovalRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Account"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/applications/newIndividualApplication" : {
+      "post" : {
+        "summary" : "Create Individual Application",
+        "description" : "",
+        "operationId" : "createApplication",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/CreateAccountHolderApplicationRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Account"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/applications/newIndividualDirect" : {
       "post" : {
         "tags" : [ "AccountHolder Management" ],
         "summary" : "Create an application for creating new individual",
@@ -725,6 +851,193 @@
           },
           "201" : {
             "description" : ""
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/applications/{applicationID}" : {
+      "get" : {
+        "summary" : "Get Individual Application",
+        "description" : "",
+        "operationId" : "getApplication",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Account"
+            }
+          }
+        }
+      },
+      "put" : {
+        "summary" : "Update Individual Application",
+        "description" : "",
+        "operationId" : "updateApplication",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/UpdateAccountHolderApplicationRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Account"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "Delete Individual Application",
+        "description" : "",
+        "operationId" : "deleteApplication",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Account"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/applications/{applicationID}/kycStatus/{kycStatus}" : {
+      "put" : {
+        "summary" : "Update Application Status",
+        "description" : "",
+        "operationId" : "updateApplicationKYCStatus",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "kycStatus",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/UpdateKycStatusRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Account"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/applications/{applicationID}/spool/{spoolID}" : {
+      "put" : {
+        "summary" : "Update Application Spool",
+        "description" : "",
+        "operationId" : "updateApplicationSpool",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "spoolID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Account"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/applications/{applicationID}/status/{newStatus}" : {
+      "put" : {
+        "summary" : "Update Application Status",
+        "description" : "",
+        "operationId" : "updateApplicationStatus",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "newStatus",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Account"
+            }
           }
         }
       }
@@ -1162,40 +1475,6 @@
             "description" : "successful operation",
             "schema" : {
               "$ref" : "#/definitions/OrderSummary"
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/ifi/{ifiID}/cards/{cardID}/setPin" : {
-      "post" : {
-        "summary" : "Set Pin to the card details",
-        "description" : "",
-        "operationId" : "setPin",
-        "consumes" : [ "application/json;charset=UTF-8" ],
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "cardID",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/SetPinRequest"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/Void"
             }
           }
         }
@@ -2803,6 +3082,37 @@
             }
           }
         }
+      },
+      "patch" : {
+        "summary" : "Change the resource status",
+        "description" : "",
+        "operationId" : "updateResource",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "resourceID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Builder"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Resource"
+            }
+          }
+        }
       }
     },
     "/api/v1/ifi/{ifiID}/resources/{resourceID}/form_factors/{formFactorID}" : {
@@ -2825,6 +3135,44 @@
           "in" : "path",
           "required" : true,
           "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/FormFactor"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/resources/{resourceID}/form_factors/{formfactorID}" : {
+      "patch" : {
+        "summary" : "Change the resource linked form factor status",
+        "description" : "",
+        "operationId" : "updateResourceLinkedFormFactor",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "resourceID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "formfactorID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Builder"
+          }
         } ],
         "responses" : {
           "200" : {
@@ -2990,319 +3338,6 @@
             "description" : "successful operation",
             "schema" : {
               "$ref" : "#/definitions/AccountHolder"
-            }
-          }
-        }
-      }
-    },
-    "/api/v2/ifi/{ifiID}/applications" : {
-      "get" : {
-        "summary" : "Get All Applications",
-        "description" : "",
-        "operationId" : "getAllApplications",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        }, {
-          "name" : "status",
-          "in" : "query",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "pageSize",
-          "in" : "query",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "pageNumber",
-          "in" : "query",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int32"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/Account"
-            }
-          }
-        }
-      }
-    },
-    "/api/v2/ifi/{ifiID}/applications/editIndividual" : {
-      "post" : {
-        "summary" : "Edit Individual Application",
-        "description" : "",
-        "operationId" : "editApplication",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        }, {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/EditIndividualApplicationRequest"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/Account"
-            }
-          }
-        }
-      }
-    },
-    "/api/v2/ifi/{ifiID}/applications/newIndividual" : {
-      "post" : {
-        "summary" : "Create Individual Application",
-        "description" : "",
-        "operationId" : "createApplication",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        }, {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/CreateAccountHolderApplicationRequest"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/Account"
-            }
-          }
-        }
-      }
-    },
-    "/api/v2/ifi/{ifiID}/applications/newIndividualWithAutoApproval" : {
-      "post" : {
-        "summary" : "Create Individual Application With Auto Approval",
-        "description" : "",
-        "operationId" : "createApplicationWithAutoApproval",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        }, {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/CreateAccountHolderApplicationWithAutoApprovalRequest"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/Account"
-            }
-          }
-        }
-      }
-    },
-    "/api/v2/ifi/{ifiID}/applications/{applicationID}" : {
-      "get" : {
-        "summary" : "Get Individual Application",
-        "description" : "",
-        "operationId" : "getApplication",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        }, {
-          "name" : "applicationID",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/Account"
-            }
-          }
-        }
-      },
-      "put" : {
-        "summary" : "Update Individual Application",
-        "description" : "",
-        "operationId" : "updateApplication",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        }, {
-          "name" : "applicationID",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/UpdateAccountHolderApplicationRequest"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/Account"
-            }
-          }
-        }
-      },
-      "delete" : {
-        "summary" : "Delete Individual Application",
-        "description" : "",
-        "operationId" : "deleteApplication",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        }, {
-          "name" : "applicationID",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/Account"
-            }
-          }
-        }
-      }
-    },
-    "/api/v2/ifi/{ifiID}/applications/{applicationID}/kycStatus/{kycStatus}" : {
-      "put" : {
-        "summary" : "Update Application Status",
-        "description" : "",
-        "operationId" : "updateApplicationKYCStatus",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        }, {
-          "name" : "applicationID",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "kycStatus",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/UpdateKycStatusRequest"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/Account"
-            }
-          }
-        }
-      }
-    },
-    "/api/v2/ifi/{ifiID}/applications/{applicationID}/spool/{spoolID}" : {
-      "put" : {
-        "summary" : "Update Application Spool",
-        "description" : "",
-        "operationId" : "updateApplicationSpool",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        }, {
-          "name" : "applicationID",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "spoolID",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/Account"
-            }
-          }
-        }
-      }
-    },
-    "/api/v2/ifi/{ifiID}/applications/{applicationID}/status/{newStatus}" : {
-      "put" : {
-        "summary" : "Update Application Status",
-        "description" : "",
-        "operationId" : "updateApplicationStatus",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        }, {
-          "name" : "applicationID",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "newStatus",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/Account"
             }
           }
         }
@@ -5929,8 +5964,17 @@
         "formFactorID" : {
           "type" : "string"
         },
+        "identityID" : {
+          "type" : "string"
+        },
         "targetURI" : {
           "type" : "string"
+        },
+        "tags" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
         },
         "attributes" : {
           "type" : "object",
@@ -5991,6 +6035,12 @@
         },
         "skuID" : {
           "type" : "string"
+        },
+        "tags" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
         },
         "attributes" : {
           "type" : "object",
@@ -6546,8 +6596,14 @@
         "serviceInstanceJID" : {
           "type" : "boolean"
         },
+        "primaryServiceName" : {
+          "type" : "string"
+        },
         "serviceViewName" : {
           "type" : "string"
+        },
+        "bareJID" : {
+          "$ref" : "#/definitions/JID"
         },
         "serviceViewJID" : {
           "type" : "boolean"
@@ -6557,12 +6613,6 @@
         },
         "jidOfAGroup" : {
           "type" : "boolean"
-        },
-        "primaryServiceName" : {
-          "type" : "string"
-        },
-        "bareJID" : {
-          "$ref" : "#/definitions/JID"
         },
         "proxyServiceJID" : {
           "type" : "boolean"
@@ -6620,6 +6670,12 @@
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
         },
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
+        },
+        "asJsonObject" : {
+          "$ref" : "#/definitions/JsonObject"
+        },
         "jsonArray" : {
           "type" : "boolean"
         },
@@ -6631,12 +6687,6 @@
         },
         "asJsonNull" : {
           "$ref" : "#/definitions/JsonNull"
-        },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
-        },
-        "asJsonObject" : {
-          "$ref" : "#/definitions/JsonObject"
         }
       }
     },
@@ -6651,6 +6701,12 @@
         },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
+        },
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
+        },
+        "asJsonObject" : {
+          "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
           "type" : "boolean"
@@ -6699,12 +6755,6 @@
         "asShort" : {
           "type" : "integer",
           "format" : "int32"
-        },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
-        },
-        "asJsonObject" : {
-          "$ref" : "#/definitions/JsonObject"
         },
         "asString" : {
           "type" : "string"
@@ -6723,6 +6773,12 @@
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
         },
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
+        },
+        "asJsonObject" : {
+          "$ref" : "#/definitions/JsonObject"
+        },
         "jsonArray" : {
           "type" : "boolean"
         },
@@ -6770,12 +6826,6 @@
         "asShort" : {
           "type" : "integer",
           "format" : "int32"
-        },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
-        },
-        "asJsonObject" : {
-          "$ref" : "#/definitions/JsonObject"
         },
         "asString" : {
           "type" : "string"
@@ -6794,6 +6844,9 @@
         "asBoolean" : {
           "type" : "boolean"
         },
+        "string" : {
+          "type" : "boolean"
+        },
         "asNumber" : {
           "$ref" : "#/definitions/Number"
         },
@@ -6830,9 +6883,6 @@
           "type" : "integer",
           "format" : "int32"
         },
-        "string" : {
-          "type" : "boolean"
-        },
         "asString" : {
           "type" : "string"
         },
@@ -6841,6 +6891,12 @@
         },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
+        },
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
+        },
+        "asJsonObject" : {
+          "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
           "type" : "boolean"
@@ -6853,12 +6909,6 @@
         },
         "asJsonNull" : {
           "$ref" : "#/definitions/JsonNull"
-        },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
-        },
-        "asJsonObject" : {
-          "$ref" : "#/definitions/JsonObject"
         }
       }
     },
@@ -7162,6 +7212,12 @@
         "resourceProduct" : {
           "type" : "string"
         },
+        "tags" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
         "attributes" : {
           "type" : "object",
           "additionalProperties" : {
@@ -7314,6 +7370,9 @@
         "id" : {
           "type" : "string"
         },
+        "resourceProductId" : {
+          "type" : "string"
+        },
         "resourceProduct" : {
           "$ref" : "#/definitions/ResourceProduct"
         },
@@ -7324,6 +7383,15 @@
           "type" : "array",
           "items" : {
             "$ref" : "#/definitions/FormFactor"
+          }
+        },
+        "authProfileId" : {
+          "type" : "string"
+        },
+        "tags" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
           }
         },
         "policies" : {
@@ -7380,6 +7448,12 @@
             "$ref" : "#/definitions/FormFactorProduct"
           }
         },
+        "tags" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
         "policies" : {
           "$ref" : "#/definitions/Policies"
         },
@@ -7412,18 +7486,6 @@
         },
         "value" : {
           "$ref" : "#/definitions/ECDHEncryptedCardPayload"
-        }
-      }
-    },
-    "SetPinRequest" : {
-      "type" : "object",
-      "properties" : {
-        "newPin" : {
-          "type" : "string"
-        },
-        "nonce" : {
-          "type" : "integer",
-          "format" : "int64"
         }
       }
     },
@@ -7673,9 +7735,6 @@
           "type" : "boolean"
         }
       }
-    },
-    "Void" : {
-      "type" : "object"
     }
   }
 }
