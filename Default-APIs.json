@@ -5233,6 +5233,12 @@
           "serviceInstanceJID" : {
             "type" : "boolean"
           },
+          "jidOfAGroup" : {
+            "type" : "boolean"
+          },
+          "proxyServiceJID" : {
+            "type" : "boolean"
+          },
           "primaryServiceName" : {
             "type" : "string"
           },
@@ -5246,12 +5252,6 @@
             "type" : "boolean"
           },
           "defaultServiceNode" : {
-            "type" : "boolean"
-          },
-          "jidOfAGroup" : {
-            "type" : "boolean"
-          },
-          "proxyServiceJID" : {
             "type" : "boolean"
           }
         }
@@ -5302,25 +5302,25 @@
           "asString" : {
             "type" : "string"
           },
-          "jsonNull" : {
-            "type" : "boolean"
-          },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
           },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
+          "jsonPrimitive" : {
+            "type" : "boolean"
           },
-          "jsonArray" : {
+          "jsonNull" : {
             "type" : "boolean"
           },
           "jsonObject" : {
             "type" : "boolean"
           },
-          "jsonPrimitive" : {
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
+          "jsonArray" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -5334,25 +5334,25 @@
           "asBoolean" : {
             "type" : "boolean"
           },
-          "jsonNull" : {
-            "type" : "boolean"
-          },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
           },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
+          "jsonPrimitive" : {
+            "type" : "boolean"
           },
-          "jsonArray" : {
+          "jsonNull" : {
             "type" : "boolean"
           },
           "jsonObject" : {
             "type" : "boolean"
           },
-          "jsonPrimitive" : {
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
+          "jsonArray" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -5406,25 +5406,25 @@
           "asBoolean" : {
             "type" : "boolean"
           },
-          "jsonNull" : {
-            "type" : "boolean"
-          },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
           },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
+          "jsonPrimitive" : {
+            "type" : "boolean"
           },
-          "jsonArray" : {
+          "jsonNull" : {
             "type" : "boolean"
           },
           "jsonObject" : {
             "type" : "boolean"
           },
-          "jsonPrimitive" : {
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
+          "jsonArray" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -5475,13 +5475,13 @@
       "JsonPrimitive" : {
         "type" : "object",
         "properties" : {
+          "asBoolean" : {
+            "type" : "boolean"
+          },
           "number" : {
             "type" : "boolean"
           },
           "boolean" : {
-            "type" : "boolean"
-          },
-          "asBoolean" : {
             "type" : "boolean"
           },
           "string" : {
@@ -5527,25 +5527,25 @@
           "asString" : {
             "type" : "string"
           },
-          "jsonNull" : {
-            "type" : "boolean"
-          },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
           },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
+          "jsonPrimitive" : {
+            "type" : "boolean"
           },
-          "jsonArray" : {
+          "jsonNull" : {
             "type" : "boolean"
           },
           "jsonObject" : {
             "type" : "boolean"
           },
-          "jsonPrimitive" : {
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
+          "jsonArray" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
