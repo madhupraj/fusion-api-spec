@@ -6596,23 +6596,23 @@
         "serviceInstanceJID" : {
           "type" : "boolean"
         },
-        "primaryServiceName" : {
-          "type" : "string"
-        },
-        "serviceViewName" : {
-          "type" : "string"
-        },
-        "bareJID" : {
-          "$ref" : "#/definitions/JID"
-        },
         "serviceViewJID" : {
           "type" : "boolean"
         },
         "defaultServiceNode" : {
           "type" : "boolean"
         },
+        "serviceViewName" : {
+          "type" : "string"
+        },
         "jidOfAGroup" : {
           "type" : "boolean"
+        },
+        "primaryServiceName" : {
+          "type" : "string"
+        },
+        "bareJID" : {
+          "$ref" : "#/definitions/JID"
         },
         "proxyServiceJID" : {
           "type" : "boolean"
@@ -6664,13 +6664,13 @@
         "asString" : {
           "type" : "string"
         },
+        "jsonPrimitive" : {
+          "type" : "boolean"
+        },
         "jsonNull" : {
           "type" : "boolean"
         },
         "jsonObject" : {
-          "type" : "boolean"
-        },
-        "jsonPrimitive" : {
           "type" : "boolean"
         },
         "asJsonPrimitive" : {
@@ -6696,13 +6696,13 @@
         "asBoolean" : {
           "type" : "boolean"
         },
+        "jsonPrimitive" : {
+          "type" : "boolean"
+        },
         "jsonNull" : {
           "type" : "boolean"
         },
         "jsonObject" : {
-          "type" : "boolean"
-        },
-        "jsonPrimitive" : {
           "type" : "boolean"
         },
         "asJsonPrimitive" : {
@@ -6767,13 +6767,13 @@
         "asBoolean" : {
           "type" : "boolean"
         },
+        "jsonPrimitive" : {
+          "type" : "boolean"
+        },
         "jsonNull" : {
           "type" : "boolean"
         },
         "jsonObject" : {
-          "type" : "boolean"
-        },
-        "jsonPrimitive" : {
           "type" : "boolean"
         },
         "asJsonPrimitive" : {
@@ -6886,13 +6886,13 @@
         "asString" : {
           "type" : "string"
         },
+        "jsonPrimitive" : {
+          "type" : "boolean"
+        },
         "jsonNull" : {
           "type" : "boolean"
         },
         "jsonObject" : {
-          "type" : "boolean"
-        },
-        "jsonPrimitive" : {
           "type" : "boolean"
         },
         "asJsonPrimitive" : {
