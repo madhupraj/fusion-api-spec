@@ -2342,6 +2342,395 @@
         }
       }
     },
+    "/api/v1/ifi/{ifiID}/ledger/createCalender" : {
+      "post" : {
+        "summary" : "Create Calender",
+        "operationId" : "createCalender",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "type" : "string"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CreateCalendarResponsePayload"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/ledger/createCoa" : {
+      "post" : {
+        "summary" : "Create Coa",
+        "operationId" : "createCoA",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "type" : "boolean"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CreateCoaResponsePayload"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/ledger/createCoaNode" : {
+      "post" : {
+        "summary" : "Create Coa node",
+        "operationId" : "createCoANode",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "type" : "string"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CreateCoaNodeResponsePayload"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/ledger/createPolicy" : {
+      "post" : {
+        "summary" : "Create Policy",
+        "operationId" : "createPolicy",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CreatePolicyRequestPayload"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CreatePolicyResponsePayload"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/ledger/getAggregateExpressions" : {
+      "get" : {
+        "summary" : "get All Aggregation Expressions",
+        "operationId" : "getAggregateExpressionList",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAggregateExpressionListResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/ledger/getAllCoas" : {
+      "get" : {
+        "summary" : "Get All Coas",
+        "operationId" : "getAllCoas",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "description" : "order of sorting",
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "type" : "string"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAllCoAsResponsePayload"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/ledger/getAllTransactionCategories" : {
+      "get" : {
+        "summary" : "get All Transaction Categories",
+        "operationId" : "getAllTransactionCategories",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAllTxnCategoriesResponsePayload"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/ledger/getCalender" : {
+      "get" : {
+        "summary" : "Get Calender",
+        "operationId" : "getCalendar",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "type" : "boolean"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetCalendarResponsePayload"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/ledger/getPolicies" : {
+      "get" : {
+        "summary" : "get Policies",
+        "operationId" : "getPolicies",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "type" : "integer",
+                "format" : "int64"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetPoliciesResponsePayload"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/ledger/getPolicy" : {
+      "get" : {
+        "summary" : "get Policy",
+        "operationId" : "getPolicy",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "type" : "string"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetPolicyResponsePayload"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/ledger/replacePolicy" : {
+      "post" : {
+        "summary" : "Replace Policy",
+        "operationId" : "replacePolicy",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ReplacePolicyRequestPayload"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ReplacePolicyResponsePayload"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/ifi/{ifiID}/payment_products/{paymentProductID}" : {
       "get" : {
         "summary" : "Get Payment Product details by ID",
@@ -2368,6 +2757,73 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/PaymentProduct"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/productFamilies/{productFamilyID}/programs" : {
+      "get" : {
+        "summary" : "Get programs by productFamilyID",
+        "operationId" : "getPrograms",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account exists",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "productFamilyID",
+          "in" : "path",
+          "description" : "ProductFamilyID of required programs",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "name",
+          "in" : "query",
+          "description" : "Name of program",
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "test"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "description" : "No of programs needed in response",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "example" : 10
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "description" : "Page number for programs needed in response",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "example" : "test"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Account"
                 }
               }
             }
@@ -3566,6 +4022,38 @@
           }
         }
       },
+      "AggregateExpression" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "ifiId" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "code" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "expression" : {
+            "type" : "string"
+          },
+          "createdAt" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "updatedAt" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }
+      },
       "Beneficiary" : {
         "type" : "object",
         "properties" : {
@@ -4060,6 +4548,37 @@
           }
         }
       },
+      "CalendarInfo" : {
+        "type" : "object",
+        "properties" : {
+          "weekStartOffset" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "yearStartDay" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "yearStartMonth" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "timeZone" : {
+            "type" : "string"
+          },
+          "ifiId" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "calendarId" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "getcalendarName" : {
+            "type" : "string"
+          }
+        }
+      },
       "CardBinRange" : {
         "type" : "object",
         "properties" : {
@@ -4156,6 +4675,46 @@
           "modifiedAt" : {
             "type" : "string",
             "format" : "date-time"
+          }
+        }
+      },
+      "CoAConfig" : {
+        "type" : "object",
+        "properties" : {
+          "coaId" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "ifiId" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "coaDescription" : {
+            "type" : "string"
+          },
+          "coaName" : {
+            "type" : "string"
+          },
+          "coaDepth" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "calendarId" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "currency" : {
+            "type" : "string"
+          },
+          "coaCode" : {
+            "type" : "string"
+          },
+          "calendarName" : {
+            "type" : "string"
+          },
+          "createdAt" : {
+            "type" : "integer",
+            "format" : "int64"
           }
         }
       },
@@ -4444,6 +5003,59 @@
       "CreateBeneficiaryRequest" : {
         "type" : "object"
       },
+      "CreateCalendarResponsePayload" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "calendarId" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "calendarDateGroupId" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }
+      },
+      "CreateCoaNodeResponsePayload" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "nodeId" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }
+      },
+      "CreateCoaResponsePayload" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "coaId" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "rootNodeId" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }
+      },
       "CreateEditCorporateApplicationRequest" : {
         "type" : "object",
         "properties" : {
@@ -4451,6 +5063,113 @@
             "type" : "integer",
             "description" : "Identifier of the corporate which is being edited",
             "format" : "int32"
+          }
+        }
+      },
+      "CreatePolicyRequestPayload" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "requestID" : {
+            "type" : "string"
+          },
+          "ifi" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "code" : {
+            "type" : "string"
+          },
+          "desc" : {
+            "type" : "string"
+          },
+          "txnConstraints" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyTxnConstraint"
+            }
+          },
+          "policyTxnRules" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyTxnRule"
+            }
+          },
+          "policyBalanceRules" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyBalanceRule"
+            }
+          },
+          "policyAggregateRules" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyAggregateRule"
+            }
+          },
+          "effectiveFrom" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "expiresAt" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "policyViolationAction" : {
+            "type" : "string",
+            "enum" : [ "DECLINE_AND_NOTIFY", "DECLINE", "NOTIFY" ]
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "CreatePolicyResponsePayload" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "policyVersionID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "policyID" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }
+      },
+      "DateGroupInfo" : {
+        "type" : "object",
+        "properties" : {
+          "dateGroupId" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "calendarId" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "dates" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
           }
         }
       },
@@ -4902,6 +5621,57 @@
           }
         }
       },
+      "GetAggregateExpressionListResponse" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "aggregateExpressions" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/AggregateExpression"
+            }
+          }
+        }
+      },
+      "GetAllCoAsResponsePayload" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "coAConfigs" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/CoAConfig"
+            }
+          }
+        }
+      },
+      "GetAllTxnCategoriesResponsePayload" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "transactionCategories" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/TxnCategory"
+            }
+          }
+        }
+      },
       "GetApplicationDetailsResponse" : {
         "type" : "object",
         "properties" : {
@@ -4925,6 +5695,57 @@
             "items" : {
               "$ref" : "#/components/schemas/BeneficiaryTransaction"
             }
+          }
+        }
+      },
+      "GetCalendarResponsePayload" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "calendarInfo" : {
+            "$ref" : "#/components/schemas/CalendarInfo"
+          },
+          "dateGroupInfo" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/DateGroupInfo"
+            }
+          }
+        }
+      },
+      "GetPoliciesResponsePayload" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "policies" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Policy"
+            }
+          }
+        }
+      },
+      "GetPolicyResponsePayload" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "policy" : {
+            "$ref" : "#/components/schemas/Policy"
           }
         }
       },
@@ -5233,23 +6054,23 @@
           "serviceInstanceJID" : {
             "type" : "boolean"
           },
+          "primaryServiceName" : {
+            "type" : "string"
+          },
+          "serviceViewName" : {
+            "type" : "string"
+          },
+          "bareJID" : {
+            "$ref" : "#/components/schemas/JID"
+          },
           "serviceViewJID" : {
             "type" : "boolean"
           },
           "defaultServiceNode" : {
             "type" : "boolean"
           },
-          "serviceViewName" : {
-            "type" : "string"
-          },
           "jidOfAGroup" : {
             "type" : "boolean"
-          },
-          "primaryServiceName" : {
-            "type" : "string"
-          },
-          "bareJID" : {
-            "$ref" : "#/components/schemas/JID"
           },
           "proxyServiceJID" : {
             "type" : "boolean"
@@ -5302,9 +6123,6 @@
           "asString" : {
             "type" : "string"
           },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
           "jsonNull" : {
             "type" : "boolean"
           },
@@ -5316,6 +6134,9 @@
           },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
+          },
+          "jsonPrimitive" : {
+            "type" : "boolean"
           },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
@@ -5334,9 +6155,6 @@
           "asBoolean" : {
             "type" : "boolean"
           },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
           "jsonNull" : {
             "type" : "boolean"
           },
@@ -5348,6 +6166,9 @@
           },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
+          },
+          "jsonPrimitive" : {
+            "type" : "boolean"
           },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
@@ -5406,9 +6227,6 @@
           "asBoolean" : {
             "type" : "boolean"
           },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
           "jsonNull" : {
             "type" : "boolean"
           },
@@ -5420,6 +6238,9 @@
           },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
+          },
+          "jsonPrimitive" : {
+            "type" : "boolean"
           },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
@@ -5527,9 +6348,6 @@
           "asString" : {
             "type" : "string"
           },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
           "jsonNull" : {
             "type" : "boolean"
           },
@@ -5541,6 +6359,9 @@
           },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
+          },
+          "jsonPrimitive" : {
+            "type" : "boolean"
           },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
@@ -5885,6 +6706,251 @@
           }
         }
       },
+      "Policy" : {
+        "type" : "object",
+        "properties" : {
+          "ifi" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "id" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "code" : {
+            "type" : "string"
+          },
+          "desc" : {
+            "type" : "string"
+          },
+          "version" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "txnConstraints" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyTxnConstraint"
+            }
+          },
+          "policyTxnRules" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyTxnRule"
+            }
+          },
+          "policyBalanceRules" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyBalanceRule"
+            }
+          },
+          "policyAggregateRules" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyAggregateRule"
+            }
+          },
+          "effectiveFrom" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "expiresAt" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "createdAt" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "updatedAt" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "policyViolationAction" : {
+            "type" : "string",
+            "enum" : [ "DECLINE_AND_NOTIFY", "DECLINE", "NOTIFY" ]
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "state" : {
+            "type" : "string",
+            "enum" : [ "ENABLED", "DISABLED" ]
+          }
+        }
+      },
+      "PolicyAggregateRule" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "policyVersionID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "action" : {
+            "type" : "string",
+            "enum" : [ "DEBIT", "CREDIT", "DEBIT_REVERSAL", "CREDIT_REVERSAL" ]
+          },
+          "categoryCode" : {
+            "type" : "string"
+          },
+          "aggExpressionID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "aggExpressionCode" : {
+            "type" : "string"
+          },
+          "dailyLimit" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "weeklyLimit" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "monthlyLimit" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "quarterlyLimit" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "yearlyLimit" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "errorCode" : {
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "string",
+            "enum" : [ "VELOCITY", "VOLUME" ]
+          }
+        }
+      },
+      "PolicyBalanceRule" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "policyVersionID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "action" : {
+            "type" : "string",
+            "enum" : [ "DEBIT", "CREDIT", "DEBIT_REVERSAL", "CREDIT_REVERSAL" ]
+          },
+          "minRequiredBalance" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "maxAllowedBalance" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "minRequiredBalanceBeforeTxn" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "maxAllowedBalanceBeforeTxn" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "transactionCategory" : {
+            "type" : "string"
+          },
+          "errorCode" : {
+            "type" : "string"
+          }
+        }
+      },
+      "PolicyTxnConstraint" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "policyVersionID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "action" : {
+            "type" : "string",
+            "enum" : [ "DEBIT", "CREDIT", "DEBIT_REVERSAL", "CREDIT_REVERSAL" ]
+          },
+          "allowedTxnCategoryCodes" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "disallowedTxnCategoryCodes" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "allowedTimeSlices" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "disallowedTimeSlices" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "errorCode" : {
+            "type" : "string"
+          }
+        }
+      },
+      "PolicyTxnRule" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "policyVersionID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "action" : {
+            "type" : "string",
+            "enum" : [ "DEBIT", "CREDIT", "DEBIT_REVERSAL", "CREDIT_REVERSAL" ]
+          },
+          "categoryCode" : {
+            "type" : "string"
+          },
+          "minRequiredAmount" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "maxAllowedAmount" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "errorCode" : {
+            "type" : "string"
+          }
+        }
+      },
       "ProductInfoRequest" : {
         "required" : [ "productID" ],
         "type" : "object",
@@ -5945,6 +7011,86 @@
               "type" : "object",
               "properties" : { }
             }
+          }
+        }
+      },
+      "ReplacePolicyRequestPayload" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "id" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "ifi" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "txnConstraints" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyTxnConstraint"
+            }
+          },
+          "policyTxnRules" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyTxnRule"
+            }
+          },
+          "policyBalanceRules" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyBalanceRule"
+            }
+          },
+          "policyAggregateRules" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyAggregateRule"
+            }
+          },
+          "effectiveFrom" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "expiresAt" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "policyViolationAction" : {
+            "type" : "string",
+            "enum" : [ "DECLINE_AND_NOTIFY", "DECLINE", "NOTIFY" ]
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "ReplacePolicyResponsePayload" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "policyVersionID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "code" : {
+            "type" : "integer",
+            "format" : "int64"
           }
         }
       },
@@ -6119,6 +7265,21 @@
             "additionalProperties" : {
               "type" : "string"
             }
+          }
+        }
+      },
+      "TxnCategory" : {
+        "type" : "object",
+        "properties" : {
+          "ifi" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "code" : {
+            "type" : "string"
+          },
+          "desc" : {
+            "type" : "string"
           }
         }
       },
