@@ -492,41 +492,13 @@
         }
       }
     },
-    "/api/v1/ifi/{ifiID}/bundles" : {
-      "get" : {
-        "operationId" : "getAllBundles",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundles are being retrieved",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "type" : "array",
-                  "items" : {
-                    "$ref" : "#/components/schemas/BundleResponse"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
+    "/api/v1/ifi/{ifiID}/athena-manager/createExtendedProduct" : {
       "post" : {
-        "operationId" : "createBundle",
+        "summary" : "CreateExtendedProduct api via fusion",
+        "operationId" : "createExtendedProduct",
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being created",
           "required" : true,
           "schema" : {
             "type" : "integer",
@@ -537,7 +509,7 @@
           "content" : {
             "*/*" : {
               "schema" : {
-                "$ref" : "#/components/schemas/AddBundleRequest"
+                "$ref" : "#/components/schemas/CreateExtendedProductRequest"
               }
             }
           },
@@ -549,7 +521,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/BundleResponse"
+                  "$ref" : "#/components/schemas/Product"
                 }
               }
             }
@@ -557,143 +529,24 @@
         }
       }
     },
-    "/api/v1/ifi/{ifiID}/bundles/{bundleID}" : {
-      "get" : {
-        "operationId" : "getBundleByID",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundles are being retrieved by bundleID",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
-        }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle whose details are being retrieved",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/BundleResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put" : {
-        "operationId" : "updateBundle",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
-        }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle whose details are being updated",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "*/*" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/UpdateBundleRequest"
-              }
-            }
-          },
-          "required" : false
-        },
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/BundleResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete" : {
-        "operationId" : "deleteBundle",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being deleted",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
-        }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle which is being deleted",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/BundleResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/ifi/{ifiID}/bundles/{bundleID}/accountProducts" : {
+    "/api/v1/ifi/{ifiID}/athena-manager/createExtendedProductFamily" : {
       "post" : {
-        "operationId" : "addAccountProductToBundle",
+        "summary" : "CreateExtendedProductFamily api via fusion",
+        "operationId" : "createExtendedProductFamily",
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
-        }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle whose details are being updated",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
           }
         } ],
         "requestBody" : {
           "content" : {
             "*/*" : {
               "schema" : {
-                "$ref" : "#/components/schemas/AddAccountProductInBundleRequest"
+                "$ref" : "#/components/schemas/CreateExtendedProductFamilyRequest"
               }
             }
           },
@@ -705,7 +558,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/BundleResponse"
+                  "$ref" : "#/components/schemas/ProductFamily"
                 }
               }
             }
@@ -713,30 +566,110 @@
         }
       }
     },
-    "/api/v1/ifi/{ifiID}/bundles/{bundleID}/accountProducts/{accountProductID}" : {
-      "delete" : {
-        "operationId" : "deleteAccountProductFromBundle",
+    "/api/v1/ifi/{ifiID}/athena-manager/getAllTransactionPoliciesByIFI" : {
+      "get" : {
+        "summary" : "Get all transaction policies for a given IFI",
+        "operationId" : "getAllTransactionPoliciesByIFI",
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAllTransactionPoliciesResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/athena-manager/getCoaList" : {
+      "get" : {
+        "summary" : "Get all CoAs for a given IFI",
+        "operationId" : "getCoaListByIFI",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetCoaListResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/athena-manager/getCoaNodes" : {
+      "get" : {
+        "summary" : "Get all CoA Nodes for a given IFI and CoAID",
+        "operationId" : "getCoaNodesByIFIAndCoaID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
           }
         }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle whose details are being updated",
+          "name" : "coaID",
+          "in" : "query",
           "required" : true,
           "schema" : {
-            "type" : "string"
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetCoaNodesResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/athena-manager/getEntityGroupList" : {
+      "get" : {
+        "summary" : "Get EntityGrouplist for a given ifi and entityType",
+        "operationId" : "getEntityGroupList",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
           }
         }, {
-          "name" : "accountProductID",
-          "in" : "path",
-          "description" : "ID for the account product which is to be removed from the bundle",
+          "name" : "entityType",
+          "in" : "query",
           "required" : true,
           "schema" : {
             "type" : "string"
@@ -748,7 +681,222 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/BundleResponse"
+                  "$ref" : "#/components/schemas/ListEntityGroupResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/athena-manager/getPolicyMappings" : {
+      "get" : {
+        "summary" : "Get PolicyMappings for a given ifi, entityID, policyEntityType, policyType and PolicyId",
+        "operationId" : "getPolicyMappings",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "entityID",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "policyEntityType",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "policyType",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "policyID",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetProductListResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/athena-manager/getProduct" : {
+      "get" : {
+        "summary" : "Get Product with a given IFI and ProductID",
+        "operationId" : "getProductByIFIAndID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "id",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Product"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/athena-manager/getProductFamily" : {
+      "get" : {
+        "summary" : "Get ProductFamily for a given ifi and id",
+        "operationId" : "getProductFamily",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "id",
+          "in" : "query",
+          "description" : "productFamilyId",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123456789065434567
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ProductFamily"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/athena-manager/getProductFamilyList" : {
+      "get" : {
+        "summary" : "Get ProductFamilyList for a given ifi",
+        "operationId" : "getProductFamilyList",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetProductFamilyListResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/athena-manager/getProductList" : {
+      "get" : {
+        "summary" : "Get ProductList for a given ifi",
+        "operationId" : "getProductList",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetProductListResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/athena-manager/getTransactionPolicyByID" : {
+      "get" : {
+        "summary" : "Get TransactionPolicy with a given ID",
+        "operationId" : "getProductByIFIAndID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "id",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TransactionPolicyResponse"
                 }
               }
             }
@@ -933,94 +1081,6 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/IssueResourceResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/ifi/{ifiID}/bundles/{bundleID}/paymentProducts" : {
-      "post" : {
-        "operationId" : "addPaymentProductToBundle",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
-        }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle whose details are being updated",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "*/*" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/AddPaymentProductInBundleRequest"
-              }
-            }
-          },
-          "required" : false
-        },
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/BundleResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/ifi/{ifiID}/bundles/{bundleID}/paymentProducts/{paymentProductID}" : {
-      "delete" : {
-        "operationId" : "deletePaymentProductFromBundle",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
-        }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle whose details are being updated",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "paymentProductID",
-          "in" : "path",
-          "description" : "ID for the payment product to be removed from the bundle",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/BundleResponse"
                 }
               }
             }
@@ -2342,43 +2402,6 @@
         }
       }
     },
-    "/api/v1/ifi/{ifiID}/ledger/createCalender" : {
-      "post" : {
-        "summary" : "Create Calender",
-        "operationId" : "createCalender",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "*/*" : {
-              "schema" : {
-                "type" : "string"
-              }
-            }
-          },
-          "required" : false
-        },
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/CreateCalendarResponsePayload"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/v1/ifi/{ifiID}/ledger/createCoa" : {
       "post" : {
         "summary" : "Create Coa",
@@ -2490,7 +2513,7 @@
         }
       }
     },
-    "/api/v1/ifi/{ifiID}/ledger/getAggregateExpressions" : {
+    "/api/v1/ifi/{ifiID}/ledger/getAggregateExpressionList" : {
       "get" : {
         "summary" : "get All Aggregation Expressions",
         "operationId" : "getAggregateExpressionList",
@@ -2530,17 +2553,6 @@
             "format" : "int64"
           }
         } ],
-        "requestBody" : {
-          "description" : "order of sorting",
-          "content" : {
-            "*/*" : {
-              "schema" : {
-                "type" : "string"
-              }
-            }
-          },
-          "required" : false
-        },
         "responses" : {
           "200" : {
             "description" : "successful operation",
@@ -2724,6 +2736,43 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ReplacePolicyResponsePayload"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/ledger/updatePolicyState" : {
+      "post" : {
+        "summary" : "Replace Policy",
+        "operationId" : "updatePolicyState",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdatePolicyStateRequestPayload"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EmptyPayload"
                 }
               }
             }
@@ -3671,20 +3720,6 @@
           }
         }
       },
-      "AddAccountProductInBundleRequest" : {
-        "type" : "object",
-        "properties" : {
-          "accountProduct" : {
-            "$ref" : "#/components/schemas/ProductInfoRequest"
-          },
-          "headers" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
-            }
-          }
-        }
-      },
       "AddBeneficiaryAccountForBeneficiaryRequest" : {
         "type" : "object",
         "properties" : {
@@ -3727,59 +3762,6 @@
           },
           "default" : {
             "type" : "boolean"
-          }
-        }
-      },
-      "AddBundleRequest" : {
-        "required" : [ "name" ],
-        "type" : "object",
-        "properties" : {
-          "name" : {
-            "type" : "string",
-            "description" : "The name which would be assigned to the bundle",
-            "example" : "Savings Bundle"
-          },
-          "shortCode" : {
-            "type" : "string",
-            "description" : "The short code to identify the bundle",
-            "example" : "SVNG"
-          },
-          "picURL" : {
-            "type" : "string",
-            "description" : "The URL to get the bundle's display pic"
-          },
-          "description" : {
-            "type" : "string",
-            "description" : "The detailed description of the bundle",
-            "example" : "Bundle related to savings accounts. Consists of a savings account product and a related debit card"
-          },
-          "accountProducts" : {
-            "type" : "array",
-            "description" : "The list of account products which will be a part of the bundle",
-            "items" : {
-              "$ref" : "#/components/schemas/ProductInfoRequest"
-            }
-          },
-          "paymentProducts" : {
-            "type" : "array",
-            "description" : "The list of payment products which will be a part of the bundle",
-            "items" : {
-              "$ref" : "#/components/schemas/ProductInfoRequest"
-            }
-          },
-          "attributes" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "object",
-              "properties" : { }
-            },
-            "description" : "Any additional information which is specific to the bundle"
-          },
-          "headers" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
-            }
           }
         }
       },
@@ -3947,14 +3929,6 @@
             "type" : "string",
             "description" : "Additional remarks for adding the corporate data",
             "example" : "Application looks good"
-          }
-        }
-      },
-      "AddPaymentProductInBundleRequest" : {
-        "type" : "object",
-        "properties" : {
-          "paymentProduct" : {
-            "$ref" : "#/components/schemas/ProductInfoRequest"
           }
         }
       },
@@ -4489,65 +4463,6 @@
           }
         }
       },
-      "BundleResponse" : {
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "string"
-          },
-          "ifiID" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "vboID" : {
-            "type" : "string"
-          },
-          "name" : {
-            "type" : "string"
-          },
-          "accountProducts" : {
-            "uniqueItems" : true,
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/ProductInfoResponse"
-            }
-          },
-          "paymentProducts" : {
-            "uniqueItems" : true,
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/ProductInfoResponse"
-            }
-          },
-          "status" : {
-            "type" : "string"
-          },
-          "attributes" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "object",
-              "properties" : { }
-            }
-          },
-          "createdAt" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "updatedAt" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "shortCode" : {
-            "type" : "string"
-          },
-          "picURL" : {
-            "type" : "string"
-          },
-          "description" : {
-            "type" : "string"
-          }
-        }
-      },
       "CalendarInfo" : {
         "type" : "object",
         "properties" : {
@@ -4573,9 +4488,6 @@
           "calendarId" : {
             "type" : "integer",
             "format" : "int64"
-          },
-          "getcalendarName" : {
-            "type" : "string"
           }
         }
       },
@@ -4705,16 +4617,30 @@
           },
           "currency" : {
             "type" : "string"
-          },
-          "coaCode" : {
-            "type" : "string"
-          },
-          "calendarName" : {
-            "type" : "string"
-          },
-          "createdAt" : {
+          }
+        }
+      },
+      "Coa" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
             "type" : "integer",
             "format" : "int64"
+          },
+          "name" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CoaNode" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "name" : {
+            "type" : "string"
           }
         }
       },
@@ -5003,7 +4929,7 @@
       "CreateBeneficiaryRequest" : {
         "type" : "object"
       },
-      "CreateCalendarResponsePayload" : {
+      "CreateCardDesignPolicyRequest" : {
         "type" : "object",
         "properties" : {
           "headers" : {
@@ -5012,13 +4938,49 @@
               "type" : "string"
             }
           },
-          "calendarId" : {
+          "code" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "ifiID" : {
             "type" : "integer",
             "format" : "int64"
           },
-          "calendarDateGroupId" : {
-            "type" : "integer",
-            "format" : "int64"
+          "logo" : {
+            "type" : "string"
+          },
+          "background" : {
+            "type" : "string"
+          },
+          "backgroundExpanded" : {
+            "type" : "string"
+          },
+          "backgroundColor" : {
+            "type" : "string"
+          },
+          "textColor" : {
+            "type" : "string"
+          },
+          "state" : {
+            "type" : "string",
+            "enum" : [ "ENABLED", "DISABLED" ]
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object",
+              "properties" : { }
+            }
+          },
+          "validFrom" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "validUntil" : {
+            "type" : "string",
+            "format" : "date-time"
           }
         }
       },
@@ -5056,6 +5018,63 @@
           }
         }
       },
+      "CreateCouponAccountingPolicyRequest" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "code" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "ifiID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "couponName" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object",
+              "properties" : { }
+            }
+          },
+          "denomination" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object",
+              "properties" : { }
+            }
+          },
+          "isPartialRedemptionAllowed" : {
+            "type" : "boolean"
+          },
+          "expiryAccount" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object",
+              "properties" : { }
+            }
+          },
+          "validFrom" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "validUntil" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }
+      },
       "CreateEditCorporateApplicationRequest" : {
         "type" : "object",
         "properties" : {
@@ -5063,6 +5082,106 @@
             "type" : "integer",
             "description" : "Identifier of the corporate which is being edited",
             "format" : "int32"
+          }
+        }
+      },
+      "CreateExtendedProductFamilyRequest" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "productFamily" : {
+            "$ref" : "#/components/schemas/CreateProductFamilyRequest"
+          },
+          "issuancePolicy" : {
+            "$ref" : "#/components/schemas/CreateIssuancePolicyRequest"
+          },
+          "transactionPolicyIDs" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "CreateExtendedProductRequest" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "productRequest" : {
+            "$ref" : "#/components/schemas/CreateProductRequest"
+          },
+          "issuancePolicyRequest" : {
+            "$ref" : "#/components/schemas/CreateIssuancePolicyRequest"
+          },
+          "couponAccountingPolicyRequest" : {
+            "$ref" : "#/components/schemas/CreateCouponAccountingPolicyRequest"
+          },
+          "cardDesignPolicyRequest" : {
+            "$ref" : "#/components/schemas/CreateCardDesignPolicyRequest"
+          },
+          "transactionPolicyIDs" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "CreateIssuancePolicyRequest" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "ifiID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "code" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object",
+              "properties" : { }
+            }
+          },
+          "validFrom" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "validUntil" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "allowedAccountHolderGroups" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "disAllowedAccountHolderGroups" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
           }
         }
       },
@@ -5151,23 +5270,83 @@
           }
         }
       },
-      "DateGroupInfo" : {
+      "CreateProductFamilyRequest" : {
         "type" : "object",
         "properties" : {
-          "dateGroupId" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "ifiID" : {
             "type" : "integer",
             "format" : "int64"
           },
-          "calendarId" : {
+          "coaID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "parentCoaNodeID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "accountingType" : {
+            "type" : "string",
+            "enum" : [ "ASSET", "LIABILITY", "INCOME", "EXPENSE", "EQUITY" ]
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "string",
+            "enum" : [ "WALLET_BASED", "ACCOUNT_BASED" ]
+          },
+          "code" : {
+            "type" : "string"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "CreateProductRequest" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "ifiID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "coaID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "productFamilyID" : {
             "type" : "integer",
             "format" : "int64"
           },
           "name" : {
             "type" : "string"
           },
-          "dates" : {
-            "type" : "array",
-            "items" : {
+          "state" : {
+            "type" : "string",
+            "enum" : [ "ENABLED", "BLOCKED" ]
+          },
+          "code" : {
+            "type" : "string"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
               "type" : "string"
             }
           }
@@ -5449,6 +5628,54 @@
       "EmptyPayload" : {
         "type" : "object"
       },
+      "EntityGroup" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "id" : {
+            "type" : "string"
+          },
+          "ifiID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "entityType" : {
+            "type" : "string",
+            "enum" : [ "ACCOUNT", "ACCOUNT_HOLDER", "BENEFICIARY", "BENEFICIARY_ACCOUNT" ]
+          },
+          "code" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "schema" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "createdAt" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "modifiedAt" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }
+      },
       "Expiry" : {
         "type" : "object",
         "properties" : {
@@ -5655,6 +5882,23 @@
           }
         }
       },
+      "GetAllTransactionPoliciesResponse" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "policies" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyEntry"
+            }
+          }
+        }
+      },
       "GetAllTxnCategoriesResponsePayload" : {
         "type" : "object",
         "properties" : {
@@ -5709,11 +5953,39 @@
           },
           "calendarInfo" : {
             "$ref" : "#/components/schemas/CalendarInfo"
+          }
+        }
+      },
+      "GetCoaListResponse" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
           },
-          "dateGroupInfo" : {
+          "coaList" : {
             "type" : "array",
             "items" : {
-              "$ref" : "#/components/schemas/DateGroupInfo"
+              "$ref" : "#/components/schemas/Coa"
+            }
+          }
+        }
+      },
+      "GetCoaNodesResponse" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "coaNodeList" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/CoaNode"
             }
           }
         }
@@ -5746,6 +6018,40 @@
           },
           "policy" : {
             "$ref" : "#/components/schemas/Policy"
+          }
+        }
+      },
+      "GetProductFamilyListResponse" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "productFamilyList" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ProductFamily"
+            }
+          }
+        }
+      },
+      "GetProductListResponse" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "productList" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Product"
+            }
           }
         }
       },
@@ -6123,6 +6429,9 @@
           "asString" : {
             "type" : "string"
           },
+          "jsonPrimitive" : {
+            "type" : "boolean"
+          },
           "jsonNull" : {
             "type" : "boolean"
           },
@@ -6134,9 +6443,6 @@
           },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
-          },
-          "jsonPrimitive" : {
-            "type" : "boolean"
           },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
@@ -6155,6 +6461,9 @@
           "asBoolean" : {
             "type" : "boolean"
           },
+          "jsonPrimitive" : {
+            "type" : "boolean"
+          },
           "jsonNull" : {
             "type" : "boolean"
           },
@@ -6166,9 +6475,6 @@
           },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
-          },
-          "jsonPrimitive" : {
-            "type" : "boolean"
           },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
@@ -6227,6 +6533,9 @@
           "asBoolean" : {
             "type" : "boolean"
           },
+          "jsonPrimitive" : {
+            "type" : "boolean"
+          },
           "jsonNull" : {
             "type" : "boolean"
           },
@@ -6238,9 +6547,6 @@
           },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
-          },
-          "jsonPrimitive" : {
-            "type" : "boolean"
           },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
@@ -6348,6 +6654,9 @@
           "asString" : {
             "type" : "string"
           },
+          "jsonPrimitive" : {
+            "type" : "boolean"
+          },
           "jsonNull" : {
             "type" : "boolean"
           },
@@ -6359,9 +6668,6 @@
           },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
-          },
-          "jsonPrimitive" : {
-            "type" : "boolean"
           },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
@@ -6439,6 +6745,23 @@
             "type" : "object",
             "additionalProperties" : {
               "type" : "string"
+            }
+          }
+        }
+      },
+      "ListEntityGroupResponse" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "entityGroupList" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/EntityGroup"
             }
           }
         }
@@ -6876,6 +7199,44 @@
           }
         }
       },
+      "PolicyEntry" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "code" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "accountingPolicyID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "state" : {
+            "type" : "string",
+            "enum" : [ "ENABLED", "DISABLED" ]
+          },
+          "createdAt" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "updatedAt" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "validFrom" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "validUntill" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }
+      },
       "PolicyTxnConstraint" : {
         "type" : "object",
         "properties" : {
@@ -6951,65 +7312,136 @@
           }
         }
       },
-      "ProductInfoRequest" : {
-        "required" : [ "productID" ],
+      "Product" : {
         "type" : "object",
         "properties" : {
-          "productID" : {
-            "type" : "string",
-            "description" : "The UUID of the account product which will be a part of the bundle",
-            "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
-          },
-          "productFamilyID" : {
-            "type" : "string",
-            "description" : "The UUID of the product's family which will be a part of the bundle",
-            "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
-          },
-          "programIDs" : {
-            "type" : "array",
-            "description" : "The UUIDs of the programs which will be associated to the account product at the time of issuance",
-            "items" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
               "type" : "string"
             }
           },
-          "attributes" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "object",
-              "properties" : { }
-            },
-            "description" : "Any additional information which is specific to the product info"
-          }
-        }
-      },
-      "ProductInfoResponse" : {
-        "type" : "object",
-        "properties" : {
           "id" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "name" : {
             "type" : "string"
           },
-          "productID" : {
-            "type" : "string"
-          },
-          "type" : {
+          "state" : {
             "type" : "string",
-            "enum" : [ "ACCOUNT", "PAYMENT" ]
-          },
-          "programIDs" : {
-            "type" : "string"
+            "enum" : [ "ENABLED", "BLOCKED" ]
           },
           "ifiID" : {
             "type" : "integer",
             "format" : "int64"
           },
-          "shortCode" : {
+          "coaID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "productFamilyID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "type" : {
+            "type" : "string",
+            "enum" : [ "ACCOUNT_BASED", "WALLET_BASED" ]
+          },
+          "code" : {
             "type" : "string"
           },
           "attributes" : {
             "type" : "object",
             "additionalProperties" : {
-              "type" : "object",
-              "properties" : { }
+              "type" : "string"
+            }
+          },
+          "coaNodeID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "auraAccountGroupID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "modifiedAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "tags" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Tag"
+            }
+          }
+        }
+      },
+      "ProductFamily" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "id" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "state" : {
+            "type" : "string",
+            "enum" : [ "ENABLED", "BLOCKED" ]
+          },
+          "ifiID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "coaID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "parentCoaNodeID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "accountingType" : {
+            "type" : "string",
+            "enum" : [ "ASSET", "LIABILITY", "INCOME", "EXPENSE", "EQUITY" ]
+          },
+          "type" : {
+            "type" : "string",
+            "enum" : [ "WALLET_BASED", "ACCOUNT_BASED" ]
+          },
+          "code" : {
+            "type" : "string"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "coaNodeID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "auraAccountGroupID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "tags" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Tag"
             }
           }
         }
@@ -7268,6 +7700,71 @@
           }
         }
       },
+      "TransactionPolicyResponse" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "id" : {
+            "type" : "string"
+          },
+          "ifiId" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "code" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "accountingPolicyID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "state" : {
+            "type" : "string",
+            "enum" : [ "ENABLED", "DISABLED" ]
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object",
+              "properties" : { }
+            }
+          },
+          "validFrom" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "validUntil" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "policyTxnRules" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyTxnRule"
+            }
+          },
+          "policyBalanceRules" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyBalanceRule"
+            }
+          },
+          "policyAggregateRules" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyAggregateRule"
+            }
+          }
+        }
+      },
       "TxnCategory" : {
         "type" : "object",
         "properties" : {
@@ -7326,61 +7823,6 @@
           }
         }
       },
-      "UpdateBundleRequest" : {
-        "type" : "object",
-        "properties" : {
-          "name" : {
-            "type" : "string",
-            "description" : "The name which would be assigned to the bundle",
-            "example" : "Savings Bundle"
-          },
-          "accountProducts" : {
-            "type" : "array",
-            "description" : "The list of account products which will be a part of the bundle",
-            "items" : {
-              "$ref" : "#/components/schemas/ProductInfoRequest"
-            }
-          },
-          "paymentProducts" : {
-            "type" : "array",
-            "description" : "The list of payment products which will be a part of the bundle",
-            "items" : {
-              "$ref" : "#/components/schemas/ProductInfoRequest"
-            }
-          },
-          "status" : {
-            "type" : "string"
-          },
-          "attributes" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "object",
-              "properties" : { }
-            },
-            "description" : "Any additional information which is specific to the bundle"
-          },
-          "shortCode" : {
-            "type" : "string",
-            "description" : "The short code to identify the bundle",
-            "example" : "SVNG"
-          },
-          "picURL" : {
-            "type" : "string",
-            "description" : "The URL to get the bundle's display pic"
-          },
-          "description" : {
-            "type" : "string",
-            "description" : "The detailed description of the bundle",
-            "example" : "Bundle related to savings accounts. Consists of a savings account product and a related debit card"
-          },
-          "headers" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
-            }
-          }
-        }
-      },
       "UpdateKycStatusRequest" : {
         "type" : "object",
         "properties" : {
@@ -7405,6 +7847,29 @@
           },
           "authData" : {
             "$ref" : "#/components/schemas/JsonObject"
+          }
+        }
+      },
+      "UpdatePolicyStateRequestPayload" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "policyId" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "ifiId" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "state" : {
+            "type" : "string",
+            "enum" : [ "ENABLED", "DISABLED" ]
           }
         }
       },
