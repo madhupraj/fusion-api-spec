@@ -2813,6 +2813,73 @@
         }
       }
     },
+    "/api/v1/ifi/{ifiID}/productFamilies/{productFamilyID}/products" : {
+      "get" : {
+        "summary" : "Get Products by productFamilyID",
+        "operationId" : "getProducts",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account exists",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "productFamilyID",
+          "in" : "path",
+          "description" : "ProductFamilyID of required products",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "name",
+          "in" : "query",
+          "description" : "Name of product",
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "test"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "description" : "No of products needed in response",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "example" : 10
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "description" : "Page number for products needed in response",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "example" : "test"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Account"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/ifi/{ifiID}/productFamilies/{productFamilyID}/programs" : {
       "get" : {
         "summary" : "Get programs by productFamilyID",
@@ -6360,14 +6427,14 @@
           "serviceInstanceJID" : {
             "type" : "boolean"
           },
-          "serviceViewName" : {
-            "type" : "string"
-          },
           "serviceViewJID" : {
             "type" : "boolean"
           },
           "defaultServiceNode" : {
             "type" : "boolean"
+          },
+          "serviceViewName" : {
+            "type" : "string"
           },
           "jidOfAGroup" : {
             "type" : "boolean"
@@ -6432,6 +6499,12 @@
           "jsonNull" : {
             "type" : "boolean"
           },
+          "jsonPrimitive" : {
+            "type" : "boolean"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
@@ -6442,12 +6515,6 @@
             "$ref" : "#/components/schemas/JsonObject"
           },
           "jsonArray" : {
-            "type" : "boolean"
-          },
-          "jsonObject" : {
-            "type" : "boolean"
-          },
-          "jsonPrimitive" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -6464,6 +6531,12 @@
           "jsonNull" : {
             "type" : "boolean"
           },
+          "jsonPrimitive" : {
+            "type" : "boolean"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
@@ -6474,12 +6547,6 @@
             "$ref" : "#/components/schemas/JsonObject"
           },
           "jsonArray" : {
-            "type" : "boolean"
-          },
-          "jsonObject" : {
-            "type" : "boolean"
-          },
-          "jsonPrimitive" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -6536,6 +6603,12 @@
           "jsonNull" : {
             "type" : "boolean"
           },
+          "jsonPrimitive" : {
+            "type" : "boolean"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
@@ -6546,12 +6619,6 @@
             "$ref" : "#/components/schemas/JsonObject"
           },
           "jsonArray" : {
-            "type" : "boolean"
-          },
-          "jsonObject" : {
-            "type" : "boolean"
-          },
-          "jsonPrimitive" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -6605,10 +6672,10 @@
           "number" : {
             "type" : "boolean"
           },
-          "asBoolean" : {
+          "boolean" : {
             "type" : "boolean"
           },
-          "boolean" : {
+          "asBoolean" : {
             "type" : "boolean"
           },
           "string" : {
@@ -6657,6 +6724,12 @@
           "jsonNull" : {
             "type" : "boolean"
           },
+          "jsonPrimitive" : {
+            "type" : "boolean"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
@@ -6667,12 +6740,6 @@
             "$ref" : "#/components/schemas/JsonObject"
           },
           "jsonArray" : {
-            "type" : "boolean"
-          },
-          "jsonObject" : {
-            "type" : "boolean"
-          },
-          "jsonPrimitive" : {
             "type" : "boolean"
           },
           "asJsonNull" : {

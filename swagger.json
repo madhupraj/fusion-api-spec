@@ -113,6 +113,37 @@
         }
       }
     },
+    "/api/v1/ifi/{ifiID}/accounts/update" : {
+      "post" : {
+        "tags" : [ "Account Management" ],
+        "summary" : "Update all Accounts for a given real or headless account holder",
+        "description" : "",
+        "operationId" : "accountHolderUpdated",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ifiID",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/UpdateProductForAllAccountsRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/EmptyPayload"
+            }
+          }
+        }
+      }
+    },
     "/api/v1/ifi/{ifiID}/accounts/{accountID}" : {
       "get" : {
         "tags" : [ "Account Management" ],
@@ -3785,6 +3816,61 @@
             "description" : "successful operation",
             "schema" : {
               "$ref" : "#/definitions/PaymentProduct"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/productFamilies/{productFamilyID}/products" : {
+      "get" : {
+        "summary" : "Get Products by productFamilyID",
+        "description" : "",
+        "operationId" : "getProducts",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account exists",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "productFamilyID",
+          "in" : "path",
+          "description" : "ProductFamilyID of required products",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "name",
+          "in" : "query",
+          "description" : "Name of product",
+          "required" : false,
+          "type" : "string",
+          "x-example" : "test"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "description" : "No of products needed in response",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32",
+          "x-example" : 10
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "description" : "Page number for products needed in response",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32",
+          "x-example" : "test"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Account"
             }
           }
         }
@@ -8191,14 +8277,14 @@
         "serviceInstanceJID" : {
           "type" : "boolean"
         },
-        "serviceViewName" : {
-          "type" : "string"
-        },
         "serviceViewJID" : {
           "type" : "boolean"
         },
         "defaultServiceNode" : {
           "type" : "boolean"
+        },
+        "serviceViewName" : {
+          "type" : "string"
         },
         "jidOfAGroup" : {
           "type" : "boolean"
@@ -8262,6 +8348,12 @@
         "jsonNull" : {
           "type" : "boolean"
         },
+        "jsonPrimitive" : {
+          "type" : "boolean"
+        },
+        "jsonObject" : {
+          "type" : "boolean"
+        },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
         },
@@ -8272,12 +8364,6 @@
           "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
-          "type" : "boolean"
-        },
-        "jsonObject" : {
-          "type" : "boolean"
-        },
-        "jsonPrimitive" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
@@ -8294,6 +8380,12 @@
         "jsonNull" : {
           "type" : "boolean"
         },
+        "jsonPrimitive" : {
+          "type" : "boolean"
+        },
+        "jsonObject" : {
+          "type" : "boolean"
+        },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
         },
@@ -8304,12 +8396,6 @@
           "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
-          "type" : "boolean"
-        },
-        "jsonObject" : {
-          "type" : "boolean"
-        },
-        "jsonPrimitive" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
@@ -8365,6 +8451,12 @@
         "jsonNull" : {
           "type" : "boolean"
         },
+        "jsonPrimitive" : {
+          "type" : "boolean"
+        },
+        "jsonObject" : {
+          "type" : "boolean"
+        },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
         },
@@ -8375,12 +8467,6 @@
           "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
-          "type" : "boolean"
-        },
-        "jsonObject" : {
-          "type" : "boolean"
-        },
-        "jsonPrimitive" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
@@ -8433,10 +8519,10 @@
         "number" : {
           "type" : "boolean"
         },
-        "asBoolean" : {
+        "boolean" : {
           "type" : "boolean"
         },
-        "boolean" : {
+        "asBoolean" : {
           "type" : "boolean"
         },
         "string" : {
@@ -8484,6 +8570,12 @@
         "jsonNull" : {
           "type" : "boolean"
         },
+        "jsonPrimitive" : {
+          "type" : "boolean"
+        },
+        "jsonObject" : {
+          "type" : "boolean"
+        },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
         },
@@ -8494,12 +8586,6 @@
           "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
-          "type" : "boolean"
-        },
-        "jsonObject" : {
-          "type" : "boolean"
-        },
-        "jsonPrimitive" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
@@ -9875,6 +9961,18 @@
         "state" : {
           "type" : "string",
           "enum" : [ "ENABLED", "DISABLED" ]
+        }
+      }
+    },
+    "UpdateProductForAllAccountsRequest" : {
+      "type" : "object",
+      "properties" : {
+        "accountHolderType" : {
+          "type" : "string",
+          "enum" : [ "REAL", "LEGAL", "HEADLESS" ]
+        },
+        "accountHolderID" : {
+          "type" : "string"
         }
       }
     },

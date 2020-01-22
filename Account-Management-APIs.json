@@ -46,6 +46,45 @@
         }
       }
     },
+    "/api/v1/ifi/{ifiID}/accounts/update" : {
+      "post" : {
+        "tags" : [ "Account Management" ],
+        "summary" : "Update all Accounts for a given real or headless account holder",
+        "operationId" : "accountHolderUpdated",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ifiID",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateProductForAllAccountsRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EmptyPayload"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/ifi/{ifiID}/accounts/{accountID}" : {
       "get" : {
         "tags" : [ "Account Management" ],
@@ -1241,6 +1280,9 @@
           }
         }
       },
+      "EmptyPayload" : {
+        "type" : "object"
+      },
       "GetAccountAccessorListResponse" : {
         "type" : "object",
         "properties" : {
@@ -1496,6 +1538,18 @@
             "type" : "string"
           },
           "isRetriableFailure" : {
+            "type" : "string"
+          }
+        }
+      },
+      "UpdateProductForAllAccountsRequest" : {
+        "type" : "object",
+        "properties" : {
+          "accountHolderType" : {
+            "type" : "string",
+            "enum" : [ "REAL", "LEGAL", "HEADLESS" ]
+          },
+          "accountHolderID" : {
             "type" : "string"
           }
         }
