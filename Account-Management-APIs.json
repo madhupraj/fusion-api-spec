@@ -1551,6 +1551,12 @@
           },
           "accountHolderID" : {
             "type" : "string"
+          },
+          "subject" : {
+            "type" : "string"
+          },
+          "object" : {
+            "type" : "string"
           }
         }
       }
