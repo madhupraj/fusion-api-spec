@@ -117,8 +117,6 @@
     },
     "/v1.0/tenants/{tenantID}/cards/{cardGuid}/authentications/{requestID}" : {
       "get" : {
-        "summary" : "Get Authentication Object",
-        "description" : "",
         "operationId" : "getAuthenticationObject",
         "parameters" : [ {
           "name" : "cardGuid",
@@ -148,11 +146,237 @@
     }
   },
   "definitions" : {
+    "AgentInfo" : {
+      "type" : "object",
+      "properties" : {
+        "geoLocation" : {
+          "$ref" : "#/definitions/GeoLocation"
+        },
+        "ipv4" : {
+          "type" : "string"
+        },
+        "ipv6" : {
+          "type" : "string"
+        },
+        "userAgent" : {
+          "type" : "string"
+        }
+      }
+    },
+    "AuthFactor" : {
+      "type" : "object",
+      "properties" : {
+        "factorNumber" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "alternativeIdentities" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/IdentityWithConfig"
+          }
+        },
+        "authTypes" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "AuthPlan" : {
+      "type" : "object",
+      "properties" : {
+        "authPlanId" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "factors" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AuthFactor"
+          }
+        }
+      }
+    },
+    "AuthenticationFactorInfo" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "authenticationID" : {
+          "type" : "string"
+        },
+        "authPlanID" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "factorNumber" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "idpSessionInfo" : {
+          "$ref" : "#/definitions/IdentityProviderSessionInfo"
+        },
+        "identityID" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "identityType" : {
+          "type" : "string"
+        },
+        "identityValue" : {
+          "type" : "string"
+        },
+        "agentInfo" : {
+          "$ref" : "#/definitions/AgentInfo"
+        },
+        "result" : {
+          "$ref" : "#/definitions/Result"
+        },
+        "createdAt" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "sessionID" : {
+          "type" : "string"
+        }
+      }
+    },
     "AuthenticationInfo" : {
       "type" : "object"
     },
+    "AuthenticationSessionInfo" : {
+      "type" : "object",
+      "properties" : {
+        "sessionID" : {
+          "type" : "string"
+        },
+        "scopes" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "authPlans" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AuthPlan"
+          }
+        },
+        "connectorURL" : {
+          "type" : "string"
+        }
+      }
+    },
+    "AuthenticationSubjectInfo" : {
+      "type" : "object",
+      "properties" : {
+        "domainID" : {
+          "type" : "string"
+        },
+        "profileID" : {
+          "type" : "string"
+        }
+      }
+    },
+    "CardMetaData" : {
+      "type" : "object",
+      "properties" : {
+        "maskedPan" : {
+          "type" : "string"
+        },
+        "cardNetwork" : {
+          "type" : "string"
+        },
+        "bin" : {
+          "type" : "string"
+        },
+        "productID" : {
+          "type" : "string"
+        }
+      }
+    },
     "CipherAuthenticationObject" : {
-      "type" : "object"
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "requestID" : {
+          "type" : "string"
+        },
+        "cardGuid" : {
+          "type" : "string"
+        },
+        "tenantID" : {
+          "type" : "string"
+        },
+        "authenticationProvider" : {
+          "type" : "string"
+        },
+        "authenticationSessionInfo" : {
+          "$ref" : "#/definitions/AuthenticationSessionInfo"
+        },
+        "authenticationSubjectInfo" : {
+          "$ref" : "#/definitions/AuthenticationSubjectInfo"
+        },
+        "value" : {
+          "$ref" : "#/definitions/Money"
+        },
+        "merchantInfo" : {
+          "$ref" : "#/definitions/MerchantInfo"
+        },
+        "validTill" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "state" : {
+          "type" : "string",
+          "enum" : [ "PENDING", "FAILED", "CANCELLED", "EXPIRED", "SUCCESS", "INITIATED" ]
+        },
+        "failureReason" : {
+          "$ref" : "#/definitions/FailureReason"
+        },
+        "resourcePublicKeyCert" : {
+          "type" : "string"
+        },
+        "authenticationFactorsInfo" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AuthenticationFactorInfo"
+          }
+        },
+        "initiatorAgentInfo" : {
+          "$ref" : "#/definitions/AgentInfo"
+        },
+        "cardInfo" : {
+          "$ref" : "#/definitions/CardMetaData"
+        },
+        "createdAt" : {
+          "type" : "string"
+        }
+      }
+    },
+    "FailureReason" : {
+      "type" : "object",
+      "properties" : {
+        "reason" : {
+          "type" : "string"
+        },
+        "code" : {
+          "type" : "string"
+        },
+        "errorName" : {
+          "type" : "string"
+        },
+        "exception" : {
+          "$ref" : "#/definitions/Throwable"
+        }
+      }
     },
     "Filters" : {
       "type" : "object",
@@ -167,6 +391,17 @@
         "endTimeInMs" : {
           "type" : "integer",
           "format" : "int64"
+        }
+      }
+    },
+    "GeoLocation" : {
+      "type" : "object",
+      "properties" : {
+        "latitude" : {
+          "type" : "string"
+        },
+        "longitude" : {
+          "type" : "string"
         }
       }
     },
@@ -222,6 +457,29 @@
           "type" : "string"
         },
         "value" : {
+          "type" : "string"
+        }
+      }
+    },
+    "IdentityProviderSessionInfo" : {
+      "type" : "object",
+      "properties" : {
+        "sessionID" : {
+          "type" : "string"
+        }
+      }
+    },
+    "IdentityWithConfig" : {
+      "type" : "object",
+      "properties" : {
+        "identityId" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "identityType" : {
+          "type" : "string"
+        },
+        "identityValue" : {
           "type" : "string"
         }
       }
@@ -305,15 +563,6 @@
         "resource" : {
           "type" : "string"
         },
-        "serviceInstanceJID" : {
-          "type" : "boolean"
-        },
-        "jidOfAGroup" : {
-          "type" : "boolean"
-        },
-        "proxyServiceJID" : {
-          "type" : "boolean"
-        },
         "primaryServiceName" : {
           "type" : "string"
         },
@@ -328,6 +577,50 @@
         },
         "defaultServiceNode" : {
           "type" : "boolean"
+        },
+        "serviceInstanceJID" : {
+          "type" : "boolean"
+        },
+        "jidOfAGroup" : {
+          "type" : "boolean"
+        },
+        "proxyServiceJID" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "MerchantInfo" : {
+      "type" : "object",
+      "properties" : {
+        "mid" : {
+          "type" : "string"
+        },
+        "aid" : {
+          "type" : "string"
+        },
+        "tid" : {
+          "type" : "string"
+        },
+        "merchantName" : {
+          "type" : "string"
+        },
+        "curatedMerchantName" : {
+          "type" : "string"
+        },
+        "mcc" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Money" : {
+      "type" : "object",
+      "properties" : {
+        "currency" : {
+          "type" : "string"
+        },
+        "amount" : {
+          "type" : "integer",
+          "format" : "int64"
         }
       }
     },
@@ -406,12 +699,80 @@
         }
       }
     },
+    "Result" : {
+      "type" : "object",
+      "properties" : {
+        "challengeValue" : {
+          "type" : "string"
+        },
+        "evaluatedResponseFromIDP" : {
+          "type" : "string"
+        },
+        "state" : {
+          "type" : "string",
+          "enum" : [ "SUCCESS", "FAILED", "PENDING" ]
+        },
+        "code" : {
+          "type" : "string"
+        },
+        "authType" : {
+          "type" : "string"
+        }
+      }
+    },
     "SignatureAlgorithm" : {
       "type" : "object",
       "properties" : {
         "id" : {
           "type" : "integer",
           "format" : "int32"
+        }
+      }
+    },
+    "StackTraceElement" : {
+      "type" : "object",
+      "properties" : {
+        "methodName" : {
+          "type" : "string"
+        },
+        "fileName" : {
+          "type" : "string"
+        },
+        "lineNumber" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "className" : {
+          "type" : "string"
+        },
+        "nativeMethod" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "Throwable" : {
+      "type" : "object",
+      "properties" : {
+        "cause" : {
+          "$ref" : "#/definitions/Throwable"
+        },
+        "stackTrace" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/StackTraceElement"
+          }
+        },
+        "message" : {
+          "type" : "string"
+        },
+        "localizedMessage" : {
+          "type" : "string"
+        },
+        "suppressed" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Throwable"
+          }
         }
       }
     },
