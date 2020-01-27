@@ -117,6 +117,8 @@
     },
     "/v1.0/tenants/{tenantID}/cards/{cardGuid}/authentications/{requestID}" : {
       "get" : {
+        "summary" : "Get Authentication Object",
+        "description" : "",
         "operationId" : "getAuthenticationObject",
         "parameters" : [ {
           "name" : "cardGuid",
@@ -309,6 +311,9 @@
         "jidOfAGroup" : {
           "type" : "boolean"
         },
+        "proxyServiceJID" : {
+          "type" : "boolean"
+        },
         "primaryServiceName" : {
           "type" : "string"
         },
@@ -322,9 +327,6 @@
           "type" : "boolean"
         },
         "defaultServiceNode" : {
-          "type" : "boolean"
-        },
-        "proxyServiceJID" : {
           "type" : "boolean"
         }
       }
