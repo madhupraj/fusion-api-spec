@@ -259,8 +259,6 @@
     },
     "/tenants/{tenantId}/cards/{cardId}" : {
       "get" : {
-        "summary" : "Get Card",
-        "description" : "",
         "operationId" : "getCard",
         "parameters" : [ {
           "name" : "tenantId",
@@ -979,9 +977,6 @@
         "resource" : {
           "type" : "string"
         },
-        "proxyServiceJID" : {
-          "type" : "boolean"
-        },
         "primaryServiceName" : {
           "type" : "string"
         },
@@ -992,6 +987,9 @@
           "$ref" : "#/definitions/JID"
         },
         "serviceViewJID" : {
+          "type" : "boolean"
+        },
+        "proxyServiceJID" : {
           "type" : "boolean"
         },
         "defaultServiceNode" : {
@@ -1146,15 +1144,15 @@
             "type" : "object"
           }
         },
-        "signatoryJID" : {
-          "$ref" : "#/definitions/JID"
-        },
         "zetaSignature" : {
           "$ref" : "#/definitions/ZetaSignature"
         },
         "payloadVersion" : {
           "type" : "integer",
           "format" : "int32"
+        },
+        "signatoryJID" : {
+          "$ref" : "#/definitions/JID"
         },
         "signed" : {
           "type" : "boolean"
@@ -1278,15 +1276,15 @@
             "type" : "object"
           }
         },
-        "signatoryJID" : {
-          "$ref" : "#/definitions/JID"
-        },
         "zetaSignature" : {
           "$ref" : "#/definitions/ZetaSignature"
         },
         "payloadVersion" : {
           "type" : "integer",
           "format" : "int32"
+        },
+        "signatoryJID" : {
+          "$ref" : "#/definitions/JID"
         },
         "signed" : {
           "type" : "boolean"
