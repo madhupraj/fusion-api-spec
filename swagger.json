@@ -977,6 +977,15 @@
         "resource" : {
           "type" : "string"
         },
+        "serviceInstanceJID" : {
+          "type" : "boolean"
+        },
+        "jidOfAGroup" : {
+          "type" : "boolean"
+        },
+        "proxyServiceJID" : {
+          "type" : "boolean"
+        },
         "primaryServiceName" : {
           "type" : "string"
         },
@@ -989,16 +998,7 @@
         "serviceViewJID" : {
           "type" : "boolean"
         },
-        "proxyServiceJID" : {
-          "type" : "boolean"
-        },
         "defaultServiceNode" : {
-          "type" : "boolean"
-        },
-        "serviceInstanceJID" : {
-          "type" : "boolean"
-        },
-        "jidOfAGroup" : {
           "type" : "boolean"
         }
       }
@@ -1144,15 +1144,15 @@
             "type" : "object"
           }
         },
+        "signatoryJID" : {
+          "$ref" : "#/definitions/JID"
+        },
         "zetaSignature" : {
           "$ref" : "#/definitions/ZetaSignature"
         },
         "payloadVersion" : {
           "type" : "integer",
           "format" : "int32"
-        },
-        "signatoryJID" : {
-          "$ref" : "#/definitions/JID"
         },
         "signed" : {
           "type" : "boolean"
@@ -1276,15 +1276,15 @@
             "type" : "object"
           }
         },
+        "signatoryJID" : {
+          "$ref" : "#/definitions/JID"
+        },
         "zetaSignature" : {
           "$ref" : "#/definitions/ZetaSignature"
         },
         "payloadVersion" : {
           "type" : "integer",
           "format" : "int32"
-        },
-        "signatoryJID" : {
-          "$ref" : "#/definitions/JID"
         },
         "signed" : {
           "type" : "boolean"
