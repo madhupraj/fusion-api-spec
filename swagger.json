@@ -1,472 +1,142 @@
 {
   "swagger" : "2.0",
   "info" : {
+    "description" : "ACS authentication agent",
     "version" : "v1",
-    "title" : "API Reference"
+    "title" : "Edith API Doc",
+    "contact" : {
+      "name" : "Amit Raj",
+      "email" : "amit.ra@zeta.tech"
+    }
   },
+  "basePath" : "/api",
+  "schemes" : [ "http", "https" ],
   "paths" : {
-    "/admin/crons/{cronName}/release" : {
-      "get" : {
-        "operationId" : "releaseCronLock",
-        "parameters" : [ {
-          "name" : "cronName",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "default" : {
-            "description" : "successful operation"
-          }
-        }
-      }
-    },
-    "/admin/crons/{cronName}/trigger" : {
-      "get" : {
-        "operationId" : "triggerCron",
-        "parameters" : [ {
-          "name" : "cronName",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "type" : "string"
-            }
-          }
-        }
-      }
-    },
-    "/sdk/get-server-time" : {
-      "get" : {
-        "operationId" : "getServerTime",
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "type" : "string"
-            }
-          }
-        }
-      }
-    },
-    "/tenants" : {
+    "/v1.0/authenticate/requestChallenge" : {
       "post" : {
-        "operationId" : "createTenant",
+        "operationId" : "requestChallenge",
         "parameters" : [ {
           "in" : "body",
           "name" : "body",
           "required" : false,
           "schema" : {
-            "$ref" : "#/definitions/CreateTenantRequest"
+            "$ref" : "#/definitions/RequestChallengePayload"
           }
         } ],
         "responses" : {
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/Tenant"
+              "$ref" : "#/definitions/CompletionStageResponseEntity"
             }
           }
         }
       }
     },
-    "/tenants/{tenantId}" : {
-      "get" : {
-        "operationId" : "getTenant",
-        "parameters" : [ {
-          "name" : "tenantId",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/GetTenantResponse"
-            }
-          }
-        }
-      },
-      "patch" : {
-        "operationId" : "updateTenant",
-        "parameters" : [ {
-          "name" : "tenantId",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/UpdateTenantRequest"
-          }
-        } ],
-        "responses" : {
-          "default" : {
-            "description" : "successful operation"
-          }
-        }
-      }
-    },
-    "/tenants/{tenantId}/actions" : {
-      "get" : {
-        "operationId" : "getAllBulkActions",
-        "parameters" : [ {
-          "name" : "tenantId",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "pageIndex",
-          "in" : "query",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "pageSize",
-          "in" : "query",
-          "required" : false,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "lastFetchedId",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "sortOrder",
-          "in" : "query",
-          "required" : false,
-          "type" : "string",
-          "enum" : [ "asc", "desc" ]
-        }, {
-          "name" : "sortBy",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/PaginatedResponseGetBulkActionResponse"
-            }
-          }
-        }
-      }
-    },
-    "/tenants/{tenantId}/cards" : {
-      "get" : {
-        "operationId" : "getAllCards",
-        "parameters" : [ {
-          "name" : "tenantId",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "state",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "productId",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "phoneNumber",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "deviceId",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "email",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "pageIndex",
-          "in" : "query",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "pageSize",
-          "in" : "query",
-          "required" : false,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "lastFetchedId",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "sortOrder",
-          "in" : "query",
-          "required" : false,
-          "type" : "string",
-          "enum" : [ "asc", "desc" ]
-        }, {
-          "name" : "sortBy",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/PaginatedResponseGetCardResponse"
-            }
-          }
-        }
-      },
+    "/v1.0/authenticate/verifyChallenge" : {
       "post" : {
-        "operationId" : "createCard",
+        "operationId" : "verifyChallenge",
         "parameters" : [ {
           "in" : "body",
           "name" : "body",
           "required" : false,
           "schema" : {
-            "$ref" : "#/definitions/CreateCardRequest"
+            "$ref" : "#/definitions/VerifyChallengePayload"
           }
-        }, {
-          "name" : "tenantId",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
         } ],
         "responses" : {
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/CreateCardResponse"
+              "$ref" : "#/definitions/CompletionStageResponseEntity"
             }
           }
         }
       }
     },
-    "/tenants/{tenantId}/cards/{cardId}" : {
-      "get" : {
-        "operationId" : "getCard",
-        "parameters" : [ {
-          "name" : "tenantId",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "cardId",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/GetCardResponse"
-            }
-          }
-        }
-      },
-      "patch" : {
-        "operationId" : "updateCard",
-        "parameters" : [ {
-          "name" : "tenantId",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "cardId",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/UpdateCardRequest"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/GetCardResponse"
-            }
-          }
-        }
-      }
-    },
-    "/tenants/{tenantId}/devices" : {
-      "get" : {
-        "operationId" : "getAllDevices",
-        "parameters" : [ {
-          "name" : "tenantId",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "cardId",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "pageIndex",
-          "in" : "query",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "pageSize",
-          "in" : "query",
-          "required" : false,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "lastFetchedId",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "sortOrder",
-          "in" : "query",
-          "required" : false,
-          "type" : "string",
-          "enum" : [ "asc", "desc" ]
-        }, {
-          "name" : "sortBy",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/PaginatedResponseGetDeviceResponse"
-            }
-          }
-        }
-      }
-    },
-    "/tenants/{tenantId}/devices/{id}" : {
-      "get" : {
-        "operationId" : "getDevice",
-        "parameters" : [ {
-          "name" : "tenantId",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "id",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/GetDeviceResponse"
-            }
-          }
-        }
-      }
-    },
-    "/tenants/{tenantId}/products" : {
-      "get" : {
-        "operationId" : "getAllProducts",
-        "parameters" : [ {
-          "name" : "tenantId",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "pageIndex",
-          "in" : "query",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "pageSize",
-          "in" : "query",
-          "required" : false,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "lastFetchedId",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "sortOrder",
-          "in" : "query",
-          "required" : false,
-          "type" : "string",
-          "enum" : [ "asc", "desc" ]
-        }, {
-          "name" : "sortBy",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/PaginatedResponseGetProductResponse"
-            }
-          }
-        }
-      },
+    "/v1.0/sdk/initiate" : {
       "post" : {
-        "operationId" : "createProduct",
+        "operationId" : "initiate",
         "parameters" : [ {
-          "name" : "tenantId",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
           "in" : "body",
           "name" : "body",
           "required" : false,
           "schema" : {
-            "$ref" : "#/definitions/CreateProductRequest"
+            "$ref" : "#/definitions/InitiateAuthenticationChallengeRequest"
           }
         } ],
         "responses" : {
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/CreateProductResponse"
+              "$ref" : "#/definitions/CompletableFutureResponseEntityInitiateAuthenticationChallengeResponse"
             }
           }
         }
       }
     },
-    "/tenants/{tenantId}/products/{productId}" : {
+    "/v1.0/sdk/verify" : {
+      "post" : {
+        "operationId" : "verify",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/VerifyAuthenticationChallengeRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/CompletableFutureResponseEntityVerifyAuthenticationChallengeResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1.0/tenants/{tenantID}/authentications" : {
+      "post" : {
+        "operationId" : "getAuthenticationObject",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/GetAuthenticationsRequest"
+          }
+        }, {
+          "name" : "tenantID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/CompletableFutureResponseEntityGetAuthenticationsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1.0/tenants/{tenantID}/cards/{cardGuid}/authentications/{requestID}" : {
       "get" : {
-        "operationId" : "getProduct",
+        "operationId" : "getAuthenticationObject",
         "parameters" : [ {
-          "name" : "tenantId",
+          "name" : "cardGuid",
           "in" : "path",
           "required" : true,
           "type" : "string"
         }, {
-          "name" : "productId",
+          "name" : "requestID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "tenantID",
           "in" : "path",
           "required" : true,
           "type" : "string"
@@ -475,656 +145,163 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/GetProductResponse"
+              "$ref" : "#/definitions/CompletableFutureResponseEntityCipherAuthenticationObject"
             }
-          }
-        }
-      },
-      "patch" : {
-        "operationId" : "updateProduct",
-        "parameters" : [ {
-          "name" : "tenantId",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "productId",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/UpdateProductRequest"
-          }
-        } ],
-        "responses" : {
-          "default" : {
-            "description" : "successful operation"
-          }
-        }
-      }
-    },
-    "/tenants/{tenantId}/sdks" : {
-      "post" : {
-        "operationId" : "registerSDK",
-        "parameters" : [ {
-          "name" : "tenantId",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/RegisterSDKRequest"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/RegisterSDKResponse"
-            }
-          }
-        }
-      }
-    },
-    "/tenants/{tenantId}/sdks/{sdkId}/get-shared-secret" : {
-      "post" : {
-        "operationId" : "getSecret",
-        "parameters" : [ {
-          "name" : "tenantId",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "sdkId",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/GetTotpSecretRequest"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/GetTotpSecretResponse"
-            }
-          }
-        }
-      }
-    },
-    "/tenants/{tenantId}/sdks/{sdkId}/set-push-token" : {
-      "post" : {
-        "operationId" : "setPushToken",
-        "parameters" : [ {
-          "name" : "tenantId",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "sdkId",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/SetPushTokenRequest"
-          }
-        } ],
-        "responses" : {
-          "default" : {
-            "description" : "successful operation"
           }
         }
       }
     }
   },
   "definitions" : {
-    "CreateCardRequest" : {
+    "CompletableFuture" : {
       "type" : "object",
       "properties" : {
-        "cardNumberPattern" : {
-          "type" : "string"
+        "cancelled" : {
+          "type" : "boolean"
         },
-        "name" : {
-          "type" : "string"
+        "done" : {
+          "type" : "boolean"
         },
-        "cardNumber" : {
-          "type" : "string"
+        "completedExceptionally" : {
+          "type" : "boolean"
         },
-        "identities" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/IdentityRequest"
-          }
-        },
-        "config" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "object"
-          }
-        },
-        "state" : {
-          "type" : "string",
-          "enum" : [ "ENABLED", "DISABLED", "BLOCKED", "DELETED" ]
-        }
-      }
-    },
-    "CreateCardResponse" : {
-      "type" : "object",
-      "properties" : {
-        "cardId" : {
-          "type" : "string"
-        }
-      }
-    },
-    "CreateProductRequest" : {
-      "type" : "object",
-      "properties" : {
-        "binPattern" : {
-          "type" : "string"
-        },
-        "name" : {
-          "type" : "string"
-        },
-        "bin" : {
-          "type" : "string"
-        },
-        "config" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "object"
-          }
-        },
-        "templateConfig" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "object"
-          }
-        },
-        "authPlans" : {
-          "type" : "array",
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string",
-              "enum" : [ "sms_otp", "email_otp", "swipe_to_pay", "super_pin" ]
-            }
-          }
-        },
-        "state" : {
-          "type" : "string",
-          "enum" : [ "ENABLED", "DISABLED" ]
-        },
-        "cardNetwork" : {
-          "type" : "string",
-          "enum" : [ "mastercard", "visa", "rupay", "maestro" ]
-        },
-        "description" : {
-          "type" : "string"
-        }
-      }
-    },
-    "CreateProductResponse" : {
-      "type" : "object",
-      "properties" : {
-        "productId" : {
-          "type" : "string"
-        }
-      }
-    },
-    "CreateTenantRequest" : {
-      "type" : "object",
-      "properties" : {
-        "tenantId" : {
-          "type" : "string"
-        },
-        "name" : {
-          "type" : "string"
-        },
-        "config" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "object"
-          }
-        },
-        "state" : {
-          "type" : "string",
-          "enum" : [ "ENABLED", "DISABLED" ]
-        }
-      }
-    },
-    "GetBulkActionResponse" : {
-      "type" : "object",
-      "properties" : {
-        "id" : {
-          "type" : "string"
-        },
-        "tenantId" : {
-          "type" : "string"
-        },
-        "type" : {
-          "type" : "string"
-        },
-        "fileName" : {
-          "type" : "string"
-        },
-        "createdAt" : {
+        "numberOfDependents" : {
           "type" : "integer",
-          "format" : "int64"
-        },
-        "state" : {
-          "type" : "string"
+          "format" : "int32"
         }
       }
     },
-    "GetCardResponse" : {
+    "CompletableFutureResponseEntityCipherAuthenticationObject" : {
       "type" : "object",
       "properties" : {
-        "cardId" : {
-          "type" : "string"
+        "cancelled" : {
+          "type" : "boolean"
         },
+        "done" : {
+          "type" : "boolean"
+        },
+        "completedExceptionally" : {
+          "type" : "boolean"
+        },
+        "numberOfDependents" : {
+          "type" : "integer",
+          "format" : "int32"
+        }
+      }
+    },
+    "CompletableFutureResponseEntityGetAuthenticationsResponse" : {
+      "type" : "object",
+      "properties" : {
+        "cancelled" : {
+          "type" : "boolean"
+        },
+        "done" : {
+          "type" : "boolean"
+        },
+        "completedExceptionally" : {
+          "type" : "boolean"
+        },
+        "numberOfDependents" : {
+          "type" : "integer",
+          "format" : "int32"
+        }
+      }
+    },
+    "CompletableFutureResponseEntityInitiateAuthenticationChallengeResponse" : {
+      "type" : "object",
+      "properties" : {
+        "cancelled" : {
+          "type" : "boolean"
+        },
+        "done" : {
+          "type" : "boolean"
+        },
+        "completedExceptionally" : {
+          "type" : "boolean"
+        },
+        "numberOfDependents" : {
+          "type" : "integer",
+          "format" : "int32"
+        }
+      }
+    },
+    "CompletableFutureResponseEntityVerifyAuthenticationChallengeResponse" : {
+      "type" : "object",
+      "properties" : {
+        "cancelled" : {
+          "type" : "boolean"
+        },
+        "done" : {
+          "type" : "boolean"
+        },
+        "completedExceptionally" : {
+          "type" : "boolean"
+        },
+        "numberOfDependents" : {
+          "type" : "integer",
+          "format" : "int32"
+        }
+      }
+    },
+    "CompletionStage" : {
+      "type" : "object"
+    },
+    "CompletionStageResponseEntity" : {
+      "type" : "object"
+    },
+    "Filters" : {
+      "type" : "object",
+      "properties" : {
         "cardGuid" : {
           "type" : "string"
         },
-        "name" : {
-          "type" : "string"
-        },
-        "tenantId" : {
-          "type" : "string"
-        },
-        "productId" : {
-          "type" : "string"
-        },
-        "productName" : {
-          "type" : "string"
-        },
-        "cardNumber" : {
-          "type" : "string"
-        },
-        "state" : {
-          "type" : "string"
-        },
-        "config" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "object"
-          }
-        },
-        "identities" : {
-          "type" : "array",
-          "uniqueItems" : true,
-          "items" : {
-            "$ref" : "#/definitions/IdentityResponse"
-          }
-        },
-        "sdks" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/SDKInfo"
-          }
-        }
-      }
-    },
-    "GetDeviceResponse" : {
-      "type" : "object",
-      "properties" : {
-        "id" : {
-          "type" : "string"
-        },
-        "tenantId" : {
-          "type" : "string"
-        },
-        "appName" : {
-          "type" : "string"
-        },
-        "appVersion" : {
-          "type" : "string"
-        },
-        "authenticationType" : {
-          "type" : "string"
-        },
-        "buildNumber" : {
-          "type" : "string"
-        },
-        "deviceId" : {
-          "type" : "string"
-        },
-        "type" : {
-          "type" : "string",
-          "enum" : [ "mobile", "browser" ]
-        },
-        "manufacturer" : {
-          "type" : "string"
-        },
-        "model" : {
-          "type" : "string"
-        },
-        "os" : {
-          "type" : "string"
-        },
-        "osVersion" : {
-          "type" : "string"
-        },
-        "lastUsed" : {
+        "startTimeInMs" : {
           "type" : "integer",
           "format" : "int64"
         },
-        "state" : {
-          "type" : "string",
-          "enum" : [ "ACTIVE", "BLACKLISTED", "BLOCKED", "INACTIVE" ]
-        },
-        "createdAt" : {
+        "endTimeInMs" : {
           "type" : "integer",
           "format" : "int64"
         }
       }
     },
-    "GetProductResponse" : {
+    "GetAuthenticationsRequest" : {
       "type" : "object",
+      "required" : [ "order" ],
       "properties" : {
-        "tenantId" : {
-          "type" : "string"
+        "pageSize" : {
+          "type" : "integer",
+          "format" : "int32",
+          "maximum" : 50
         },
-        "productId" : {
-          "type" : "string"
+        "filters" : {
+          "$ref" : "#/definitions/Filters"
         },
-        "name" : {
-          "type" : "string"
+        "pageNumber" : {
+          "type" : "integer",
+          "format" : "int32",
+          "minimum" : 1
         },
-        "description" : {
-          "type" : "string"
-        },
-        "bin" : {
-          "type" : "string"
-        },
-        "config" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "object"
-          }
-        },
-        "templateConfig" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "object"
-          }
-        },
-        "state" : {
-          "type" : "string"
-        },
-        "authPlans" : {
-          "type" : "array",
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string",
-              "enum" : [ "sms_otp", "email_otp", "swipe_to_pay", "super_pin" ]
-            }
-          }
-        },
-        "cardNetwork" : {
+        "order" : {
           "type" : "string",
-          "enum" : [ "mastercard", "visa", "rupay", "maestro" ]
-        },
-        "createdAt" : {
-          "type" : "string"
+          "enum" : [ "LATEST_FIRST", "EARLIEST_FIRST" ]
         }
       }
     },
-    "GetTenantResponse" : {
+    "Identity" : {
       "type" : "object",
       "properties" : {
-        "tenantId" : {
+        "identityType" : {
           "type" : "string"
-        },
-        "name" : {
-          "type" : "string"
-        },
-        "config" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "object"
-          }
-        },
-        "state" : {
-          "type" : "string",
-          "enum" : [ "ENABLED", "DISABLED" ]
-        },
-        "authPlans" : {
-          "type" : "array",
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string",
-              "enum" : [ "sms_otp", "email_otp", "swipe_to_pay", "super_pin" ]
-            }
-          }
-        }
-      }
-    },
-    "GetTotpSecretRequest" : {
-      "type" : "object",
-      "properties" : {
-        "encodedPublicKeyCertificate" : {
-          "type" : "string"
-        }
-      }
-    },
-    "GetTotpSecretResponse" : {
-      "type" : "object",
-      "properties" : {
-        "encryptedSecret" : {
-          "type" : "string"
-        },
-        "encodedServerPublicKeyCert" : {
-          "type" : "string"
-        }
-      }
-    },
-    "IdentityRequest" : {
-      "type" : "object",
-      "properties" : {
-        "type" : {
-          "type" : "string",
-          "enum" : [ "phoneNumber", "totp_secret", "email", "tenantUniqueVector" ]
         },
         "value" : {
           "type" : "string"
         }
       }
     },
-    "IdentityResponse" : {
+    "InitiateAuthenticationChallengeRequest" : {
       "type" : "object",
-      "properties" : {
-        "type" : {
-          "type" : "string"
-        },
-        "value" : {
-          "type" : "string"
-        },
-        "state" : {
-          "type" : "string"
-        }
-      }
-    },
-    "JID" : {
-      "type" : "object",
-      "properties" : {
-        "appDomain" : {
-          "type" : "string"
-        },
-        "serviceName" : {
-          "type" : "string"
-        },
-        "nodeId" : {
-          "type" : "string"
-        },
-        "resource" : {
-          "type" : "string"
-        },
-        "serviceInstanceJID" : {
-          "type" : "boolean"
-        },
-        "jidOfAGroup" : {
-          "type" : "boolean"
-        },
-        "proxyServiceJID" : {
-          "type" : "boolean"
-        },
-        "primaryServiceName" : {
-          "type" : "string"
-        },
-        "serviceViewName" : {
-          "type" : "string"
-        },
-        "bareJID" : {
-          "$ref" : "#/definitions/JID"
-        },
-        "serviceViewJID" : {
-          "type" : "boolean"
-        },
-        "defaultServiceNode" : {
-          "type" : "boolean"
-        }
-      }
-    },
-    "PaginatedResponse" : {
-      "type" : "object",
-      "properties" : {
-        "nextPageIndex" : {
-          "type" : "string"
-        },
-        "prevPageIndex" : {
-          "type" : "string"
-        },
-        "entities" : {
-          "type" : "array",
-          "items" : {
-            "type" : "object"
-          }
-        },
-        "hasNext" : {
-          "type" : "boolean"
-        },
-        "totalCount" : {
-          "type" : "integer",
-          "format" : "int64"
-        }
-      }
-    },
-    "PaginatedResponseGetBulkActionResponse" : {
-      "type" : "object",
-      "properties" : {
-        "nextPageIndex" : {
-          "type" : "string"
-        },
-        "prevPageIndex" : {
-          "type" : "string"
-        },
-        "entities" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/GetBulkActionResponse"
-          }
-        },
-        "hasNext" : {
-          "type" : "boolean"
-        },
-        "totalCount" : {
-          "type" : "integer",
-          "format" : "int64"
-        }
-      }
-    },
-    "PaginatedResponseGetCardResponse" : {
-      "type" : "object",
-      "properties" : {
-        "nextPageIndex" : {
-          "type" : "string"
-        },
-        "prevPageIndex" : {
-          "type" : "string"
-        },
-        "entities" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/GetCardResponse"
-          }
-        },
-        "hasNext" : {
-          "type" : "boolean"
-        },
-        "totalCount" : {
-          "type" : "integer",
-          "format" : "int64"
-        }
-      }
-    },
-    "PaginatedResponseGetDeviceResponse" : {
-      "type" : "object",
-      "properties" : {
-        "nextPageIndex" : {
-          "type" : "string"
-        },
-        "prevPageIndex" : {
-          "type" : "string"
-        },
-        "entities" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/GetDeviceResponse"
-          }
-        },
-        "hasNext" : {
-          "type" : "boolean"
-        },
-        "totalCount" : {
-          "type" : "integer",
-          "format" : "int64"
-        }
-      }
-    },
-    "PaginatedResponseGetProductResponse" : {
-      "type" : "object",
-      "properties" : {
-        "nextPageIndex" : {
-          "type" : "string"
-        },
-        "prevPageIndex" : {
-          "type" : "string"
-        },
-        "entities" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/GetProductResponse"
-          }
-        },
-        "hasNext" : {
-          "type" : "boolean"
-        },
-        "totalCount" : {
-          "type" : "integer",
-          "format" : "int64"
-        }
-      }
-    },
-    "RegisterSDKRequest" : {
-      "type" : "object",
+      "required" : [ "authProfileID", "domainID", "publicKey", "relyingIdentity", "scopes", "sdkID", "tenantID", "uaInfo" ],
       "properties" : {
         "headers" : {
           "type" : "object",
@@ -1132,17 +309,33 @@
             "type" : "string"
           }
         },
-        "sdkInfo" : {
-          "$ref" : "#/definitions/SDKInfo"
-        },
-        "base64EncodedPublicKey" : {
+        "tenantID" : {
           "type" : "string"
         },
-        "attrs" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "object"
+        "authProfileID" : {
+          "type" : "string"
+        },
+        "sdkID" : {
+          "type" : "string"
+        },
+        "domainID" : {
+          "type" : "string"
+        },
+        "relyingIdentity" : {
+          "$ref" : "#/definitions/Identity"
+        },
+        "uaInfo" : {
+          "type" : "string"
+        },
+        "scopes" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "type" : "string"
           }
+        },
+        "publicKey" : {
+          "$ref" : "#/definitions/PublicKeyContainer"
         },
         "signatoryJID" : {
           "$ref" : "#/definitions/JID"
@@ -1162,104 +355,61 @@
         }
       }
     },
-    "RegisterSDKResponse" : {
+    "JID" : {
       "type" : "object",
       "properties" : {
-        "sdkId" : {
+        "appDomain" : {
+          "type" : "string"
+        },
+        "serviceName" : {
+          "type" : "string"
+        },
+        "nodeId" : {
+          "type" : "string"
+        },
+        "resource" : {
+          "type" : "string"
+        },
+        "proxyServiceJID" : {
+          "type" : "boolean"
+        },
+        "primaryServiceName" : {
+          "type" : "string"
+        },
+        "serviceViewName" : {
+          "type" : "string"
+        },
+        "bareJID" : {
+          "$ref" : "#/definitions/JID"
+        },
+        "serviceViewJID" : {
+          "type" : "boolean"
+        },
+        "defaultServiceNode" : {
+          "type" : "boolean"
+        },
+        "serviceInstanceJID" : {
+          "type" : "boolean"
+        },
+        "jidOfAGroup" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "PublicKeyContainer" : {
+      "type" : "object",
+      "properties" : {
+        "encodedKey" : {
+          "type" : "string"
+        },
+        "algorithm" : {
           "type" : "string"
         }
       }
     },
-    "SDKAgentInfo" : {
+    "RequestChallengePayload" : {
       "type" : "object",
-      "properties" : {
-        "appID" : {
-          "type" : "string"
-        },
-        "appName" : {
-          "type" : "string"
-        },
-        "appVersion" : {
-          "type" : "string"
-        },
-        "authenticationType" : {
-          "type" : "string"
-        },
-        "buildNumber" : {
-          "type" : "string"
-        },
-        "deviceID" : {
-          "type" : "string"
-        },
-        "deviceManufacturer" : {
-          "type" : "string"
-        },
-        "deviceModel" : {
-          "type" : "string"
-        },
-        "deviceType" : {
-          "type" : "string"
-        },
-        "hasFrontCamera" : {
-          "type" : "string"
-        },
-        "hasNFC" : {
-          "type" : "string"
-        },
-        "isLocationEnabled" : {
-          "type" : "string"
-        },
-        "isWifiEnabled" : {
-          "type" : "string"
-        },
-        "locale" : {
-          "type" : "string"
-        },
-        "macAddress" : {
-          "type" : "string"
-        },
-        "networkType" : {
-          "type" : "string"
-        },
-        "operators" : {
-          "type" : "string"
-        },
-        "os" : {
-          "type" : "string"
-        },
-        "screenResolution" : {
-          "type" : "string"
-        },
-        "osversion" : {
-          "type" : "string"
-        },
-        "OSVersion" : {
-          "type" : "string"
-        }
-      }
-    },
-    "SDKInfo" : {
-      "type" : "object",
-      "properties" : {
-        "appVersion" : {
-          "type" : "string"
-        },
-        "uaInfo" : {
-          "$ref" : "#/definitions/SDKAgentInfo"
-        },
-        "appID" : {
-          "type" : "string"
-        },
-        "appType" : {
-          "type" : "string"
-        },
-        "os" : {
-          "type" : "string"
-        }
-      }
-    },
-    "SetPushTokenRequest" : {
-      "type" : "object",
+      "required" : [ "authContextID", "authPlanID", "factorNumber" ],
       "properties" : {
         "headers" : {
           "type" : "object",
@@ -1267,14 +417,16 @@
             "type" : "string"
           }
         },
-        "token" : {
-          "type" : "string"
+        "authPlanID" : {
+          "type" : "integer",
+          "format" : "int32"
         },
-        "config" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "object"
-          }
+        "factorNumber" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "authContextID" : {
+          "type" : "string"
         },
         "signatoryJID" : {
           "$ref" : "#/definitions/JID"
@@ -1303,97 +455,91 @@
         }
       }
     },
-    "Tenant" : {
+    "VerifyAuthenticationChallengeRequest" : {
       "type" : "object",
+      "required" : [ "authProfileID", "challengeResponse", "domainID", "sessionID", "tenantID" ],
       "properties" : {
-        "tenantId" : {
-          "type" : "string"
-        },
-        "domainId" : {
-          "type" : "string"
-        },
-        "name" : {
-          "type" : "string"
-        },
-        "config" : {
+        "headers" : {
           "type" : "object",
           "additionalProperties" : {
-            "type" : "object"
+            "type" : "string"
           }
         },
-        "state" : {
-          "type" : "string",
-          "enum" : [ "ENABLED", "DISABLED" ]
+        "sessionID" : {
+          "type" : "string"
         },
-        "templateConfig" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "object"
-          }
+        "tenantID" : {
+          "type" : "string"
+        },
+        "domainID" : {
+          "type" : "string"
+        },
+        "challengeResponse" : {
+          "type" : "string"
+        },
+        "authProfileID" : {
+          "type" : "string"
+        },
+        "signatoryJID" : {
+          "$ref" : "#/definitions/JID"
+        },
+        "zetaSignature" : {
+          "$ref" : "#/definitions/ZetaSignature"
+        },
+        "payloadVersion" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "signed" : {
+          "type" : "boolean"
+        },
+        "signature" : {
+          "type" : "string"
         }
       }
     },
-    "UpdateCardRequest" : {
+    "VerifyChallengePayload" : {
       "type" : "object",
+      "required" : [ "authContextID", "authPlanID", "challenge", "factorNumber" ],
       "properties" : {
-        "state" : {
-          "type" : "string",
-          "enum" : [ "ENABLED", "DISABLED", "BLOCKED", "DELETED" ]
-        }
-      }
-    },
-    "UpdateProductRequest" : {
-      "type" : "object",
-      "properties" : {
-        "state" : {
-          "type" : "string",
-          "enum" : [ "ENABLED", "DISABLED" ]
-        },
-        "description" : {
-          "type" : "string"
-        },
-        "name" : {
-          "type" : "string"
-        },
-        "config" : {
+        "headers" : {
           "type" : "object",
           "additionalProperties" : {
-            "type" : "object"
+            "type" : "string"
           }
         },
-        "templateConfig" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "object"
-          }
+        "authPlanID" : {
+          "type" : "integer",
+          "format" : "int32"
         },
-        "authPlans" : {
-          "type" : "array",
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string",
-              "enum" : [ "sms_otp", "email_otp", "swipe_to_pay", "super_pin" ]
-            }
-          }
-        }
-      }
-    },
-    "UpdateTenantRequest" : {
-      "type" : "object",
-      "properties" : {
-        "name" : {
+        "factorNumber" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "authContextID" : {
           "type" : "string"
         },
-        "config" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "object"
-          }
+        "challenge" : {
+          "type" : "string"
         },
-        "state" : {
-          "type" : "string",
-          "enum" : [ "ENABLED", "DISABLED" ]
+        "authType" : {
+          "type" : "string"
+        },
+        "signatoryJID" : {
+          "$ref" : "#/definitions/JID"
+        },
+        "zetaSignature" : {
+          "$ref" : "#/definitions/ZetaSignature"
+        },
+        "payloadVersion" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "signed" : {
+          "type" : "boolean"
+        },
+        "signature" : {
+          "type" : "string"
         }
       }
     },
