@@ -370,9 +370,6 @@
         "resource" : {
           "type" : "string"
         },
-        "proxyServiceJID" : {
-          "type" : "boolean"
-        },
         "primaryServiceName" : {
           "type" : "string"
         },
@@ -392,6 +389,9 @@
           "type" : "boolean"
         },
         "jidOfAGroup" : {
+          "type" : "boolean"
+        },
+        "proxyServiceJID" : {
           "type" : "boolean"
         }
       }
