@@ -194,7 +194,7 @@
           "content" : {
             "*/*" : {
               "schema" : {
-                "$ref" : "#/components/schemas/CreateAccountHolderApplicationWithAutoApprovalRequest"
+                "$ref" : "#/components/schemas/CreateAccountHolderWithAutoApprovalRequest"
               }
             }
           },
@@ -566,6 +566,43 @@
         }
       }
     },
+    "/api/v1/ifi/{ifiID}/athena-manager/entity-policy-mapping" : {
+      "post" : {
+        "summary" : "Create Policy Mapping state",
+        "operationId" : "createPolicyMapping",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CreatePolicyMappingRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TransactionPolicyResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/ifi/{ifiID}/athena-manager/getAllTransactionPoliciesByIFI" : {
       "get" : {
         "summary" : "Get all transaction policies for a given IFI",
@@ -579,6 +616,16 @@
             "format" : "int64"
           }
         } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "type" : "boolean"
+              }
+            }
+          },
+          "required" : false
+        },
         "responses" : {
           "200" : {
             "description" : "successful operation",
@@ -897,6 +944,131 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/TransactionPolicyResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/athena-manager/transaction-policy" : {
+      "post" : {
+        "summary" : "Create TransactionPolicy",
+        "operationId" : "createTransactionPolicy",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Builder"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TransactionPolicyResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/athena-manager/transaction-policy/{transactionPolicyID}" : {
+      "put" : {
+        "summary" : "Replace Transaction Policy",
+        "operationId" : "replaceTransactionPolicy",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "transactionPolicyID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ReplaceTransactionPolicyRequestPayload"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TransactionPolicyResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/athena-manager/transaction-policy/{transactionPolicyId}" : {
+      "patch" : {
+        "summary" : "Update Transaction Policy State",
+        "operationId" : "updateTransactionPolicyState",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "transactionPolicyId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateTransactionPolicyStateRequestPayload"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EmptyPayload"
                 }
               }
             }
@@ -2035,6 +2207,106 @@
             }
           }
         }
+      },
+      "put" : {
+        "summary" : "Update a beneficiary of an individual",
+        "operationId" : "updateBeneficiary",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "description" : "ID of the individual for whom the beneficiary is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "description" : "ID of the beneficiary which is being updated belonging to an individual",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "f0e68249-aed0-4359-9df2-a89a350567e9"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateBeneficiaryRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Beneficiary"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "Delete a beneficiary of an individual",
+        "operationId" : "deleteBeneficiary",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "description" : "ID of the individual for whom the beneficiary is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "description" : "ID of the beneficiary which is being updated belonging to an individual",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "f0e68249-aed0-4359-9df2-a89a350567e9"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Beneficiary"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/v1/ifi/{ifiID}/individuals/{individualID}/beneficiaries/{beneficiaryID}/accounts" : {
@@ -2241,6 +2513,118 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/BeneficiaryTransactionResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/individuals/{individualID}/beneficiaries/{beneficiaryID}/accounts/{beneficiaryAccountID}" : {
+      "put" : {
+        "summary" : "Update of a beneficiary account",
+        "operationId" : "updateBeneficiaryAccount",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary account is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "description" : "ID of the individual for whom the beneficiary account is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "beneficaryAccountId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateBeneficiaryAccountRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BeneficiaryAccount"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "Delete of a beneficiary account",
+        "operationId" : "deleteBeneficiaryAccount",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary account is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "description" : "ID of the individual for whom the beneficiary account is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "beneficiaryAccountID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BeneficiaryAccount"
                 }
               }
             }
@@ -4878,15 +5262,9 @@
           }
         }
       },
-      "CreateAccountHolderApplicationWithAutoApprovalRequest" : {
+      "CreateAccountHolderWithAutoApprovalRequest" : {
         "type" : "object",
         "properties" : {
-          "headers" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
-            }
-          },
           "ifiID" : {
             "type" : "integer",
             "format" : "int64"
@@ -4901,13 +5279,6 @@
             "type" : "string"
           },
           "individualType" : {
-            "type" : "string"
-          },
-          "applicationType" : {
-            "type" : "string",
-            "enum" : [ "KYC", "CREATE_ACCOUNT_HOLDER", "EDIT_ACCOUNT_HOLDER" ]
-          },
-          "individualID" : {
             "type" : "string"
           },
           "salutation" : {
@@ -5252,6 +5623,42 @@
           }
         }
       },
+      "CreatePolicyMappingRequest" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "ifiID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "entityID" : {
+            "type" : "string"
+          },
+          "policyEntityType" : {
+            "type" : "string",
+            "enum" : [ "PRODUCT_FAMILY", "PRODUCT", "PROGRAM" ]
+          },
+          "policyID" : {
+            "type" : "string"
+          },
+          "policyType" : {
+            "type" : "string",
+            "enum" : [ "TRANSACTION_POLICY", "CARD_DESIGN_POLICY", "ISSUANCE_POLICY", "COUPON_ACCOUNTING_POLICY", "NOTIFICATION_POLICY", "FEE_CHARGES_POLICY", "INTEREST_POLICY", "ACCOUNT_DISCOVERY_POLICY" ]
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object",
+              "properties" : { }
+            }
+          }
+        }
+      },
       "CreatePolicyRequestPayload" : {
         "type" : "object",
         "properties" : {
@@ -5372,6 +5779,9 @@
           "code" : {
             "type" : "string"
           },
+          "description" : {
+            "type" : "string"
+          },
           "attributes" : {
             "type" : "object",
             "additionalProperties" : {
@@ -5409,6 +5819,9 @@
             "enum" : [ "ENABLED", "BLOCKED" ]
           },
           "code" : {
+            "type" : "string"
+          },
+          "description" : {
             "type" : "string"
           },
           "attributes" : {
@@ -5961,7 +6374,7 @@
           "policies" : {
             "type" : "array",
             "items" : {
-              "$ref" : "#/components/schemas/PolicyEntry"
+              "$ref" : "#/components/schemas/TransactionPolicyResponse"
             }
           }
         }
@@ -6427,14 +6840,8 @@
           "serviceInstanceJID" : {
             "type" : "boolean"
           },
-          "primaryServiceName" : {
-            "type" : "string"
-          },
           "serviceViewName" : {
             "type" : "string"
-          },
-          "bareJID" : {
-            "$ref" : "#/components/schemas/JID"
           },
           "serviceViewJID" : {
             "type" : "boolean"
@@ -6444,6 +6851,12 @@
           },
           "jidOfAGroup" : {
             "type" : "boolean"
+          },
+          "primaryServiceName" : {
+            "type" : "string"
+          },
+          "bareJID" : {
+            "$ref" : "#/components/schemas/JID"
           },
           "proxyServiceJID" : {
             "type" : "boolean"
@@ -6499,12 +6912,6 @@
           "jsonNull" : {
             "type" : "boolean"
           },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
-          "jsonObject" : {
-            "type" : "boolean"
-          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
@@ -6515,6 +6922,12 @@
             "$ref" : "#/components/schemas/JsonObject"
           },
           "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
+          "jsonPrimitive" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -6531,12 +6944,6 @@
           "jsonNull" : {
             "type" : "boolean"
           },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
-          "jsonObject" : {
-            "type" : "boolean"
-          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
@@ -6547,6 +6954,12 @@
             "$ref" : "#/components/schemas/JsonObject"
           },
           "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
+          "jsonPrimitive" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -6603,12 +7016,6 @@
           "jsonNull" : {
             "type" : "boolean"
           },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
-          "jsonObject" : {
-            "type" : "boolean"
-          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
@@ -6619,6 +7026,12 @@
             "$ref" : "#/components/schemas/JsonObject"
           },
           "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
+          "jsonPrimitive" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -6678,9 +7091,6 @@
           "boolean" : {
             "type" : "boolean"
           },
-          "string" : {
-            "type" : "boolean"
-          },
           "asNumber" : {
             "$ref" : "#/components/schemas/Number"
           },
@@ -6718,16 +7128,13 @@
             "type" : "integer",
             "format" : "int32"
           },
+          "string" : {
+            "type" : "boolean"
+          },
           "asString" : {
             "type" : "string"
           },
           "jsonNull" : {
-            "type" : "boolean"
-          },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
-          "jsonObject" : {
             "type" : "boolean"
           },
           "asJsonPrimitive" : {
@@ -6740,6 +7147,12 @@
             "$ref" : "#/components/schemas/JsonObject"
           },
           "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
+          "jsonPrimitive" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -7266,44 +7679,6 @@
           }
         }
       },
-      "PolicyEntry" : {
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "string"
-          },
-          "code" : {
-            "type" : "string"
-          },
-          "description" : {
-            "type" : "string"
-          },
-          "accountingPolicyID" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "state" : {
-            "type" : "string",
-            "enum" : [ "ENABLED", "DISABLED" ]
-          },
-          "createdAt" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "updatedAt" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "validFrom" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "validUntill" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
-        }
-      },
       "PolicyTxnConstraint" : {
         "type" : "object",
         "properties" : {
@@ -7418,6 +7793,9 @@
           "code" : {
             "type" : "string"
           },
+          "description" : {
+            "type" : "string"
+          },
           "attributes" : {
             "type" : "object",
             "additionalProperties" : {
@@ -7489,6 +7867,9 @@
             "enum" : [ "WALLET_BASED", "ACCOUNT_BASED" ]
           },
           "code" : {
+            "type" : "string"
+          },
+          "description" : {
             "type" : "string"
           },
           "attributes" : {
@@ -7588,6 +7969,73 @@
             "format" : "int64"
           },
           "code" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }
+      },
+      "ReplaceTransactionPolicyRequestPayload" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "ifiId" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "id" : {
+            "type" : "string"
+          },
+          "txnConstraints" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyTxnConstraint"
+            }
+          },
+          "txnLimits" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyTxnRule"
+            }
+          },
+          "balanceLimits" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyBalanceRule"
+            }
+          },
+          "volumeLimits" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyAggregateRule"
+            }
+          },
+          "velocityLimits" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyAggregateRule"
+            }
+          },
+          "policyViolationAction" : {
+            "type" : "string",
+            "enum" : [ "DECLINE_AND_NOTIFY", "DECLINE", "NOTIFY" ]
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object",
+              "properties" : { }
+            }
+          },
+          "validFrom" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "validUntil" : {
             "type" : "integer",
             "format" : "int64"
           }
@@ -7786,16 +8234,12 @@
           "code" : {
             "type" : "string"
           },
-          "description" : {
-            "type" : "string"
-          },
-          "accountingPolicyID" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "state" : {
+          "status" : {
             "type" : "string",
             "enum" : [ "ENABLED", "DISABLED" ]
+          },
+          "description" : {
+            "type" : "string"
           },
           "attributes" : {
             "type" : "object",
@@ -7812,23 +8256,47 @@
             "type" : "integer",
             "format" : "int64"
           },
-          "policyTxnRules" : {
+          "policyViolationAction" : {
+            "type" : "string",
+            "enum" : [ "DECLINE_AND_NOTIFY", "DECLINE", "NOTIFY" ]
+          },
+          "txnConstraints" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyTxnConstraint"
+            }
+          },
+          "txnLimits" : {
             "type" : "array",
             "items" : {
               "$ref" : "#/components/schemas/PolicyTxnRule"
             }
           },
-          "policyBalanceRules" : {
+          "balanceLimits" : {
             "type" : "array",
             "items" : {
               "$ref" : "#/components/schemas/PolicyBalanceRule"
             }
           },
-          "policyAggregateRules" : {
+          "volumeLimits" : {
             "type" : "array",
             "items" : {
               "$ref" : "#/components/schemas/PolicyAggregateRule"
             }
+          },
+          "velocityLimits" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyAggregateRule"
+            }
+          },
+          "createdAt" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "updatedAt" : {
+            "type" : "integer",
+            "format" : "int64"
           }
         }
       },
@@ -7890,6 +8358,107 @@
           }
         }
       },
+      "UpdateBeneficiaryAccountRequest" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "id" : {
+            "type" : "string"
+          },
+          "beneficiaryID" : {
+            "type" : "string"
+          },
+          "parentAccountHolderID" : {
+            "type" : "string"
+          },
+          "ifiID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "nickname" : {
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "string"
+          },
+          "accountInfo" : {
+            "$ref" : "#/components/schemas/BeneficiaryAccountInfo"
+          },
+          "status" : {
+            "type" : "string"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "verified" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "UpdateBeneficiaryRequest" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "id" : {
+            "type" : "string"
+          },
+          "ifiID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "accountHolderID" : {
+            "type" : "string"
+          },
+          "firstName" : {
+            "type" : "string"
+          },
+          "middleName" : {
+            "type" : "string"
+          },
+          "lastName" : {
+            "type" : "string"
+          },
+          "gender" : {
+            "type" : "string"
+          },
+          "salutation" : {
+            "type" : "string"
+          },
+          "relationship" : {
+            "type" : "string"
+          },
+          "profilePicURL" : {
+            "type" : "string"
+          },
+          "dob" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "type" : {
+            "type" : "string",
+            "enum" : [ "REAL", "LEGAL", "HEADLESS" ]
+          },
+          "customFields" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
       "UpdateKycStatusRequest" : {
         "type" : "object",
         "properties" : {
@@ -7929,6 +8498,28 @@
           "policyId" : {
             "type" : "integer",
             "format" : "int64"
+          },
+          "ifiId" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "state" : {
+            "type" : "string",
+            "enum" : [ "ENABLED", "DISABLED" ]
+          }
+        }
+      },
+      "UpdateTransactionPolicyStateRequestPayload" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "transactionPolicyID" : {
+            "type" : "string"
           },
           "ifiId" : {
             "type" : "integer",

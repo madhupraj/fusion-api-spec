@@ -350,7 +350,7 @@
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated",
+          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated.",
           "required" : true,
           "schema" : {
             "type" : "integer",
