@@ -7091,6 +7091,9 @@
           "boolean" : {
             "type" : "boolean"
           },
+          "string" : {
+            "type" : "boolean"
+          },
           "asNumber" : {
             "$ref" : "#/components/schemas/Number"
           },
@@ -7127,9 +7130,6 @@
           "asShort" : {
             "type" : "integer",
             "format" : "int32"
-          },
-          "string" : {
-            "type" : "boolean"
           },
           "asString" : {
             "type" : "string"
