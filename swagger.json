@@ -8926,6 +8926,9 @@
         "boolean" : {
           "type" : "boolean"
         },
+        "string" : {
+          "type" : "boolean"
+        },
         "asNumber" : {
           "$ref" : "#/definitions/Number"
         },
@@ -8961,9 +8964,6 @@
         "asShort" : {
           "type" : "integer",
           "format" : "int32"
-        },
-        "string" : {
-          "type" : "boolean"
         },
         "asString" : {
           "type" : "string"
