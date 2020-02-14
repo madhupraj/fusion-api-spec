@@ -370,6 +370,18 @@
         "resource" : {
           "type" : "string"
         },
+        "primaryServiceName" : {
+          "type" : "string"
+        },
+        "serviceViewName" : {
+          "type" : "string"
+        },
+        "bareJID" : {
+          "$ref" : "#/definitions/JID"
+        },
+        "serviceViewJID" : {
+          "type" : "boolean"
+        },
         "defaultServiceNode" : {
           "type" : "boolean"
         },
@@ -379,19 +391,7 @@
         "jidOfAGroup" : {
           "type" : "boolean"
         },
-        "bareJID" : {
-          "$ref" : "#/definitions/JID"
-        },
         "proxyServiceJID" : {
-          "type" : "boolean"
-        },
-        "primaryServiceName" : {
-          "type" : "string"
-        },
-        "serviceViewName" : {
-          "type" : "string"
-        },
-        "serviceViewJID" : {
           "type" : "boolean"
         }
       }
