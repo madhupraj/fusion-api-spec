@@ -156,90 +156,90 @@
     "CompletableFuture" : {
       "type" : "object",
       "properties" : {
+        "cancelled" : {
+          "type" : "boolean"
+        },
+        "done" : {
+          "type" : "boolean"
+        },
         "completedExceptionally" : {
           "type" : "boolean"
         },
         "numberOfDependents" : {
           "type" : "integer",
           "format" : "int32"
-        },
-        "cancelled" : {
-          "type" : "boolean"
-        },
-        "done" : {
-          "type" : "boolean"
         }
       }
     },
     "CompletableFutureResponseEntityCipherAuthenticationObject" : {
       "type" : "object",
       "properties" : {
+        "cancelled" : {
+          "type" : "boolean"
+        },
+        "done" : {
+          "type" : "boolean"
+        },
         "completedExceptionally" : {
           "type" : "boolean"
         },
         "numberOfDependents" : {
           "type" : "integer",
           "format" : "int32"
-        },
-        "cancelled" : {
-          "type" : "boolean"
-        },
-        "done" : {
-          "type" : "boolean"
         }
       }
     },
     "CompletableFutureResponseEntityGetAuthenticationsResponse" : {
       "type" : "object",
       "properties" : {
+        "cancelled" : {
+          "type" : "boolean"
+        },
+        "done" : {
+          "type" : "boolean"
+        },
         "completedExceptionally" : {
           "type" : "boolean"
         },
         "numberOfDependents" : {
           "type" : "integer",
           "format" : "int32"
-        },
-        "cancelled" : {
-          "type" : "boolean"
-        },
-        "done" : {
-          "type" : "boolean"
         }
       }
     },
     "CompletableFutureResponseEntityInitiateAuthenticationChallengeResponse" : {
       "type" : "object",
       "properties" : {
+        "cancelled" : {
+          "type" : "boolean"
+        },
+        "done" : {
+          "type" : "boolean"
+        },
         "completedExceptionally" : {
           "type" : "boolean"
         },
         "numberOfDependents" : {
           "type" : "integer",
           "format" : "int32"
-        },
-        "cancelled" : {
-          "type" : "boolean"
-        },
-        "done" : {
-          "type" : "boolean"
         }
       }
     },
     "CompletableFutureResponseEntityVerifyAuthenticationChallengeResponse" : {
       "type" : "object",
       "properties" : {
+        "cancelled" : {
+          "type" : "boolean"
+        },
+        "done" : {
+          "type" : "boolean"
+        },
         "completedExceptionally" : {
           "type" : "boolean"
         },
         "numberOfDependents" : {
           "type" : "integer",
           "format" : "int32"
-        },
-        "cancelled" : {
-          "type" : "boolean"
-        },
-        "done" : {
-          "type" : "boolean"
         }
       }
     },
@@ -370,6 +370,18 @@
         "resource" : {
           "type" : "string"
         },
+        "defaultServiceNode" : {
+          "type" : "boolean"
+        },
+        "serviceInstanceJID" : {
+          "type" : "boolean"
+        },
+        "jidOfAGroup" : {
+          "type" : "boolean"
+        },
+        "bareJID" : {
+          "$ref" : "#/definitions/JID"
+        },
         "proxyServiceJID" : {
           "type" : "boolean"
         },
@@ -379,19 +391,7 @@
         "serviceViewName" : {
           "type" : "string"
         },
-        "bareJID" : {
-          "$ref" : "#/definitions/JID"
-        },
         "serviceViewJID" : {
-          "type" : "boolean"
-        },
-        "defaultServiceNode" : {
-          "type" : "boolean"
-        },
-        "serviceInstanceJID" : {
-          "type" : "boolean"
-        },
-        "jidOfAGroup" : {
           "type" : "boolean"
         }
       }
