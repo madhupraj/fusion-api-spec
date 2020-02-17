@@ -492,6 +492,43 @@
         }
       }
     },
+    "/api/v1/ifi/{ifiID}/athena-manager/createEntityPolicyMapping" : {
+      "post" : {
+        "summary" : "Create Entity Policy Mapping",
+        "operationId" : "createPolicyMapping",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CreatePolicyMappingRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TransactionPolicyResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/ifi/{ifiID}/athena-manager/createExtendedProduct" : {
       "post" : {
         "summary" : "CreateExtendedProduct api via fusion",
@@ -559,43 +596,6 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ProductFamily"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/ifi/{ifiID}/athena-manager/entity-policy-mapping" : {
-      "post" : {
-        "summary" : "Create Policy Mapping state",
-        "operationId" : "createPolicyMapping",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "*/*" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/CreatePolicyMappingRequest"
-              }
-            }
-          },
-          "required" : false
-        },
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/TransactionPolicyResponse"
                 }
               }
             }
@@ -951,44 +951,7 @@
         }
       }
     },
-    "/api/v1/ifi/{ifiID}/athena-manager/transaction-policy" : {
-      "post" : {
-        "summary" : "Create TransactionPolicy",
-        "operationId" : "createTransactionPolicy",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "*/*" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/Builder"
-              }
-            }
-          },
-          "required" : false
-        },
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/TransactionPolicyResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/ifi/{ifiID}/athena-manager/transaction-policy/{transactionPolicyID}" : {
+    "/api/v1/ifi/{ifiID}/athena-manager/replaceTransactionPolicy/{transactionPolicyID}" : {
       "put" : {
         "summary" : "Replace Transaction Policy",
         "operationId" : "replaceTransactionPolicy",
@@ -1032,7 +995,44 @@
         }
       }
     },
-    "/api/v1/ifi/{ifiID}/athena-manager/transaction-policy/{transactionPolicyId}" : {
+    "/api/v1/ifi/{ifiID}/athena-manager/transactionPolicy" : {
+      "post" : {
+        "summary" : "Create TransactionPolicy",
+        "operationId" : "createTransactionPolicy",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Builder"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TransactionPolicyResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/athena-manager/updateTransactionPolicy/{transactionPolicyId}" : {
       "patch" : {
         "summary" : "Update Transaction Policy State",
         "operationId" : "updateTransactionPolicyState",
@@ -3256,7 +3256,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/Account"
+                  "$ref" : "#/components/schemas/GetProductListResponse"
                 }
               }
             }
@@ -4903,16 +4903,7 @@
         }
       },
       "Builder" : {
-        "type" : "object",
-        "properties" : {
-          "tenantID" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "object" : {
-            "$ref" : "#/components/schemas/JID"
-          }
-        }
+        "type" : "object"
       },
       "CalendarInfo" : {
         "type" : "object",
@@ -6819,47 +6810,6 @@
               "type" : "string"
             },
             "description" : "Any additional information which you would like to provide"
-          }
-        }
-      },
-      "JID" : {
-        "type" : "object",
-        "properties" : {
-          "appDomain" : {
-            "type" : "string"
-          },
-          "serviceName" : {
-            "type" : "string"
-          },
-          "nodeId" : {
-            "type" : "string"
-          },
-          "resource" : {
-            "type" : "string"
-          },
-          "serviceInstanceJID" : {
-            "type" : "boolean"
-          },
-          "primaryServiceName" : {
-            "type" : "string"
-          },
-          "serviceViewName" : {
-            "type" : "string"
-          },
-          "bareJID" : {
-            "$ref" : "#/components/schemas/JID"
-          },
-          "serviceViewJID" : {
-            "type" : "boolean"
-          },
-          "defaultServiceNode" : {
-            "type" : "boolean"
-          },
-          "jidOfAGroup" : {
-            "type" : "boolean"
-          },
-          "proxyServiceJID" : {
-            "type" : "boolean"
           }
         }
       },
