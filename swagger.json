@@ -370,17 +370,17 @@
         "resource" : {
           "type" : "string"
         },
+        "serviceViewJID" : {
+          "type" : "boolean"
+        },
+        "bareJID" : {
+          "$ref" : "#/definitions/JID"
+        },
         "primaryServiceName" : {
           "type" : "string"
         },
         "serviceViewName" : {
           "type" : "string"
-        },
-        "bareJID" : {
-          "$ref" : "#/definitions/JID"
-        },
-        "serviceViewJID" : {
-          "type" : "boolean"
         },
         "defaultServiceNode" : {
           "type" : "boolean"
