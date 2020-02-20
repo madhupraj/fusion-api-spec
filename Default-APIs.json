@@ -8,6 +8,168 @@
     "name" : "Default"
   } ],
   "paths" : {
+    "/api/v1/fusion-config" : {
+      "get" : {
+        "operationId" : "getAllFusionConfigs",
+        "parameters" : [ {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "asc", "desc" ]
+          }
+        }, {
+          "name" : "pageIndex",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "lastFetchedId",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PaginatedResponseFusionConfig"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "operationId" : "createFusionConfig",
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AddFusionConfigRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/FusionConfig"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/fusion-config/{configID}" : {
+      "get" : {
+        "operationId" : "getFusionConfigByID",
+        "parameters" : [ {
+          "name" : "configID",
+          "in" : "path",
+          "description" : "ID of the fusionConfig whose details are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/FusionConfig"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "operationId" : "updateFusionConfig",
+        "parameters" : [ {
+          "name" : "configID",
+          "in" : "path",
+          "description" : "ID of the fusionConfig whose details are being updated",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateFusionConfigRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/FusionConfig"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "operationId" : "deleteConfigByID",
+        "parameters" : [ {
+          "name" : "configID",
+          "in" : "path",
+          "description" : "ID of the fusionConfig whose details are being deleted",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "successful operation",
+            "content" : { }
+          }
+        }
+      }
+    },
     "/api/v1/ifi/{ifiID}/applications" : {
       "get" : {
         "summary" : "Get All Applications",
@@ -4383,6 +4545,38 @@
           }
         }
       },
+      "AddFusionConfigRequest" : {
+        "required" : [ "key" ],
+        "type" : "object",
+        "properties" : {
+          "key" : {
+            "type" : "string",
+            "description" : "The key of the key-value pair",
+            "example" : "123123"
+          },
+          "value" : {
+            "type" : "string",
+            "description" : "The value of the key-value pair",
+            "example" : "test"
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "The type for the key-value config",
+            "example" : "SANDBOX_VBO_MAPPING"
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "The description for the key-value config",
+            "example" : "Description of the key"
+          },
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
       "Address" : {
         "type" : "object",
         "properties" : {
@@ -6286,6 +6480,41 @@
           }
         }
       },
+      "FusionConfig" : {
+        "type" : "object",
+        "properties" : {
+          "key" : {
+            "type" : "string"
+          },
+          "value" : {
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "createdBy" : {
+            "type" : "string"
+          },
+          "updatedBy" : {
+            "type" : "string"
+          },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "updatedAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        }
+      },
       "GenericCreateApplicationResponse" : {
         "type" : "object",
         "properties" : {
@@ -6862,6 +7091,12 @@
           "jsonNull" : {
             "type" : "boolean"
           },
+          "jsonPrimitive" : {
+            "type" : "boolean"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
@@ -6872,12 +7107,6 @@
             "$ref" : "#/components/schemas/JsonObject"
           },
           "jsonArray" : {
-            "type" : "boolean"
-          },
-          "jsonObject" : {
-            "type" : "boolean"
-          },
-          "jsonPrimitive" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -6894,6 +7123,12 @@
           "jsonNull" : {
             "type" : "boolean"
           },
+          "jsonPrimitive" : {
+            "type" : "boolean"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
@@ -6904,12 +7139,6 @@
             "$ref" : "#/components/schemas/JsonObject"
           },
           "jsonArray" : {
-            "type" : "boolean"
-          },
-          "jsonObject" : {
-            "type" : "boolean"
-          },
-          "jsonPrimitive" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -6966,6 +7195,12 @@
           "jsonNull" : {
             "type" : "boolean"
           },
+          "jsonPrimitive" : {
+            "type" : "boolean"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
@@ -6976,12 +7211,6 @@
             "$ref" : "#/components/schemas/JsonObject"
           },
           "jsonArray" : {
-            "type" : "boolean"
-          },
-          "jsonObject" : {
-            "type" : "boolean"
-          },
-          "jsonPrimitive" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -7035,10 +7264,10 @@
           "number" : {
             "type" : "boolean"
           },
-          "asBoolean" : {
+          "boolean" : {
             "type" : "boolean"
           },
-          "boolean" : {
+          "asBoolean" : {
             "type" : "boolean"
           },
           "string" : {
@@ -7087,6 +7316,12 @@
           "jsonNull" : {
             "type" : "boolean"
           },
+          "jsonPrimitive" : {
+            "type" : "boolean"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
@@ -7097,12 +7332,6 @@
             "$ref" : "#/components/schemas/JsonObject"
           },
           "jsonArray" : {
-            "type" : "boolean"
-          },
-          "jsonObject" : {
-            "type" : "boolean"
-          },
-          "jsonPrimitive" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -7377,6 +7606,26 @@
             "format" : "date-time"
           },
           "default" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "PaginatedResponseFusionConfig" : {
+        "type" : "object",
+        "properties" : {
+          "nextPageIndex" : {
+            "type" : "string"
+          },
+          "prevPageIndex" : {
+            "type" : "string"
+          },
+          "entities" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/FusionConfig"
+            }
+          },
+          "hasNext" : {
             "type" : "boolean"
           }
         }
@@ -8402,6 +8651,37 @@
             "enum" : [ "REAL", "LEGAL", "HEADLESS" ]
           },
           "customFields" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "UpdateFusionConfigRequest" : {
+        "type" : "object",
+        "properties" : {
+          "key" : {
+            "type" : "string",
+            "description" : "The key of the key-value pair",
+            "example" : "123123"
+          },
+          "value" : {
+            "type" : "string",
+            "description" : "The value of the key-value pair",
+            "example" : "test"
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "The type for the key-value config",
+            "example" : "SANDBOX_VBO_MAPPING"
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "The type for the key-value config",
+            "example" : "Description of the key"
+          },
+          "headers" : {
             "type" : "object",
             "additionalProperties" : {
               "type" : "string"
