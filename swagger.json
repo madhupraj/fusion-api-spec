@@ -5,6 +5,8 @@
     "title" : "API Reference"
   },
   "tags" : [ {
+    "name" : "Account"
+  }, {
     "name" : "Account Management"
   }, {
     "name" : "AccountHolder Management"
@@ -136,38 +138,6 @@
         "responses" : {
           "default" : {
             "description" : "successful operation"
-          }
-        }
-      }
-    },
-    "/api/v1/ifi/{ifiID}/account/{accountID}/transactionPolicies" : {
-      "get" : {
-        "tags" : [ "Account Management" ],
-        "summary" : "",
-        "description" : "",
-        "operationId" : "getTransactionPoliciesByAccount",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the policies exist",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64",
-          "x-example" : 123123
-        }, {
-          "name" : "accountID",
-          "in" : "path",
-          "description" : "ID of the account whose policy details are being retrieved",
-          "required" : true,
-          "type" : "string",
-          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/GetAllTransactionPoliciesResponse"
-            }
           }
         }
       }
@@ -330,14 +300,14 @@
     },
     "/api/v1/ifi/{ifiID}/accounts/{accountID}" : {
       "get" : {
-        "tags" : [ "Account Management" ],
-        "summary" : "Get specific account by ID",
-        "description" : "",
+        "tags" : [ "Account" ],
+        "summary" : "",
+        "description" : "Returns Account object given an accountID. The accountID should be a UUID.",
         "operationId" : "getAccount",
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the account exists",
+          "description" : "ID of the IFI (on-boarded organization).",
           "required" : true,
           "type" : "integer",
           "format" : "int64",
@@ -345,7 +315,7 @@
         }, {
           "name" : "accountID",
           "in" : "path",
-          "description" : "ID of the account whose details are being retrieved",
+          "description" : "ID of the Account whose details are to be retrieved.",
           "required" : true,
           "type" : "string",
           "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
@@ -470,14 +440,14 @@
     },
     "/api/v1/ifi/{ifiID}/accounts/{accountID}/balance" : {
       "get" : {
-        "tags" : [ "Account Management" ],
-        "summary" : "Get the balance of the accountID provided",
-        "description" : "",
+        "tags" : [ "Account" ],
+        "summary" : "",
+        "description" : "Get Balance of the accountID provided.",
         "operationId" : "getBalance",
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the account exists",
+          "description" : "ID of the IFI (on-boarded organization).",
           "required" : true,
           "type" : "integer",
           "format" : "int64",
@@ -485,7 +455,7 @@
         }, {
           "name" : "accountID",
           "in" : "path",
-          "description" : "ID of the account whose balance details are being retrieved",
+          "description" : "ID of the Account whose balance details are to be retrieved.",
           "required" : true,
           "type" : "string",
           "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
@@ -603,6 +573,38 @@
             "description" : "successful operation",
             "schema" : {
               "$ref" : "#/definitions/AccountRelation"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/accounts/{accountID}/transactionPolicies" : {
+      "get" : {
+        "tags" : [ "Account Management" ],
+        "summary" : "",
+        "description" : "",
+        "operationId" : "getTransactionPoliciesByAccount",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the policies exist",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the account whose policy details are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GetAllTransactionPoliciesResponse"
             }
           }
         }
@@ -5343,6 +5345,77 @@
         }
       }
     },
+    "/api/v1/support/ifi/{ifiID}/individuals/{individualID}/accounts/{accountID}/transactions" : {
+      "get" : {
+        "tags" : [ "SupportCentre" ],
+        "summary" : "Get all transactions of an account",
+        "description" : "",
+        "operationId" : "getTransactions",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account transactions exist",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "description" : "ID of the individual to which the account belongs",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d12345"
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the account whose transaction details are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GetAccountTransactionListResponse"
+            }
+          }
+        }
+      }
+    },
     "/api/v1/support/ifi/{ifiID}/individuals/{individualID}/dob" : {
       "post" : {
         "tags" : [ "SupportCentre" ],
@@ -9724,9 +9797,6 @@
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
         },
-        "jsonObject" : {
-          "type" : "boolean"
-        },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
         },
@@ -9734,6 +9804,9 @@
           "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
+          "type" : "boolean"
+        },
+        "jsonObject" : {
           "type" : "boolean"
         },
         "jsonPrimitive" : {
@@ -9756,9 +9829,6 @@
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
         },
-        "jsonObject" : {
-          "type" : "boolean"
-        },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
         },
@@ -9766,6 +9836,9 @@
           "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
+          "type" : "boolean"
+        },
+        "jsonObject" : {
           "type" : "boolean"
         },
         "jsonPrimitive" : {
@@ -9827,9 +9900,6 @@
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
         },
-        "jsonObject" : {
-          "type" : "boolean"
-        },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
         },
@@ -9837,6 +9907,9 @@
           "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
+          "type" : "boolean"
+        },
+        "jsonObject" : {
           "type" : "boolean"
         },
         "jsonPrimitive" : {
@@ -9892,13 +9965,10 @@
         "number" : {
           "type" : "boolean"
         },
-        "asBoolean" : {
-          "type" : "boolean"
-        },
         "boolean" : {
           "type" : "boolean"
         },
-        "string" : {
+        "asBoolean" : {
           "type" : "boolean"
         },
         "asNumber" : {
@@ -9937,6 +10007,9 @@
           "type" : "integer",
           "format" : "int32"
         },
+        "string" : {
+          "type" : "boolean"
+        },
         "asString" : {
           "type" : "string"
         },
@@ -9946,9 +10019,6 @@
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
         },
-        "jsonObject" : {
-          "type" : "boolean"
-        },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
         },
@@ -9956,6 +10026,9 @@
           "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
+          "type" : "boolean"
+        },
+        "jsonObject" : {
           "type" : "boolean"
         },
         "jsonPrimitive" : {

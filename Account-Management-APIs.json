@@ -8,44 +8,6 @@
     "name" : "Account Management"
   } ],
   "paths" : {
-    "/api/v1/ifi/{ifiID}/account/{accountID}/transactionPolicies" : {
-      "get" : {
-        "tags" : [ "Account Management" ],
-        "operationId" : "getTransactionPoliciesByAccount",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the policies exist",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "example" : 123123
-        }, {
-          "name" : "accountID",
-          "in" : "path",
-          "description" : "ID of the account whose policy details are being retrieved",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          },
-          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/GetAllTransactionPoliciesResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/v1/ifi/{ifiID}/accounts" : {
       "get" : {
         "tags" : [ "Account Management" ],
@@ -149,45 +111,6 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/EmptyPayload"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/ifi/{ifiID}/accounts/{accountID}" : {
-      "get" : {
-        "tags" : [ "Account Management" ],
-        "summary" : "Get specific account by ID",
-        "operationId" : "getAccount",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the account exists",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "example" : 123123
-        }, {
-          "name" : "accountID",
-          "in" : "path",
-          "description" : "ID of the account whose details are being retrieved",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          },
-          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Account"
                 }
               }
             }
@@ -329,45 +252,6 @@
         }
       }
     },
-    "/api/v1/ifi/{ifiID}/accounts/{accountID}/balance" : {
-      "get" : {
-        "tags" : [ "Account Management" ],
-        "summary" : "Get the balance of the accountID provided",
-        "operationId" : "getBalance",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the account exists",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "example" : 123123
-        }, {
-          "name" : "accountID",
-          "in" : "path",
-          "description" : "ID of the account whose balance details are being retrieved",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          },
-          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/GetAccountBalanceResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/v1/ifi/{ifiID}/accounts/{accountID}/relations" : {
       "get" : {
         "tags" : [ "Account Management" ],
@@ -495,6 +379,44 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/AccountRelation"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/accounts/{accountID}/transactionPolicies" : {
+      "get" : {
+        "tags" : [ "Account Management" ],
+        "operationId" : "getTransactionPoliciesByAccount",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the policies exist",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the account whose policy details are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAllTransactionPoliciesResponse"
                 }
               }
             }
@@ -1367,37 +1289,6 @@
             "type" : "array",
             "items" : {
               "$ref" : "#/components/schemas/Accessor"
-            }
-          }
-        }
-      },
-      "GetAccountBalanceResponse" : {
-        "type" : "object",
-        "properties" : {
-          "headers" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
-            }
-          },
-          "balance" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "currency" : {
-            "type" : "string"
-          },
-          "lastTransactionID" : {
-            "type" : "string"
-          },
-          "accountingType" : {
-            "type" : "string",
-            "enum" : [ "ASSET", "LIABILITY", "INCOME", "EXPENSE", "EQUITY" ]
-          },
-          "attributes" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
             }
           }
         }
