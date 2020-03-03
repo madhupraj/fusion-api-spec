@@ -170,6 +170,33 @@
         }
       }
     },
+    "/api/v1/ifi/{ifiID}/aggregateExpressions" : {
+      "get" : {
+        "summary" : "get All Aggregation Expressions",
+        "operationId" : "getAggregateExpressionList",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAggregateExpressionListResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/ifi/{ifiID}/applications" : {
       "get" : {
         "summary" : "Get All Applications",
@@ -1536,6 +1563,68 @@
         }
       }
     },
+    "/api/v1/ifi/{ifiID}/coas" : {
+      "get" : {
+        "summary" : "Get all CoAs for a given IFI",
+        "operationId" : "getCoaListByIFI",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetCoaListResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/coas/{coaid}/coaNodes" : {
+      "get" : {
+        "summary" : "Get all CoA Nodes for a given IFI and CoAID",
+        "operationId" : "getCoaNodesByIFIAndCoaID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "coaID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetCoaNodesResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/ifi/{ifiID}/companies" : {
       "get" : {
         "summary" : "Get all the companies of a specific IFI",
@@ -2249,6 +2338,114 @@
         }
       }
     },
+    "/api/v1/ifi/{ifiID}/createExtendedProduct" : {
+      "post" : {
+        "summary" : "CreateExtendedProduct api via fusion",
+        "operationId" : "createExtendedProduct",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CreateExtendedProductRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Product"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/createExtendedProductFamily" : {
+      "post" : {
+        "summary" : "CreateExtendedProductFamily api via fusion",
+        "operationId" : "createExtendedProductFamily",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CreateExtendedProductFamilyRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ProductFamily"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/entityGroups" : {
+      "get" : {
+        "summary" : "Get EntityGrouplist for a given ifi and entityType",
+        "operationId" : "getEntityGroupList",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "entityType",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ListEntityGroupResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/ifi/{ifiID}/form_factor_products/{formFactorProductID}" : {
       "get" : {
         "summary" : "Get Form Factor Product details by ID",
@@ -2755,7 +2952,7 @@
             "type" : "string"
           }
         }, {
-          "name" : "beneficaryAccountId",
+          "name" : "beneficiaryAccountID",
           "in" : "path",
           "required" : true,
           "schema" : {
@@ -3401,6 +3598,114 @@
         }
       }
     },
+    "/api/v1/ifi/{ifiID}/policyMappings" : {
+      "get" : {
+        "summary" : "Get PolicyMappings for a given ifi, entityID, policyEntityType, policyType and PolicyId",
+        "operationId" : "getPolicyMappings",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "entityID",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "policyEntityType",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "policyType",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "policyID",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetProductListResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Create Entity Policy Mapping",
+        "operationId" : "createPolicyMapping",
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CreatePolicyMappingRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TransactionPolicyResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/productFamilies" : {
+      "get" : {
+        "summary" : "Get ProductFamilyList for a given ifi",
+        "operationId" : "getProductFamilyList",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetProductFamilyListResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/ifi/{ifiID}/productFamilies/{productFamilyID}/products" : {
       "get" : {
         "summary" : "Get Products by productFamilyID",
@@ -3528,6 +3833,76 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/Account"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/productFamilies/{productFamilyId}" : {
+      "get" : {
+        "summary" : "Get ProductFamily for a given ifi and id",
+        "operationId" : "getProductFamily",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "productFamilyId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ProductFamily"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/products/{productID}" : {
+      "get" : {
+        "summary" : "Get TransactionPolicy with a given ID",
+        "operationId" : "getProductByIFIAndID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "productID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TransactionPolicyResponse"
                 }
               }
             }
@@ -3684,6 +4059,92 @@
         }
       }
     },
+    "/api/v1/ifi/{ifiID}/resources/{resourceID}/form_factors" : {
+      "post" : {
+        "summary" : "Add (already provisioned) form factor to an existing resource",
+        "operationId" : "insertFormFactor",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "resourceID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Builder"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/InsertFormFactorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/resources/{resourceID}/form_factors/create" : {
+      "post" : {
+        "summary" : "Provision form factor and link it to an existing resource",
+        "operationId" : "provisionFormFactor",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "resourceID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Builder"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CreateAndLinkFormFactorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/ifi/{ifiID}/resources/{resourceID}/form_factors/{formFactorID}" : {
       "get" : {
         "summary" : "Get form factor details by ID",
@@ -3810,6 +4271,230 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/Resource"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/transactionCategories" : {
+      "get" : {
+        "summary" : "get All Transaction Categories",
+        "operationId" : "getAllTransactionCategories",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAllTxnCategoriesResponsePayload"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/transactionPolicies" : {
+      "get" : {
+        "summary" : "Get all transaction policies for a given IFI",
+        "operationId" : "getAllTransactionPoliciesByIFI",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "type" : "boolean"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAllTransactionPoliciesResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Create TransactionPolicy",
+        "operationId" : "createTransactionPolicy",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Builder"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TransactionPolicyResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/transactionPolicies/updateState" : {
+      "post" : {
+        "summary" : "Replace Policy",
+        "operationId" : "updatePolicyState",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdatePolicyStateRequestPayload"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EmptyPayload"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/transactionPolicies/{transactionPolicyID}" : {
+      "put" : {
+        "summary" : "Replace Transaction Policy",
+        "operationId" : "replaceTransactionPolicy",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "transactionPolicyID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ReplaceTransactionPolicyRequestPayload"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TransactionPolicyResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/transactionPolicies/{transactionPolicyId}" : {
+      "patch" : {
+        "summary" : "Update Transaction Policy State",
+        "operationId" : "updateTransactionPolicyState",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "transactionPolicyId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateTransactionPolicyStateRequestPayload"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EmptyPayload"
                 }
               }
             }
@@ -5574,6 +6259,27 @@
           }
         }
       },
+      "CreateAndLinkFormFactorResponse" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "resource" : {
+            "$ref" : "#/components/schemas/Resource"
+          },
+          "provisionFormFactorResponse" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object",
+              "properties" : { }
+            }
+          }
+        }
+      },
       "CreateApplicationResponse" : {
         "type" : "object",
         "properties" : {
@@ -6832,6 +7538,61 @@
           }
         }
       },
+      "InsertFormFactorResponse" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "id" : {
+            "type" : "string"
+          },
+          "ifi" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "formFactorProductID" : {
+            "type" : "string"
+          },
+          "formFactorID" : {
+            "type" : "string"
+          },
+          "targetURI" : {
+            "type" : "string"
+          },
+          "tags" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object",
+              "properties" : { }
+            }
+          },
+          "policies" : {
+            "$ref" : "#/components/schemas/Policies"
+          },
+          "status" : {
+            "type" : "string",
+            "enum" : [ "ACTIVE", "INACTIVE", "DELETED" ]
+          },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "modifiedAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        }
+      },
       "IssueAccountArtifactRequest" : {
         "required" : [ "accountHolderID", "accountProductID" ],
         "type" : "object",
@@ -7013,6 +7774,9 @@
           "bundleID" : {
             "type" : "string"
           },
+          "id" : {
+            "type" : "string"
+          },
           "formFactorID" : {
             "type" : "string"
           },
@@ -7165,11 +7929,11 @@
           "asString" : {
             "type" : "string"
           },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
           "jsonNull" : {
             "type" : "boolean"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
           },
           "jsonObject" : {
             "type" : "boolean"
@@ -7177,13 +7941,13 @@
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
           },
           "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonPrimitive" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -7197,11 +7961,11 @@
           "asBoolean" : {
             "type" : "boolean"
           },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
           "jsonNull" : {
             "type" : "boolean"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
           },
           "jsonObject" : {
             "type" : "boolean"
@@ -7209,13 +7973,13 @@
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
           },
           "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonPrimitive" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -7269,11 +8033,11 @@
           "asBoolean" : {
             "type" : "boolean"
           },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
           "jsonNull" : {
             "type" : "boolean"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
           },
           "jsonObject" : {
             "type" : "boolean"
@@ -7281,13 +8045,13 @@
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
           },
           "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonPrimitive" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -7390,11 +8154,11 @@
           "asString" : {
             "type" : "string"
           },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
           "jsonNull" : {
             "type" : "boolean"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
           },
           "jsonObject" : {
             "type" : "boolean"
@@ -7402,13 +8166,13 @@
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
           },
           "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonPrimitive" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
