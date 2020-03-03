@@ -9723,15 +9723,6 @@
         "serviceInstanceJID" : {
           "type" : "boolean"
         },
-        "serviceViewJID" : {
-          "type" : "boolean"
-        },
-        "defaultServiceNode" : {
-          "type" : "boolean"
-        },
-        "serviceViewName" : {
-          "type" : "string"
-        },
         "jidOfAGroup" : {
           "type" : "boolean"
         },
@@ -9742,6 +9733,15 @@
           "$ref" : "#/definitions/JID"
         },
         "proxyServiceJID" : {
+          "type" : "boolean"
+        },
+        "serviceViewName" : {
+          "type" : "string"
+        },
+        "serviceViewJID" : {
+          "type" : "boolean"
+        },
+        "defaultServiceNode" : {
           "type" : "boolean"
         }
       }
@@ -9794,8 +9794,14 @@
         "jsonNull" : {
           "type" : "boolean"
         },
+        "jsonPrimitive" : {
+          "type" : "boolean"
+        },
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
+        },
+        "jsonObject" : {
+          "type" : "boolean"
         },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
@@ -9804,12 +9810,6 @@
           "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
-          "type" : "boolean"
-        },
-        "jsonObject" : {
-          "type" : "boolean"
-        },
-        "jsonPrimitive" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
@@ -9826,8 +9826,14 @@
         "jsonNull" : {
           "type" : "boolean"
         },
+        "jsonPrimitive" : {
+          "type" : "boolean"
+        },
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
+        },
+        "jsonObject" : {
+          "type" : "boolean"
         },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
@@ -9836,12 +9842,6 @@
           "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
-          "type" : "boolean"
-        },
-        "jsonObject" : {
-          "type" : "boolean"
-        },
-        "jsonPrimitive" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
@@ -9897,8 +9897,14 @@
         "jsonNull" : {
           "type" : "boolean"
         },
+        "jsonPrimitive" : {
+          "type" : "boolean"
+        },
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
+        },
+        "jsonObject" : {
+          "type" : "boolean"
         },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
@@ -9907,12 +9913,6 @@
           "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
-          "type" : "boolean"
-        },
-        "jsonObject" : {
-          "type" : "boolean"
-        },
-        "jsonPrimitive" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
@@ -9971,6 +9971,9 @@
         "asBoolean" : {
           "type" : "boolean"
         },
+        "string" : {
+          "type" : "boolean"
+        },
         "asNumber" : {
           "$ref" : "#/definitions/Number"
         },
@@ -10007,17 +10010,20 @@
           "type" : "integer",
           "format" : "int32"
         },
-        "string" : {
-          "type" : "boolean"
-        },
         "asString" : {
           "type" : "string"
         },
         "jsonNull" : {
           "type" : "boolean"
         },
+        "jsonPrimitive" : {
+          "type" : "boolean"
+        },
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
+        },
+        "jsonObject" : {
+          "type" : "boolean"
         },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
@@ -10026,12 +10032,6 @@
           "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
-          "type" : "boolean"
-        },
-        "jsonObject" : {
-          "type" : "boolean"
-        },
-        "jsonPrimitive" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
