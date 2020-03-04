@@ -2201,6 +2201,93 @@
         }
       }
     },
+    "/api/v1/ifi/{ifiID}/cards/list" : {
+      "get" : {
+        "summary" : "List cards",
+        "description" : "",
+        "operationId" : "listCards",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/FusionListCardsRequest"
+          }
+        }, {
+          "name" : "X-Zeta-JWS",
+          "in" : "header",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/CardView"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/cards/orders" : {
+      "post" : {
+        "operationId" : "placeBulkOrder",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/BulkOrderRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/BulkOrderRequest"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/cards/orders/personalized" : {
+      "post" : {
+        "operationId" : "placePersonalizedOrder",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/PersonalizedOrderRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/PersonalizedOrderRequest"
+            }
+          }
+        }
+      }
+    },
     "/api/v1/ifi/{ifiID}/cards/orders/{orderID}" : {
       "get" : {
         "summary" : "Get order details by ID",
@@ -2227,6 +2314,31 @@
         }
       }
     },
+    "/api/v1/ifi/{ifiID}/cards/orders/{orderID}/cancel" : {
+      "post" : {
+        "operationId" : "cancelOrder",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "orderID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Void"
+            }
+          }
+        }
+      }
+    },
     "/api/v1/ifi/{ifiID}/cards/{cardID}/dispatch" : {
       "post" : {
         "operationId" : "dispatchCard",
@@ -2234,7 +2346,8 @@
           "name" : "ifiID",
           "in" : "path",
           "required" : true,
-          "type" : "string"
+          "type" : "integer",
+          "format" : "int64"
         }, {
           "name" : "cardID",
           "in" : "path",
@@ -3050,6 +3163,37 @@
             "description" : "successful operation",
             "schema" : {
               "$ref" : "#/definitions/GetAllAccountHoldersResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/getCardByCRN/{crn}" : {
+      "get" : {
+        "summary" : "Get card details by CRN",
+        "description" : "",
+        "operationId" : "getCardByCRN",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "crn",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "X-Zeta-JWS",
+          "in" : "header",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/CardView"
             }
           }
         }
@@ -4761,6 +4905,42 @@
         }
       }
     },
+    "/api/v1/ifi/{ifiID}/resourceByVector" : {
+      "get" : {
+        "summary" : "Get resource details by accountHolder ID",
+        "description" : "",
+        "operationId" : "getResourceByAccountHolder",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Resource"
+            }
+          }
+        }
+      }
+    },
     "/api/v1/ifi/{ifiID}/resource_products/{resourceProductID}" : {
       "get" : {
         "summary" : "Get Resource Product details by ID",
@@ -5038,28 +5218,6 @@
             "description" : "successful operation",
             "schema" : {
               "$ref" : "#/definitions/Resource"
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/ifi/{ifiID}/transactionCategories" : {
-      "get" : {
-        "summary" : "get All Transaction Categories",
-        "description" : "",
-        "operationId" : "getAllTransactionCategories",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/GetAllTxnCategoriesResponsePayload"
             }
           }
         }
@@ -5837,6 +5995,9 @@
         },
         "value" : {
           "type" : "string"
+        },
+        "verified" : {
+          "type" : "boolean"
         },
         "createdAt" : {
           "type" : "string",
@@ -7372,6 +7533,54 @@
     },
     "Builder" : {
       "type" : "object"
+    },
+    "BulkOrderRequest" : {
+      "type" : "object",
+      "properties" : {
+        "quantity" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "orderID" : {
+          "type" : "string"
+        },
+        "cardSkuID" : {
+          "type" : "string"
+        },
+        "plasticCode" : {
+          "type" : "string"
+        },
+        "expiry" : {
+          "$ref" : "#/definitions/Expiry"
+        },
+        "thirdLineEmbossing" : {
+          "type" : "string"
+        },
+        "fourthLineEmbossing" : {
+          "type" : "string"
+        },
+        "deliveryAddress" : {
+          "$ref" : "#/definitions/Address"
+        },
+        "additionalAttributes" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "tenantAttributes" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "vendorAttributes" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        }
+      }
     },
     "BundleResponse" : {
       "type" : "object",
@@ -8944,6 +9153,14 @@
         }
       }
     },
+    "FusionListCardsRequest" : {
+      "type" : "object",
+      "properties" : {
+        "panSHA" : {
+          "type" : "string"
+        }
+      }
+    },
     "GenericCreateApplicationResponse" : {
       "type" : "object",
       "properties" : {
@@ -9723,25 +9940,25 @@
         "serviceInstanceJID" : {
           "type" : "boolean"
         },
-        "jidOfAGroup" : {
-          "type" : "boolean"
-        },
         "primaryServiceName" : {
+          "type" : "string"
+        },
+        "serviceViewName" : {
           "type" : "string"
         },
         "bareJID" : {
           "$ref" : "#/definitions/JID"
         },
-        "proxyServiceJID" : {
-          "type" : "boolean"
-        },
-        "serviceViewName" : {
-          "type" : "string"
-        },
         "serviceViewJID" : {
           "type" : "boolean"
         },
         "defaultServiceNode" : {
+          "type" : "boolean"
+        },
+        "jidOfAGroup" : {
+          "type" : "boolean"
+        },
+        "proxyServiceJID" : {
           "type" : "boolean"
         }
       }
@@ -9794,14 +10011,8 @@
         "jsonNull" : {
           "type" : "boolean"
         },
-        "jsonPrimitive" : {
-          "type" : "boolean"
-        },
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
-        },
-        "jsonObject" : {
-          "type" : "boolean"
         },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
@@ -9810,6 +10021,12 @@
           "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
+          "type" : "boolean"
+        },
+        "jsonObject" : {
+          "type" : "boolean"
+        },
+        "jsonPrimitive" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
@@ -9826,14 +10043,8 @@
         "jsonNull" : {
           "type" : "boolean"
         },
-        "jsonPrimitive" : {
-          "type" : "boolean"
-        },
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
-        },
-        "jsonObject" : {
-          "type" : "boolean"
         },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
@@ -9842,6 +10053,12 @@
           "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
+          "type" : "boolean"
+        },
+        "jsonObject" : {
+          "type" : "boolean"
+        },
+        "jsonPrimitive" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
@@ -9897,14 +10114,8 @@
         "jsonNull" : {
           "type" : "boolean"
         },
-        "jsonPrimitive" : {
-          "type" : "boolean"
-        },
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
-        },
-        "jsonObject" : {
-          "type" : "boolean"
         },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
@@ -9913,6 +10124,12 @@
           "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
+          "type" : "boolean"
+        },
+        "jsonObject" : {
+          "type" : "boolean"
+        },
+        "jsonPrimitive" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
@@ -10016,14 +10233,8 @@
         "jsonNull" : {
           "type" : "boolean"
         },
-        "jsonPrimitive" : {
-          "type" : "boolean"
-        },
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
-        },
-        "jsonObject" : {
-          "type" : "boolean"
         },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
@@ -10032,6 +10243,12 @@
           "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
+          "type" : "boolean"
+        },
+        "jsonObject" : {
+          "type" : "boolean"
+        },
+        "jsonPrimitive" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
@@ -10090,12 +10307,10 @@
           "type" : "string"
         },
         "updateTime" : {
-          "type" : "string",
-          "format" : "date-time"
+          "type" : "string"
         },
         "expiryTime" : {
-          "type" : "string",
-          "format" : "date-time"
+          "type" : "string"
         },
         "kycStatusPostExpiry" : {
           "type" : "string"
@@ -10419,6 +10634,69 @@
         "modifiedAt" : {
           "type" : "string",
           "format" : "date-time"
+        }
+      }
+    },
+    "PersonalizedOrderRequest" : {
+      "type" : "object",
+      "properties" : {
+        "orderID" : {
+          "type" : "string"
+        },
+        "quantity" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "cardSkuID" : {
+          "type" : "string"
+        },
+        "expiry" : {
+          "$ref" : "#/definitions/Expiry"
+        },
+        "records" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/PersonalizedOrderRequestRecord"
+          }
+        }
+      }
+    },
+    "PersonalizedOrderRequestRecord" : {
+      "type" : "object",
+      "properties" : {
+        "recordID" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "deliveryAddress" : {
+          "$ref" : "#/definitions/Address"
+        },
+        "plasticCode" : {
+          "type" : "string"
+        },
+        "thirdLineEmbossing" : {
+          "type" : "string"
+        },
+        "fourthLineEmbossing" : {
+          "type" : "string"
+        },
+        "vendorAttributes" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "tenantAttributes" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "additionalAttributes" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
         }
       }
     },
@@ -11706,6 +11984,9 @@
           "type" : "boolean"
         }
       }
+    },
+    "Void" : {
+      "type" : "object"
     }
   }
 }

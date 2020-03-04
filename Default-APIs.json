@@ -1449,6 +1449,120 @@
         }
       }
     },
+    "/api/v1/ifi/{ifiID}/cards/list" : {
+      "get" : {
+        "summary" : "List cards",
+        "operationId" : "listCards",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "X-Zeta-JWS",
+          "in" : "header",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/FusionListCardsRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CardView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/cards/orders" : {
+      "post" : {
+        "operationId" : "placeBulkOrder",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/BulkOrderRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BulkOrderRequest"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/cards/orders/personalized" : {
+      "post" : {
+        "operationId" : "placePersonalizedOrder",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/PersonalizedOrderRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PersonalizedOrderRequest"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/ifi/{ifiID}/cards/orders/{orderID}" : {
       "get" : {
         "summary" : "Get order details by ID",
@@ -1482,6 +1596,39 @@
         }
       }
     },
+    "/api/v1/ifi/{ifiID}/cards/orders/{orderID}/cancel" : {
+      "post" : {
+        "operationId" : "cancelOrder",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "orderID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Void"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/ifi/{ifiID}/cards/{cardID}/dispatch" : {
       "post" : {
         "operationId" : "dispatchCard",
@@ -1490,7 +1637,8 @@
           "in" : "path",
           "required" : true,
           "schema" : {
-            "type" : "string"
+            "type" : "integer",
+            "format" : "int64"
           }
         }, {
           "name" : "cardID",
@@ -2472,6 +2620,45 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/FormFactorProduct"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/getCardByCRN/{crn}" : {
+      "get" : {
+        "summary" : "Get card details by CRN",
+        "operationId" : "getCardByCRN",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "crn",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "X-Zeta-JWS",
+          "in" : "header",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CardView"
                 }
               }
             }
@@ -3910,6 +4097,43 @@
         }
       }
     },
+    "/api/v1/ifi/{ifiID}/resourceByVector" : {
+      "get" : {
+        "summary" : "Get resource details by accountHolder ID",
+        "operationId" : "getResourceByAccountHolder",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "type" : "string"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Resource"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/ifi/{ifiID}/resource_products/{resourceProductID}" : {
       "get" : {
         "summary" : "Get Resource Product details by ID",
@@ -4271,33 +4495,6 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/Resource"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/ifi/{ifiID}/transactionCategories" : {
-      "get" : {
-        "summary" : "get All Transaction Categories",
-        "operationId" : "getAllTransactionCategories",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/GetAllTxnCategoriesResponsePayload"
                 }
               }
             }
@@ -4703,6 +4900,9 @@
           },
           "value" : {
             "type" : "string"
+          },
+          "verified" : {
+            "type" : "boolean"
           },
           "createdAt" : {
             "type" : "string",
@@ -5825,6 +6025,54 @@
       },
       "Builder" : {
         "type" : "object"
+      },
+      "BulkOrderRequest" : {
+        "type" : "object",
+        "properties" : {
+          "quantity" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "orderID" : {
+            "type" : "string"
+          },
+          "cardSkuID" : {
+            "type" : "string"
+          },
+          "plasticCode" : {
+            "type" : "string"
+          },
+          "expiry" : {
+            "$ref" : "#/components/schemas/Expiry"
+          },
+          "thirdLineEmbossing" : {
+            "type" : "string"
+          },
+          "fourthLineEmbossing" : {
+            "type" : "string"
+          },
+          "deliveryAddress" : {
+            "$ref" : "#/components/schemas/Address"
+          },
+          "additionalAttributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "tenantAttributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "vendorAttributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        }
       },
       "CalendarInfo" : {
         "type" : "object",
@@ -7298,6 +7546,14 @@
           }
         }
       },
+      "FusionListCardsRequest" : {
+        "type" : "object",
+        "properties" : {
+          "panSHA" : {
+            "type" : "string"
+          }
+        }
+      },
       "GenericCreateApplicationResponse" : {
         "type" : "object",
         "properties" : {
@@ -7932,14 +8188,8 @@
           "jsonNull" : {
             "type" : "boolean"
           },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
-          },
-          "jsonObject" : {
-            "type" : "boolean"
           },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
@@ -7948,6 +8198,12 @@
             "$ref" : "#/components/schemas/JsonObject"
           },
           "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
+          "jsonPrimitive" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -7964,14 +8220,8 @@
           "jsonNull" : {
             "type" : "boolean"
           },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
-          },
-          "jsonObject" : {
-            "type" : "boolean"
           },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
@@ -7980,6 +8230,12 @@
             "$ref" : "#/components/schemas/JsonObject"
           },
           "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
+          "jsonPrimitive" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -8036,14 +8292,8 @@
           "jsonNull" : {
             "type" : "boolean"
           },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
-          },
-          "jsonObject" : {
-            "type" : "boolean"
           },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
@@ -8052,6 +8302,12 @@
             "$ref" : "#/components/schemas/JsonObject"
           },
           "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
+          "jsonPrimitive" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -8157,14 +8413,8 @@
           "jsonNull" : {
             "type" : "boolean"
           },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
-          },
-          "jsonObject" : {
-            "type" : "boolean"
           },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
@@ -8173,6 +8423,12 @@
             "$ref" : "#/components/schemas/JsonObject"
           },
           "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
+          "jsonPrimitive" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -8231,12 +8487,10 @@
             "type" : "string"
           },
           "updateTime" : {
-            "type" : "string",
-            "format" : "date-time"
+            "type" : "string"
           },
           "expiryTime" : {
-            "type" : "string",
-            "format" : "date-time"
+            "type" : "string"
           },
           "kycStatusPostExpiry" : {
             "type" : "string"
@@ -8529,6 +8783,69 @@
           "modifiedAt" : {
             "type" : "string",
             "format" : "date-time"
+          }
+        }
+      },
+      "PersonalizedOrderRequest" : {
+        "type" : "object",
+        "properties" : {
+          "orderID" : {
+            "type" : "string"
+          },
+          "quantity" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "cardSkuID" : {
+            "type" : "string"
+          },
+          "expiry" : {
+            "$ref" : "#/components/schemas/Expiry"
+          },
+          "records" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PersonalizedOrderRequestRecord"
+            }
+          }
+        }
+      },
+      "PersonalizedOrderRequestRecord" : {
+        "type" : "object",
+        "properties" : {
+          "recordID" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "deliveryAddress" : {
+            "$ref" : "#/components/schemas/Address"
+          },
+          "plasticCode" : {
+            "type" : "string"
+          },
+          "thirdLineEmbossing" : {
+            "type" : "string"
+          },
+          "fourthLineEmbossing" : {
+            "type" : "string"
+          },
+          "vendorAttributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "tenantAttributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "additionalAttributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
           }
         }
       },
@@ -9632,6 +9949,9 @@
             "type" : "boolean"
           }
         }
+      },
+      "Void" : {
+        "type" : "object"
       }
     }
   }
