@@ -5223,6 +5223,28 @@
         }
       }
     },
+    "/api/v1/ifi/{ifiID}/transactionCategories" : {
+      "get" : {
+        "summary" : "get All Transaction Categories",
+        "description" : "",
+        "operationId" : "getAllTransactionCategories",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GetAllTxnCategoriesResponsePayload"
+            }
+          }
+        }
+      }
+    },
     "/api/v1/ifi/{ifiID}/transactionPolicies" : {
       "get" : {
         "summary" : "Get all transaction policies for a given IFI",
@@ -5995,9 +6017,6 @@
         },
         "value" : {
           "type" : "string"
-        },
-        "verified" : {
-          "type" : "boolean"
         },
         "createdAt" : {
           "type" : "string",
@@ -7675,6 +7694,41 @@
           "type" : "string"
         },
         "range" : {
+          "type" : "string"
+        }
+      }
+    },
+    "CardSku" : {
+      "type" : "object",
+      "properties" : {
+        "cardSkuId" : {
+          "type" : "string"
+        },
+        "productID" : {
+          "type" : "string"
+        },
+        "ifi" : {
+          "type" : "string"
+        },
+        "bin" : {
+          "type" : "string"
+        },
+        "plasticCode" : {
+          "type" : "string"
+        },
+        "vendorID" : {
+          "type" : "string"
+        },
+        "tags" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "range" : {
+          "type" : "string"
+        },
+        "binRange" : {
           "type" : "string"
         }
       }
@@ -9940,14 +9994,8 @@
         "serviceInstanceJID" : {
           "type" : "boolean"
         },
-        "primaryServiceName" : {
-          "type" : "string"
-        },
         "serviceViewName" : {
           "type" : "string"
-        },
-        "bareJID" : {
-          "$ref" : "#/definitions/JID"
         },
         "serviceViewJID" : {
           "type" : "boolean"
@@ -9957,6 +10005,12 @@
         },
         "jidOfAGroup" : {
           "type" : "boolean"
+        },
+        "primaryServiceName" : {
+          "type" : "string"
+        },
+        "bareJID" : {
+          "$ref" : "#/definitions/JID"
         },
         "proxyServiceJID" : {
           "type" : "boolean"
@@ -10182,13 +10236,10 @@
         "number" : {
           "type" : "boolean"
         },
-        "boolean" : {
-          "type" : "boolean"
-        },
         "asBoolean" : {
           "type" : "boolean"
         },
-        "string" : {
+        "boolean" : {
           "type" : "boolean"
         },
         "asNumber" : {
@@ -10226,6 +10277,9 @@
         "asShort" : {
           "type" : "integer",
           "format" : "int32"
+        },
+        "string" : {
+          "type" : "boolean"
         },
         "asString" : {
           "type" : "string"
@@ -10307,10 +10361,12 @@
           "type" : "string"
         },
         "updateTime" : {
-          "type" : "string"
+          "type" : "string",
+          "format" : "date-time"
         },
         "expiryTime" : {
-          "type" : "string"
+          "type" : "string",
+          "format" : "date-time"
         },
         "kycStatusPostExpiry" : {
           "type" : "string"
@@ -10380,6 +10436,9 @@
         },
         "cardSkuID" : {
           "type" : "string"
+        },
+        "cardSku" : {
+          "$ref" : "#/definitions/CardSku"
         },
         "plasticCode" : {
           "type" : "string"
