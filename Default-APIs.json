@@ -2627,7 +2627,7 @@
         }
       }
     },
-    "/api/v1/ifi/{ifiID}/getCardByCrn/{crn}" : {
+    "/api/v1/ifi/{ifiID}/getCardByCRN/{crn}" : {
       "get" : {
         "summary" : "Get card details by CRN",
         "operationId" : "getCardByCRN",
@@ -4502,33 +4502,6 @@
         }
       }
     },
-    "/api/v1/ifi/{ifiID}/transactionCategories" : {
-      "get" : {
-        "summary" : "get All Transaction Categories",
-        "operationId" : "getAllTransactionCategories",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/GetAllTxnCategoriesResponsePayload"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/v1/ifi/{ifiID}/transactionPolicies" : {
       "get" : {
         "summary" : "Get all transaction policies for a given IFI",
@@ -4927,6 +4900,9 @@
           },
           "value" : {
             "type" : "string"
+          },
+          "verified" : {
+            "type" : "boolean"
           },
           "createdAt" : {
             "type" : "string",
@@ -6133,41 +6109,6 @@
             "type" : "string"
           },
           "range" : {
-            "type" : "string"
-          }
-        }
-      },
-      "CardSku" : {
-        "type" : "object",
-        "properties" : {
-          "cardSkuId" : {
-            "type" : "string"
-          },
-          "productID" : {
-            "type" : "string"
-          },
-          "ifi" : {
-            "type" : "string"
-          },
-          "bin" : {
-            "type" : "string"
-          },
-          "plasticCode" : {
-            "type" : "string"
-          },
-          "vendorID" : {
-            "type" : "string"
-          },
-          "tags" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
-            }
-          },
-          "range" : {
-            "type" : "string"
-          },
-          "binRange" : {
             "type" : "string"
           }
         }
@@ -8250,10 +8191,16 @@
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
           },
           "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonObject" : {
             "type" : "boolean"
           },
           "jsonPrimitive" : {
@@ -8261,12 +8208,6 @@
           },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
-          "jsonObject" : {
-            "type" : "boolean"
           }
         }
       },
@@ -8282,10 +8223,16 @@
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
           },
           "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonObject" : {
             "type" : "boolean"
           },
           "jsonPrimitive" : {
@@ -8296,12 +8243,6 @@
           },
           "asNumber" : {
             "$ref" : "#/components/schemas/Number"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
-          "jsonObject" : {
-            "type" : "boolean"
           },
           "asDouble" : {
             "type" : "number",
@@ -8354,10 +8295,16 @@
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
           },
           "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonObject" : {
             "type" : "boolean"
           },
           "jsonPrimitive" : {
@@ -8368,12 +8315,6 @@
           },
           "asNumber" : {
             "$ref" : "#/components/schemas/Number"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
-          "jsonObject" : {
-            "type" : "boolean"
           },
           "asDouble" : {
             "type" : "number",
@@ -8420,10 +8361,10 @@
           "number" : {
             "type" : "boolean"
           },
-          "asBoolean" : {
+          "boolean" : {
             "type" : "boolean"
           },
-          "boolean" : {
+          "asBoolean" : {
             "type" : "boolean"
           },
           "string" : {
@@ -8475,10 +8416,16 @@
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
           },
           "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonObject" : {
             "type" : "boolean"
           },
           "jsonPrimitive" : {
@@ -8486,12 +8433,6 @@
           },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
-          "jsonObject" : {
-            "type" : "boolean"
           }
         }
       },
@@ -8553,6 +8494,12 @@
             "type" : "string",
             "format" : "date-time"
           },
+          "standardUpdateTime" : {
+            "type" : "string"
+          },
+          "standardExpiryTime" : {
+            "type" : "string"
+          },
           "kycStatusPostExpiry" : {
             "type" : "string"
           },
@@ -8609,9 +8556,6 @@
           },
           "cardSkuID" : {
             "type" : "string"
-          },
-          "cardSku" : {
-            "$ref" : "#/components/schemas/CardSku"
           },
           "plasticCode" : {
             "type" : "string"

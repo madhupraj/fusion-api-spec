@@ -1063,41 +1063,6 @@
         }
       }
     },
-    "/api/v1/ifi/{ifiID}/applications/newIndividualDirect" : {
-      "post" : {
-        "tags" : [ "AccountHolder Management" ],
-        "summary" : "Create an application for creating new individual",
-        "description" : "",
-        "operationId" : "createAccountHolder",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the account holder is being created",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64",
-          "x-example" : 123123
-        }, {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/CreateAccountHolderRequest"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/AccountHolder"
-            }
-          },
-          "201" : {
-            "description" : ""
-          }
-        }
-      }
-    },
     "/api/v1/ifi/{ifiID}/applications/{applicationID}" : {
       "get" : {
         "summary" : "Get Individual Application",
@@ -3168,7 +3133,7 @@
         }
       }
     },
-    "/api/v1/ifi/{ifiID}/getCardByCrn/{crn}" : {
+    "/api/v1/ifi/{ifiID}/getCardByCRN/{crn}" : {
       "get" : {
         "summary" : "Get card details by CRN",
         "description" : "",
@@ -5223,28 +5188,6 @@
         }
       }
     },
-    "/api/v1/ifi/{ifiID}/transactionCategories" : {
-      "get" : {
-        "summary" : "get All Transaction Categories",
-        "description" : "",
-        "operationId" : "getAllTransactionCategories",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/GetAllTxnCategoriesResponsePayload"
-            }
-          }
-        }
-      }
-    },
     "/api/v1/ifi/{ifiID}/transactionPolicies" : {
       "get" : {
         "summary" : "Get all transaction policies for a given IFI",
@@ -6017,6 +5960,9 @@
         },
         "value" : {
           "type" : "string"
+        },
+        "verified" : {
+          "type" : "boolean"
         },
         "createdAt" : {
           "type" : "string",
@@ -7694,41 +7640,6 @@
           "type" : "string"
         },
         "range" : {
-          "type" : "string"
-        }
-      }
-    },
-    "CardSku" : {
-      "type" : "object",
-      "properties" : {
-        "cardSkuId" : {
-          "type" : "string"
-        },
-        "productID" : {
-          "type" : "string"
-        },
-        "ifi" : {
-          "type" : "string"
-        },
-        "bin" : {
-          "type" : "string"
-        },
-        "plasticCode" : {
-          "type" : "string"
-        },
-        "vendorID" : {
-          "type" : "string"
-        },
-        "tags" : {
-          "type" : "array",
-          "items" : {
-            "type" : "string"
-          }
-        },
-        "range" : {
-          "type" : "string"
-        },
-        "binRange" : {
           "type" : "string"
         }
       }
@@ -9994,6 +9905,15 @@
         "serviceInstanceJID" : {
           "type" : "boolean"
         },
+        "primaryServiceName" : {
+          "type" : "string"
+        },
+        "serviceViewName" : {
+          "type" : "string"
+        },
+        "bareJID" : {
+          "$ref" : "#/definitions/JID"
+        },
         "serviceViewJID" : {
           "type" : "boolean"
         },
@@ -10003,17 +9923,8 @@
         "jidOfAGroup" : {
           "type" : "boolean"
         },
-        "primaryServiceName" : {
-          "type" : "string"
-        },
-        "bareJID" : {
-          "$ref" : "#/definitions/JID"
-        },
         "proxyServiceJID" : {
           "type" : "boolean"
-        },
-        "serviceViewName" : {
-          "type" : "string"
         }
       }
     },
@@ -10068,10 +9979,16 @@
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
         },
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
+        },
         "asJsonObject" : {
           "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
+          "type" : "boolean"
+        },
+        "jsonObject" : {
           "type" : "boolean"
         },
         "jsonPrimitive" : {
@@ -10079,12 +9996,6 @@
         },
         "asJsonNull" : {
           "$ref" : "#/definitions/JsonNull"
-        },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
-        },
-        "jsonObject" : {
-          "type" : "boolean"
         }
       }
     },
@@ -10100,10 +10011,16 @@
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
         },
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
+        },
         "asJsonObject" : {
           "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
+          "type" : "boolean"
+        },
+        "jsonObject" : {
           "type" : "boolean"
         },
         "jsonPrimitive" : {
@@ -10114,12 +10031,6 @@
         },
         "asNumber" : {
           "$ref" : "#/definitions/Number"
-        },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
-        },
-        "jsonObject" : {
-          "type" : "boolean"
         },
         "asDouble" : {
           "type" : "number",
@@ -10171,10 +10082,16 @@
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
         },
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
+        },
         "asJsonObject" : {
           "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
+          "type" : "boolean"
+        },
+        "jsonObject" : {
           "type" : "boolean"
         },
         "jsonPrimitive" : {
@@ -10185,12 +10102,6 @@
         },
         "asNumber" : {
           "$ref" : "#/definitions/Number"
-        },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
-        },
-        "jsonObject" : {
-          "type" : "boolean"
         },
         "asDouble" : {
           "type" : "number",
@@ -10236,10 +10147,10 @@
         "number" : {
           "type" : "boolean"
         },
-        "asBoolean" : {
+        "boolean" : {
           "type" : "boolean"
         },
-        "boolean" : {
+        "asBoolean" : {
           "type" : "boolean"
         },
         "string" : {
@@ -10290,10 +10201,16 @@
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
         },
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
+        },
         "asJsonObject" : {
           "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
+          "type" : "boolean"
+        },
+        "jsonObject" : {
           "type" : "boolean"
         },
         "jsonPrimitive" : {
@@ -10301,12 +10218,6 @@
         },
         "asJsonNull" : {
           "$ref" : "#/definitions/JsonNull"
-        },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
-        },
-        "jsonObject" : {
-          "type" : "boolean"
         }
       }
     },
@@ -10367,6 +10278,12 @@
         "expiryTime" : {
           "type" : "string",
           "format" : "date-time"
+        },
+        "standardUpdateTime" : {
+          "type" : "string"
+        },
+        "standardExpiryTime" : {
+          "type" : "string"
         },
         "kycStatusPostExpiry" : {
           "type" : "string"
@@ -10436,9 +10353,6 @@
         },
         "cardSkuID" : {
           "type" : "string"
-        },
-        "cardSku" : {
-          "$ref" : "#/definitions/CardSku"
         },
         "plasticCode" : {
           "type" : "string"

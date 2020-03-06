@@ -91,50 +91,6 @@
         }
       }
     },
-    "/api/v1/ifi/{ifiID}/applications/newIndividualDirect" : {
-      "post" : {
-        "tags" : [ "AccountHolder Management" ],
-        "summary" : "Create an application for creating new individual",
-        "operationId" : "createAccountHolder",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the account holder is being created",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "example" : 123123
-        } ],
-        "requestBody" : {
-          "content" : {
-            "*/*" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/CreateAccountHolderRequest"
-              }
-            }
-          },
-          "required" : false
-        },
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/AccountHolder"
-                }
-              }
-            }
-          },
-          "201" : {
-            "description" : "",
-            "content" : { }
-          }
-        }
-      }
-    },
     "/api/v1/ifi/{ifiID}/getAllAccountHolders" : {
       "get" : {
         "tags" : [ "AccountHolder Management" ],
@@ -936,6 +892,9 @@
           "value" : {
             "type" : "string"
           },
+          "verified" : {
+            "type" : "boolean"
+          },
           "createdAt" : {
             "type" : "string",
             "format" : "date-time"
@@ -1256,6 +1215,12 @@
           "expiryTime" : {
             "type" : "string",
             "format" : "date-time"
+          },
+          "standardUpdateTime" : {
+            "type" : "string"
+          },
+          "standardExpiryTime" : {
+            "type" : "string"
           },
           "kycStatusPostExpiry" : {
             "type" : "string"

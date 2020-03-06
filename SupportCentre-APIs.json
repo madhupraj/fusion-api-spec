@@ -313,6 +313,9 @@
           "value" : {
             "type" : "string"
           },
+          "verified" : {
+            "type" : "boolean"
+          },
           "createdAt" : {
             "type" : "string",
             "format" : "date-time"
@@ -525,6 +528,12 @@
           "expiryTime" : {
             "type" : "string",
             "format" : "date-time"
+          },
+          "standardUpdateTime" : {
+            "type" : "string"
+          },
+          "standardExpiryTime" : {
+            "type" : "string"
           },
           "kycStatusPostExpiry" : {
             "type" : "string"
