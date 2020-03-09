@@ -1711,33 +1711,6 @@
         }
       }
     },
-    "/api/v1/ifi/{ifiID}/coas" : {
-      "get" : {
-        "summary" : "Get all CoAs for a given IFI",
-        "operationId" : "getCoaListByIFI",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/GetCoaListResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/v1/ifi/{ifiID}/coas/{coaid}/coaNodes" : {
       "get" : {
         "summary" : "Get all CoA Nodes for a given IFI and CoAID",
@@ -6077,6 +6050,12 @@
       "CalendarInfo" : {
         "type" : "object",
         "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
           "weekStartOffset" : {
             "type" : "integer",
             "format" : "int32"
@@ -6099,6 +6078,12 @@
           "calendarId" : {
             "type" : "integer",
             "format" : "int64"
+          },
+          "calendarName" : {
+            "type" : "string"
+          },
+          "code" : {
+            "type" : "string"
           }
         }
       },
@@ -7013,6 +6998,38 @@
           }
         }
       },
+      "DateGroupInfo" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "dateGroupId" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "calendarId" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "dates" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "ifi" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }
+      },
       "DeferredResultCompany" : {
         "type" : "object",
         "properties" : {
@@ -7692,6 +7709,12 @@
           },
           "calendarInfo" : {
             "$ref" : "#/components/schemas/CalendarInfo"
+          },
+          "dateGroupInfo" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/DateGroupInfo"
+            }
           }
         }
       },
@@ -8191,9 +8214,6 @@
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
           },
@@ -8208,6 +8228,9 @@
           },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
           }
         }
       },
@@ -8222,9 +8245,6 @@
           },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
           },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
@@ -8277,6 +8297,9 @@
           "asShort" : {
             "type" : "integer",
             "format" : "int32"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
           },
           "asString" : {
             "type" : "string"
@@ -8295,9 +8318,6 @@
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
           },
@@ -8349,6 +8369,9 @@
           "asShort" : {
             "type" : "integer",
             "format" : "int32"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
           },
           "asString" : {
             "type" : "string"
@@ -8367,9 +8390,6 @@
           "asBoolean" : {
             "type" : "boolean"
           },
-          "string" : {
-            "type" : "boolean"
-          },
           "asNumber" : {
             "$ref" : "#/components/schemas/Number"
           },
@@ -8407,6 +8427,9 @@
             "type" : "integer",
             "format" : "int32"
           },
+          "string" : {
+            "type" : "boolean"
+          },
           "asString" : {
             "type" : "string"
           },
@@ -8415,9 +8438,6 @@
           },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
           },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
@@ -8433,6 +8453,9 @@
           },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
           }
         }
       },
