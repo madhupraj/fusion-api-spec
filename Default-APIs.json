@@ -1106,6 +1106,43 @@
         }
       }
     },
+    "/api/v1/ifi/{ifiID}/athena-manager/getTransactionPoliciesByEntityID" : {
+      "get" : {
+        "summary" : "get Transaction Policies by EntityID",
+        "operationId" : "getTransactionPoliciesByEntityID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "type" : "string"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAllTransactionPoliciesResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/ifi/{ifiID}/athena-manager/getTransactionPolicyByID" : {
       "get" : {
         "summary" : "Get TransactionPolicy with a given ID",
@@ -2600,7 +2637,7 @@
         }
       }
     },
-    "/api/v1/ifi/{ifiID}/getCardByCRN/{crn}" : {
+    "/api/v1/ifi/{ifiID}/getCardByCrn/{crn}" : {
       "get" : {
         "summary" : "Get card details by CRN",
         "operationId" : "getCardByCRN",
@@ -6098,6 +6135,41 @@
           }
         }
       },
+      "CardSku" : {
+        "type" : "object",
+        "properties" : {
+          "cardSkuId" : {
+            "type" : "string"
+          },
+          "productID" : {
+            "type" : "string"
+          },
+          "ifi" : {
+            "type" : "string"
+          },
+          "bin" : {
+            "type" : "string"
+          },
+          "plasticCode" : {
+            "type" : "string"
+          },
+          "vendorID" : {
+            "type" : "string"
+          },
+          "tags" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "range" : {
+            "type" : "string"
+          },
+          "binRange" : {
+            "type" : "string"
+          }
+        }
+      },
       "CardView" : {
         "type" : "object",
         "properties" : {
@@ -8211,6 +8283,9 @@
           "jsonNull" : {
             "type" : "boolean"
           },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
@@ -8228,9 +8303,6 @@
           },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
           }
         }
       },
@@ -8242,6 +8314,9 @@
           },
           "jsonNull" : {
             "type" : "boolean"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
           },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
@@ -8297,9 +8372,6 @@
           "asShort" : {
             "type" : "integer",
             "format" : "int32"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
           },
           "asString" : {
             "type" : "string"
@@ -8315,6 +8387,9 @@
           "jsonNull" : {
             "type" : "boolean"
           },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
@@ -8369,9 +8444,6 @@
           "asShort" : {
             "type" : "integer",
             "format" : "int32"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
           },
           "asString" : {
             "type" : "string"
@@ -8381,13 +8453,16 @@
       "JsonPrimitive" : {
         "type" : "object",
         "properties" : {
-          "number" : {
+          "asBoolean" : {
             "type" : "boolean"
           },
           "boolean" : {
             "type" : "boolean"
           },
-          "asBoolean" : {
+          "number" : {
+            "type" : "boolean"
+          },
+          "string" : {
             "type" : "boolean"
           },
           "asNumber" : {
@@ -8427,14 +8502,14 @@
             "type" : "integer",
             "format" : "int32"
           },
-          "string" : {
-            "type" : "boolean"
-          },
           "asString" : {
             "type" : "string"
           },
           "jsonNull" : {
             "type" : "boolean"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
           },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
@@ -8453,9 +8528,6 @@
           },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
           }
         }
       },
@@ -8579,6 +8651,9 @@
           },
           "cardSkuID" : {
             "type" : "string"
+          },
+          "cardSku" : {
+            "$ref" : "#/components/schemas/CardSku"
           },
           "plasticCode" : {
             "type" : "string"
