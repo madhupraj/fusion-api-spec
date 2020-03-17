@@ -1337,6 +1337,40 @@
         }
       }
     },
+    "/api/v1/ifi/{ifiID}/athena-manager/entitycode/{entity}" : {
+      "get" : {
+        "summary" : "Get Entity Code",
+        "description" : "",
+        "operationId" : "getEntityCode",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "entity",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/EntityCodeResponse"
+            }
+          }
+        }
+      }
+    },
     "/api/v1/ifi/{ifiID}/athena-manager/getAllTransactionPoliciesByIFI" : {
       "get" : {
         "summary" : "Get all transaction policies for a given IFI",
@@ -9068,6 +9102,14 @@
     "EmptyPayload" : {
       "type" : "object"
     },
+    "EntityCodeResponse" : {
+      "type" : "object",
+      "properties" : {
+        "entityCode" : {
+          "type" : "string"
+        }
+      }
+    },
     "EntityGroup" : {
       "type" : "object",
       "properties" : {
@@ -10091,18 +10133,6 @@
         "serviceInstanceJID" : {
           "type" : "boolean"
         },
-        "serviceViewName" : {
-          "type" : "string"
-        },
-        "serviceViewJID" : {
-          "type" : "boolean"
-        },
-        "defaultServiceNode" : {
-          "type" : "boolean"
-        },
-        "proxyServiceJID" : {
-          "type" : "boolean"
-        },
         "jidOfAGroup" : {
           "type" : "boolean"
         },
@@ -10111,6 +10141,18 @@
         },
         "bareJID" : {
           "$ref" : "#/definitions/JID"
+        },
+        "proxyServiceJID" : {
+          "type" : "boolean"
+        },
+        "serviceViewJID" : {
+          "type" : "boolean"
+        },
+        "defaultServiceNode" : {
+          "type" : "boolean"
+        },
+        "serviceViewName" : {
+          "type" : "string"
         }
       }
     },
@@ -10162,6 +10204,12 @@
         "jsonNull" : {
           "type" : "boolean"
         },
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
+        },
+        "jsonObject" : {
+          "type" : "boolean"
+        },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
         },
@@ -10171,17 +10219,11 @@
         "jsonArray" : {
           "type" : "boolean"
         },
-        "jsonObject" : {
-          "type" : "boolean"
-        },
         "jsonPrimitive" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
           "$ref" : "#/definitions/JsonNull"
-        },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
         }
       }
     },
@@ -10194,6 +10236,15 @@
         "jsonNull" : {
           "type" : "boolean"
         },
+        "asNumber" : {
+          "$ref" : "#/definitions/Number"
+        },
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
+        },
+        "jsonObject" : {
+          "type" : "boolean"
+        },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
         },
@@ -10203,24 +10254,15 @@
         "jsonArray" : {
           "type" : "boolean"
         },
-        "asNumber" : {
-          "$ref" : "#/definitions/Number"
-        },
-        "asDouble" : {
-          "type" : "number",
-          "format" : "double"
-        },
-        "jsonObject" : {
-          "type" : "boolean"
-        },
         "jsonPrimitive" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
           "$ref" : "#/definitions/JsonNull"
         },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
+        "asDouble" : {
+          "type" : "number",
+          "format" : "double"
         },
         "asFloat" : {
           "type" : "number",
@@ -10265,6 +10307,15 @@
         "jsonNull" : {
           "type" : "boolean"
         },
+        "asNumber" : {
+          "$ref" : "#/definitions/Number"
+        },
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
+        },
+        "jsonObject" : {
+          "type" : "boolean"
+        },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
         },
@@ -10274,24 +10325,15 @@
         "jsonArray" : {
           "type" : "boolean"
         },
-        "asNumber" : {
-          "$ref" : "#/definitions/Number"
-        },
-        "asDouble" : {
-          "type" : "number",
-          "format" : "double"
-        },
-        "jsonObject" : {
-          "type" : "boolean"
-        },
         "jsonPrimitive" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
           "$ref" : "#/definitions/JsonNull"
         },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
+        "asDouble" : {
+          "type" : "number",
+          "format" : "double"
         },
         "asFloat" : {
           "type" : "number",
@@ -10336,6 +10378,15 @@
         "jsonNull" : {
           "type" : "boolean"
         },
+        "asNumber" : {
+          "$ref" : "#/definitions/Number"
+        },
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
+        },
+        "jsonObject" : {
+          "type" : "boolean"
+        },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
         },
@@ -10345,24 +10396,15 @@
         "jsonArray" : {
           "type" : "boolean"
         },
-        "asNumber" : {
-          "$ref" : "#/definitions/Number"
-        },
-        "asDouble" : {
-          "type" : "number",
-          "format" : "double"
-        },
-        "jsonObject" : {
-          "type" : "boolean"
-        },
         "jsonPrimitive" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
           "$ref" : "#/definitions/JsonNull"
         },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
+        "asDouble" : {
+          "type" : "number",
+          "format" : "double"
         },
         "asFloat" : {
           "type" : "number",
@@ -10413,6 +10455,9 @@
         "asNumber" : {
           "$ref" : "#/definitions/Number"
         },
+        "string" : {
+          "type" : "boolean"
+        },
         "asDouble" : {
           "type" : "number",
           "format" : "double"
@@ -10446,13 +10491,16 @@
           "type" : "integer",
           "format" : "int32"
         },
-        "string" : {
-          "type" : "boolean"
-        },
         "asString" : {
           "type" : "string"
         },
         "jsonNull" : {
+          "type" : "boolean"
+        },
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
+        },
+        "jsonObject" : {
           "type" : "boolean"
         },
         "asJsonPrimitive" : {
@@ -10464,17 +10512,11 @@
         "jsonArray" : {
           "type" : "boolean"
         },
-        "jsonObject" : {
-          "type" : "boolean"
-        },
         "jsonPrimitive" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
           "$ref" : "#/definitions/JsonNull"
-        },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
         }
       }
     },
@@ -11577,6 +11619,12 @@
           "type" : "string"
         },
         "tags" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "vectors" : {
           "type" : "array",
           "items" : {
             "type" : "string"

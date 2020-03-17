@@ -792,6 +792,50 @@
         }
       }
     },
+    "/api/v1/ifi/{ifiID}/athena-manager/entitycode/{entity}" : {
+      "get" : {
+        "summary" : "Get Entity Code",
+        "operationId" : "getEntityCode",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "entity",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "type" : "string"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EntityCodeResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/ifi/{ifiID}/athena-manager/getAllTransactionPoliciesByIFI" : {
       "get" : {
         "summary" : "Get all transaction policies for a given IFI",
@@ -7499,6 +7543,14 @@
       "EmptyPayload" : {
         "type" : "object"
       },
+      "EntityCodeResponse" : {
+        "type" : "object",
+        "properties" : {
+          "entityCode" : {
+            "type" : "string"
+          }
+        }
+      },
       "EntityGroup" : {
         "type" : "object",
         "properties" : {
@@ -8379,6 +8431,12 @@
           "jsonNull" : {
             "type" : "boolean"
           },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
@@ -8388,17 +8446,11 @@
           "jsonArray" : {
             "type" : "boolean"
           },
-          "jsonObject" : {
-            "type" : "boolean"
-          },
           "jsonPrimitive" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
           }
         }
       },
@@ -8411,6 +8463,15 @@
           "jsonNull" : {
             "type" : "boolean"
           },
+          "asNumber" : {
+            "$ref" : "#/components/schemas/Number"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
@@ -8420,24 +8481,15 @@
           "jsonArray" : {
             "type" : "boolean"
           },
-          "asNumber" : {
-            "$ref" : "#/components/schemas/Number"
-          },
-          "asDouble" : {
-            "type" : "number",
-            "format" : "double"
-          },
-          "jsonObject" : {
-            "type" : "boolean"
-          },
           "jsonPrimitive" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
           },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
+          "asDouble" : {
+            "type" : "number",
+            "format" : "double"
           },
           "asFloat" : {
             "type" : "number",
@@ -8483,6 +8535,15 @@
           "jsonNull" : {
             "type" : "boolean"
           },
+          "asNumber" : {
+            "$ref" : "#/components/schemas/Number"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
@@ -8492,24 +8553,15 @@
           "jsonArray" : {
             "type" : "boolean"
           },
-          "asNumber" : {
-            "$ref" : "#/components/schemas/Number"
-          },
-          "asDouble" : {
-            "type" : "number",
-            "format" : "double"
-          },
-          "jsonObject" : {
-            "type" : "boolean"
-          },
           "jsonPrimitive" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
           },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
+          "asDouble" : {
+            "type" : "number",
+            "format" : "double"
           },
           "asFloat" : {
             "type" : "number",
@@ -8555,6 +8607,15 @@
           "jsonNull" : {
             "type" : "boolean"
           },
+          "asNumber" : {
+            "$ref" : "#/components/schemas/Number"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
@@ -8564,24 +8625,15 @@
           "jsonArray" : {
             "type" : "boolean"
           },
-          "asNumber" : {
-            "$ref" : "#/components/schemas/Number"
-          },
-          "asDouble" : {
-            "type" : "number",
-            "format" : "double"
-          },
-          "jsonObject" : {
-            "type" : "boolean"
-          },
           "jsonPrimitive" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
           },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
+          "asDouble" : {
+            "type" : "number",
+            "format" : "double"
           },
           "asFloat" : {
             "type" : "number",
@@ -8633,6 +8685,9 @@
           "asNumber" : {
             "$ref" : "#/components/schemas/Number"
           },
+          "string" : {
+            "type" : "boolean"
+          },
           "asDouble" : {
             "type" : "number",
             "format" : "double"
@@ -8667,13 +8722,16 @@
             "type" : "integer",
             "format" : "int32"
           },
-          "string" : {
-            "type" : "boolean"
-          },
           "asString" : {
             "type" : "string"
           },
           "jsonNull" : {
+            "type" : "boolean"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "jsonObject" : {
             "type" : "boolean"
           },
           "asJsonPrimitive" : {
@@ -8685,17 +8743,11 @@
           "jsonArray" : {
             "type" : "boolean"
           },
-          "jsonObject" : {
-            "type" : "boolean"
-          },
           "jsonPrimitive" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
           }
         }
       },
@@ -9707,6 +9759,12 @@
             "type" : "string"
           },
           "tags" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "vectors" : {
             "type" : "array",
             "items" : {
               "type" : "string"
