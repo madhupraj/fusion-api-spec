@@ -1,0 +1,196 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "API Reference",
+    "version" : "v1"
+  },
+  "tags" : [ {
+    "name" : "Resource Product"
+  } ],
+  "paths" : {
+    "/api/v1/ifi/{ifiID}/resource_products/{resourceProductID}" : {
+      "get" : {
+        "tags" : [ "Resource Product" ],
+        "description" : "Get Resource Product details by ID",
+        "operationId" : "getResourceProduct",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "resourceProductID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResourceProduct"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "FormFactorProduct" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "ifi" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "id" : {
+            "type" : "string"
+          },
+          "code" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "string"
+          },
+          "policies" : {
+            "$ref" : "#/components/schemas/Policies"
+          },
+          "provider" : {
+            "type" : "string"
+          },
+          "skuID" : {
+            "type" : "string"
+          },
+          "tags" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object",
+              "properties" : { }
+            }
+          },
+          "issuanceStatus" : {
+            "type" : "string",
+            "enum" : [ "ACTIVE", "INACTIVE", "DELETED" ]
+          },
+          "paymentStatus" : {
+            "type" : "string",
+            "enum" : [ "ACTIVE", "INACTIVE", "DELETED" ]
+          },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "modifiedAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        }
+      },
+      "Policies" : {
+        "type" : "object",
+        "properties" : {
+          "issuancePolicies" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "paymentPolicies" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "ResourceProduct" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "ifi" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "id" : {
+            "type" : "string"
+          },
+          "code" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "formFactorProducts" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/FormFactorProduct"
+            }
+          },
+          "tags" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "policies" : {
+            "$ref" : "#/components/schemas/Policies"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object",
+              "properties" : { }
+            }
+          },
+          "status" : {
+            "type" : "string",
+            "enum" : [ "ACTIVE", "INACTIVE", "DELETED" ]
+          },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "modifiedAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        }
+      }
+    }
+  }
+}

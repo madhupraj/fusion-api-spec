@@ -2690,39 +2690,6 @@
         }
       }
     },
-    "/api/v1/ifi/{ifiID}/form_factor_products/{formFactorProductID}" : {
-      "get" : {
-        "summary" : "Get Form Factor Product details by ID",
-        "operationId" : "getFormFactorProduct",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "formFactorProductID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/FormFactorProduct"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/v1/ifi/{ifiID}/individuals/{individualID}/beneficiaries" : {
       "get" : {
         "summary" : "Get all the beneficiaries of an individual",
@@ -4065,39 +4032,6 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/Resource"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/ifi/{ifiID}/resource_products/{resourceProductID}" : {
-      "get" : {
-        "summary" : "Get Resource Product details by ID",
-        "operationId" : "getResourceProduct",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "resourceProductID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResourceProduct"
                 }
               }
             }
@@ -8177,14 +8111,8 @@
           "jsonNull" : {
             "type" : "boolean"
           },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
-          },
-          "jsonObject" : {
-            "type" : "boolean"
           },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
@@ -8193,6 +8121,12 @@
             "$ref" : "#/components/schemas/JsonObject"
           },
           "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
+          "jsonPrimitive" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -8209,14 +8143,8 @@
           "jsonNull" : {
             "type" : "boolean"
           },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
-          },
-          "jsonObject" : {
-            "type" : "boolean"
           },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
@@ -8225,6 +8153,12 @@
             "$ref" : "#/components/schemas/JsonObject"
           },
           "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
+          "jsonPrimitive" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -8281,14 +8215,8 @@
           "jsonNull" : {
             "type" : "boolean"
           },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
-          },
-          "jsonObject" : {
-            "type" : "boolean"
           },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
@@ -8297,6 +8225,12 @@
             "$ref" : "#/components/schemas/JsonObject"
           },
           "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
+          "jsonPrimitive" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -8353,14 +8287,8 @@
           "jsonNull" : {
             "type" : "boolean"
           },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
-          },
-          "jsonObject" : {
-            "type" : "boolean"
           },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
@@ -8369,6 +8297,12 @@
             "$ref" : "#/components/schemas/JsonObject"
           },
           "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
+          "jsonPrimitive" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -8474,14 +8408,8 @@
           "jsonNull" : {
             "type" : "boolean"
           },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
-          },
-          "jsonObject" : {
-            "type" : "boolean"
           },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
@@ -8490,6 +8418,12 @@
             "$ref" : "#/components/schemas/JsonObject"
           },
           "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
+          "jsonPrimitive" : {
             "type" : "boolean"
           },
           "asJsonNull" : {

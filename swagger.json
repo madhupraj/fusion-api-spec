@@ -15,6 +15,10 @@
   }, {
     "name" : "Bundles"
   }, {
+    "name" : "Form Factor Product"
+  }, {
+    "name" : "Resource Product"
+  }, {
     "name" : "SupportCentre"
   } ],
   "paths" : {
@@ -3159,8 +3163,9 @@
     },
     "/api/v1/ifi/{ifiID}/form_factor_products/{formFactorProductID}" : {
       "get" : {
-        "summary" : "Get Form Factor Product details by ID",
-        "description" : "",
+        "tags" : [ "Form Factor Product" ],
+        "summary" : "",
+        "description" : "Get Form Factor Product details by ID",
         "operationId" : "getFormFactorProduct",
         "parameters" : [ {
           "name" : "ifiID",
@@ -5074,8 +5079,9 @@
     },
     "/api/v1/ifi/{ifiID}/resource_products/{resourceProductID}" : {
       "get" : {
-        "summary" : "Get Resource Product details by ID",
-        "description" : "",
+        "tags" : [ "Resource Product" ],
+        "summary" : "",
+        "description" : "Get Resource Product details by ID",
         "operationId" : "getResourceProduct",
         "parameters" : [ {
           "name" : "ifiID",
@@ -10387,14 +10393,8 @@
         "jsonNull" : {
           "type" : "boolean"
         },
-        "jsonPrimitive" : {
-          "type" : "boolean"
-        },
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
-        },
-        "jsonObject" : {
-          "type" : "boolean"
         },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
@@ -10403,6 +10403,12 @@
           "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
+          "type" : "boolean"
+        },
+        "jsonObject" : {
+          "type" : "boolean"
+        },
+        "jsonPrimitive" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
@@ -10419,14 +10425,8 @@
         "jsonNull" : {
           "type" : "boolean"
         },
-        "jsonPrimitive" : {
-          "type" : "boolean"
-        },
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
-        },
-        "jsonObject" : {
-          "type" : "boolean"
         },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
@@ -10435,6 +10435,12 @@
           "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
+          "type" : "boolean"
+        },
+        "jsonObject" : {
+          "type" : "boolean"
+        },
+        "jsonPrimitive" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
@@ -10490,14 +10496,8 @@
         "jsonNull" : {
           "type" : "boolean"
         },
-        "jsonPrimitive" : {
-          "type" : "boolean"
-        },
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
-        },
-        "jsonObject" : {
-          "type" : "boolean"
         },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
@@ -10506,6 +10506,12 @@
           "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
+          "type" : "boolean"
+        },
+        "jsonObject" : {
+          "type" : "boolean"
+        },
+        "jsonPrimitive" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
@@ -10561,14 +10567,8 @@
         "jsonNull" : {
           "type" : "boolean"
         },
-        "jsonPrimitive" : {
-          "type" : "boolean"
-        },
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
-        },
-        "jsonObject" : {
-          "type" : "boolean"
         },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
@@ -10577,6 +10577,12 @@
           "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
+          "type" : "boolean"
+        },
+        "jsonObject" : {
+          "type" : "boolean"
+        },
+        "jsonPrimitive" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
@@ -10680,14 +10686,8 @@
         "jsonNull" : {
           "type" : "boolean"
         },
-        "jsonPrimitive" : {
-          "type" : "boolean"
-        },
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
-        },
-        "jsonObject" : {
-          "type" : "boolean"
         },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
@@ -10696,6 +10696,12 @@
           "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
+          "type" : "boolean"
+        },
+        "jsonObject" : {
+          "type" : "boolean"
+        },
+        "jsonPrimitive" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
