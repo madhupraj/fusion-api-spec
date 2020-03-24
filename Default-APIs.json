@@ -4025,80 +4025,7 @@
         }
       }
     },
-    "/api/v1/ifi/{ifiID}/resource_products/{resourceProductID}/resources/list" : {
-      "post" : {
-        "operationId" : "filterResourceProductBasedResources",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "resourceProductID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "*/*" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/Builder"
-              }
-            }
-          },
-          "required" : false
-        },
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ListResourceResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/v1/ifi/{ifiID}/resources/{resourceID}" : {
-      "get" : {
-        "summary" : "Get resource details by ID",
-        "operationId" : "getResource",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "resourceID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Resource"
-                }
-              }
-            }
-          }
-        }
-      },
       "patch" : {
         "summary" : "Change the resource status",
         "operationId" : "updateResource",
@@ -4355,49 +4282,6 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ListPaymentResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/ifi/{ifiID}/resources/{resourceID}/target" : {
-      "patch" : {
-        "summary" : "Change the resource target account",
-        "operationId" : "updateResourceTarget",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "resourceID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "*/*" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/Builder"
-              }
-            }
-          },
-          "required" : false
-        },
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Resource"
                 }
               }
             }
@@ -10277,25 +10161,25 @@
           "serviceInstanceJID" : {
             "type" : "boolean"
           },
+          "serviceViewJID" : {
+            "type" : "boolean"
+          },
+          "bareJID" : {
+            "$ref" : "#/components/schemas/JID"
+          },
           "primaryServiceName" : {
             "type" : "string"
           },
           "serviceViewName" : {
             "type" : "string"
           },
-          "bareJID" : {
-            "$ref" : "#/components/schemas/JID"
-          },
-          "serviceViewJID" : {
-            "type" : "boolean"
-          },
           "defaultServiceNode" : {
             "type" : "boolean"
           },
-          "jidOfAGroup" : {
+          "proxyServiceJID" : {
             "type" : "boolean"
           },
-          "proxyServiceJID" : {
+          "jidOfAGroup" : {
             "type" : "boolean"
           }
         }
@@ -10346,11 +10230,11 @@
           "asString" : {
             "type" : "string"
           },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
           },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
@@ -10378,11 +10262,11 @@
           "asBoolean" : {
             "type" : "boolean"
           },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
           },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
@@ -10450,11 +10334,11 @@
           "asBoolean" : {
             "type" : "boolean"
           },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
           },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
@@ -10522,11 +10406,11 @@
           "asBoolean" : {
             "type" : "boolean"
           },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
           },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
@@ -10600,9 +10484,6 @@
           "asBoolean" : {
             "type" : "boolean"
           },
-          "string" : {
-            "type" : "boolean"
-          },
           "asNumber" : {
             "$ref" : "#/components/schemas/Number"
           },
@@ -10640,14 +10521,17 @@
             "type" : "integer",
             "format" : "int32"
           },
+          "string" : {
+            "type" : "boolean"
+          },
           "asString" : {
             "type" : "string"
           },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
           },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
@@ -10785,23 +10669,6 @@
             "type" : "array",
             "items" : {
               "$ref" : "#/components/schemas/Payment"
-            }
-          }
-        }
-      },
-      "ListResourceResponse" : {
-        "type" : "object",
-        "properties" : {
-          "headers" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
-            }
-          },
-          "resources" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/Resource"
             }
           }
         }
