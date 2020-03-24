@@ -1,0 +1,123 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "API Reference",
+    "version" : "v1"
+  },
+  "tags" : [ {
+    "name" : "Payment"
+  } ],
+  "paths" : {
+    "/api/v2/ifi/{ifiID}/transfers" : {
+      "post" : {
+        "tags" : [ "Payment" ],
+        "description" : "Transfer from one account to another",
+        "operationId" : "transfer",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account transfer is being performed",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/TransferRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TransferResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "Money" : {
+        "type" : "object",
+        "properties" : {
+          "currency" : {
+            "type" : "string"
+          },
+          "amount" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }
+      },
+      "TransferRequest" : {
+        "required" : [ "amount", "creditAccountID", "debitAccountID", "remarks", "requestID", "transferCode", "transferTime" ],
+        "type" : "object",
+        "properties" : {
+          "requestID" : {
+            "type" : "string"
+          },
+          "amount" : {
+            "$ref" : "#/components/schemas/Money"
+          },
+          "transferCode" : {
+            "type" : "string"
+          },
+          "debitAccountID" : {
+            "type" : "string"
+          },
+          "creditAccountID" : {
+            "type" : "string"
+          },
+          "transferTime" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "remarks" : {
+            "type" : "string"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            },
+            "description" : "Any additional information which you would like to provide"
+          }
+        }
+      },
+      "TransferResponse" : {
+        "type" : "object",
+        "properties" : {
+          "requestID" : {
+            "type" : "string"
+          },
+          "transferID" : {
+            "type" : "string"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "string"
+          },
+          "isRetriableFailure" : {
+            "type" : "string"
+          }
+        }
+      }
+    }
+  }
+}

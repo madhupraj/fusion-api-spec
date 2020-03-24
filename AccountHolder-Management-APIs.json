@@ -725,6 +725,724 @@
           }
         }
       }
+    },
+    "/api/v2/ifi/{ifiID}/accountHolder/headless" : {
+      "post" : {
+        "tags" : [ "AccountHolder Management" ],
+        "summary" : "Create a headless account holder",
+        "operationId" : "createHeadlessAccountHolder",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the headless account holder is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CreateAccountHolderRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAccountHolderRelationListResponse"
+                }
+              }
+            }
+          },
+          "201" : {
+            "description" : "",
+            "content" : { }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/accountHolders/{accountHolderID}" : {
+      "get" : {
+        "tags" : [ "AccountHolder Management" ],
+        "summary" : "Get all details of the account holder",
+        "operationId" : "getAccountHolderByID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "accountHolderID",
+          "in" : "path",
+          "description" : "ID of the account holder whose details are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AccountHolder"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/getAllAccountHolders" : {
+      "get" : {
+        "tags" : [ "AccountHolder Management" ],
+        "summary" : "Get paginated AccountHolders list of type belonging to ifi",
+        "operationId" : "getAllAccountHolders",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the individual exists",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "type" : "string"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAllAccountHoldersResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/individualApplications/{applicationID}" : {
+      "get" : {
+        "tags" : [ "AccountHolder Management" ],
+        "summary" : "Get the application details for an individual by ID",
+        "operationId" : "getAccountHolder",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the application exists",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "description" : "ID of the application which is being fetched",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "123123"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AccountHolder"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/individualApplications/{applicationID}/pops" : {
+      "get" : {
+        "tags" : [ "AccountHolder Management" ],
+        "summary" : "Get all the Point of Presence(POP)s of an individual",
+        "operationId" : "getAccountHolderPops",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account holder POP exists",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "description" : "ID of the application for which the account holder POP is being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "123123"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetPOPListResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "AccountHolder Management" ],
+        "summary" : "Create the Point of Presence(POP) of an individual",
+        "operationId" : "addAccountHolderPop",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the individual's POPs exist",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "description" : "ID of the application for which the POP is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "123123"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AddAccountHolderPOPRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/POP"
+                }
+              }
+            }
+          },
+          "201" : {
+            "description" : "",
+            "content" : { }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/individualApplications/{applicationID}/pops/{popID}" : {
+      "get" : {
+        "tags" : [ "AccountHolder Management" ],
+        "summary" : "Get the Point of Presence(POP) of an individual by ID",
+        "operationId" : "getAccountHolderPopsByID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the individual's POP exists",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "description" : "ID of the application for which the account holder POP is being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "123123"
+        }, {
+          "name" : "popID",
+          "in" : "path",
+          "description" : "ID of the POP whose details are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/POP"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/individualApplications/{applicationID}/relationships" : {
+      "get" : {
+        "tags" : [ "AccountHolder Management" ],
+        "summary" : "Get all relationships of an individual",
+        "operationId" : "getAccountHolderRelationships",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account holder relationships exist",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "description" : "ID of the application for which the account holder relationships are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "123123"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAccountHolderRelationListResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "AccountHolder Management" ],
+        "summary" : "Create the relationship for an individual",
+        "operationId" : "addAccountHolderRelationship",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account holder relation is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "description" : "ID of the application for which the account holder relation is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "123123"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AddAccountHolderRelationshipRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AccountHolderRelation"
+                }
+              }
+            }
+          },
+          "201" : {
+            "description" : "",
+            "content" : { }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/individualApplications/{applicationID}/relationships/{relationshipID}" : {
+      "get" : {
+        "tags" : [ "AccountHolder Management" ],
+        "summary" : "Get a specific individual's relationship by ID",
+        "operationId" : "getAccountHolderRelationshipByID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account holder relationship exists",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "description" : "ID of the application for which the account holder relationship is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "123123"
+        }, {
+          "name" : "relationshipID",
+          "in" : "path",
+          "description" : "ID of the relationship whose details are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AccountHolderRelation"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/individualApplications/{applicationID}/vectors" : {
+      "post" : {
+        "tags" : [ "AccountHolder Management" ],
+        "summary" : "Create the vector for an individual",
+        "operationId" : "addAccountHolderVector",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account holder vector is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "description" : "ID of the application for which the account holder vector is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "123123"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AddAccountHolderVectorRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AccountHolderVector"
+                }
+              }
+            }
+          },
+          "201" : {
+            "description" : "",
+            "content" : { }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/individualApplications/{applicationID}/vectors/{vectorID}" : {
+      "get" : {
+        "tags" : [ "AccountHolder Management" ],
+        "summary" : "Get the vector of an individual by ID",
+        "operationId" : "getAccountHolderVector",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account holder",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "description" : "ID of the application for which the account holder vector is being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "123123"
+        }, {
+          "name" : "vectorID",
+          "in" : "path",
+          "description" : "ID of the vector whose details are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AccountHolderVector"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/individualByVector/{vectorType}/{vectorValue}" : {
+      "get" : {
+        "tags" : [ "AccountHolder Management" ],
+        "operationId" : "getAccountHolderByVector",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account holder",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "vectorType",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "vectorValue",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AccountHolder"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/individuals/{individualID}" : {
+      "get" : {
+        "tags" : [ "AccountHolder Management" ],
+        "summary" : "Get details of an individual by ID",
+        "operationId" : "getAccountHolders",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the individual exists",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "description" : "ID of the individual whose details are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AccountHolder"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/transactions" : {
+      "get" : {
+        "tags" : [ "AccountHolder Management" ],
+        "summary" : "Get all payments of user",
+        "operationId" : "getPayments",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account holder exist",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "accountID",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "startTime",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "endTime",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "asc", "desc" ]
+          }
+        }, {
+          "name" : "pageIndex",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "lastFetchedId",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetTransactionsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components" : {
@@ -907,6 +1625,12 @@
             "type" : "object",
             "additionalProperties" : {
               "type" : "string"
+            }
+          },
+          "tags" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Tag"
             }
           }
         }

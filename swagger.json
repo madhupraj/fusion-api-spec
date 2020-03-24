@@ -15,7 +15,11 @@
   }, {
     "name" : "Bundles"
   }, {
+    "name" : "Cards list"
+  }, {
     "name" : "Form Factor Product"
+  }, {
+    "name" : "Payment"
   }, {
     "name" : "Resource Product"
   }, {
@@ -2243,9 +2247,10 @@
       }
     },
     "/api/v1/ifi/{ifiID}/cards/list" : {
-      "get" : {
-        "summary" : "List cards",
-        "description" : "",
+      "post" : {
+        "tags" : [ "Cards list" ],
+        "summary" : "",
+        "description" : "The endpoint supports the following views -\n\nBASIC\nEXPANDED\nEXPANDED_SENSITIVE\nOne or multiple filters can be passed to get the results. EXPANDED_SENSITIVE view is supported only if you are PCI DSS compliant.",
         "operationId" : "listCards",
         "parameters" : [ {
           "name" : "ifiID",
@@ -5878,6 +5883,3881 @@
         }
       }
     },
+    "/api/v2/ifi/{ifiID}/accountHolder/headless" : {
+      "post" : {
+        "tags" : [ "AccountHolder Management" ],
+        "summary" : "Create a headless account holder",
+        "description" : "",
+        "operationId" : "createHeadlessAccountHolder",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the headless account holder is being created",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/CreateAccountHolderRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GetAccountHolderRelationListResponse"
+            }
+          },
+          "201" : {
+            "description" : ""
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/accountHolders/{accountHolderID}" : {
+      "get" : {
+        "tags" : [ "AccountHolder Management" ],
+        "summary" : "Get all details of the account holder",
+        "description" : "",
+        "operationId" : "getAccountHolderByID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "accountHolderID",
+          "in" : "path",
+          "description" : "ID of the account holder whose details are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/AccountHolder"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/accounts" : {
+      "get" : {
+        "tags" : [ "Account Management" ],
+        "summary" : "Get all accounts of IFI",
+        "description" : "",
+        "operationId" : "getAccounts",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the accounts exist",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "enum" : [ "asc", "desc" ]
+        }, {
+          "name" : "pageIndex",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "lastFetchedId",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GetAccountListResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/accounts/update" : {
+      "post" : {
+        "tags" : [ "Account Management" ],
+        "summary" : "Update all Accounts for a given real or headless account holder",
+        "description" : "",
+        "operationId" : "accountHolderUpdated",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ifiID",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/UpdateProductForAllAccountsRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/EmptyPayload"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/accounts/{accountID}" : {
+      "get" : {
+        "tags" : [ "Account" ],
+        "summary" : "",
+        "description" : "Returns Account object given an accountID. The accountID should be a UUID.",
+        "operationId" : "getAccount",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization).",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the Account whose details are to be retrieved.",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Account"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/accounts/{accountID}/accessors" : {
+      "get" : {
+        "tags" : [ "Account Management" ],
+        "summary" : "Get all accessors for a given accountID",
+        "description" : "",
+        "operationId" : "getAccountAccessors",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account accessors exist",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the account whose accessor details are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GetAccountAccessorListResponse"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Account Management" ],
+        "summary" : "Create accessors for the given accountID",
+        "description" : "",
+        "operationId" : "createAccountAccessor",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account accessor is being created",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the account for which the accessor is being created",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/AddAccountAccessorRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Accessor"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/accounts/{accountID}/accessors/{accessorID}" : {
+      "get" : {
+        "tags" : [ "Account Management" ],
+        "summary" : "Get accessor for a given accountID by the ID",
+        "description" : "",
+        "operationId" : "getAccountAccessorByID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account accessor exists",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the account whose accessor details are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "accessorID",
+          "in" : "path",
+          "description" : "ID of the accessor whose details are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Accessor"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/accounts/{accountID}/balance" : {
+      "get" : {
+        "tags" : [ "Account" ],
+        "summary" : "",
+        "description" : "Get Balance of the accountID provided.",
+        "operationId" : "getBalance",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization).",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the Account whose balance details are to be retrieved.",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GetAccountBalanceResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/accounts/{accountID}/relations" : {
+      "get" : {
+        "tags" : [ "Account Management" ],
+        "summary" : "Get all relations of the given accountID",
+        "description" : "",
+        "operationId" : "getAccountRelations",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account relations exist",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the account whose relation details are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GetAccountRelationListResponse"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Account Management" ],
+        "summary" : "Create relation for the given accountID",
+        "description" : "",
+        "operationId" : "createAccountRelation",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account relation is being created",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the account for which relation is being created",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/AddAccountRelationRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/AccountRelation"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/accounts/{accountID}/relations/{relationID}" : {
+      "get" : {
+        "tags" : [ "Account Management" ],
+        "summary" : "Get the relation of an account by the ID",
+        "description" : "",
+        "operationId" : "getAccountRelationByID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account relation exists",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the account whose relation details are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "relationID",
+          "in" : "path",
+          "description" : "ID of the relation whose details are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/AccountRelation"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/accounts/{accountID}/transactionPolicies" : {
+      "get" : {
+        "tags" : [ "Account Management" ],
+        "summary" : "",
+        "description" : "",
+        "operationId" : "getTransactionPoliciesByAccount",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the policies exist",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the account whose policy details are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GetAllTransactionPoliciesResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/accounts/{accountID}/transactions" : {
+      "get" : {
+        "tags" : [ "Account Management" ],
+        "summary" : "Get all transactions of an account",
+        "description" : "",
+        "operationId" : "getTransactions",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account transactions exist",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the account whose transaction details are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GetAccountTransactionListResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/accounts/{accountID}/transactions/{transactionID}" : {
+      "get" : {
+        "tags" : [ "Account Management" ],
+        "summary" : "Get information of a specific transaction as per ID",
+        "description" : "",
+        "operationId" : "getTransaction",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account transaction exists",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the account whose transaction details are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "transactionID",
+          "in" : "path",
+          "description" : "ID of the transaction whose details are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/AccountTransaction"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/accounts/{accountID}/vectors" : {
+      "get" : {
+        "tags" : [ "Account Management" ],
+        "summary" : "Get all vectors of the given accountID",
+        "description" : "",
+        "operationId" : "getAccountVectors",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account vector exists",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the account whose vector details are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GetAccountVectorListResponse"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Account Management" ],
+        "summary" : "Create vector for the given accountID",
+        "description" : "",
+        "operationId" : "createAccountVector",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account vector is being created",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the account whose vector details are being created",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/AddAccountVectorRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/AccountVector"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/accounts/{accountID}/vectors/{vectorID}" : {
+      "get" : {
+        "tags" : [ "Account Management" ],
+        "summary" : "Get the vector of an account by ID",
+        "description" : "",
+        "operationId" : "getAccountVectorByID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account vector exists",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the account whose vector details are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "vectorID",
+          "in" : "path",
+          "description" : "ID of the vector whose details are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/AccountVector"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/accountsInfo/{accountID}" : {
+      "get" : {
+        "tags" : [ "Account Management" ],
+        "operationId" : "getAccountInfo",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the account whose details are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/AccountInfo"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/applications" : {
+      "get" : {
+        "summary" : "Get All Applications",
+        "description" : "",
+        "operationId" : "getAllApplications",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "status",
+          "in" : "query",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Account"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/applications/editIndividual" : {
+      "post" : {
+        "summary" : "Edit Individual Application",
+        "description" : "",
+        "operationId" : "editApplication",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/EditIndividualApplicationRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Account"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/applications/newIndividual" : {
+      "post" : {
+        "summary" : "Create Individual Application With Auto Approval",
+        "description" : "",
+        "operationId" : "createApplicationWithAutoApproval",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/CreateAccountHolderWithAutoApprovalRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Account"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/applications/newIndividualApplication" : {
+      "post" : {
+        "summary" : "Create Individual Application",
+        "description" : "",
+        "operationId" : "createApplication",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/CreateAccountHolderApplicationRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Account"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/applications/{applicationID}" : {
+      "get" : {
+        "summary" : "Get Individual Application",
+        "description" : "",
+        "operationId" : "getApplication",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Account"
+            }
+          }
+        }
+      },
+      "put" : {
+        "summary" : "Update Individual Application",
+        "description" : "",
+        "operationId" : "updateApplication",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/UpdateAccountHolderApplicationRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Account"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "Delete Individual Application",
+        "description" : "",
+        "operationId" : "deleteApplication",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Account"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/applications/{applicationID}/kycStatus/{kycStatus}" : {
+      "put" : {
+        "summary" : "Update Application Status",
+        "description" : "",
+        "operationId" : "updateApplicationKYCStatus",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "kycStatus",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/UpdateKycStatusRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Account"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/applications/{applicationID}/spool/{spoolID}" : {
+      "put" : {
+        "summary" : "Update Application Spool",
+        "description" : "",
+        "operationId" : "updateApplicationSpool",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "spoolID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Account"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/applications/{applicationID}/status/{newStatus}" : {
+      "put" : {
+        "summary" : "Update Application Status",
+        "description" : "",
+        "operationId" : "updateApplicationStatus",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "newStatus",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Account"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/athena-manager/createEntityPolicyMapping" : {
+      "post" : {
+        "summary" : "Create Entity Policy Mapping",
+        "description" : "",
+        "operationId" : "createPolicyMapping",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/CreatePolicyMappingRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/TransactionPolicyResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/athena-manager/createExtendedProduct" : {
+      "post" : {
+        "summary" : "CreateExtendedProduct api via fusion",
+        "description" : "",
+        "operationId" : "createExtendedProduct",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/CreateExtendedProductRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Product"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/athena-manager/createExtendedProductFamily" : {
+      "post" : {
+        "summary" : "CreateExtendedProductFamily api via fusion",
+        "description" : "",
+        "operationId" : "createExtendedProductFamily",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/CreateExtendedProductFamilyRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/ProductFamily"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/athena-manager/entitycode/{entity}" : {
+      "get" : {
+        "summary" : "Get Entity Code",
+        "description" : "",
+        "operationId" : "getEntityCode",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "entity",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/EntityCodeResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/athena-manager/getAllTransactionPoliciesByIFI" : {
+      "get" : {
+        "summary" : "Get all transaction policies for a given IFI",
+        "description" : "",
+        "operationId" : "getAllTransactionPoliciesByIFI",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "boolean"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GetAllTransactionPoliciesResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/athena-manager/getCoaList" : {
+      "get" : {
+        "summary" : "Get all CoAs for a given IFI",
+        "description" : "",
+        "operationId" : "getCoaListByIFI",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GetCoaListResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/athena-manager/getCoaNodes" : {
+      "get" : {
+        "summary" : "Get all CoA Nodes for a given IFI and CoAID",
+        "description" : "",
+        "operationId" : "getCoaNodesByIFIAndCoaID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "coaID",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GetCoaNodesResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/athena-manager/getEntityGroupList" : {
+      "get" : {
+        "summary" : "Get EntityGrouplist for a given ifi and entityType",
+        "description" : "",
+        "operationId" : "getEntityGroupList",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "entityType",
+          "in" : "query",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/ListEntityGroupResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/athena-manager/getPolicyMappings" : {
+      "get" : {
+        "summary" : "Get PolicyMappings for a given ifi, entityID, policyEntityType, policyType and PolicyId",
+        "description" : "",
+        "operationId" : "getPolicyMappings",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "entityID",
+          "in" : "query",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "policyEntityType",
+          "in" : "query",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "policyType",
+          "in" : "query",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "policyID",
+          "in" : "query",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GetProductListResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/athena-manager/getProduct" : {
+      "get" : {
+        "summary" : "Get Product with a given IFI and ProductID",
+        "description" : "",
+        "operationId" : "getProductByIFIAndID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "id",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Product"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/athena-manager/getProductFamily" : {
+      "get" : {
+        "summary" : "Get ProductFamily for a given ifi and id",
+        "description" : "",
+        "operationId" : "getProductFamily",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "id",
+          "in" : "query",
+          "description" : "productFamilyId",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123456789065434567
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/ProductFamily"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/athena-manager/getProductFamilyList" : {
+      "get" : {
+        "summary" : "Get ProductFamilyList for a given ifi",
+        "description" : "",
+        "operationId" : "getProductFamilyList",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GetProductFamilyListResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/athena-manager/getProductList" : {
+      "get" : {
+        "summary" : "Get ProductList for a given ifi",
+        "description" : "",
+        "operationId" : "getProductList",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GetProductListResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/athena-manager/getTransactionPoliciesByEntityID" : {
+      "get" : {
+        "summary" : "get Transaction Policies by EntityID",
+        "description" : "",
+        "operationId" : "getTransactionPoliciesByEntityID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GetAllTransactionPoliciesResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/athena-manager/getTransactionPolicyByID" : {
+      "get" : {
+        "summary" : "Get TransactionPolicy with a given ID",
+        "description" : "",
+        "operationId" : "getProductByIFIAndID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "id",
+          "in" : "query",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/TransactionPolicyResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/athena-manager/replaceTransactionPolicy/{transactionPolicyID}" : {
+      "put" : {
+        "summary" : "Replace Transaction Policy",
+        "description" : "",
+        "operationId" : "replaceTransactionPolicy",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "transactionPolicyID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/ReplaceTransactionPolicyRequestPayload"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/TransactionPolicyResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/athena-manager/transactionPolicy" : {
+      "post" : {
+        "summary" : "Create TransactionPolicy",
+        "description" : "",
+        "operationId" : "createTransactionPolicy",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Builder"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/TransactionPolicyResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/athena-manager/updateTransactionPolicy/{transactionPolicyId}" : {
+      "patch" : {
+        "summary" : "Update Transaction Policy State",
+        "description" : "",
+        "operationId" : "updateTransactionPolicyState",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "transactionPolicyId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/UpdateTransactionPolicyStateRequestPayload"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/EmptyPayload"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/bundles" : {
+      "get" : {
+        "tags" : [ "Bundles" ],
+        "summary" : "Get all Bundles",
+        "description" : "Get all Bundles available for an IFI. The response returns a unique identifier for each available Bundle.",
+        "operationId" : "getAllBundles",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the bundles are being retrieved",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/BundleResponse"
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Bundles" ],
+        "summary" : "Create Bundle",
+        "description" : "Creates a Bundle",
+        "operationId" : "createBundle",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being created",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/AddBundleRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/BundleResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/bundles/{bundleID}" : {
+      "get" : {
+        "tags" : [ "Bundles" ],
+        "summary" : "Get Bundle by Bundle ID",
+        "description" : "Returns Bundle by bundleID for an IFI.",
+        "operationId" : "getBundleByID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the bundles are being retrieved by bundleID",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "bundleID",
+          "in" : "path",
+          "description" : "ID of the bundle whose details are being retrieved",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/BundleResponse"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Bundles" ],
+        "summary" : "Update Bundle",
+        "description" : "Update Bundle details",
+        "operationId" : "updateBundle",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "bundleID",
+          "in" : "path",
+          "description" : "ID of the bundle whose details are being updated",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/UpdateBundleRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/BundleResponse"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Bundles" ],
+        "summary" : "Delete Bundle",
+        "description" : "Delete a Bundle",
+        "operationId" : "deleteBundle",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being deleted",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "bundleID",
+          "in" : "path",
+          "description" : "ID of the bundle which is being deleted",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/BundleResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/bundles/{bundleID}/accountProducts" : {
+      "post" : {
+        "tags" : [ "Bundles" ],
+        "summary" : "Add Account Product",
+        "description" : "Adds an Account Product to a Bundle",
+        "operationId" : "addAccountProductToBundle",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "bundleID",
+          "in" : "path",
+          "description" : "ID of the bundle whose details are being updated",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/AddAccountProductInBundleRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/BundleResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/bundles/{bundleID}/accountProducts/{accountProductID}" : {
+      "delete" : {
+        "tags" : [ "Bundles" ],
+        "summary" : "Delete Account Product",
+        "description" : "Deletes an Account Product from a Bundle",
+        "operationId" : "deleteAccountProductFromBundle",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "bundleID",
+          "in" : "path",
+          "description" : "ID of the bundle whose details are being updated",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "accountProductID",
+          "in" : "path",
+          "description" : "ID for the account product which is to be removed from the bundle",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/BundleResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/bundles/{bundleID}/issueAccount" : {
+      "post" : {
+        "summary" : "Issue specific Account from a bundle ",
+        "description" : "",
+        "operationId" : "issueAccountProduct",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the Account is being issued",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "bundleID",
+          "in" : "path",
+          "description" : "ID of the bundle whose account product is being issued",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/IssueAccountArtifactRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/IssueAccountArtifactResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/bundles/{bundleID}/issueBundle" : {
+      "post" : {
+        "summary" : "Issue bundle to a specific individual/company",
+        "description" : "",
+        "operationId" : "issueBundle",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being issued",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "bundleID",
+          "in" : "path",
+          "description" : "ID of the bundle which is being issued",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/IssueBundleRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/IssueBundleResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/bundles/{bundleID}/issueFormFactor" : {
+      "post" : {
+        "summary" : "Issue specific form factor of a resource to a specific individual/company",
+        "description" : "",
+        "operationId" : "issueFormFactor",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the form factor is being issued",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "bundleID",
+          "in" : "path",
+          "description" : "ID of the bundle whose form factor/card is being issued",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/IssueFormFactorRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/IssueFormFactorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/bundles/{bundleID}/issueResource" : {
+      "post" : {
+        "summary" : "Issue specific resource of a bundle to a specific individual/company",
+        "description" : "",
+        "operationId" : "issueResource",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the resource is being issued",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "bundleID",
+          "in" : "path",
+          "description" : "ID of the bundle whose resource is being issued",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/IssueResourceRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/IssueResourceResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/bundles/{bundleID}/paymentProducts" : {
+      "post" : {
+        "tags" : [ "Bundles" ],
+        "summary" : "Add Payment Product",
+        "description" : "Adds a Payment Product to a Bundle",
+        "operationId" : "addPaymentProductToBundle",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "bundleID",
+          "in" : "path",
+          "description" : "ID of the bundle whose details are being updated",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/AddPaymentProductInBundleRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/BundleResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/bundles/{bundleID}/paymentProducts/{paymentProductID}" : {
+      "delete" : {
+        "tags" : [ "Bundles" ],
+        "summary" : "Delete Payment Product",
+        "description" : "Deletes a Payment Product from a Bundle",
+        "operationId" : "deletePaymentProductFromBundle",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated.",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "bundleID",
+          "in" : "path",
+          "description" : "ID of the bundle whose details are being updated",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "paymentProductID",
+          "in" : "path",
+          "description" : "ID for the payment product to be removed from the bundle",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/BundleResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/getAllAccountHolders" : {
+      "get" : {
+        "tags" : [ "AccountHolder Management" ],
+        "summary" : "Get paginated AccountHolders list of type belonging to ifi",
+        "description" : "",
+        "operationId" : "getAllAccountHolders",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the individual exists",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GetAllAccountHoldersResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/individualApplications/{applicationID}" : {
+      "get" : {
+        "tags" : [ "AccountHolder Management" ],
+        "summary" : "Get the application details for an individual by ID",
+        "description" : "",
+        "operationId" : "getAccountHolder",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the application exists",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "description" : "ID of the application which is being fetched",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "123123"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/AccountHolder"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/individualApplications/{applicationID}/pops" : {
+      "get" : {
+        "tags" : [ "AccountHolder Management" ],
+        "summary" : "Get all the Point of Presence(POP)s of an individual",
+        "description" : "",
+        "operationId" : "getAccountHolderPops",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account holder POP exists",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "description" : "ID of the application for which the account holder POP is being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "123123"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GetPOPListResponse"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "AccountHolder Management" ],
+        "summary" : "Create the Point of Presence(POP) of an individual",
+        "description" : "",
+        "operationId" : "addAccountHolderPop",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the individual's POPs exist",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "description" : "ID of the application for which the POP is being created",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "123123"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/AddAccountHolderPOPRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/POP"
+            }
+          },
+          "201" : {
+            "description" : ""
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/individualApplications/{applicationID}/pops/{popID}" : {
+      "get" : {
+        "tags" : [ "AccountHolder Management" ],
+        "summary" : "Get the Point of Presence(POP) of an individual by ID",
+        "description" : "",
+        "operationId" : "getAccountHolderPopsByID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the individual's POP exists",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "description" : "ID of the application for which the account holder POP is being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "123123"
+        }, {
+          "name" : "popID",
+          "in" : "path",
+          "description" : "ID of the POP whose details are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/POP"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/individualApplications/{applicationID}/relationships" : {
+      "get" : {
+        "tags" : [ "AccountHolder Management" ],
+        "summary" : "Get all relationships of an individual",
+        "description" : "",
+        "operationId" : "getAccountHolderRelationships",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account holder relationships exist",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "description" : "ID of the application for which the account holder relationships are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "123123"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GetAccountHolderRelationListResponse"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "AccountHolder Management" ],
+        "summary" : "Create the relationship for an individual",
+        "description" : "",
+        "operationId" : "addAccountHolderRelationship",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account holder relation is being created",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "description" : "ID of the application for which the account holder relation is being created",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "123123"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/AddAccountHolderRelationshipRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/AccountHolderRelation"
+            }
+          },
+          "201" : {
+            "description" : ""
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/individualApplications/{applicationID}/relationships/{relationshipID}" : {
+      "get" : {
+        "tags" : [ "AccountHolder Management" ],
+        "summary" : "Get a specific individual's relationship by ID",
+        "description" : "",
+        "operationId" : "getAccountHolderRelationshipByID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account holder relationship exists",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "description" : "ID of the application for which the account holder relationship is being created",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "123123"
+        }, {
+          "name" : "relationshipID",
+          "in" : "path",
+          "description" : "ID of the relationship whose details are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/AccountHolderRelation"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/individualApplications/{applicationID}/vectors" : {
+      "post" : {
+        "tags" : [ "AccountHolder Management" ],
+        "summary" : "Create the vector for an individual",
+        "description" : "",
+        "operationId" : "addAccountHolderVector",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account holder vector is being created",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "description" : "ID of the application for which the account holder vector is being created",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "123123"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/AddAccountHolderVectorRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/AccountHolderVector"
+            }
+          },
+          "201" : {
+            "description" : ""
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/individualApplications/{applicationID}/vectors/{vectorID}" : {
+      "get" : {
+        "tags" : [ "AccountHolder Management" ],
+        "summary" : "Get the vector of an individual by ID",
+        "description" : "",
+        "operationId" : "getAccountHolderVector",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account holder",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "description" : "ID of the application for which the account holder vector is being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "123123"
+        }, {
+          "name" : "vectorID",
+          "in" : "path",
+          "description" : "ID of the vector whose details are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/AccountHolderVector"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/individualByVector/{vectorType}/{vectorValue}" : {
+      "get" : {
+        "tags" : [ "AccountHolder Management" ],
+        "operationId" : "getAccountHolderByVector",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account holder",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "vectorType",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "vectorValue",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/AccountHolder"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/individuals/{individualID}" : {
+      "get" : {
+        "tags" : [ "AccountHolder Management" ],
+        "summary" : "Get details of an individual by ID",
+        "description" : "",
+        "operationId" : "getAccountHolders",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the individual exists",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "description" : "ID of the individual whose details are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/AccountHolder"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/individuals/{individualID}/accounts" : {
+      "get" : {
+        "tags" : [ "Account Management" ],
+        "summary" : "Get all accounts of an individual",
+        "description" : "",
+        "operationId" : "getAccounts",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the accounts exist",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "description" : "ID of the individual whose accounts are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GetAccountListResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/individuals/{individualID}/beneficiaries" : {
+      "get" : {
+        "summary" : "Get all the beneficiaries of an individual",
+        "description" : "",
+        "operationId" : "getBeneficiaries",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary details are being retrieved",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "description" : "ID of the individual for whom the beneficiaries list are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/BeneficiaryListResponse"
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Create a new beneficiary of an individual",
+        "description" : "",
+        "operationId" : "createBeneficiary",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary is being created",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "description" : "ID of the individual for whom the beneficiary is being created",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/CreateBeneficiaryRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Beneficiary"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/individuals/{individualID}/beneficiaries/{beneficiaryID}" : {
+      "get" : {
+        "summary" : "Get details of a beneficiary by ID",
+        "description" : "",
+        "operationId" : "getBeneficiaryByID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary exists",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "description" : "ID of the individual for whom the beneficiary details are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "description" : "ID of the beneficiary whose details are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Beneficiary"
+            }
+          }
+        }
+      },
+      "put" : {
+        "summary" : "Update a beneficiary of an individual",
+        "description" : "",
+        "operationId" : "updateBeneficiary",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary is being created",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "description" : "ID of the individual for whom the beneficiary is being created",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "description" : "ID of the beneficiary which is being updated belonging to an individual",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "f0e68249-aed0-4359-9df2-a89a350567e9"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/UpdateBeneficiaryRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Beneficiary"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "Delete a beneficiary of an individual",
+        "description" : "",
+        "operationId" : "deleteBeneficiary",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary is being created",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "description" : "ID of the individual for whom the beneficiary is being created",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "description" : "ID of the beneficiary which is being updated belonging to an individual",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "f0e68249-aed0-4359-9df2-a89a350567e9"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Beneficiary"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/individuals/{individualID}/beneficiaries/{beneficiaryID}/accounts" : {
+      "get" : {
+        "summary" : "Get all the accounts of a beneficiary",
+        "description" : "",
+        "operationId" : "getBeneficiaryAccounts",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary accounts are being retrieved",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "description" : "ID of the individual for whom the beneficiary accounts are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/BeneficiaryAccountListResponse"
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Creation of a beneficiary account",
+        "description" : "",
+        "operationId" : "createBeneficiaryAccount",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary account is being created",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "description" : "ID of the individual for whom the beneficiary account is being created",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/AddBeneficiaryAccountForBeneficiaryRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/BeneficiaryAccount"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/individuals/{individualID}/beneficiaries/{beneficiaryID}/accounts/{accountID}" : {
+      "get" : {
+        "summary" : "Get details of a specific beneficiary account of an individual's beneficiary ",
+        "description" : "",
+        "operationId" : "getBeneficiaryAccountByID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary account being retrieved exists",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "description" : "ID of the individual for whom the beneficiary account being retrieved exists",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "description" : "ID of the beneficiary whose beneficiary account details are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the beneficiary account whose details are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/BeneficiaryAccount"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/individuals/{individualID}/beneficiaries/{beneficiaryID}/accounts/{accountID}/transfers" : {
+      "post" : {
+        "tags" : [ "Beneficiary Transfers" ],
+        "summary" : "",
+        "description" : "Perform transfer to a beneficiary account of an individual.",
+        "operationId" : "transferToBeneficiaryAccount",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary transfer is being performed",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "description" : "ID of the individual who is performing the beneficiary transfer",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "description" : "ID of the beneficiary to whom the transfer is being performed",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/BeneficiaryAccountTransactionRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/BeneficiaryTransactionResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/individuals/{individualID}/beneficiaries/{beneficiaryID}/accounts/{beneficiaryAccountID}" : {
+      "put" : {
+        "summary" : "Update of a beneficiary account",
+        "description" : "",
+        "operationId" : "updateBeneficiaryAccount",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary account is being created",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "description" : "ID of the individual for whom the beneficiary account is being created",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "beneficiaryAccountID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/UpdateBeneficiaryAccountRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/BeneficiaryAccount"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "Delete of a beneficiary account",
+        "description" : "",
+        "operationId" : "deleteBeneficiaryAccount",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary account is being created",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "description" : "ID of the individual for whom the beneficiary account is being created",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "beneficiaryAccountID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/BeneficiaryAccount"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/individuals/{individualID}/beneficiaries/{beneficiaryID}/transfers" : {
+      "post" : {
+        "tags" : [ "Beneficiary Transfers" ],
+        "summary" : "",
+        "description" : "Perform transfer to an individual beneficiary's default account",
+        "operationId" : "transferToDefaultBeneficiaryAccount",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary transfer is being performed",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "description" : "ID of the individual who is performing the beneficiary transfer",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "description" : "ID of the beneficiary to whom the transfer is being performed",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/BeneficiaryTransactionRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/BeneficiaryTransactionResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/individuals/{individualID}/beneficiaryTransfers" : {
+      "get" : {
+        "tags" : [ "Beneficiary Transfers" ],
+        "summary" : "",
+        "description" : "Get all the beneficiary transfers of an individual.",
+        "operationId" : "getAllBeneficiaryTransfers",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary whose transfers are being retrieved",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "description" : "ID of the individual for whom the beneficiary transfers are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GetBeneficiaryTransactionListResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/individuals/{individualID}/beneficiaryTransfers/{transferID}" : {
+      "get" : {
+        "tags" : [ "Beneficiary Transfers" ],
+        "summary" : "",
+        "description" : "Get the details of a transfer by ID",
+        "operationId" : "getBeneficiaryTransferByID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary transfer exists",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "description" : "ID of the individual for whom the beneficiary transfer details are being fetched",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "transferID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/BeneficiaryTransaction"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/ledger/createCoa" : {
+      "post" : {
+        "summary" : "Create Coa",
+        "description" : "",
+        "operationId" : "createCoA",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "boolean"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/CreateCoaResponsePayload"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/ledger/createCoaNode" : {
+      "post" : {
+        "summary" : "Create Coa node",
+        "description" : "",
+        "operationId" : "createCoANode",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/CreateCoaNodeResponsePayload"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/ledger/createPolicy" : {
+      "post" : {
+        "summary" : "Create Policy",
+        "description" : "",
+        "operationId" : "createPolicy",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/CreatePolicyRequestPayload"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/CreatePolicyResponsePayload"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/ledger/getAggregateExpressionList" : {
+      "get" : {
+        "summary" : "get All Aggregation Expressions",
+        "description" : "",
+        "operationId" : "getAggregateExpressionList",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GetAggregateExpressionListResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/ledger/getAllCoas" : {
+      "get" : {
+        "summary" : "Get All Coas",
+        "description" : "",
+        "operationId" : "getAllCoas",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GetAllCoAsResponsePayload"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/ledger/getAllTransactionCategories" : {
+      "get" : {
+        "summary" : "get All Transaction Categories",
+        "description" : "",
+        "operationId" : "getAllTransactionCategories",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GetAllTxnCategoriesResponsePayload"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/ledger/getCalender" : {
+      "get" : {
+        "summary" : "Get Calender",
+        "description" : "",
+        "operationId" : "getCalendar",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "boolean"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GetCalendarResponsePayload"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/ledger/getPolicies" : {
+      "get" : {
+        "summary" : "get Policies",
+        "description" : "",
+        "operationId" : "getPolicies",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GetPoliciesResponsePayload"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/ledger/getPolicy" : {
+      "get" : {
+        "summary" : "get Policy",
+        "description" : "",
+        "operationId" : "getPolicy",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GetPolicyResponsePayload"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/ledger/replacePolicy" : {
+      "post" : {
+        "summary" : "Replace Policy",
+        "description" : "",
+        "operationId" : "replacePolicy",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/ReplacePolicyRequestPayload"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/ReplacePolicyResponsePayload"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/ledger/updatePolicyState" : {
+      "post" : {
+        "summary" : "Replace Policy",
+        "description" : "",
+        "operationId" : "updatePolicyState",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/UpdatePolicyStateRequestPayload"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/EmptyPayload"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/productFamilies/{productFamilyID}/products" : {
+      "get" : {
+        "summary" : "Get Products by productFamilyID",
+        "description" : "",
+        "operationId" : "getProducts",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account exists",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "productFamilyID",
+          "in" : "path",
+          "description" : "ProductFamilyID of required products",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "name",
+          "in" : "query",
+          "description" : "Name of product",
+          "required" : false,
+          "type" : "string",
+          "x-example" : "test"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "description" : "No of products needed in response",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32",
+          "x-example" : 10
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "description" : "Page number for products needed in response",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32",
+          "x-example" : "test"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GetProductListResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/productFamilies/{productFamilyID}/programs" : {
+      "get" : {
+        "summary" : "Get programs by productFamilyID",
+        "description" : "",
+        "operationId" : "getPrograms",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account exists",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "productFamilyID",
+          "in" : "path",
+          "description" : "ProductFamilyID of required programs",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "name",
+          "in" : "query",
+          "description" : "Name of program",
+          "required" : false,
+          "type" : "string",
+          "x-example" : "test"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "description" : "No of programs needed in response",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32",
+          "x-example" : 10
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "description" : "Page number for programs needed in response",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32",
+          "x-example" : "test"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Account"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/transactions" : {
+      "get" : {
+        "tags" : [ "AccountHolder Management" ],
+        "summary" : "Get all payments of user",
+        "description" : "",
+        "operationId" : "getPayments",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account holder exist",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "query",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "name" : "accountID",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "startTime",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "endTime",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "enum" : [ "asc", "desc" ]
+        }, {
+          "name" : "pageIndex",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "lastFetchedId",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GetTransactionsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/transfers" : {
+      "post" : {
+        "tags" : [ "Payment" ],
+        "summary" : "",
+        "description" : "Transfer from one account to another",
+        "operationId" : "transfer",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account transfer is being performed",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/TransferRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/TransferResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/support/ifi/{ifiID}/individuals/{individualID}/accounts/{accountID}/transactions" : {
+      "get" : {
+        "tags" : [ "SupportCentre" ],
+        "summary" : "Get all transactions of an account",
+        "description" : "",
+        "operationId" : "getTransactions",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account transactions exist",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "description" : "ID of the individual to which the account belongs",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d12345"
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the account whose transaction details are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GetAccountTransactionListResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/support/ifi/{ifiID}/individuals/{individualID}/dob" : {
+      "post" : {
+        "tags" : [ "SupportCentre" ],
+        "operationId" : "updateAccountHolderDob",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "dob",
+          "in" : "query",
+          "required" : true,
+          "type" : "string",
+          "format" : "date-time"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/AccountHolder"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/support/ifi/{ifiID}/individuals/{individualID}/gender/{gender}" : {
+      "post" : {
+        "tags" : [ "SupportCentre" ],
+        "operationId" : "updateAccountHolderGender",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "gender",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/AccountHolder"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/support/ifi/{ifiID}/individuals/{individualID}/name/{accountHolderName}" : {
+      "post" : {
+        "tags" : [ "SupportCentre" ],
+        "operationId" : "updateAccountHolderName",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "accountHolderName",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/AccountHolder"
+            }
+          }
+        }
+      }
+    },
     "/health" : {
       "get" : {
         "operationId" : "healthCheck",
@@ -6221,6 +10101,12 @@
           "type" : "object",
           "additionalProperties" : {
             "type" : "string"
+          }
+        },
+        "tags" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Tag"
           }
         }
       }
@@ -10087,7 +13973,7 @@
     },
     "IssueBundleRequest" : {
       "type" : "object",
-      "required" : [ "accountHolderID", "name", "phoneNumber" ],
+      "required" : [ "accountHolderID", "name" ],
       "properties" : {
         "name" : {
           "type" : "string",
@@ -10100,6 +13986,11 @@
           "description" : "The phone number to be assosciated with the account and the card",
           "minLength" : 10,
           "maxLength" : 15
+        },
+        "targetAccount" : {
+          "type" : "string",
+          "example" : "account://account-num-1",
+          "description" : "The account number to be assosciated with the card"
         },
         "accountHolderID" : {
           "type" : "string",
@@ -10390,9 +14281,6 @@
         "asString" : {
           "type" : "string"
         },
-        "jsonNull" : {
-          "type" : "boolean"
-        },
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
         },
@@ -10409,6 +14297,9 @@
           "type" : "boolean"
         },
         "jsonPrimitive" : {
+          "type" : "boolean"
+        },
+        "jsonNull" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
@@ -10422,9 +14313,6 @@
         "asBoolean" : {
           "type" : "boolean"
         },
-        "jsonNull" : {
-          "type" : "boolean"
-        },
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
         },
@@ -10441,6 +14329,9 @@
           "type" : "boolean"
         },
         "jsonPrimitive" : {
+          "type" : "boolean"
+        },
+        "jsonNull" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
@@ -10493,9 +14384,6 @@
         "asBoolean" : {
           "type" : "boolean"
         },
-        "jsonNull" : {
-          "type" : "boolean"
-        },
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
         },
@@ -10512,6 +14400,9 @@
           "type" : "boolean"
         },
         "jsonPrimitive" : {
+          "type" : "boolean"
+        },
+        "jsonNull" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
@@ -10564,9 +14455,6 @@
         "asBoolean" : {
           "type" : "boolean"
         },
-        "jsonNull" : {
-          "type" : "boolean"
-        },
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
         },
@@ -10583,6 +14471,9 @@
           "type" : "boolean"
         },
         "jsonPrimitive" : {
+          "type" : "boolean"
+        },
+        "jsonNull" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
@@ -10683,9 +14574,6 @@
         "asString" : {
           "type" : "string"
         },
-        "jsonNull" : {
-          "type" : "boolean"
-        },
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
         },
@@ -10702,6 +14590,9 @@
           "type" : "boolean"
         },
         "jsonPrimitive" : {
+          "type" : "boolean"
+        },
+        "jsonNull" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
@@ -12632,6 +16523,12 @@
           "type" : "object",
           "additionalProperties" : {
             "type" : "string"
+          }
+        },
+        "tags" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Tag"
           }
         },
         "verified" : {

@@ -783,6 +783,742 @@
           }
         }
       }
+    },
+    "/api/v2/ifi/{ifiID}/accounts" : {
+      "get" : {
+        "tags" : [ "Account Management" ],
+        "summary" : "Get all accounts of IFI",
+        "operationId" : "getAccounts",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the accounts exist",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "asc", "desc" ]
+          }
+        }, {
+          "name" : "pageIndex",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "lastFetchedId",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAccountListResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/accounts/update" : {
+      "post" : {
+        "tags" : [ "Account Management" ],
+        "summary" : "Update all Accounts for a given real or headless account holder",
+        "operationId" : "accountHolderUpdated",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ifiID",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateProductForAllAccountsRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EmptyPayload"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/accounts/{accountID}/accessors" : {
+      "get" : {
+        "tags" : [ "Account Management" ],
+        "summary" : "Get all accessors for a given accountID",
+        "operationId" : "getAccountAccessors",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account accessors exist",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the account whose accessor details are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAccountAccessorListResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Account Management" ],
+        "summary" : "Create accessors for the given accountID",
+        "operationId" : "createAccountAccessor",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account accessor is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the account for which the accessor is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AddAccountAccessorRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Accessor"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/accounts/{accountID}/accessors/{accessorID}" : {
+      "get" : {
+        "tags" : [ "Account Management" ],
+        "summary" : "Get accessor for a given accountID by the ID",
+        "operationId" : "getAccountAccessorByID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account accessor exists",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the account whose accessor details are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "accessorID",
+          "in" : "path",
+          "description" : "ID of the accessor whose details are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Accessor"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/accounts/{accountID}/relations" : {
+      "get" : {
+        "tags" : [ "Account Management" ],
+        "summary" : "Get all relations of the given accountID",
+        "operationId" : "getAccountRelations",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account relations exist",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the account whose relation details are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAccountRelationListResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Account Management" ],
+        "summary" : "Create relation for the given accountID",
+        "operationId" : "createAccountRelation",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account relation is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the account for which relation is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AddAccountRelationRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AccountRelation"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/accounts/{accountID}/relations/{relationID}" : {
+      "get" : {
+        "tags" : [ "Account Management" ],
+        "summary" : "Get the relation of an account by the ID",
+        "operationId" : "getAccountRelationByID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account relation exists",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the account whose relation details are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "relationID",
+          "in" : "path",
+          "description" : "ID of the relation whose details are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AccountRelation"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/accounts/{accountID}/transactionPolicies" : {
+      "get" : {
+        "tags" : [ "Account Management" ],
+        "operationId" : "getTransactionPoliciesByAccount",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the policies exist",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the account whose policy details are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAllTransactionPoliciesResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/accounts/{accountID}/transactions" : {
+      "get" : {
+        "tags" : [ "Account Management" ],
+        "summary" : "Get all transactions of an account",
+        "operationId" : "getTransactions",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account transactions exist",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the account whose transaction details are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "type" : "integer",
+                "format" : "int64"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAccountTransactionListResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/accounts/{accountID}/transactions/{transactionID}" : {
+      "get" : {
+        "tags" : [ "Account Management" ],
+        "summary" : "Get information of a specific transaction as per ID",
+        "operationId" : "getTransaction",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account transaction exists",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the account whose transaction details are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "transactionID",
+          "in" : "path",
+          "description" : "ID of the transaction whose details are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AccountTransaction"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/accounts/{accountID}/vectors" : {
+      "get" : {
+        "tags" : [ "Account Management" ],
+        "summary" : "Get all vectors of the given accountID",
+        "operationId" : "getAccountVectors",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account vector exists",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the account whose vector details are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAccountVectorListResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Account Management" ],
+        "summary" : "Create vector for the given accountID",
+        "operationId" : "createAccountVector",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account vector is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the account whose vector details are being created",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AddAccountVectorRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AccountVector"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/accounts/{accountID}/vectors/{vectorID}" : {
+      "get" : {
+        "tags" : [ "Account Management" ],
+        "summary" : "Get the vector of an account by ID",
+        "operationId" : "getAccountVectorByID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account vector exists",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the account whose vector details are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "vectorID",
+          "in" : "path",
+          "description" : "ID of the vector whose details are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AccountVector"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/accountsInfo/{accountID}" : {
+      "get" : {
+        "tags" : [ "Account Management" ],
+        "operationId" : "getAccountInfo",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the account whose details are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AccountInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/individuals/{individualID}/accounts" : {
+      "get" : {
+        "tags" : [ "Account Management" ],
+        "summary" : "Get all accounts of an individual",
+        "operationId" : "getAccounts",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the accounts exist",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "description" : "ID of the individual whose accounts are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "type" : "integer",
+                "format" : "int64"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAccountListResponse"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components" : {

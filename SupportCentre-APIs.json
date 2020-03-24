@@ -190,6 +190,189 @@
           }
         }
       }
+    },
+    "/api/v2/support/ifi/{ifiID}/individuals/{individualID}/accounts/{accountID}/transactions" : {
+      "get" : {
+        "tags" : [ "SupportCentre" ],
+        "summary" : "Get all transactions of an account",
+        "operationId" : "getTransactions",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account transactions exist",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "description" : "ID of the individual to which the account belongs",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d12345"
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the account whose transaction details are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "type" : "integer",
+                "format" : "int64"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAccountTransactionListResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/support/ifi/{ifiID}/individuals/{individualID}/dob" : {
+      "post" : {
+        "tags" : [ "SupportCentre" ],
+        "operationId" : "updateAccountHolderDob",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "dob",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AccountHolder"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/support/ifi/{ifiID}/individuals/{individualID}/gender/{gender}" : {
+      "post" : {
+        "tags" : [ "SupportCentre" ],
+        "operationId" : "updateAccountHolderGender",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "gender",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AccountHolder"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/support/ifi/{ifiID}/individuals/{individualID}/name/{accountHolderName}" : {
+      "post" : {
+        "tags" : [ "SupportCentre" ],
+        "operationId" : "updateAccountHolderName",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "accountHolderName",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AccountHolder"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components" : {
@@ -328,6 +511,12 @@
             "type" : "object",
             "additionalProperties" : {
               "type" : "string"
+            }
+          },
+          "tags" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Tag"
             }
           }
         }

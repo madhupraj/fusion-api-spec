@@ -386,6 +386,385 @@
           }
         }
       }
+    },
+    "/api/v2/ifi/{ifiID}/bundles" : {
+      "get" : {
+        "tags" : [ "Bundles" ],
+        "summary" : "Get all Bundles",
+        "description" : "Get all Bundles available for an IFI. The response returns a unique identifier for each available Bundle.",
+        "operationId" : "getAllBundles",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the bundles are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/BundleResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Bundles" ],
+        "summary" : "Create Bundle",
+        "description" : "Creates a Bundle",
+        "operationId" : "createBundle",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AddBundleRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BundleResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/bundles/{bundleID}" : {
+      "get" : {
+        "tags" : [ "Bundles" ],
+        "summary" : "Get Bundle by Bundle ID",
+        "description" : "Returns Bundle by bundleID for an IFI.",
+        "operationId" : "getBundleByID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the bundles are being retrieved by bundleID",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "bundleID",
+          "in" : "path",
+          "description" : "ID of the bundle whose details are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BundleResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Bundles" ],
+        "summary" : "Update Bundle",
+        "description" : "Update Bundle details",
+        "operationId" : "updateBundle",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "bundleID",
+          "in" : "path",
+          "description" : "ID of the bundle whose details are being updated",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateBundleRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BundleResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Bundles" ],
+        "summary" : "Delete Bundle",
+        "description" : "Delete a Bundle",
+        "operationId" : "deleteBundle",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being deleted",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "bundleID",
+          "in" : "path",
+          "description" : "ID of the bundle which is being deleted",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BundleResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/bundles/{bundleID}/accountProducts" : {
+      "post" : {
+        "tags" : [ "Bundles" ],
+        "summary" : "Add Account Product",
+        "description" : "Adds an Account Product to a Bundle",
+        "operationId" : "addAccountProductToBundle",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "bundleID",
+          "in" : "path",
+          "description" : "ID of the bundle whose details are being updated",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AddAccountProductInBundleRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BundleResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/bundles/{bundleID}/accountProducts/{accountProductID}" : {
+      "delete" : {
+        "tags" : [ "Bundles" ],
+        "summary" : "Delete Account Product",
+        "description" : "Deletes an Account Product from a Bundle",
+        "operationId" : "deleteAccountProductFromBundle",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "bundleID",
+          "in" : "path",
+          "description" : "ID of the bundle whose details are being updated",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "accountProductID",
+          "in" : "path",
+          "description" : "ID for the account product which is to be removed from the bundle",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BundleResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/bundles/{bundleID}/paymentProducts" : {
+      "post" : {
+        "tags" : [ "Bundles" ],
+        "summary" : "Add Payment Product",
+        "description" : "Adds a Payment Product to a Bundle",
+        "operationId" : "addPaymentProductToBundle",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "bundleID",
+          "in" : "path",
+          "description" : "ID of the bundle whose details are being updated",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AddPaymentProductInBundleRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BundleResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/bundles/{bundleID}/paymentProducts/{paymentProductID}" : {
+      "delete" : {
+        "tags" : [ "Bundles" ],
+        "summary" : "Delete Payment Product",
+        "description" : "Deletes a Payment Product from a Bundle",
+        "operationId" : "deletePaymentProductFromBundle",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated.",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "bundleID",
+          "in" : "path",
+          "description" : "ID of the bundle whose details are being updated",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "paymentProductID",
+          "in" : "path",
+          "description" : "ID for the payment product to be removed from the bundle",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BundleResponse"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components" : {

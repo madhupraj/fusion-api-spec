@@ -1530,53 +1530,6 @@
         }
       }
     },
-    "/api/v1/ifi/{ifiID}/cards/list" : {
-      "get" : {
-        "summary" : "List cards",
-        "operationId" : "listCards",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
-        }, {
-          "name" : "X-Zeta-JWS",
-          "in" : "header",
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "*/*" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/FusionListCardsRequest"
-              }
-            }
-          },
-          "required" : false
-        },
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "type" : "array",
-                  "items" : {
-                    "type" : "object",
-                    "properties" : { }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/v1/ifi/{ifiID}/cards/orders" : {
       "post" : {
         "operationId" : "placeBulkOrder",
@@ -4616,6 +4569,2266 @@
         }
       }
     },
+    "/api/v2/ifi/{ifiID}/applications" : {
+      "get" : {
+        "summary" : "Get All Applications",
+        "operationId" : "getAllApplications",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "status",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Account"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/applications/editIndividual" : {
+      "post" : {
+        "summary" : "Edit Individual Application",
+        "operationId" : "editApplication",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/EditIndividualApplicationRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Account"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/applications/newIndividual" : {
+      "post" : {
+        "summary" : "Create Individual Application With Auto Approval",
+        "operationId" : "createApplicationWithAutoApproval",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CreateAccountHolderWithAutoApprovalRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Account"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/applications/newIndividualApplication" : {
+      "post" : {
+        "summary" : "Create Individual Application",
+        "operationId" : "createApplication",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CreateAccountHolderApplicationRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Account"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/applications/{applicationID}" : {
+      "get" : {
+        "summary" : "Get Individual Application",
+        "operationId" : "getApplication",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Account"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "summary" : "Update Individual Application",
+        "operationId" : "updateApplication",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateAccountHolderApplicationRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Account"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "Delete Individual Application",
+        "operationId" : "deleteApplication",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Account"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/applications/{applicationID}/kycStatus/{kycStatus}" : {
+      "put" : {
+        "summary" : "Update Application Status",
+        "operationId" : "updateApplicationKYCStatus",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "kycStatus",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateKycStatusRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Account"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/applications/{applicationID}/spool/{spoolID}" : {
+      "put" : {
+        "summary" : "Update Application Spool",
+        "operationId" : "updateApplicationSpool",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "spoolID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Account"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/applications/{applicationID}/status/{newStatus}" : {
+      "put" : {
+        "summary" : "Update Application Status",
+        "operationId" : "updateApplicationStatus",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "applicationID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "newStatus",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Account"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/athena-manager/createEntityPolicyMapping" : {
+      "post" : {
+        "summary" : "Create Entity Policy Mapping",
+        "operationId" : "createPolicyMapping",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CreatePolicyMappingRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TransactionPolicyResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/athena-manager/createExtendedProduct" : {
+      "post" : {
+        "summary" : "CreateExtendedProduct api via fusion",
+        "operationId" : "createExtendedProduct",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CreateExtendedProductRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Product"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/athena-manager/createExtendedProductFamily" : {
+      "post" : {
+        "summary" : "CreateExtendedProductFamily api via fusion",
+        "operationId" : "createExtendedProductFamily",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CreateExtendedProductFamilyRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ProductFamily"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/athena-manager/entitycode/{entity}" : {
+      "get" : {
+        "summary" : "Get Entity Code",
+        "operationId" : "getEntityCode",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "entity",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "type" : "string"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EntityCodeResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/athena-manager/getAllTransactionPoliciesByIFI" : {
+      "get" : {
+        "summary" : "Get all transaction policies for a given IFI",
+        "operationId" : "getAllTransactionPoliciesByIFI",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "type" : "boolean"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAllTransactionPoliciesResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/athena-manager/getCoaList" : {
+      "get" : {
+        "summary" : "Get all CoAs for a given IFI",
+        "operationId" : "getCoaListByIFI",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetCoaListResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/athena-manager/getCoaNodes" : {
+      "get" : {
+        "summary" : "Get all CoA Nodes for a given IFI and CoAID",
+        "operationId" : "getCoaNodesByIFIAndCoaID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "coaID",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetCoaNodesResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/athena-manager/getEntityGroupList" : {
+      "get" : {
+        "summary" : "Get EntityGrouplist for a given ifi and entityType",
+        "operationId" : "getEntityGroupList",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "entityType",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ListEntityGroupResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/athena-manager/getPolicyMappings" : {
+      "get" : {
+        "summary" : "Get PolicyMappings for a given ifi, entityID, policyEntityType, policyType and PolicyId",
+        "operationId" : "getPolicyMappings",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "entityID",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "policyEntityType",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "policyType",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "policyID",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetProductListResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/athena-manager/getProduct" : {
+      "get" : {
+        "summary" : "Get Product with a given IFI and ProductID",
+        "operationId" : "getProductByIFIAndID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "id",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Product"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/athena-manager/getProductFamily" : {
+      "get" : {
+        "summary" : "Get ProductFamily for a given ifi and id",
+        "operationId" : "getProductFamily",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "id",
+          "in" : "query",
+          "description" : "productFamilyId",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123456789065434567
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ProductFamily"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/athena-manager/getProductFamilyList" : {
+      "get" : {
+        "summary" : "Get ProductFamilyList for a given ifi",
+        "operationId" : "getProductFamilyList",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetProductFamilyListResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/athena-manager/getProductList" : {
+      "get" : {
+        "summary" : "Get ProductList for a given ifi",
+        "operationId" : "getProductList",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetProductListResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/athena-manager/getTransactionPoliciesByEntityID" : {
+      "get" : {
+        "summary" : "get Transaction Policies by EntityID",
+        "operationId" : "getTransactionPoliciesByEntityID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "type" : "string"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAllTransactionPoliciesResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/athena-manager/getTransactionPolicyByID" : {
+      "get" : {
+        "summary" : "Get TransactionPolicy with a given ID",
+        "operationId" : "getProductByIFIAndID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "id",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TransactionPolicyResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/athena-manager/replaceTransactionPolicy/{transactionPolicyID}" : {
+      "put" : {
+        "summary" : "Replace Transaction Policy",
+        "operationId" : "replaceTransactionPolicy",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "transactionPolicyID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ReplaceTransactionPolicyRequestPayload"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TransactionPolicyResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/athena-manager/transactionPolicy" : {
+      "post" : {
+        "summary" : "Create TransactionPolicy",
+        "operationId" : "createTransactionPolicy",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Builder"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TransactionPolicyResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/athena-manager/updateTransactionPolicy/{transactionPolicyId}" : {
+      "patch" : {
+        "summary" : "Update Transaction Policy State",
+        "operationId" : "updateTransactionPolicyState",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "transactionPolicyId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateTransactionPolicyStateRequestPayload"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EmptyPayload"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/bundles/{bundleID}/issueAccount" : {
+      "post" : {
+        "summary" : "Issue specific Account from a bundle ",
+        "operationId" : "issueAccountProduct",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the Account is being issued",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "bundleID",
+          "in" : "path",
+          "description" : "ID of the bundle whose account product is being issued",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/IssueAccountArtifactRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/IssueAccountArtifactResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/bundles/{bundleID}/issueBundle" : {
+      "post" : {
+        "summary" : "Issue bundle to a specific individual/company",
+        "operationId" : "issueBundle",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being issued",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "bundleID",
+          "in" : "path",
+          "description" : "ID of the bundle which is being issued",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/IssueBundleRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/IssueBundleResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/bundles/{bundleID}/issueFormFactor" : {
+      "post" : {
+        "summary" : "Issue specific form factor of a resource to a specific individual/company",
+        "operationId" : "issueFormFactor",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the form factor is being issued",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "bundleID",
+          "in" : "path",
+          "description" : "ID of the bundle whose form factor/card is being issued",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/IssueFormFactorRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/IssueFormFactorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/bundles/{bundleID}/issueResource" : {
+      "post" : {
+        "summary" : "Issue specific resource of a bundle to a specific individual/company",
+        "operationId" : "issueResource",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the resource is being issued",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "bundleID",
+          "in" : "path",
+          "description" : "ID of the bundle whose resource is being issued",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/IssueResourceRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/IssueResourceResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/individuals/{individualID}/beneficiaries" : {
+      "get" : {
+        "summary" : "Get all the beneficiaries of an individual",
+        "operationId" : "getBeneficiaries",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary details are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "description" : "ID of the individual for whom the beneficiaries list are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BeneficiaryListResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Create a new beneficiary of an individual",
+        "operationId" : "createBeneficiary",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "description" : "ID of the individual for whom the beneficiary is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CreateBeneficiaryRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Beneficiary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/individuals/{individualID}/beneficiaries/{beneficiaryID}" : {
+      "get" : {
+        "summary" : "Get details of a beneficiary by ID",
+        "operationId" : "getBeneficiaryByID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary exists",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "description" : "ID of the individual for whom the beneficiary details are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "description" : "ID of the beneficiary whose details are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Beneficiary"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "summary" : "Update a beneficiary of an individual",
+        "operationId" : "updateBeneficiary",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "description" : "ID of the individual for whom the beneficiary is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "description" : "ID of the beneficiary which is being updated belonging to an individual",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "f0e68249-aed0-4359-9df2-a89a350567e9"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateBeneficiaryRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Beneficiary"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "Delete a beneficiary of an individual",
+        "operationId" : "deleteBeneficiary",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "description" : "ID of the individual for whom the beneficiary is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "description" : "ID of the beneficiary which is being updated belonging to an individual",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "f0e68249-aed0-4359-9df2-a89a350567e9"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Beneficiary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/individuals/{individualID}/beneficiaries/{beneficiaryID}/accounts" : {
+      "get" : {
+        "summary" : "Get all the accounts of a beneficiary",
+        "operationId" : "getBeneficiaryAccounts",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary accounts are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "description" : "ID of the individual for whom the beneficiary accounts are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BeneficiaryAccountListResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Creation of a beneficiary account",
+        "operationId" : "createBeneficiaryAccount",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary account is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "description" : "ID of the individual for whom the beneficiary account is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AddBeneficiaryAccountForBeneficiaryRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BeneficiaryAccount"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/individuals/{individualID}/beneficiaries/{beneficiaryID}/accounts/{accountID}" : {
+      "get" : {
+        "summary" : "Get details of a specific beneficiary account of an individual's beneficiary ",
+        "operationId" : "getBeneficiaryAccountByID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary account being retrieved exists",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "description" : "ID of the individual for whom the beneficiary account being retrieved exists",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "description" : "ID of the beneficiary whose beneficiary account details are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the beneficiary account whose details are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BeneficiaryAccount"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/individuals/{individualID}/beneficiaries/{beneficiaryID}/accounts/{beneficiaryAccountID}" : {
+      "put" : {
+        "summary" : "Update of a beneficiary account",
+        "operationId" : "updateBeneficiaryAccount",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary account is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "description" : "ID of the individual for whom the beneficiary account is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "beneficiaryAccountID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateBeneficiaryAccountRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BeneficiaryAccount"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "Delete of a beneficiary account",
+        "operationId" : "deleteBeneficiaryAccount",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary account is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "individualID",
+          "in" : "path",
+          "description" : "ID of the individual for whom the beneficiary account is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "beneficiaryAccountID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BeneficiaryAccount"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/ledger/createCoa" : {
+      "post" : {
+        "summary" : "Create Coa",
+        "operationId" : "createCoA",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "type" : "boolean"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CreateCoaResponsePayload"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/ledger/createCoaNode" : {
+      "post" : {
+        "summary" : "Create Coa node",
+        "operationId" : "createCoANode",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "type" : "string"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CreateCoaNodeResponsePayload"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/ledger/createPolicy" : {
+      "post" : {
+        "summary" : "Create Policy",
+        "operationId" : "createPolicy",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CreatePolicyRequestPayload"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CreatePolicyResponsePayload"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/ledger/getAggregateExpressionList" : {
+      "get" : {
+        "summary" : "get All Aggregation Expressions",
+        "operationId" : "getAggregateExpressionList",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAggregateExpressionListResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/ledger/getAllCoas" : {
+      "get" : {
+        "summary" : "Get All Coas",
+        "operationId" : "getAllCoas",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAllCoAsResponsePayload"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/ledger/getAllTransactionCategories" : {
+      "get" : {
+        "summary" : "get All Transaction Categories",
+        "operationId" : "getAllTransactionCategories",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAllTxnCategoriesResponsePayload"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/ledger/getCalender" : {
+      "get" : {
+        "summary" : "Get Calender",
+        "operationId" : "getCalendar",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "type" : "boolean"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetCalendarResponsePayload"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/ledger/getPolicies" : {
+      "get" : {
+        "summary" : "get Policies",
+        "operationId" : "getPolicies",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "type" : "integer",
+                "format" : "int64"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetPoliciesResponsePayload"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/ledger/getPolicy" : {
+      "get" : {
+        "summary" : "get Policy",
+        "operationId" : "getPolicy",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "type" : "string"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetPolicyResponsePayload"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/ledger/replacePolicy" : {
+      "post" : {
+        "summary" : "Replace Policy",
+        "operationId" : "replacePolicy",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ReplacePolicyRequestPayload"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ReplacePolicyResponsePayload"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/ledger/updatePolicyState" : {
+      "post" : {
+        "summary" : "Replace Policy",
+        "operationId" : "updatePolicyState",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdatePolicyStateRequestPayload"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EmptyPayload"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/productFamilies/{productFamilyID}/products" : {
+      "get" : {
+        "summary" : "Get Products by productFamilyID",
+        "operationId" : "getProducts",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account exists",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "productFamilyID",
+          "in" : "path",
+          "description" : "ProductFamilyID of required products",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "name",
+          "in" : "query",
+          "description" : "Name of product",
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "test"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "description" : "No of products needed in response",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "example" : 10
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "description" : "Page number for products needed in response",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "example" : "test"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetProductListResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/productFamilies/{productFamilyID}/programs" : {
+      "get" : {
+        "summary" : "Get programs by productFamilyID",
+        "operationId" : "getPrograms",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account exists",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "productFamilyID",
+          "in" : "path",
+          "description" : "ProductFamilyID of required programs",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "name",
+          "in" : "query",
+          "description" : "Name of program",
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "test"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "description" : "No of programs needed in response",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "example" : 10
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "description" : "Page number for programs needed in response",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "example" : "test"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Account"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/health" : {
       "get" : {
         "operationId" : "healthCheck",
@@ -4833,6 +7046,12 @@
             "type" : "object",
             "additionalProperties" : {
               "type" : "string"
+            }
+          },
+          "tags" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Tag"
             }
           }
         }
@@ -7418,25 +9637,6 @@
           }
         }
       },
-      "FusionListCardsRequest" : {
-        "type" : "object",
-        "properties" : {
-          "filters" : {
-            "$ref" : "#/components/schemas/FusionListCardsRequestFilters"
-          }
-        }
-      },
-      "FusionListCardsRequestFilters" : {
-        "type" : "object",
-        "properties" : {
-          "cardID" : {
-            "type" : "string"
-          },
-          "crn" : {
-            "type" : "string"
-          }
-        }
-      },
       "GenericCreateApplicationResponse" : {
         "type" : "object",
         "properties" : {
@@ -7800,7 +10000,7 @@
         }
       },
       "IssueBundleRequest" : {
-        "required" : [ "accountHolderID", "name", "phoneNumber" ],
+        "required" : [ "accountHolderID", "name" ],
         "type" : "object",
         "properties" : {
           "name" : {
@@ -7814,6 +10014,11 @@
             "type" : "string",
             "description" : "The phone number to be assosciated with the account and the card",
             "example" : "+919876543210"
+          },
+          "targetAccount" : {
+            "type" : "string",
+            "description" : "The account number to be assosciated with the card",
+            "example" : "account://account-num-1"
           },
           "accountHolderID" : {
             "type" : "string",
@@ -8108,9 +10313,6 @@
           "asString" : {
             "type" : "string"
           },
-          "jsonNull" : {
-            "type" : "boolean"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
           },
@@ -8127,6 +10329,9 @@
             "type" : "boolean"
           },
           "jsonPrimitive" : {
+            "type" : "boolean"
+          },
+          "jsonNull" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -8140,9 +10345,6 @@
           "asBoolean" : {
             "type" : "boolean"
           },
-          "jsonNull" : {
-            "type" : "boolean"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
           },
@@ -8159,6 +10361,9 @@
             "type" : "boolean"
           },
           "jsonPrimitive" : {
+            "type" : "boolean"
+          },
+          "jsonNull" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -8212,9 +10417,6 @@
           "asBoolean" : {
             "type" : "boolean"
           },
-          "jsonNull" : {
-            "type" : "boolean"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
           },
@@ -8231,6 +10433,9 @@
             "type" : "boolean"
           },
           "jsonPrimitive" : {
+            "type" : "boolean"
+          },
+          "jsonNull" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -8284,9 +10489,6 @@
           "asBoolean" : {
             "type" : "boolean"
           },
-          "jsonNull" : {
-            "type" : "boolean"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
           },
@@ -8303,6 +10505,9 @@
             "type" : "boolean"
           },
           "jsonPrimitive" : {
+            "type" : "boolean"
+          },
+          "jsonNull" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -8405,9 +10610,6 @@
           "asString" : {
             "type" : "string"
           },
-          "jsonNull" : {
-            "type" : "boolean"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
           },
@@ -8424,6 +10626,9 @@
             "type" : "boolean"
           },
           "jsonPrimitive" : {
+            "type" : "boolean"
+          },
+          "jsonNull" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -10151,6 +12356,12 @@
             "type" : "object",
             "additionalProperties" : {
               "type" : "string"
+            }
+          },
+          "tags" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Tag"
             }
           },
           "verified" : {
