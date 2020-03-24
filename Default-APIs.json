@@ -9937,7 +9937,7 @@
           "resource" : {
             "type" : "string"
           },
-          "jidOfAGroup" : {
+          "serviceInstanceJID" : {
             "type" : "boolean"
           },
           "primaryServiceName" : {
@@ -9946,19 +9946,19 @@
           "serviceViewName" : {
             "type" : "string"
           },
-          "defaultServiceNode" : {
-            "type" : "boolean"
-          },
           "bareJID" : {
             "$ref" : "#/components/schemas/JID"
           },
           "serviceViewJID" : {
             "type" : "boolean"
           },
-          "proxyServiceJID" : {
+          "defaultServiceNode" : {
             "type" : "boolean"
           },
-          "serviceInstanceJID" : {
+          "jidOfAGroup" : {
+            "type" : "boolean"
+          },
+          "proxyServiceJID" : {
             "type" : "boolean"
           }
         }
@@ -10009,11 +10009,11 @@
           "asString" : {
             "type" : "string"
           },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
           },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
@@ -10041,11 +10041,11 @@
           "asBoolean" : {
             "type" : "boolean"
           },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
           },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
@@ -10113,11 +10113,11 @@
           "asBoolean" : {
             "type" : "boolean"
           },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
           },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
@@ -10185,11 +10185,11 @@
           "asBoolean" : {
             "type" : "boolean"
           },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
           },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
@@ -10257,10 +10257,10 @@
           "number" : {
             "type" : "boolean"
           },
-          "asBoolean" : {
+          "boolean" : {
             "type" : "boolean"
           },
-          "boolean" : {
+          "asBoolean" : {
             "type" : "boolean"
           },
           "asNumber" : {
@@ -10306,11 +10306,11 @@
           "asString" : {
             "type" : "string"
           },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
           },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
@@ -11613,11 +11613,11 @@
           "signatoryJID" : {
             "$ref" : "#/components/schemas/JID"
           },
-          "signatureHash" : {
-            "type" : "string"
-          },
           "zetaSignature" : {
             "$ref" : "#/components/schemas/ZetaSignature"
+          },
+          "signatureHash" : {
+            "type" : "string"
           },
           "signed" : {
             "type" : "boolean"
