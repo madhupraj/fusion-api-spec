@@ -17,6 +17,8 @@
   }, {
     "name" : "Cards list"
   }, {
+    "name" : "Form Factor"
+  }, {
     "name" : "Payment"
   }, {
     "name" : "Resource"
@@ -5218,8 +5220,9 @@
     },
     "/api/v1/ifi/{ifiID}/resources/{resourceID}/form_factors" : {
       "post" : {
-        "summary" : "Add (already provisioned) form factor to an existing resource",
-        "description" : "",
+        "tags" : [ "Form Factor" ],
+        "summary" : "",
+        "description" : "Add (already provisioned) form factor to an existing resource",
         "operationId" : "insertFormFactor",
         "parameters" : [ {
           "name" : "ifiID",
@@ -5284,8 +5287,9 @@
     },
     "/api/v1/ifi/{ifiID}/resources/{resourceID}/form_factors/{formFactorID}" : {
       "get" : {
-        "summary" : "Get form factor details by ID",
-        "description" : "",
+        "tags" : [ "Form Factor" ],
+        "summary" : "",
+        "description" : "Get form factor details by ID",
         "operationId" : "getFormFactor",
         "parameters" : [ {
           "name" : "ifiID",
@@ -5315,8 +5319,9 @@
     },
     "/api/v1/ifi/{ifiID}/resources/{resourceID}/form_factors/{formfactorID}" : {
       "patch" : {
-        "summary" : "Change the resource linked form factor status",
-        "description" : "",
+        "tags" : [ "Form Factor" ],
+        "summary" : "",
+        "description" : "Change the resource linked form factor status",
         "operationId" : "updateResourceLinkedFormFactor",
         "parameters" : [ {
           "name" : "ifiID",
@@ -14217,25 +14222,25 @@
         "serviceInstanceJID" : {
           "type" : "boolean"
         },
-        "serviceViewJID" : {
-          "type" : "boolean"
-        },
-        "bareJID" : {
-          "$ref" : "#/definitions/JID"
-        },
         "primaryServiceName" : {
           "type" : "string"
         },
         "serviceViewName" : {
           "type" : "string"
         },
+        "bareJID" : {
+          "$ref" : "#/definitions/JID"
+        },
+        "serviceViewJID" : {
+          "type" : "boolean"
+        },
         "defaultServiceNode" : {
           "type" : "boolean"
         },
-        "proxyServiceJID" : {
+        "jidOfAGroup" : {
           "type" : "boolean"
         },
-        "jidOfAGroup" : {
+        "proxyServiceJID" : {
           "type" : "boolean"
         }
       }
@@ -14285,11 +14290,11 @@
         "asString" : {
           "type" : "string"
         },
-        "asJsonPrimitive" : {
-          "$ref" : "#/definitions/JsonPrimitive"
-        },
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
+        },
+        "asJsonPrimitive" : {
+          "$ref" : "#/definitions/JsonPrimitive"
         },
         "asJsonObject" : {
           "$ref" : "#/definitions/JsonObject"
@@ -14317,11 +14322,11 @@
         "asBoolean" : {
           "type" : "boolean"
         },
-        "asJsonPrimitive" : {
-          "$ref" : "#/definitions/JsonPrimitive"
-        },
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
+        },
+        "asJsonPrimitive" : {
+          "$ref" : "#/definitions/JsonPrimitive"
         },
         "asJsonObject" : {
           "$ref" : "#/definitions/JsonObject"
@@ -14388,11 +14393,11 @@
         "asBoolean" : {
           "type" : "boolean"
         },
-        "asJsonPrimitive" : {
-          "$ref" : "#/definitions/JsonPrimitive"
-        },
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
+        },
+        "asJsonPrimitive" : {
+          "$ref" : "#/definitions/JsonPrimitive"
         },
         "asJsonObject" : {
           "$ref" : "#/definitions/JsonObject"
@@ -14459,11 +14464,11 @@
         "asBoolean" : {
           "type" : "boolean"
         },
-        "asJsonPrimitive" : {
-          "$ref" : "#/definitions/JsonPrimitive"
-        },
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
+        },
+        "asJsonPrimitive" : {
+          "$ref" : "#/definitions/JsonPrimitive"
         },
         "asJsonObject" : {
           "$ref" : "#/definitions/JsonObject"
@@ -14578,11 +14583,11 @@
         "asString" : {
           "type" : "string"
         },
-        "asJsonPrimitive" : {
-          "$ref" : "#/definitions/JsonPrimitive"
-        },
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
+        },
+        "asJsonPrimitive" : {
+          "$ref" : "#/definitions/JsonPrimitive"
         },
         "asJsonObject" : {
           "$ref" : "#/definitions/JsonObject"

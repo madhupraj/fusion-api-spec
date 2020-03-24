@@ -4068,49 +4068,6 @@
         }
       }
     },
-    "/api/v1/ifi/{ifiID}/resources/{resourceID}/form_factors" : {
-      "post" : {
-        "summary" : "Add (already provisioned) form factor to an existing resource",
-        "operationId" : "insertFormFactor",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "resourceID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "*/*" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/Builder"
-              }
-            }
-          },
-          "required" : false
-        },
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/InsertFormFactorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/v1/ifi/{ifiID}/resources/{resourceID}/form_factors/create" : {
       "post" : {
         "summary" : "Provision form factor and link it to an existing resource",
@@ -4147,96 +4104,6 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/CreateAndLinkFormFactorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/ifi/{ifiID}/resources/{resourceID}/form_factors/{formFactorID}" : {
-      "get" : {
-        "summary" : "Get form factor details by ID",
-        "operationId" : "getFormFactor",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "resourceID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "formFactorID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/FormFactor"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/ifi/{ifiID}/resources/{resourceID}/form_factors/{formfactorID}" : {
-      "patch" : {
-        "summary" : "Change the resource linked form factor status",
-        "operationId" : "updateResourceLinkedFormFactor",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "resourceID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "formfactorID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "*/*" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/Builder"
-              }
-            }
-          },
-          "required" : false
-        },
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/FormFactor"
                 }
               }
             }
@@ -9783,61 +9650,6 @@
           }
         }
       },
-      "InsertFormFactorResponse" : {
-        "type" : "object",
-        "properties" : {
-          "headers" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
-            }
-          },
-          "id" : {
-            "type" : "string"
-          },
-          "ifi" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "formFactorProductID" : {
-            "type" : "string"
-          },
-          "formFactorID" : {
-            "type" : "string"
-          },
-          "targetURI" : {
-            "type" : "string"
-          },
-          "tags" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
-            }
-          },
-          "attributes" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "object",
-              "properties" : { }
-            }
-          },
-          "policies" : {
-            "$ref" : "#/components/schemas/Policies"
-          },
-          "status" : {
-            "type" : "string",
-            "enum" : [ "ACTIVE", "INACTIVE", "DELETED" ]
-          },
-          "createdAt" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "modifiedAt" : {
-            "type" : "string",
-            "format" : "date-time"
-          }
-        }
-      },
       "IssueAccountArtifactRequest" : {
         "required" : [ "accountHolderID", "accountProductID" ],
         "type" : "object",
@@ -10161,25 +9973,25 @@
           "serviceInstanceJID" : {
             "type" : "boolean"
           },
-          "serviceViewJID" : {
-            "type" : "boolean"
-          },
-          "bareJID" : {
-            "$ref" : "#/components/schemas/JID"
-          },
           "primaryServiceName" : {
             "type" : "string"
           },
           "serviceViewName" : {
             "type" : "string"
           },
+          "bareJID" : {
+            "$ref" : "#/components/schemas/JID"
+          },
+          "serviceViewJID" : {
+            "type" : "boolean"
+          },
           "defaultServiceNode" : {
             "type" : "boolean"
           },
-          "proxyServiceJID" : {
+          "jidOfAGroup" : {
             "type" : "boolean"
           },
-          "jidOfAGroup" : {
+          "proxyServiceJID" : {
             "type" : "boolean"
           }
         }
@@ -10230,11 +10042,11 @@
           "asString" : {
             "type" : "string"
           },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
           },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
@@ -10262,11 +10074,11 @@
           "asBoolean" : {
             "type" : "boolean"
           },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
           },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
@@ -10334,11 +10146,11 @@
           "asBoolean" : {
             "type" : "boolean"
           },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
           },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
@@ -10406,11 +10218,11 @@
           "asBoolean" : {
             "type" : "boolean"
           },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
           },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
@@ -10527,11 +10339,11 @@
           "asString" : {
             "type" : "string"
           },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
           },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
