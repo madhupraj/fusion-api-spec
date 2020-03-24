@@ -2643,6 +2643,39 @@
         }
       }
     },
+    "/api/v1/ifi/{ifiID}/form_factor_products/{formFactorProductID}" : {
+      "get" : {
+        "description" : "Get Form Factor Product details by ID",
+        "operationId" : "getFormFactorProduct",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "formFactorProductID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/FormFactorProduct"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/ifi/{ifiID}/individuals/{individualID}/beneficiaries" : {
       "get" : {
         "summary" : "Get all the beneficiaries of an individual",

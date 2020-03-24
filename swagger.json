@@ -17,8 +17,6 @@
   }, {
     "name" : "Cards list"
   }, {
-    "name" : "Form Factor Product"
-  }, {
     "name" : "Payment"
   }, {
     "name" : "Resource Product"
@@ -3168,7 +3166,6 @@
     },
     "/api/v1/ifi/{ifiID}/form_factor_products/{formFactorProductID}" : {
       "get" : {
-        "tags" : [ "Form Factor Product" ],
         "summary" : "",
         "description" : "Get Form Factor Product details by ID",
         "operationId" : "getFormFactorProduct",
