@@ -170,6 +170,284 @@
         }
       }
     },
+    "/api/v1/ifi/{ifiID}/accountHolders/{accountHolderID}/policyMappings" : {
+      "get" : {
+        "summary" : "Get PolicyMappings for a given ifi, accountHolderId",
+        "operationId" : "getAccountHolderPolicyMappings",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "accountHolderID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetPolicyMappingsResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Create Account Holder Policy Mapping",
+        "operationId" : "createAccountHolderPolicyMappings",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "accountHolderID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CreatePolicyMappingRequestPayload"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PolicyMappingResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/accountHolders/{accountHolderID}/transactionCategories" : {
+      "get" : {
+        "summary" : "Get User Transaction Categories",
+        "operationId" : "getTransactionCategory",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "accountHolderID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAllTxnCategoriesResponsePayload"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/accountHolders/{accountHolderID}/transactionCategory" : {
+      "post" : {
+        "summary" : "Create User Transaction Category",
+        "operationId" : "createTransactionCategory",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "accountHolderID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CreateUserTransactionCategoryRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CreateUserTransactionCategoryResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/accountHolders/{accountHolderID}/transactionPolicies/{transactionPolicyID}" : {
+      "get" : {
+        "summary" : "Get TransactionPolicy with a given ID",
+        "operationId" : "getTransactionPolicyById",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "accountHolderID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "transactionPolicyID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TransactionPolicyResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "summary" : "Replace Transaction Policy",
+        "operationId" : "replaceAccountHolderTransactionPolicy",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "transactionPolicyID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ReplaceTransactionPolicyRequestPayload"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TransactionPolicyResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/accountHolders/{accountHolderID}/transactionPolicies/{transactionPolicyID}/{state}" : {
+      "patch" : {
+        "summary" : "Update User Transaction Policy State",
+        "operationId" : "updateTxnPolicyState",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "transactionPolicyID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "state",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EmptyPayload"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/ifi/{ifiID}/aggregateExpressions" : {
       "get" : {
         "summary" : "get All Aggregation Expressions",
@@ -1396,6 +1674,52 @@
       "post" : {
         "summary" : "Issue bundle to a specific individual/company",
         "operationId" : "issueBundle",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being issued",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "bundleID",
+          "in" : "path",
+          "description" : "ID of the bundle which is being issued",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/IssueBundleRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/IssueBundleResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/bundles/{bundleID}/issueBundleOveridingAssessment" : {
+      "post" : {
+        "summary" : "Issue bundle to a specific individual/company without Assessment irrespective of ifi whitelisting",
+        "operationId" : "issueBundleOverridingOFACCheck",
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
@@ -4116,6 +4440,47 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ListPaymentResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/resources/{resourceID}/payments/{paymentID}" : {
+      "get" : {
+        "summary" : "Get payment details by paymentID and resourceID",
+        "operationId" : "getPayment",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "resourceID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "paymentID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Payment"
                 }
               }
             }
@@ -7860,6 +8225,9 @@
       "CardViewResponse" : {
         "type" : "object",
         "properties" : {
+          "resource" : {
+            "$ref" : "#/components/schemas/Resource"
+          },
           "cardID" : {
             "type" : "string"
           },
@@ -8563,7 +8931,7 @@
           },
           "policyEntityType" : {
             "type" : "string",
-            "enum" : [ "PRODUCT_FAMILY", "PRODUCT", "PROGRAM" ]
+            "enum" : [ "PRODUCT_FAMILY", "PRODUCT", "PROGRAM", "ACCOUNT_HOLDER", "ACCOUNT" ]
           },
           "policyID" : {
             "type" : "string"
@@ -8578,6 +8946,14 @@
               "type" : "object",
               "properties" : { }
             }
+          }
+        }
+      },
+      "CreatePolicyMappingRequestPayload" : {
+        "type" : "object",
+        "properties" : {
+          "policyID" : {
+            "type" : "string"
           }
         }
       },
@@ -8753,6 +9129,30 @@
             }
           }
         }
+      },
+      "CreateUserTransactionCategoryRequest" : {
+        "type" : "object",
+        "properties" : {
+          "ifi" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "code" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "transactionAttributes" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/TransactionCategoryStructure"
+            }
+          }
+        }
+      },
+      "CreateUserTransactionCategoryResponse" : {
+        "type" : "object"
       },
       "DateGroupInfo" : {
         "type" : "object",
@@ -9569,6 +9969,23 @@
           }
         }
       },
+      "GetPolicyMappingsResponse" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "policyMappingResponseList" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyMappingResponse"
+            }
+          }
+        }
+      },
       "GetPolicyResponsePayload" : {
         "type" : "object",
         "properties" : {
@@ -9706,7 +10123,7 @@
           },
           "phoneNumber" : {
             "maxLength" : 15,
-            "minLength" : 10,
+            "minLength" : 0,
             "type" : "string",
             "description" : "The phone number to be assosciated with the account and the card",
             "example" : "+919876543210"
@@ -9940,6 +10357,9 @@
           "serviceInstanceJID" : {
             "type" : "boolean"
           },
+          "proxyServiceJID" : {
+            "type" : "boolean"
+          },
           "primaryServiceName" : {
             "type" : "string"
           },
@@ -9956,9 +10376,6 @@
             "type" : "boolean"
           },
           "jidOfAGroup" : {
-            "type" : "boolean"
-          },
-          "proxyServiceJID" : {
             "type" : "boolean"
           }
         }
@@ -10652,6 +11069,10 @@
           },
           "hasNext" : {
             "type" : "boolean"
+          },
+          "totalCount" : {
+            "type" : "integer",
+            "format" : "int64"
           }
         }
       },
@@ -11027,6 +11448,53 @@
           },
           "errorCode" : {
             "type" : "string"
+          }
+        }
+      },
+      "PolicyMappingResponse" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "id" : {
+            "type" : "string"
+          },
+          "ifiID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "entityID" : {
+            "type" : "string"
+          },
+          "policyEntityType" : {
+            "type" : "string",
+            "enum" : [ "PRODUCT_FAMILY", "PRODUCT", "PROGRAM", "ACCOUNT_HOLDER", "ACCOUNT" ]
+          },
+          "policyID" : {
+            "type" : "string"
+          },
+          "policyType" : {
+            "type" : "string",
+            "enum" : [ "TRANSACTION_POLICY", "CARD_DESIGN_POLICY", "ISSUANCE_POLICY", "COUPON_ACCOUNTING_POLICY", "NOTIFICATION_POLICY", "FEE_CHARGES_POLICY", "INTEREST_POLICY", "ACCOUNT_DISCOVERY_POLICY" ]
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object",
+              "properties" : { }
+            }
+          },
+          "createdAt" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "updatedAt" : {
+            "type" : "integer",
+            "format" : "int64"
           }
         }
       },
@@ -11664,6 +12132,21 @@
           }
         }
       },
+      "TransactionCategoryStructure" : {
+        "type" : "object",
+        "properties" : {
+          "txnCategoryComparator" : {
+            "type" : "string",
+            "enum" : [ "EQUALS", "CONTAINS" ]
+          },
+          "attrVal" : {
+            "type" : "string"
+          },
+          "attrKey" : {
+            "type" : "string"
+          }
+        }
+      },
       "TransactionPolicyResponse" : {
         "type" : "object",
         "properties" : {
@@ -11761,6 +12244,34 @@
           },
           "desc" : {
             "type" : "string"
+          },
+          "attrs" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/TxnCategoryAttrs"
+            }
+          }
+        }
+      },
+      "TxnCategoryAttrs" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "code" : {
+            "type" : "string"
+          },
+          "attrKey" : {
+            "type" : "string"
+          },
+          "attrVal" : {
+            "type" : "string"
+          },
+          "txnCategoryComparator" : {
+            "type" : "string",
+            "enum" : [ "EQUALS", "CONTAINS" ]
           }
         }
       },

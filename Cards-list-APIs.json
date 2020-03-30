@@ -75,6 +75,15 @@
           },
           "crn" : {
             "type" : "string"
+          },
+          "panSHA" : {
+            "type" : "string"
+          },
+          "tags" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
           }
         }
       }
