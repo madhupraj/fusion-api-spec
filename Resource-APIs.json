@@ -44,7 +44,10 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ListResourceResponse"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Resource"
+                  }
                 }
               }
             }
@@ -184,6 +187,9 @@
             "type" : "string",
             "enum" : [ "ACTIVE", "INACTIVE", "DELETED" ]
           },
+          "reason" : {
+            "$ref" : "#/components/schemas/StatusReason"
+          },
           "createdAt" : {
             "type" : "string",
             "format" : "date-time"
@@ -259,23 +265,6 @@
           "modifiedAt" : {
             "type" : "string",
             "format" : "date-time"
-          }
-        }
-      },
-      "ListResourceResponse" : {
-        "type" : "object",
-        "properties" : {
-          "headers" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
-            }
-          },
-          "resources" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/Resource"
-            }
           }
         }
       },
@@ -424,6 +413,18 @@
           "modifiedAt" : {
             "type" : "string",
             "format" : "date-time"
+          }
+        }
+      },
+      "StatusReason" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "string",
+            "enum" : [ "LOST_OR_STOLEN", "DAMAGED", "HOTLISTED", "OTHER" ]
+          },
+          "description" : {
+            "type" : "string"
           }
         }
       }

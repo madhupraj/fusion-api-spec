@@ -198,6 +198,9 @@
             "type" : "string",
             "enum" : [ "ACTIVE", "INACTIVE", "DELETED" ]
           },
+          "reason" : {
+            "$ref" : "#/components/schemas/StatusReason"
+          },
           "createdAt" : {
             "type" : "string",
             "format" : "date-time"
@@ -277,6 +280,18 @@
             "items" : {
               "type" : "string"
             }
+          }
+        }
+      },
+      "StatusReason" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "string",
+            "enum" : [ "LOST_OR_STOLEN", "DAMAGED", "HOTLISTED", "OTHER" ]
+          },
+          "description" : {
+            "type" : "string"
           }
         }
       }

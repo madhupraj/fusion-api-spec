@@ -9675,6 +9675,9 @@
             "type" : "string",
             "enum" : [ "ACTIVE", "INACTIVE", "DELETED" ]
           },
+          "reason" : {
+            "$ref" : "#/components/schemas/StatusReason"
+          },
           "createdAt" : {
             "type" : "string",
             "format" : "date-time"
@@ -10354,9 +10357,6 @@
           "resource" : {
             "type" : "string"
           },
-          "serviceInstanceJID" : {
-            "type" : "boolean"
-          },
           "proxyServiceJID" : {
             "type" : "boolean"
           },
@@ -10376,6 +10376,9 @@
             "type" : "boolean"
           },
           "jidOfAGroup" : {
+            "type" : "boolean"
+          },
+          "serviceInstanceJID" : {
             "type" : "boolean"
           }
         }
@@ -10426,9 +10429,6 @@
           "asString" : {
             "type" : "string"
           },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
@@ -10449,6 +10449,9 @@
           },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
           }
         }
       },
@@ -10457,9 +10460,6 @@
         "properties" : {
           "asBoolean" : {
             "type" : "boolean"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
           },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
@@ -10518,6 +10518,9 @@
           "asShort" : {
             "type" : "integer",
             "format" : "int32"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
           },
           "asString" : {
             "type" : "string"
@@ -10530,9 +10533,6 @@
           "asBoolean" : {
             "type" : "boolean"
           },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
@@ -10590,6 +10590,9 @@
           "asShort" : {
             "type" : "integer",
             "format" : "int32"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
           },
           "asString" : {
             "type" : "string"
@@ -10602,9 +10605,6 @@
           "asBoolean" : {
             "type" : "boolean"
           },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
@@ -10662,6 +10662,9 @@
           "asShort" : {
             "type" : "integer",
             "format" : "int32"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
           },
           "asString" : {
             "type" : "string"
@@ -10674,10 +10677,13 @@
           "number" : {
             "type" : "boolean"
           },
+          "asBoolean" : {
+            "type" : "boolean"
+          },
           "boolean" : {
             "type" : "boolean"
           },
-          "asBoolean" : {
+          "string" : {
             "type" : "boolean"
           },
           "asNumber" : {
@@ -10717,14 +10723,8 @@
             "type" : "integer",
             "format" : "int32"
           },
-          "string" : {
-            "type" : "boolean"
-          },
           "asString" : {
             "type" : "string"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
           },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
@@ -10746,6 +10746,9 @@
           },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
           }
         }
       },
@@ -11121,7 +11124,10 @@
             "$ref" : "#/components/schemas/PublicPaymentRequestWrapper"
           },
           "receipts" : {
-            "$ref" : "#/components/schemas/PublicTransactionReceipts"
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Receipt"
+            }
           },
           "error" : {
             "$ref" : "#/components/schemas/Error"
@@ -11573,6 +11579,45 @@
           }
         }
       },
+      "Posting" : {
+        "type" : "object",
+        "properties" : {
+          "postingID" : {
+            "type" : "string"
+          },
+          "ifi" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "value" : {
+            "$ref" : "#/components/schemas/Money"
+          },
+          "newBalance" : {
+            "$ref" : "#/components/schemas/Money"
+          },
+          "instrumentType" : {
+            "type" : "string"
+          },
+          "productType" : {
+            "type" : "string"
+          },
+          "cardProgramID" : {
+            "type" : "string"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "coupons" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/JsonObject"
+            }
+          }
+        }
+      },
       "Product" : {
         "type" : "object",
         "properties" : {
@@ -11746,20 +11791,103 @@
           }
         }
       },
-      "PublicTransactionReceipts" : {
+      "Receipt" : {
         "type" : "object",
         "properties" : {
-          "transactionReceipts" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/SignedPayload"
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
             }
           },
-          "reversalTransactionReceipts" : {
+          "receiptType" : {
+            "type" : "string",
+            "enum" : [ "AUTHORIZATION", "PAYMENT", "REVERSAL" ]
+          },
+          "paymentID" : {
+            "type" : "string"
+          },
+          "paymentRequestID" : {
+            "type" : "string"
+          },
+          "receiptID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "transactionHash" : {
+            "type" : "string"
+          },
+          "transactionCode" : {
+            "type" : "string"
+          },
+          "paymentFrom" : {
+            "type" : "string"
+          },
+          "paymentTo" : {
+            "type" : "string"
+          },
+          "time" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "debits" : {
             "type" : "array",
             "items" : {
-              "$ref" : "#/components/schemas/SignedPayload"
+              "$ref" : "#/components/schemas/Posting"
             }
+          },
+          "credits" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Posting"
+            }
+          },
+          "towards" : {
+            "type" : "string"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "value" : {
+            "$ref" : "#/components/schemas/Money"
+          },
+          "payerInfo" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "payeeInfo" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "reversedReceiptID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "type" : {
+            "type" : "string"
+          },
+          "signatoryJID" : {
+            "$ref" : "#/components/schemas/JID"
+          },
+          "zetaSignature" : {
+            "$ref" : "#/components/schemas/ZetaSignature"
+          },
+          "payloadVersion" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "signed" : {
+            "type" : "boolean"
+          },
+          "signature" : {
+            "type" : "string"
           }
         }
       },
@@ -12062,39 +12190,6 @@
           }
         }
       },
-      "SignedPayload" : {
-        "type" : "object",
-        "properties" : {
-          "headers" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
-            }
-          },
-          "signedDoc" : {
-            "$ref" : "#/components/schemas/JsonObject"
-          },
-          "version" : {
-            "type" : "integer",
-            "format" : "int32"
-          },
-          "signatoryJID" : {
-            "$ref" : "#/components/schemas/JID"
-          },
-          "zetaSignature" : {
-            "$ref" : "#/components/schemas/ZetaSignature"
-          },
-          "signatureHash" : {
-            "type" : "string"
-          },
-          "signed" : {
-            "type" : "boolean"
-          },
-          "signature" : {
-            "type" : "string"
-          }
-        }
-      },
       "SigningAuthority" : {
         "type" : "object",
         "properties" : {
@@ -12112,6 +12207,18 @@
             "type" : "string",
             "description" : "Phone number of the signing authority",
             "example" : "+919876543210"
+          }
+        }
+      },
+      "StatusReason" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "string",
+            "enum" : [ "LOST_OR_STOLEN", "DAMAGED", "HOTLISTED", "OTHER" ]
+          },
+          "description" : {
+            "type" : "string"
           }
         }
       },
