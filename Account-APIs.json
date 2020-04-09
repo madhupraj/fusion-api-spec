@@ -389,6 +389,12 @@
           "updatedAt" : {
             "type" : "string",
             "format" : "date-time"
+          },
+          "tags" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Tag"
+            }
           }
         }
       },
