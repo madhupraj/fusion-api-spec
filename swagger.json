@@ -71,7 +71,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/PaginatedResponseFusionConfig"
+              "$ref" : "#/definitions/PaginatedResponseFusionConfigResponse"
             }
           }
         }
@@ -90,7 +90,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/FusionConfig"
+              "$ref" : "#/definitions/FusionConfigResponse"
             }
           }
         }
@@ -110,7 +110,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/FusionConfig"
+              "$ref" : "#/definitions/FusionConfigResponse"
             }
           }
         }
@@ -135,7 +135,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/FusionConfig"
+              "$ref" : "#/definitions/FusionConfigResponse"
             }
           }
         }
@@ -7785,228 +7785,6 @@
         }
       }
     },
-    "/api/v2/ifi/{ifiID}/bundles" : {
-      "get" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Get all Bundles",
-        "description" : "Get all Bundles available for an IFI. The response returns a unique identifier for each available Bundle.",
-        "operationId" : "getAllBundles",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundles are being retrieved",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "type" : "array",
-              "items" : {
-                "$ref" : "#/definitions/BundleResponse"
-              }
-            }
-          }
-        }
-      },
-      "post" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Create Bundle",
-        "description" : "Creates a Bundle",
-        "operationId" : "createBundle",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being created",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        }, {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/AddBundleRequest"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/BundleResponse"
-            }
-          }
-        }
-      }
-    },
-    "/api/v2/ifi/{ifiID}/bundles/{bundleID}" : {
-      "get" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Get Bundle by Bundle ID",
-        "description" : "Returns Bundle by bundleID for an IFI.",
-        "operationId" : "getBundleByID",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundles are being retrieved by bundleID",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle whose details are being retrieved",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/BundleResponse"
-            }
-          }
-        }
-      },
-      "put" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Update Bundle",
-        "description" : "Update Bundle details",
-        "operationId" : "updateBundle",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle whose details are being updated",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/UpdateBundleRequest"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/BundleResponse"
-            }
-          }
-        }
-      },
-      "delete" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Delete Bundle",
-        "description" : "Delete a Bundle",
-        "operationId" : "deleteBundle",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being deleted",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle which is being deleted",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/BundleResponse"
-            }
-          }
-        }
-      }
-    },
-    "/api/v2/ifi/{ifiID}/bundles/{bundleID}/accountProducts" : {
-      "post" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Add Account Product",
-        "description" : "Adds an Account Product to a Bundle",
-        "operationId" : "addAccountProductToBundle",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle whose details are being updated",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/AddAccountProductInBundleRequest"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/BundleResponse"
-            }
-          }
-        }
-      }
-    },
-    "/api/v2/ifi/{ifiID}/bundles/{bundleID}/accountProducts/{accountProductID}" : {
-      "delete" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Delete Account Product",
-        "description" : "Deletes an Account Product from a Bundle",
-        "operationId" : "deleteAccountProductFromBundle",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle whose details are being updated",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "accountProductID",
-          "in" : "path",
-          "description" : "ID for the account product which is to be removed from the bundle",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/BundleResponse"
-            }
-          }
-        }
-      }
-    },
     "/api/v2/ifi/{ifiID}/bundles/{bundleID}/issueAccount" : {
       "post" : {
         "summary" : "Issue specific Account from a bundle ",
@@ -8146,79 +7924,6 @@
             "description" : "successful operation",
             "schema" : {
               "$ref" : "#/definitions/IssueResourceResponse"
-            }
-          }
-        }
-      }
-    },
-    "/api/v2/ifi/{ifiID}/bundles/{bundleID}/paymentProducts" : {
-      "post" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Add Payment Product",
-        "description" : "Adds a Payment Product to a Bundle",
-        "operationId" : "addPaymentProductToBundle",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle whose details are being updated",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/AddPaymentProductInBundleRequest"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/BundleResponse"
-            }
-          }
-        }
-      }
-    },
-    "/api/v2/ifi/{ifiID}/bundles/{bundleID}/paymentProducts/{paymentProductID}" : {
-      "delete" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Delete Payment Product",
-        "description" : "Deletes a Payment Product from a Bundle",
-        "operationId" : "deletePaymentProductFromBundle",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated.",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle whose details are being updated",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "paymentProductID",
-          "in" : "path",
-          "description" : "ID for the payment product to be removed from the bundle",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/BundleResponse"
             }
           }
         }
@@ -12069,12 +11774,10 @@
           }
         },
         "createdAt" : {
-          "type" : "string",
-          "format" : "date-time"
+          "type" : "string"
         },
         "updatedAt" : {
-          "type" : "string",
-          "format" : "date-time"
+          "type" : "string"
         },
         "shortCode" : {
           "type" : "string"
@@ -13704,40 +13407,8 @@
         }
       }
     },
-    "FusionConfig" : {
-      "type" : "object",
-      "properties" : {
-        "key" : {
-          "type" : "string"
-        },
-        "value" : {
-          "type" : "string"
-        },
-        "type" : {
-          "type" : "string"
-        },
-        "description" : {
-          "type" : "string"
-        },
-        "id" : {
-          "type" : "string",
-          "format" : "uuid"
-        },
-        "createdBy" : {
-          "type" : "string"
-        },
-        "updatedBy" : {
-          "type" : "string"
-        },
-        "createdAt" : {
-          "type" : "string",
-          "format" : "date-time"
-        },
-        "updatedAt" : {
-          "type" : "string",
-          "format" : "date-time"
-        }
-      }
+    "FusionConfigResponse" : {
+      "type" : "object"
     },
     "FusionListCardsRequest" : {
       "type" : "object",
@@ -14585,9 +14256,6 @@
         "serviceInstanceJID" : {
           "type" : "boolean"
         },
-        "proxyServiceJID" : {
-          "type" : "boolean"
-        },
         "primaryServiceName" : {
           "type" : "string"
         },
@@ -14605,6 +14273,9 @@
         },
         "jidOfAGroup" : {
           "type" : "boolean"
+        },
+        "proxyServiceJID" : {
+          "type" : "boolean"
         }
       }
     },
@@ -14613,6 +14284,23 @@
       "properties" : {
         "asBoolean" : {
           "type" : "boolean"
+        },
+        "asByte" : {
+          "type" : "string",
+          "format" : "byte"
+        },
+        "asCharacter" : {
+          "type" : "string"
+        },
+        "asBigDecimal" : {
+          "type" : "number"
+        },
+        "asBigInteger" : {
+          "type" : "integer"
+        },
+        "asShort" : {
+          "type" : "integer",
+          "format" : "int32"
         },
         "asNumber" : {
           "$ref" : "#/definitions/Number"
@@ -14633,45 +14321,28 @@
           "type" : "integer",
           "format" : "int32"
         },
-        "asByte" : {
-          "type" : "string",
-          "format" : "byte"
-        },
-        "asCharacter" : {
-          "type" : "string"
-        },
-        "asBigDecimal" : {
-          "type" : "number"
-        },
-        "asBigInteger" : {
-          "type" : "integer"
-        },
-        "asShort" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
         "asString" : {
           "type" : "string"
         },
-        "jsonPrimitive" : {
-          "type" : "boolean"
-        },
-        "jsonNull" : {
-          "type" : "boolean"
-        },
-        "jsonObject" : {
-          "type" : "boolean"
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
         },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
-        },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
         },
         "asJsonObject" : {
           "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
+          "type" : "boolean"
+        },
+        "jsonObject" : {
+          "type" : "boolean"
+        },
+        "jsonPrimitive" : {
+          "type" : "boolean"
+        },
+        "jsonNull" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
@@ -14685,25 +14356,42 @@
         "asBoolean" : {
           "type" : "boolean"
         },
-        "jsonPrimitive" : {
-          "type" : "boolean"
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
         },
-        "jsonNull" : {
-          "type" : "boolean"
+        "asByte" : {
+          "type" : "string",
+          "format" : "byte"
         },
-        "jsonObject" : {
-          "type" : "boolean"
+        "asCharacter" : {
+          "type" : "string"
         },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
-        },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
         },
         "asJsonObject" : {
           "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
+          "type" : "boolean"
+        },
+        "asBigDecimal" : {
+          "type" : "number"
+        },
+        "asBigInteger" : {
+          "type" : "integer"
+        },
+        "asShort" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "jsonObject" : {
+          "type" : "boolean"
+        },
+        "jsonPrimitive" : {
+          "type" : "boolean"
+        },
+        "jsonNull" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
@@ -14725,23 +14413,6 @@
           "format" : "int64"
         },
         "asInt" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "asByte" : {
-          "type" : "string",
-          "format" : "byte"
-        },
-        "asCharacter" : {
-          "type" : "string"
-        },
-        "asBigDecimal" : {
-          "type" : "number"
-        },
-        "asBigInteger" : {
-          "type" : "integer"
-        },
-        "asShort" : {
           "type" : "integer",
           "format" : "int32"
         },
@@ -14756,25 +14427,42 @@
         "asBoolean" : {
           "type" : "boolean"
         },
-        "jsonPrimitive" : {
-          "type" : "boolean"
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
         },
-        "jsonNull" : {
-          "type" : "boolean"
+        "asByte" : {
+          "type" : "string",
+          "format" : "byte"
         },
-        "jsonObject" : {
-          "type" : "boolean"
+        "asCharacter" : {
+          "type" : "string"
         },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
-        },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
         },
         "asJsonObject" : {
           "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
+          "type" : "boolean"
+        },
+        "asBigDecimal" : {
+          "type" : "number"
+        },
+        "asBigInteger" : {
+          "type" : "integer"
+        },
+        "asShort" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "jsonObject" : {
+          "type" : "boolean"
+        },
+        "jsonPrimitive" : {
+          "type" : "boolean"
+        },
+        "jsonNull" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
@@ -14796,23 +14484,6 @@
           "format" : "int64"
         },
         "asInt" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "asByte" : {
-          "type" : "string",
-          "format" : "byte"
-        },
-        "asCharacter" : {
-          "type" : "string"
-        },
-        "asBigDecimal" : {
-          "type" : "number"
-        },
-        "asBigInteger" : {
-          "type" : "integer"
-        },
-        "asShort" : {
           "type" : "integer",
           "format" : "int32"
         },
@@ -14827,25 +14498,42 @@
         "asBoolean" : {
           "type" : "boolean"
         },
-        "jsonPrimitive" : {
-          "type" : "boolean"
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
         },
-        "jsonNull" : {
-          "type" : "boolean"
+        "asByte" : {
+          "type" : "string",
+          "format" : "byte"
         },
-        "jsonObject" : {
-          "type" : "boolean"
+        "asCharacter" : {
+          "type" : "string"
         },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
-        },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
         },
         "asJsonObject" : {
           "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
+          "type" : "boolean"
+        },
+        "asBigDecimal" : {
+          "type" : "number"
+        },
+        "asBigInteger" : {
+          "type" : "integer"
+        },
+        "asShort" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "jsonObject" : {
+          "type" : "boolean"
+        },
+        "jsonPrimitive" : {
+          "type" : "boolean"
+        },
+        "jsonNull" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
@@ -14867,23 +14555,6 @@
           "format" : "int64"
         },
         "asInt" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "asByte" : {
-          "type" : "string",
-          "format" : "byte"
-        },
-        "asCharacter" : {
-          "type" : "string"
-        },
-        "asBigDecimal" : {
-          "type" : "number"
-        },
-        "asBigInteger" : {
-          "type" : "integer"
-        },
-        "asShort" : {
           "type" : "integer",
           "format" : "int32"
         },
@@ -14904,8 +14575,22 @@
         "asBoolean" : {
           "type" : "boolean"
         },
-        "string" : {
-          "type" : "boolean"
+        "asByte" : {
+          "type" : "string",
+          "format" : "byte"
+        },
+        "asCharacter" : {
+          "type" : "string"
+        },
+        "asBigDecimal" : {
+          "type" : "number"
+        },
+        "asBigInteger" : {
+          "type" : "integer"
+        },
+        "asShort" : {
+          "type" : "integer",
+          "format" : "int32"
         },
         "asNumber" : {
           "$ref" : "#/definitions/Number"
@@ -14926,45 +14611,31 @@
           "type" : "integer",
           "format" : "int32"
         },
-        "asByte" : {
-          "type" : "string",
-          "format" : "byte"
-        },
-        "asCharacter" : {
-          "type" : "string"
-        },
-        "asBigDecimal" : {
-          "type" : "number"
-        },
-        "asBigInteger" : {
-          "type" : "integer"
-        },
-        "asShort" : {
-          "type" : "integer",
-          "format" : "int32"
+        "string" : {
+          "type" : "boolean"
         },
         "asString" : {
           "type" : "string"
         },
-        "jsonPrimitive" : {
-          "type" : "boolean"
-        },
-        "jsonNull" : {
-          "type" : "boolean"
-        },
-        "jsonObject" : {
-          "type" : "boolean"
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
         },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
-        },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
         },
         "asJsonObject" : {
           "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
+          "type" : "boolean"
+        },
+        "jsonObject" : {
+          "type" : "boolean"
+        },
+        "jsonPrimitive" : {
+          "type" : "boolean"
+        },
+        "jsonNull" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
@@ -15275,6 +14946,41 @@
         }
       }
     },
+    "PageMetadata" : {
+      "type" : "object",
+      "properties" : {
+        "size" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "totalElements" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "totalPages" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "number" : {
+          "type" : "integer",
+          "format" : "int64"
+        }
+      }
+    },
+    "PagedModel" : {
+      "type" : "object",
+      "properties" : {
+        "content" : {
+          "type" : "array",
+          "items" : {
+            "type" : "object"
+          }
+        },
+        "metadata" : {
+          "$ref" : "#/definitions/PageMetadata"
+        }
+      }
+    },
     "PaginatedResponse" : {
       "type" : "object",
       "properties" : {
@@ -15299,7 +15005,7 @@
         }
       }
     },
-    "PaginatedResponseFusionConfig" : {
+    "PaginatedResponseFusionConfigResponse" : {
       "type" : "object",
       "properties" : {
         "nextPageIndex" : {
@@ -15311,7 +15017,7 @@
         "entities" : {
           "type" : "array",
           "items" : {
-            "$ref" : "#/definitions/FusionConfig"
+            "$ref" : "#/definitions/FusionConfigResponse"
           }
         },
         "hasNext" : {
