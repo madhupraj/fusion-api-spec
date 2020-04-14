@@ -59,7 +59,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/PaginatedResponseFusionConfig"
+                  "$ref" : "#/components/schemas/PaginatedResponseFusionConfigResponse"
                 }
               }
             }
@@ -84,7 +84,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/FusionConfig"
+                  "$ref" : "#/components/schemas/FusionConfigResponse"
                 }
               }
             }
@@ -110,7 +110,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/FusionConfig"
+                  "$ref" : "#/components/schemas/FusionConfigResponse"
                 }
               }
             }
@@ -144,7 +144,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/FusionConfig"
+                  "$ref" : "#/components/schemas/FusionConfigResponse"
                 }
               }
             }
@@ -9762,40 +9762,8 @@
           }
         }
       },
-      "FusionConfig" : {
-        "type" : "object",
-        "properties" : {
-          "key" : {
-            "type" : "string"
-          },
-          "value" : {
-            "type" : "string"
-          },
-          "type" : {
-            "type" : "string"
-          },
-          "description" : {
-            "type" : "string"
-          },
-          "id" : {
-            "type" : "string",
-            "format" : "uuid"
-          },
-          "createdBy" : {
-            "type" : "string"
-          },
-          "updatedBy" : {
-            "type" : "string"
-          },
-          "createdAt" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "updatedAt" : {
-            "type" : "string",
-            "format" : "date-time"
-          }
-        }
+      "FusionConfigResponse" : {
+        "type" : "object"
       },
       "GenericCreateApplicationResponse" : {
         "type" : "object",
@@ -10359,12 +10327,6 @@
           "serviceInstanceJID" : {
             "type" : "boolean"
           },
-          "primaryServiceName" : {
-            "type" : "string"
-          },
-          "serviceViewName" : {
-            "type" : "string"
-          },
           "bareJID" : {
             "$ref" : "#/components/schemas/JID"
           },
@@ -10379,6 +10341,12 @@
           },
           "proxyServiceJID" : {
             "type" : "boolean"
+          },
+          "primaryServiceName" : {
+            "type" : "string"
+          },
+          "serviceViewName" : {
+            "type" : "string"
           }
         }
       },
@@ -10428,6 +10396,15 @@
           "asString" : {
             "type" : "string"
           },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
           "jsonArray" : {
             "type" : "boolean"
           },
@@ -10442,6 +10419,14 @@
           },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
+          }
+        }
+      },
+      "JsonElement" : {
+        "type" : "object",
+        "properties" : {
+          "asBoolean" : {
+            "type" : "boolean"
           },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
@@ -10451,14 +10436,6 @@
           },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
-          }
-        }
-      },
-      "JsonElement" : {
-        "type" : "object",
-        "properties" : {
-          "asBoolean" : {
-            "type" : "boolean"
           },
           "jsonArray" : {
             "type" : "boolean"
@@ -10511,15 +10488,6 @@
           "asShort" : {
             "type" : "integer",
             "format" : "int32"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
           },
           "asString" : {
             "type" : "string"
@@ -10532,6 +10500,15 @@
           "asBoolean" : {
             "type" : "boolean"
           },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
           "jsonArray" : {
             "type" : "boolean"
           },
@@ -10583,15 +10560,6 @@
           "asShort" : {
             "type" : "integer",
             "format" : "int32"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
           },
           "asString" : {
             "type" : "string"
@@ -10604,6 +10572,15 @@
           "asBoolean" : {
             "type" : "boolean"
           },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
           "jsonArray" : {
             "type" : "boolean"
           },
@@ -10655,15 +10632,6 @@
           "asShort" : {
             "type" : "integer",
             "format" : "int32"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
           },
           "asString" : {
             "type" : "string"
@@ -10725,6 +10693,15 @@
           "asString" : {
             "type" : "string"
           },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
           "jsonArray" : {
             "type" : "boolean"
           },
@@ -10739,15 +10716,6 @@
           },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
           }
         }
       },
@@ -11054,7 +11022,7 @@
           }
         }
       },
-      "PaginatedResponseFusionConfig" : {
+      "PaginatedResponseFusionConfigResponse" : {
         "type" : "object",
         "properties" : {
           "nextPageIndex" : {
@@ -11066,7 +11034,7 @@
           "entities" : {
             "type" : "array",
             "items" : {
-              "$ref" : "#/components/schemas/FusionConfig"
+              "$ref" : "#/components/schemas/FusionConfigResponse"
             }
           },
           "hasNext" : {

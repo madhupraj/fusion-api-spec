@@ -32,46 +32,8 @@
                 "schema" : {
                   "type" : "array",
                   "items" : {
-                    "$ref" : "#/components/schemas/BundleResponse"
+                    "$ref" : "#/components/schemas/IBundleView"
                   }
-                }
-              }
-            }
-          }
-        }
-      },
-      "post" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Create Bundle",
-        "description" : "Creates a Bundle",
-        "operationId" : "createBundle",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being created",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "*/*" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/AddBundleRequest"
-              }
-            }
-          },
-          "required" : false
-        },
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/BundleResponse"
                 }
               }
             }
@@ -109,277 +71,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/BundleResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Update Bundle",
-        "description" : "Update Bundle details",
-        "operationId" : "updateBundle",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
-        }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle whose details are being updated",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "*/*" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/UpdateBundleRequest"
-              }
-            }
-          },
-          "required" : false
-        },
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/BundleResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Delete Bundle",
-        "description" : "Delete a Bundle",
-        "operationId" : "deleteBundle",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being deleted",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
-        }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle which is being deleted",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/BundleResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/ifi/{ifiID}/bundles/{bundleID}/accountProducts" : {
-      "post" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Add Account Product",
-        "description" : "Adds an Account Product to a Bundle",
-        "operationId" : "addAccountProductToBundle",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
-        }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle whose details are being updated",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "*/*" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/AddAccountProductInBundleRequest"
-              }
-            }
-          },
-          "required" : false
-        },
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/BundleResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/ifi/{ifiID}/bundles/{bundleID}/accountProducts/{accountProductID}" : {
-      "delete" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Delete Account Product",
-        "description" : "Deletes an Account Product from a Bundle",
-        "operationId" : "deleteAccountProductFromBundle",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
-        }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle whose details are being updated",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "accountProductID",
-          "in" : "path",
-          "description" : "ID for the account product which is to be removed from the bundle",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/BundleResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/ifi/{ifiID}/bundles/{bundleID}/paymentProducts" : {
-      "post" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Add Payment Product",
-        "description" : "Adds a Payment Product to a Bundle",
-        "operationId" : "addPaymentProductToBundle",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
-        }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle whose details are being updated",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "*/*" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/AddPaymentProductInBundleRequest"
-              }
-            }
-          },
-          "required" : false
-        },
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/BundleResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/ifi/{ifiID}/bundles/{bundleID}/paymentProducts/{paymentProductID}" : {
-      "delete" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Delete Payment Product",
-        "description" : "Deletes a Payment Product from a Bundle",
-        "operationId" : "deletePaymentProductFromBundle",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated.",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
-        }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle whose details are being updated",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "paymentProductID",
-          "in" : "path",
-          "description" : "ID for the payment product to be removed from the bundle",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/BundleResponse"
+                  "$ref" : "#/components/schemas/IBundleView"
                 }
               }
             }
@@ -402,6 +94,39 @@
             "type" : "integer",
             "format" : "int64"
           }
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "description" : "Page number of the request",
+          "schema" : {
+            "maximum" : 50,
+            "minimum" : 0,
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "description" : "Page Size of the request",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "description" : "Sort by a given value",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "description" : "Order of the request i.e asc or desc",
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "asc", "desc" ]
+          }
         } ],
         "responses" : {
           "200" : {
@@ -409,10 +134,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "type" : "array",
-                  "items" : {
-                    "$ref" : "#/components/schemas/BundleResponse"
-                  }
+                  "$ref" : "#/components/schemas/PagedModel"
                 }
               }
             }
@@ -450,7 +172,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/BundleResponse"
+                  "$ref" : "#/components/schemas/IBundleView"
                 }
               }
             }
@@ -488,7 +210,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/BundleResponse"
+                  "$ref" : "#/components/schemas/IBundleView"
                 }
               }
             }
@@ -534,7 +256,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/BundleResponse"
+                  "$ref" : "#/components/schemas/IBundleView"
                 }
               }
             }
@@ -570,195 +292,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/BundleResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v2/ifi/{ifiID}/bundles/{bundleID}/accountProducts" : {
-      "post" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Add Account Product",
-        "description" : "Adds an Account Product to a Bundle",
-        "operationId" : "addAccountProductToBundle",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
-        }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle whose details are being updated",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "*/*" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/AddAccountProductInBundleRequest"
-              }
-            }
-          },
-          "required" : false
-        },
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/BundleResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v2/ifi/{ifiID}/bundles/{bundleID}/accountProducts/{accountProductID}" : {
-      "delete" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Delete Account Product",
-        "description" : "Deletes an Account Product from a Bundle",
-        "operationId" : "deleteAccountProductFromBundle",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
-        }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle whose details are being updated",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "accountProductID",
-          "in" : "path",
-          "description" : "ID for the account product which is to be removed from the bundle",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/BundleResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v2/ifi/{ifiID}/bundles/{bundleID}/paymentProducts" : {
-      "post" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Add Payment Product",
-        "description" : "Adds a Payment Product to a Bundle",
-        "operationId" : "addPaymentProductToBundle",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
-        }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle whose details are being updated",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "*/*" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/AddPaymentProductInBundleRequest"
-              }
-            }
-          },
-          "required" : false
-        },
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/BundleResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v2/ifi/{ifiID}/bundles/{bundleID}/paymentProducts/{paymentProductID}" : {
-      "delete" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Delete Payment Product",
-        "description" : "Deletes a Payment Product from a Bundle",
-        "operationId" : "deletePaymentProductFromBundle",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated.",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
-        }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle whose details are being updated",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "paymentProductID",
-          "in" : "path",
-          "description" : "ID for the payment product to be removed from the bundle",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/BundleResponse"
+                  "$ref" : "#/components/schemas/IBundleView"
                 }
               }
             }
@@ -769,22 +303,8 @@
   },
   "components" : {
     "schemas" : {
-      "AddAccountProductInBundleRequest" : {
-        "type" : "object",
-        "properties" : {
-          "accountProduct" : {
-            "$ref" : "#/components/schemas/ProductInfoRequest"
-          },
-          "headers" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
-            }
-          }
-        }
-      },
       "AddBundleRequest" : {
-        "required" : [ "name" ],
+        "required" : [ "name", "productMappingRequest", "shortCode" ],
         "type" : "object",
         "properties" : {
           "name" : {
@@ -806,18 +326,11 @@
             "description" : "The detailed description of the bundle",
             "example" : "Bundle related to savings accounts. Consists of a savings account product and a related debit card"
           },
-          "accountProducts" : {
+          "productMappingRequest" : {
             "type" : "array",
-            "description" : "The list of account products which will be a part of the bundle",
+            "description" : "The mapping of account products to payment products",
             "items" : {
-              "$ref" : "#/components/schemas/ProductInfoRequest"
-            }
-          },
-          "paymentProducts" : {
-            "type" : "array",
-            "description" : "The list of payment products which will be a part of the bundle",
-            "items" : {
-              "$ref" : "#/components/schemas/ProductInfoRequest"
+              "$ref" : "#/components/schemas/ProductMappingRequest"
             }
           },
           "attributes" : {
@@ -836,70 +349,42 @@
           }
         }
       },
-      "AddPaymentProductInBundleRequest" : {
-        "type" : "object",
-        "properties" : {
-          "paymentProduct" : {
-            "$ref" : "#/components/schemas/ProductInfoRequest"
-          }
-        }
+      "IBundleView" : {
+        "type" : "object"
       },
-      "BundleResponse" : {
+      "PageMetadata" : {
         "type" : "object",
         "properties" : {
-          "id" : {
-            "type" : "string"
-          },
-          "ifiID" : {
+          "size" : {
             "type" : "integer",
             "format" : "int64"
           },
-          "vboID" : {
-            "type" : "string"
+          "totalElements" : {
+            "type" : "integer",
+            "format" : "int64"
           },
-          "name" : {
-            "type" : "string"
+          "totalPages" : {
+            "type" : "integer",
+            "format" : "int64"
           },
-          "accountProducts" : {
-            "uniqueItems" : true,
+          "number" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }
+      },
+      "PagedModel" : {
+        "type" : "object",
+        "properties" : {
+          "content" : {
             "type" : "array",
             "items" : {
-              "$ref" : "#/components/schemas/ProductInfoResponse"
-            }
-          },
-          "paymentProducts" : {
-            "uniqueItems" : true,
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/ProductInfoResponse"
-            }
-          },
-          "status" : {
-            "type" : "string"
-          },
-          "attributes" : {
-            "type" : "object",
-            "additionalProperties" : {
               "type" : "object",
               "properties" : { }
             }
           },
-          "createdAt" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "updatedAt" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "shortCode" : {
-            "type" : "string"
-          },
-          "picURL" : {
-            "type" : "string"
-          },
-          "description" : {
-            "type" : "string"
+          "metadata" : {
+            "$ref" : "#/components/schemas/PageMetadata"
           }
         }
       },
@@ -934,34 +419,16 @@
           }
         }
       },
-      "ProductInfoResponse" : {
+      "ProductMappingRequest" : {
         "type" : "object",
         "properties" : {
-          "id" : {
-            "type" : "string"
+          "accountProductInfoRequest" : {
+            "$ref" : "#/components/schemas/ProductInfoRequest"
           },
-          "productID" : {
-            "type" : "string"
-          },
-          "type" : {
-            "type" : "string",
-            "enum" : [ "ACCOUNT", "PAYMENT" ]
-          },
-          "programIDs" : {
-            "type" : "string"
-          },
-          "ifiID" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "shortCode" : {
-            "type" : "string"
-          },
-          "attributes" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "object",
-              "properties" : { }
+          "paymentProductInfoRequest" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ProductInfoRequest"
             }
           }
         }
@@ -973,36 +440,6 @@
             "type" : "string",
             "description" : "The name which would be assigned to the bundle",
             "example" : "Savings Bundle"
-          },
-          "accountProducts" : {
-            "type" : "array",
-            "description" : "The list of account products which will be a part of the bundle",
-            "items" : {
-              "$ref" : "#/components/schemas/ProductInfoRequest"
-            }
-          },
-          "paymentProducts" : {
-            "type" : "array",
-            "description" : "The list of payment products which will be a part of the bundle",
-            "items" : {
-              "$ref" : "#/components/schemas/ProductInfoRequest"
-            }
-          },
-          "status" : {
-            "type" : "string"
-          },
-          "attributes" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "object",
-              "properties" : { }
-            },
-            "description" : "Any additional information which is specific to the bundle"
-          },
-          "shortCode" : {
-            "type" : "string",
-            "description" : "The short code to identify the bundle",
-            "example" : "SVNG"
           },
           "picURL" : {
             "type" : "string",
