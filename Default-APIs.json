@@ -4360,6 +4360,172 @@
         }
       }
     },
+    "/api/v1/ifi/{ifiID}/resource_products/{resourceProductID}/interceptors" : {
+      "get" : {
+        "summary" : "List Interceptor",
+        "operationId" : "listInterceptor",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "resourceProductID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ListInterceptorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Add Interceptor",
+        "operationId" : "addInterceptor",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "resourceProductID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Builder"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Interceptor"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/resource_products/{resourceProductID}/interceptors/{interceptorID}" : {
+      "get" : {
+        "summary" : "Get Interceptor",
+        "operationId" : "getInterceptor",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "resourceProductID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "interceptorID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Interceptor"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch" : {
+        "summary" : "Update Interceptor",
+        "operationId" : "updateInterceptor",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "resourceProductID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "interceptorID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Builder"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Interceptor"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/ifi/{ifiID}/resources/{resourceID}" : {
       "patch" : {
         "summary" : "Change the resource status",
@@ -4525,6 +4691,58 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/Payment"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/resources/{resourceID}/payments/{paymentID}/resume" : {
+      "post" : {
+        "summary" : "Resume Intercepted Payment",
+        "operationId" : "resumePayment",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "resourceID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "paymentID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Builder"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EmptyPayload"
                 }
               }
             }
@@ -8080,6 +8298,10 @@
             "items" : {
               "$ref" : "#/components/schemas/BeneficiaryAccount"
             }
+          },
+          "totalElements" : {
+            "type" : "integer",
+            "format" : "int64"
           }
         }
       },
@@ -8097,6 +8319,10 @@
             "items" : {
               "$ref" : "#/components/schemas/Beneficiary"
             }
+          },
+          "totalElements" : {
+            "type" : "integer",
+            "format" : "int64"
           }
         }
       },
@@ -8452,6 +8678,20 @@
             "additionalProperties" : {
               "type" : "object",
               "properties" : { }
+            }
+          }
+        }
+      },
+      "ConnectionConfig" : {
+        "type" : "object",
+        "properties" : {
+          "endpoint" : {
+            "type" : "string"
+          },
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
             }
           }
         }
@@ -10005,6 +10245,46 @@
           }
         }
       },
+      "Interceptor" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "ifi" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "id" : {
+            "type" : "string"
+          },
+          "resourceProductId" : {
+            "type" : "string"
+          },
+          "actionName" : {
+            "type" : "string",
+            "enum" : [ "PAYMENT_REQUESTED", "PAYMENT_AUTHORIZATION_RECEIVED", "PAYMENT_REVERSAL_REQUESTED" ]
+          },
+          "connectionConfig" : {
+            "$ref" : "#/components/schemas/ConnectionConfig"
+          },
+          "status" : {
+            "type" : "string",
+            "enum" : [ "ACTIVE", "INACTIVE", "DELETED" ]
+          },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "modifiedAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        }
+      },
       "IssueAccountArtifactRequest" : {
         "required" : [ "accountHolderID", "accountProductID" ],
         "type" : "object",
@@ -10327,9 +10607,6 @@
           "serviceInstanceJID" : {
             "type" : "boolean"
           },
-          "proxyServiceJID" : {
-            "type" : "boolean"
-          },
           "primaryServiceName" : {
             "type" : "string"
           },
@@ -10346,6 +10623,9 @@
             "type" : "boolean"
           },
           "jidOfAGroup" : {
+            "type" : "boolean"
+          },
+          "proxyServiceJID" : {
             "type" : "boolean"
           }
         }
@@ -10399,9 +10679,6 @@
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
-          },
           "jsonArray" : {
             "type" : "boolean"
           },
@@ -10419,6 +10696,9 @@
           },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
           }
         }
       },
@@ -10430,9 +10710,6 @@
           },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
           },
           "jsonArray" : {
             "type" : "boolean"
@@ -10488,6 +10765,9 @@
           },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
           },
           "asString" : {
             "type" : "string"
@@ -10503,9 +10783,6 @@
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
-          },
           "jsonArray" : {
             "type" : "boolean"
           },
@@ -10560,6 +10837,9 @@
           },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
           },
           "asString" : {
             "type" : "string"
@@ -10575,9 +10855,6 @@
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
-          },
           "jsonArray" : {
             "type" : "boolean"
           },
@@ -10632,6 +10909,9 @@
           },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
           },
           "asString" : {
             "type" : "string"
@@ -10644,10 +10924,13 @@
           "number" : {
             "type" : "boolean"
           },
+          "boolean" : {
+            "type" : "boolean"
+          },
           "asBoolean" : {
             "type" : "boolean"
           },
-          "boolean" : {
+          "string" : {
             "type" : "boolean"
           },
           "asNumber" : {
@@ -10687,17 +10970,11 @@
             "type" : "integer",
             "format" : "int32"
           },
-          "string" : {
-            "type" : "boolean"
-          },
           "asString" : {
             "type" : "string"
           },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
           },
           "jsonArray" : {
             "type" : "boolean"
@@ -10716,6 +10993,9 @@
           },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
           }
         }
       },
@@ -10807,6 +11087,23 @@
             "type" : "array",
             "items" : {
               "$ref" : "#/components/schemas/EntityGroup"
+            }
+          }
+        }
+      },
+      "ListInterceptorResponse" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "interceptors" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Interceptor"
             }
           }
         }
@@ -11059,7 +11356,7 @@
           },
           "requestChannelType" : {
             "type" : "string",
-            "enum" : [ "ZETA_POS", "SUPER_CARD", "COLLECT_CARD", "COLLECT_CALL", "ZETA_PAYMENT_PAGE", "ZETA_USER_APP", "ZETA_API", "ZETA_EXPRESS_REMOTE", "ZETA_EXPRESS_KIOSK", "ZETA_SHADOW_CARD", "ZETA_UNKNOWN", "VOID" ]
+            "enum" : [ "ZETA_POS", "SUPER_CARD", "COLLECT_CARD", "COLLECT_CALL", "ZETA_PAYMENT_PAGE", "ZETA_USER_APP", "ZETA_API", "ZETA_EXPRESS_REMOTE", "ZETA_EXPRESS_KIOSK", "ZETA_SHADOW_CARD", "ZETA_UNKNOWN", "UPI", "VOID", "IMPS", "NEFT" ]
           },
           "state" : {
             "type" : "string",

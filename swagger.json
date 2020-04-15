@@ -4087,7 +4087,7 @@
     "/api/v1/ifi/{ifiID}/individuals/{individualID}/beneficiaries/{beneficiaryID}/accounts/{accountID}/transfers" : {
       "post" : {
         "tags" : [ "Beneficiary Transfers" ],
-        "summary" : "",
+        "summary" : "Transfer Funds to Beneficiary Account",
         "description" : "Perform transfer to a beneficiary account of an individual.",
         "operationId" : "transferToBeneficiaryAccount",
         "parameters" : [ {
@@ -4113,11 +4113,18 @@
           "type" : "string",
           "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
         }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the beneficiary account to which the transfer is being performed",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
           "in" : "body",
           "name" : "body",
           "required" : false,
           "schema" : {
-            "$ref" : "#/definitions/BeneficiaryAccountTransactionRequest"
+            "$ref" : "#/definitions/BeneficiaryAccountTransferRequest"
           }
         } ],
         "responses" : {
@@ -4250,7 +4257,7 @@
           "name" : "body",
           "required" : false,
           "schema" : {
-            "$ref" : "#/definitions/BeneficiaryTransactionRequest"
+            "$ref" : "#/definitions/BeneficiaryAccountTransferRequest"
           }
         } ],
         "responses" : {
@@ -4260,7 +4267,8 @@
               "$ref" : "#/definitions/BeneficiaryTransactionResponse"
             }
           }
-        }
+        },
+        "deprecated" : true
       }
     },
     "/api/v1/ifi/{ifiID}/individuals/{individualID}/beneficiaryTransfers" : {
@@ -5161,6 +5169,134 @@
         }
       }
     },
+    "/api/v1/ifi/{ifiID}/resource_products/{resourceProductID}/interceptors" : {
+      "get" : {
+        "summary" : "List Interceptor",
+        "description" : "",
+        "operationId" : "listInterceptor",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "resourceProductID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/ListInterceptorResponse"
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Add Interceptor",
+        "description" : "",
+        "operationId" : "addInterceptor",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "resourceProductID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Builder"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Interceptor"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/resource_products/{resourceProductID}/interceptors/{interceptorID}" : {
+      "get" : {
+        "summary" : "Get Interceptor",
+        "description" : "",
+        "operationId" : "getInterceptor",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "resourceProductID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "interceptorID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Interceptor"
+            }
+          }
+        }
+      },
+      "patch" : {
+        "summary" : "Update Interceptor",
+        "description" : "",
+        "operationId" : "updateInterceptor",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "resourceProductID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "interceptorID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Builder"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Interceptor"
+            }
+          }
+        }
+      }
+    },
     "/api/v1/ifi/{ifiID}/resource_products/{resourceProductID}/resources/list" : {
       "post" : {
         "tags" : [ "Resource" ],
@@ -5494,6 +5630,46 @@
             "description" : "successful operation",
             "schema" : {
               "$ref" : "#/definitions/Payment"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/resources/{resourceID}/payments/{paymentID}/resume" : {
+      "post" : {
+        "summary" : "Resume Intercepted Payment",
+        "description" : "",
+        "operationId" : "resumePayment",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "resourceID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "paymentID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Builder"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/EmptyPayload"
             }
           }
         }
@@ -8708,7 +8884,7 @@
     "/api/v2/ifi/{ifiID}/individuals/{individualID}/beneficiaries/{beneficiaryID}/accounts/{accountID}/transfers" : {
       "post" : {
         "tags" : [ "Beneficiary Transfers" ],
-        "summary" : "",
+        "summary" : "Transfer Funds to Beneficiary Account",
         "description" : "Perform transfer to a beneficiary account of an individual.",
         "operationId" : "transferToBeneficiaryAccount",
         "parameters" : [ {
@@ -8734,11 +8910,18 @@
           "type" : "string",
           "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
         }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the beneficiary account to which the transfer is being performed",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
           "in" : "body",
           "name" : "body",
           "required" : false,
           "schema" : {
-            "$ref" : "#/definitions/BeneficiaryAccountTransactionRequest"
+            "$ref" : "#/definitions/BeneficiaryAccountTransferRequest"
           }
         } ],
         "responses" : {
@@ -8871,7 +9054,7 @@
           "name" : "body",
           "required" : false,
           "schema" : {
-            "$ref" : "#/definitions/BeneficiaryTransactionRequest"
+            "$ref" : "#/definitions/BeneficiaryAccountTransferRequest"
           }
         } ],
         "responses" : {
@@ -11344,24 +11527,22 @@
           "items" : {
             "$ref" : "#/definitions/BeneficiaryAccount"
           }
+        },
+        "totalElements" : {
+          "type" : "integer",
+          "format" : "int64"
         }
       }
     },
-    "BeneficiaryAccountTransactionRequest" : {
+    "BeneficiaryAccountTransferRequest" : {
       "type" : "object",
+      "required" : [ "debitAccountID", "remarks", "transactionCode", "transactionTime" ],
       "properties" : {
-        "headers" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "string"
-          }
-        },
         "requestID" : {
           "type" : "string"
         },
-        "ifiID" : {
-          "type" : "integer",
-          "format" : "int64"
+        "transferAmount" : {
+          "$ref" : "#/definitions/Money"
         },
         "currency" : {
           "type" : "string"
@@ -11376,23 +11557,21 @@
         "debitAccountID" : {
           "type" : "string"
         },
-        "debitAccountHolderID" : {
-          "type" : "string"
-        },
-        "beneficiaryID" : {
-          "type" : "string"
-        },
-        "beneficiaryAccountID" : {
-          "type" : "string"
-        },
         "transactionTime" : {
           "type" : "integer",
-          "format" : "int64"
+          "format" : "int64",
+          "minimum" : 1
         },
         "remarks" : {
           "type" : "string"
         },
         "attributes" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "headers" : {
           "type" : "object",
           "additionalProperties" : {
             "type" : "string"
@@ -11414,6 +11593,10 @@
           "items" : {
             "$ref" : "#/definitions/Beneficiary"
           }
+        },
+        "totalElements" : {
+          "type" : "integer",
+          "format" : "int64"
         }
       }
     },
@@ -11462,11 +11645,16 @@
           "type" : "integer",
           "format" : "int64"
         },
+        "transferType" : {
+          "type" : "string"
+        },
         "status" : {
-          "type" : "string",
-          "enum" : [ "SUCCESS", "FAILED" ]
+          "type" : "string"
         },
         "transactionID" : {
+          "type" : "string"
+        },
+        "receiptID" : {
           "type" : "string"
         },
         "remarks" : {
@@ -11481,56 +11669,6 @@
         "createdAt" : {
           "type" : "string",
           "format" : "date-time"
-        }
-      }
-    },
-    "BeneficiaryTransactionRequest" : {
-      "type" : "object",
-      "properties" : {
-        "headers" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "string"
-          }
-        },
-        "requestID" : {
-          "type" : "string"
-        },
-        "ifiID" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "currency" : {
-          "type" : "string"
-        },
-        "amount" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "transactionCode" : {
-          "type" : "string"
-        },
-        "debitAccountHolderID" : {
-          "type" : "string"
-        },
-        "debitAccountID" : {
-          "type" : "string"
-        },
-        "beneficiaryID" : {
-          "type" : "string"
-        },
-        "transactionTime" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "remarks" : {
-          "type" : "string"
-        },
-        "attributes" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "string"
-          }
         }
       }
     },
@@ -11550,6 +11688,9 @@
           "type" : "string"
         },
         "status" : {
+          "type" : "string"
+        },
+        "transferType" : {
           "type" : "string"
         }
       }
@@ -11905,6 +12046,20 @@
           "type" : "object",
           "additionalProperties" : {
             "type" : "object"
+          }
+        }
+      }
+    },
+    "ConnectionConfig" : {
+      "type" : "object",
+      "properties" : {
+        "endpoint" : {
+          "type" : "string"
+        },
+        "headers" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
           }
         }
       }
@@ -13568,6 +13723,10 @@
           "items" : {
             "$ref" : "#/definitions/BeneficiaryTransaction"
           }
+        },
+        "totalElements" : {
+          "type" : "integer",
+          "format" : "int64"
         }
       }
     },
@@ -13775,6 +13934,46 @@
         },
         "policies" : {
           "$ref" : "#/definitions/Policies"
+        },
+        "status" : {
+          "type" : "string",
+          "enum" : [ "ACTIVE", "INACTIVE", "DELETED" ]
+        },
+        "createdAt" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "modifiedAt" : {
+          "type" : "string",
+          "format" : "date-time"
+        }
+      }
+    },
+    "Interceptor" : {
+      "type" : "object",
+      "properties" : {
+        "headers" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "ifi" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "id" : {
+          "type" : "string"
+        },
+        "resourceProductId" : {
+          "type" : "string"
+        },
+        "actionName" : {
+          "type" : "string",
+          "enum" : [ "PAYMENT_REQUESTED", "PAYMENT_AUTHORIZATION_RECEIVED", "PAYMENT_REVERSAL_REQUESTED" ]
+        },
+        "connectionConfig" : {
+          "$ref" : "#/definitions/ConnectionConfig"
         },
         "status" : {
           "type" : "string",
@@ -14109,9 +14308,6 @@
         "serviceInstanceJID" : {
           "type" : "boolean"
         },
-        "proxyServiceJID" : {
-          "type" : "boolean"
-        },
         "primaryServiceName" : {
           "type" : "string"
         },
@@ -14128,6 +14324,9 @@
           "type" : "boolean"
         },
         "jidOfAGroup" : {
+          "type" : "boolean"
+        },
+        "proxyServiceJID" : {
           "type" : "boolean"
         }
       }
@@ -14180,9 +14379,6 @@
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
         },
-        "asJsonObject" : {
-          "$ref" : "#/definitions/JsonObject"
-        },
         "jsonArray" : {
           "type" : "boolean"
         },
@@ -14200,6 +14396,9 @@
         },
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
+        },
+        "asJsonObject" : {
+          "$ref" : "#/definitions/JsonObject"
         }
       }
     },
@@ -14211,9 +14410,6 @@
         },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
-        },
-        "asJsonObject" : {
-          "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
           "type" : "boolean"
@@ -14268,6 +14464,9 @@
         },
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
+        },
+        "asJsonObject" : {
+          "$ref" : "#/definitions/JsonObject"
         },
         "asString" : {
           "type" : "string"
@@ -14283,9 +14482,6 @@
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
         },
-        "asJsonObject" : {
-          "$ref" : "#/definitions/JsonObject"
-        },
         "jsonArray" : {
           "type" : "boolean"
         },
@@ -14339,6 +14535,9 @@
         },
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
+        },
+        "asJsonObject" : {
+          "$ref" : "#/definitions/JsonObject"
         },
         "asString" : {
           "type" : "string"
@@ -14354,9 +14553,6 @@
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
         },
-        "asJsonObject" : {
-          "$ref" : "#/definitions/JsonObject"
-        },
         "jsonArray" : {
           "type" : "boolean"
         },
@@ -14410,6 +14606,9 @@
         },
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
+        },
+        "asJsonObject" : {
+          "$ref" : "#/definitions/JsonObject"
         },
         "asString" : {
           "type" : "string"
@@ -14422,10 +14621,13 @@
         "number" : {
           "type" : "boolean"
         },
+        "boolean" : {
+          "type" : "boolean"
+        },
         "asBoolean" : {
           "type" : "boolean"
         },
-        "boolean" : {
+        "string" : {
           "type" : "boolean"
         },
         "asNumber" : {
@@ -14464,17 +14666,11 @@
           "type" : "integer",
           "format" : "int32"
         },
-        "string" : {
-          "type" : "boolean"
-        },
         "asString" : {
           "type" : "string"
         },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
-        },
-        "asJsonObject" : {
-          "$ref" : "#/definitions/JsonObject"
         },
         "jsonArray" : {
           "type" : "boolean"
@@ -14493,6 +14689,9 @@
         },
         "asJsonArray" : {
           "$ref" : "#/definitions/JsonArray"
+        },
+        "asJsonObject" : {
+          "$ref" : "#/definitions/JsonObject"
         }
       }
     },
@@ -14584,6 +14783,23 @@
           "type" : "array",
           "items" : {
             "$ref" : "#/definitions/EntityGroup"
+          }
+        }
+      }
+    },
+    "ListInterceptorResponse" : {
+      "type" : "object",
+      "properties" : {
+        "headers" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "interceptors" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Interceptor"
           }
         }
       }
@@ -14895,7 +15111,7 @@
         },
         "requestChannelType" : {
           "type" : "string",
-          "enum" : [ "ZETA_POS", "SUPER_CARD", "COLLECT_CARD", "COLLECT_CALL", "ZETA_PAYMENT_PAGE", "ZETA_USER_APP", "ZETA_API", "ZETA_EXPRESS_REMOTE", "ZETA_EXPRESS_KIOSK", "ZETA_SHADOW_CARD", "ZETA_UNKNOWN", "VOID" ]
+          "enum" : [ "ZETA_POS", "SUPER_CARD", "COLLECT_CARD", "COLLECT_CALL", "ZETA_PAYMENT_PAGE", "ZETA_USER_APP", "ZETA_API", "ZETA_EXPRESS_REMOTE", "ZETA_EXPRESS_KIOSK", "ZETA_SHADOW_CARD", "ZETA_UNKNOWN", "UPI", "VOID", "IMPS", "NEFT" ]
         },
         "state" : {
           "type" : "string",
