@@ -71,7 +71,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/PaginatedResponseFusionConfig"
+              "$ref" : "#/definitions/PaginatedResponseFusionConfigResponse"
             }
           }
         }
@@ -90,7 +90,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/FusionConfig"
+              "$ref" : "#/definitions/FusionConfigResponse"
             }
           }
         }
@@ -110,7 +110,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/FusionConfig"
+              "$ref" : "#/definitions/FusionConfigResponse"
             }
           }
         }
@@ -135,7 +135,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/FusionConfig"
+              "$ref" : "#/definitions/FusionConfigResponse"
             }
           }
         }
@@ -2047,37 +2047,8 @@
             "schema" : {
               "type" : "array",
               "items" : {
-                "$ref" : "#/definitions/BundleResponse"
+                "$ref" : "#/definitions/IBundleView"
               }
-            }
-          }
-        }
-      },
-      "post" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Create Bundle",
-        "description" : "Creates a Bundle",
-        "operationId" : "createBundle",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being created",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        }, {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/AddBundleRequest"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/BundleResponse"
             }
           }
         }
@@ -2107,143 +2078,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/BundleResponse"
-            }
-          }
-        }
-      },
-      "put" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Update Bundle",
-        "description" : "Update Bundle details",
-        "operationId" : "updateBundle",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle whose details are being updated",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/UpdateBundleRequest"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/BundleResponse"
-            }
-          }
-        }
-      },
-      "delete" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Delete Bundle",
-        "description" : "Delete a Bundle",
-        "operationId" : "deleteBundle",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being deleted",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle which is being deleted",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/BundleResponse"
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/ifi/{ifiID}/bundles/{bundleID}/accountProducts" : {
-      "post" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Add Account Product",
-        "description" : "Adds an Account Product to a Bundle",
-        "operationId" : "addAccountProductToBundle",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle whose details are being updated",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/AddAccountProductInBundleRequest"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/BundleResponse"
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/ifi/{ifiID}/bundles/{bundleID}/accountProducts/{accountProductID}" : {
-      "delete" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Delete Account Product",
-        "description" : "Deletes an Account Product from a Bundle",
-        "operationId" : "deleteAccountProductFromBundle",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle whose details are being updated",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "accountProductID",
-          "in" : "path",
-          "description" : "ID for the account product which is to be removed from the bundle",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/BundleResponse"
+              "$ref" : "#/definitions/IBundleView"
             }
           }
         }
@@ -2424,79 +2259,6 @@
             "description" : "successful operation",
             "schema" : {
               "$ref" : "#/definitions/IssueResourceResponse"
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/ifi/{ifiID}/bundles/{bundleID}/paymentProducts" : {
-      "post" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Add Payment Product",
-        "description" : "Adds a Payment Product to a Bundle",
-        "operationId" : "addPaymentProductToBundle",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle whose details are being updated",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/AddPaymentProductInBundleRequest"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/BundleResponse"
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/ifi/{ifiID}/bundles/{bundleID}/paymentProducts/{paymentProductID}" : {
-      "delete" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Delete Payment Product",
-        "description" : "Deletes a Payment Product from a Bundle",
-        "operationId" : "deletePaymentProductFromBundle",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated.",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle whose details are being updated",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "paymentProductID",
-          "in" : "path",
-          "description" : "ID for the payment product to be removed from the bundle",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/BundleResponse"
             }
           }
         }
@@ -6214,7 +5976,7 @@
           "name" : "body",
           "required" : false,
           "schema" : {
-            "$ref" : "#/definitions/TransferRequest"
+            "$ref" : "#/definitions/TransferRequestV1"
           }
         } ],
         "responses" : {
@@ -6418,43 +6180,11 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/GetAccountHolderRelationListResponse"
+              "$ref" : "#/definitions/AccountHolderResponse"
             }
           },
           "201" : {
             "description" : ""
-          }
-        }
-      }
-    },
-    "/api/v2/ifi/{ifiID}/accountHolders/{accountHolderID}" : {
-      "get" : {
-        "tags" : [ "AccountHolder Management" ],
-        "summary" : "Get all details of the account holder",
-        "description" : "",
-        "operationId" : "getAccountHolderByID",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the account",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64",
-          "x-example" : 123123
-        }, {
-          "name" : "accountHolderID",
-          "in" : "path",
-          "description" : "ID of the account holder whose details are being retrieved",
-          "required" : true,
-          "type" : "string",
-          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/AccountHolder"
-            }
           }
         }
       }
@@ -6574,7 +6304,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/Account"
+              "$ref" : "#/definitions/GetAccountResponse"
             }
           }
         }
@@ -6682,7 +6412,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/Accessor"
+              "$ref" : "#/definitions/AccountAccessorResponse"
             }
           }
         }
@@ -6783,7 +6513,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/AccountRelation"
+              "$ref" : "#/definitions/AccountRelationResponse"
             }
           }
         }
@@ -6822,7 +6552,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/AccountRelation"
+              "$ref" : "#/definitions/AccountRelationResponse"
             }
           }
         }
@@ -6831,7 +6561,7 @@
     "/api/v2/ifi/{ifiID}/accounts/{accountID}/transactionPolicies" : {
       "get" : {
         "tags" : [ "Account Management" ],
-        "summary" : "",
+        "summary" : "Get transaction policies of account by accountID",
         "description" : "",
         "operationId" : "getTransactionPoliciesByAccount",
         "parameters" : [ {
@@ -6849,12 +6579,35 @@
           "required" : true,
           "type" : "string",
           "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "enum" : [ "asc", "desc" ]
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
         } ],
         "responses" : {
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/GetAllTransactionPoliciesResponse"
+              "$ref" : "#/definitions/GetTransactionPolicyResponse"
             }
           }
         }
@@ -6898,27 +6651,35 @@
             "format" : "int64"
           }
         }, {
-          "in" : "body",
-          "name" : "body",
+          "name" : "sortBy",
+          "in" : "query",
           "required" : false,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int32"
-          }
+          "type" : "string"
         }, {
-          "in" : "body",
-          "name" : "body",
+          "name" : "sortOrder",
+          "in" : "query",
           "required" : false,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
+          "type" : "string",
+          "enum" : [ "asc", "desc" ]
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "maximum" : 50,
+          "format" : "int32"
         } ],
         "responses" : {
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/GetAccountTransactionListResponse"
+              "$ref" : "#/definitions/GetAccountTransaction"
             }
           }
         }
@@ -6957,7 +6718,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/AccountTransaction"
+              "$ref" : "#/definitions/GetAccountTransaction"
             }
           }
         }
@@ -7026,7 +6787,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/AccountVector"
+              "$ref" : "#/definitions/AccountVectorResponse"
             }
           }
         }
@@ -7065,7 +6826,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/AccountVector"
+              "$ref" : "#/definitions/AccountVectorResponse"
             }
           }
         }
@@ -7095,7 +6856,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/AccountInfo"
+              "$ref" : "#/definitions/AccountInfoResponse"
             }
           }
         }
@@ -7974,15 +7735,41 @@
           "required" : true,
           "type" : "integer",
           "format" : "int64"
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "description" : "Page number of the request",
+          "required" : false,
+          "type" : "integer",
+          "maximum" : 50,
+          "minimum" : 0,
+          "format" : "int64"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "description" : "Page Size of the request",
+          "required" : false,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "description" : "Sort by a given value",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "description" : "Order of the request i.e asc or desc",
+          "required" : false,
+          "type" : "string",
+          "enum" : [ "asc", "desc" ]
         } ],
         "responses" : {
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "type" : "array",
-              "items" : {
-                "$ref" : "#/definitions/BundleResponse"
-              }
+              "$ref" : "#/definitions/PagedModel"
             }
           }
         }
@@ -8011,7 +7798,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/BundleResponse"
+              "$ref" : "#/definitions/IBundleView"
             }
           }
         }
@@ -8041,7 +7828,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/BundleResponse"
+              "$ref" : "#/definitions/IBundleView"
             }
           }
         }
@@ -8076,7 +7863,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/BundleResponse"
+              "$ref" : "#/definitions/IBundleView"
             }
           }
         }
@@ -8104,80 +7891,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/BundleResponse"
-            }
-          }
-        }
-      }
-    },
-    "/api/v2/ifi/{ifiID}/bundles/{bundleID}/accountProducts" : {
-      "post" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Add Account Product",
-        "description" : "Adds an Account Product to a Bundle",
-        "operationId" : "addAccountProductToBundle",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle whose details are being updated",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/AddAccountProductInBundleRequest"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/BundleResponse"
-            }
-          }
-        }
-      }
-    },
-    "/api/v2/ifi/{ifiID}/bundles/{bundleID}/accountProducts/{accountProductID}" : {
-      "delete" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Delete Account Product",
-        "description" : "Deletes an Account Product from a Bundle",
-        "operationId" : "deleteAccountProductFromBundle",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle whose details are being updated",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "accountProductID",
-          "in" : "path",
-          "description" : "ID for the account product which is to be removed from the bundle",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/BundleResponse"
+              "$ref" : "#/definitions/IBundleView"
             }
           }
         }
@@ -8327,79 +8041,6 @@
         }
       }
     },
-    "/api/v2/ifi/{ifiID}/bundles/{bundleID}/paymentProducts" : {
-      "post" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Add Payment Product",
-        "description" : "Adds a Payment Product to a Bundle",
-        "operationId" : "addPaymentProductToBundle",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle whose details are being updated",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/AddPaymentProductInBundleRequest"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/BundleResponse"
-            }
-          }
-        }
-      }
-    },
-    "/api/v2/ifi/{ifiID}/bundles/{bundleID}/paymentProducts/{paymentProductID}" : {
-      "delete" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Delete Payment Product",
-        "description" : "Deletes a Payment Product from a Bundle",
-        "operationId" : "deletePaymentProductFromBundle",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated.",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle whose details are being updated",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "paymentProductID",
-          "in" : "path",
-          "description" : "ID for the payment product to be removed from the bundle",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/BundleResponse"
-            }
-          }
-        }
-      }
-    },
     "/api/v2/ifi/{ifiID}/getAllAccountHolders" : {
       "get" : {
         "tags" : [ "AccountHolder Management" ],
@@ -8415,66 +8056,29 @@
           "format" : "int64",
           "x-example" : 123123
         }, {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int32"
-          }
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
         }, {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int32"
-          }
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
         }, {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "type" : "string"
-          }
+          "name" : "accountHolderType",
+          "in" : "query",
+          "required" : true,
+          "type" : "string",
+          "enum" : [ "REAL", "LEGAL", "HEADLESS" ]
         } ],
         "responses" : {
           "200" : {
             "description" : "successful operation",
             "schema" : {
               "$ref" : "#/definitions/GetAllAccountHoldersResponse"
-            }
-          }
-        }
-      }
-    },
-    "/api/v2/ifi/{ifiID}/individualApplications/{applicationID}" : {
-      "get" : {
-        "tags" : [ "AccountHolder Management" ],
-        "summary" : "Get the application details for an individual by ID",
-        "description" : "",
-        "operationId" : "getAccountHolder",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the application exists",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64",
-          "x-example" : 123123
-        }, {
-          "name" : "applicationID",
-          "in" : "path",
-          "description" : "ID of the application which is being fetched",
-          "required" : true,
-          "type" : "string",
-          "x-example" : "123123"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/AccountHolder"
             }
           }
         }
@@ -8501,12 +8105,37 @@
           "required" : true,
           "type" : "string",
           "x-example" : "123123"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : true,
+          "type" : "string",
+          "enum" : [ "asc", "desc" ]
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "minimum" : 1,
+          "format" : "int64"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "minimum" : 1,
+          "format" : "int64"
         } ],
         "responses" : {
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/GetPOPListResponse"
+              "$ref" : "#/definitions/PagedModel"
             }
           }
         }
@@ -8543,7 +8172,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/POP"
+              "$ref" : "#/definitions/POPResponse"
             }
           },
           "201" : {
@@ -8585,7 +8214,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/POP"
+              "$ref" : "#/definitions/POPResponse"
             }
           }
         }
@@ -8612,12 +8241,37 @@
           "required" : true,
           "type" : "string",
           "x-example" : "123123"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "enum" : [ "asc", "desc" ]
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "minimum" : 1,
+          "format" : "int64"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "minimum" : 1,
+          "format" : "int64"
         } ],
         "responses" : {
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/GetAccountHolderRelationListResponse"
+              "$ref" : "#/definitions/PagedModel"
             }
           }
         }
@@ -8654,7 +8308,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/AccountHolderRelation"
+              "$ref" : "#/definitions/AccountHolderRelationResponse"
             }
           },
           "201" : {
@@ -8696,7 +8350,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/AccountHolderRelation"
+              "$ref" : "#/definitions/AccountHolderRelationResponse"
             }
           }
         }
@@ -8735,7 +8389,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/AccountHolderVector"
+              "$ref" : "#/definitions/AccountHolderVectorResponse"
             }
           },
           "201" : {
@@ -8777,7 +8431,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/AccountHolderVector"
+              "$ref" : "#/definitions/AccountHolderVectorResponse"
             }
           }
         }
@@ -8786,6 +8440,8 @@
     "/api/v2/ifi/{ifiID}/individualByVector/{vectorType}/{vectorValue}" : {
       "get" : {
         "tags" : [ "AccountHolder Management" ],
+        "summary" : "Get the Account Holder by Vector",
+        "description" : "",
         "operationId" : "getAccountHolderByVector",
         "parameters" : [ {
           "name" : "ifiID",
@@ -8810,7 +8466,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/AccountHolder"
+              "$ref" : "#/definitions/AccountHolderVectorResponse"
             }
           }
         }
@@ -8821,7 +8477,7 @@
         "tags" : [ "AccountHolder Management" ],
         "summary" : "Get details of an individual by ID",
         "description" : "",
-        "operationId" : "getAccountHolders",
+        "operationId" : "getAccountHolderByID",
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
@@ -8842,7 +8498,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/AccountHolder"
+              "$ref" : "#/definitions/AccountHolderResponse"
             }
           }
         }
@@ -8953,12 +8609,34 @@
           "required" : true,
           "type" : "string",
           "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
         } ],
         "responses" : {
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/BeneficiaryListResponse"
+              "$ref" : "#/definitions/PagedModel"
             }
           }
         }
@@ -8994,7 +8672,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/Beneficiary"
+              "$ref" : "#/definitions/BeneficiaryResponse"
             }
           }
         }
@@ -9032,7 +8710,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/Beneficiary"
+              "$ref" : "#/definitions/BeneficiaryResponse"
             }
           }
         }
@@ -9075,7 +8753,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/Beneficiary"
+              "$ref" : "#/definitions/BeneficiaryResponse"
             }
           }
         }
@@ -9111,7 +8789,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/Beneficiary"
+              "$ref" : "#/definitions/BeneficiaryResponse"
             }
           }
         }
@@ -9142,12 +8820,34 @@
           "in" : "path",
           "required" : true,
           "type" : "string"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
         } ],
         "responses" : {
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/BeneficiaryAccountListResponse"
+              "$ref" : "#/definitions/PagedModel"
             }
           }
         }
@@ -9181,14 +8881,14 @@
           "name" : "body",
           "required" : false,
           "schema" : {
-            "$ref" : "#/definitions/AddBeneficiaryAccountForBeneficiaryRequest"
+            "$ref" : "#/definitions/AddBeneficiaryAccountForBeneficiaryFusionRequest"
           }
         } ],
         "responses" : {
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/BeneficiaryAccount"
+              "$ref" : "#/definitions/BeneficiaryAccountResponse"
             }
           }
         }
@@ -9233,7 +8933,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/BeneficiaryAccount"
+              "$ref" : "#/definitions/BeneficiaryAccountResponse"
             }
           }
         }
@@ -9242,7 +8942,7 @@
     "/api/v2/ifi/{ifiID}/individuals/{individualID}/beneficiaries/{beneficiaryID}/accounts/{accountID}/transfers" : {
       "post" : {
         "tags" : [ "Beneficiary Transfers" ],
-        "summary" : "Transfer Funds to Beneficiary Account",
+        "summary" : "",
         "description" : "Perform transfer to a beneficiary account of an individual.",
         "operationId" : "transferToBeneficiaryAccount",
         "parameters" : [ {
@@ -9268,25 +8968,18 @@
           "type" : "string",
           "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
         }, {
-          "name" : "accountID",
-          "in" : "path",
-          "description" : "ID of the beneficiary account to which the transfer is being performed",
-          "required" : true,
-          "type" : "string",
-          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
-        }, {
           "in" : "body",
           "name" : "body",
           "required" : false,
           "schema" : {
-            "$ref" : "#/definitions/BeneficiaryAccountTransferRequest"
+            "$ref" : "#/definitions/BeneficiaryAccountTransactionFusionRequest"
           }
         } ],
         "responses" : {
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/BeneficiaryTransactionResponse"
+              "$ref" : "#/definitions/BeneficiaryTransactionFusionResponse"
             }
           }
         }
@@ -9327,14 +9020,14 @@
           "name" : "body",
           "required" : false,
           "schema" : {
-            "$ref" : "#/definitions/UpdateBeneficiaryAccountRequest"
+            "$ref" : "#/definitions/UpdateBeneficiaryAccountFusionRequest"
           }
         } ],
         "responses" : {
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/BeneficiaryAccount"
+              "$ref" : "#/definitions/BeneficiaryAccountResponse"
             }
           }
         }
@@ -9373,7 +9066,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/BeneficiaryAccount"
+              "$ref" : "#/definitions/BeneficiaryAccountResponse"
             }
           }
         }
@@ -9447,15 +9140,25 @@
           "type" : "string",
           "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
         }, {
-          "name" : "pageSize",
+          "name" : "sortBy",
           "in" : "query",
           "required" : false,
-          "type" : "integer",
-          "format" : "int64"
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
         }, {
           "name" : "pageNumber",
           "in" : "query",
-          "required" : false,
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
           "type" : "integer",
           "format" : "int64"
         } ],
@@ -9463,7 +9166,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/GetBeneficiaryTransactionListResponse"
+              "$ref" : "#/definitions/PagedModel"
             }
           }
         }
@@ -10439,6 +10142,45 @@
         }
       }
     },
+    "AccountAccessorResponse" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "ifiID" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "accountHolderID" : {
+          "type" : "string"
+        },
+        "accountID" : {
+          "type" : "string"
+        },
+        "transactionPolicyIDs" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "status" : {
+          "type" : "string"
+        },
+        "attributes" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "createdAt" : {
+          "type" : "string"
+        },
+        "updatedAt" : {
+          "type" : "string"
+        }
+      }
+    },
     "AccountHolder" : {
       "type" : "object",
       "properties" : {
@@ -10580,6 +10322,131 @@
         }
       }
     },
+    "AccountHolderRelationResponse" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "ifiID" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "individualID" : {
+          "type" : "string"
+        },
+        "relatedIndividualID" : {
+          "type" : "string"
+        },
+        "relationshipType" : {
+          "type" : "string"
+        },
+        "status" : {
+          "type" : "string"
+        },
+        "attributes" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "createdAt" : {
+          "type" : "string"
+        },
+        "updatedAt" : {
+          "type" : "string"
+        },
+        "headers" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "AccountHolderResponse" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "ifiID" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "vectors" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AccountHolderVectorResponse"
+          }
+        },
+        "type" : {
+          "type" : "string",
+          "enum" : [ "REAL", "LEGAL", "HEADLESS" ]
+        },
+        "status" : {
+          "type" : "string"
+        },
+        "salutation" : {
+          "type" : "string"
+        },
+        "firstName" : {
+          "type" : "string"
+        },
+        "middleName" : {
+          "type" : "string"
+        },
+        "lastName" : {
+          "type" : "string"
+        },
+        "profilePicURL" : {
+          "type" : "string"
+        },
+        "dob" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "gender" : {
+          "type" : "string"
+        },
+        "mothersMaidenName" : {
+          "type" : "string"
+        },
+        "pops" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/POPResponse"
+          }
+        },
+        "tags" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Tag"
+          }
+        },
+        "attributes" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "createdAt" : {
+          "type" : "string"
+        },
+        "updatedAt" : {
+          "type" : "string"
+        },
+        "headers" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "kycstatus" : {
+          "$ref" : "#/definitions/KYCStatus"
+        }
+      }
+    },
     "AccountHolderVector" : {
       "type" : "object",
       "properties" : {
@@ -10629,6 +10496,51 @@
           "type" : "array",
           "items" : {
             "$ref" : "#/definitions/Tag"
+          }
+        }
+      }
+    },
+    "AccountHolderVectorResponse" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "individualID" : {
+          "type" : "string"
+        },
+        "ifiID" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "status" : {
+          "type" : "string"
+        },
+        "type" : {
+          "type" : "string"
+        },
+        "value" : {
+          "type" : "string"
+        },
+        "verified" : {
+          "type" : "boolean"
+        },
+        "createdAt" : {
+          "type" : "string"
+        },
+        "updatedAt" : {
+          "type" : "string"
+        },
+        "attributes" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "headers" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
           }
         }
       }
@@ -10730,6 +10642,88 @@
         }
       }
     },
+    "AccountInfoResponse" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "vectors" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AccountVectorResponse"
+          }
+        },
+        "accessors" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AccountAccessorResponse"
+          }
+        },
+        "relationships" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AccountRelationResponse"
+          }
+        },
+        "ifiID" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "ownerAccountHolderID" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "productFamilyID" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "productFamilyName" : {
+          "type" : "string"
+        },
+        "productID" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "productName" : {
+          "type" : "string"
+        },
+        "programIDs" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "balance" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "currency" : {
+          "type" : "string"
+        },
+        "status" : {
+          "type" : "string"
+        },
+        "accountingType" : {
+          "type" : "string",
+          "enum" : [ "ASSET", "LIABILITY", "INCOME", "EXPENSE", "EQUITY" ]
+        },
+        "attributes" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "createdAt" : {
+          "type" : "string"
+        },
+        "updatedAt" : {
+          "type" : "string"
+        }
+      }
+    },
     "AccountRelation" : {
       "type" : "object",
       "properties" : {
@@ -10771,6 +10765,42 @@
         "updatedAt" : {
           "type" : "string",
           "format" : "date-time"
+        }
+      }
+    },
+    "AccountRelationResponse" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "ifiID" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "accountID" : {
+          "type" : "string"
+        },
+        "relatedAccountID" : {
+          "type" : "string"
+        },
+        "relationshipType" : {
+          "type" : "string"
+        },
+        "status" : {
+          "type" : "string"
+        },
+        "attributes" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "createdAt" : {
+          "type" : "string"
+        },
+        "updatedAt" : {
+          "type" : "string"
         }
       }
     },
@@ -10883,6 +10913,42 @@
           "items" : {
             "$ref" : "#/definitions/Tag"
           }
+        }
+      }
+    },
+    "AccountVectorResponse" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "ifiID" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "accountID" : {
+          "type" : "string"
+        },
+        "value" : {
+          "type" : "string"
+        },
+        "type" : {
+          "type" : "string"
+        },
+        "status" : {
+          "type" : "string"
+        },
+        "attributes" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "createdAt" : {
+          "type" : "string"
+        },
+        "updatedAt" : {
+          "type" : "string"
         }
       }
     },
@@ -11137,33 +11203,26 @@
     "AddAccountAccessorRequest" : {
       "type" : "object",
       "properties" : {
-        "headers" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "string"
-          }
-        },
-        "ifiID" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "accountID" : {
-          "type" : "string"
-        },
         "accountHolderID" : {
-          "type" : "string"
+          "type" : "string",
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db",
+          "description" : "ID of the account holder for whom the account belongs"
         },
         "transactionPolicyIDs" : {
           "type" : "array",
+          "description" : "ID of the transaction policies assosciated with the account",
           "items" : {
             "type" : "string"
           }
         },
         "status" : {
-          "type" : "string"
+          "type" : "string",
+          "example" : "ACTIVE",
+          "description" : "Status of the account Accessor"
         },
         "attributes" : {
           "type" : "object",
+          "description" : "Any additional information which you would like to provide",
           "additionalProperties" : {
             "type" : "string"
           }
@@ -11248,48 +11307,27 @@
         }
       }
     },
-    "AddAccountProductInBundleRequest" : {
-      "type" : "object",
-      "properties" : {
-        "accountProduct" : {
-          "description" : "The account product which will be a part of the bundle",
-          "$ref" : "#/definitions/ProductInfoRequest"
-        },
-        "headers" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "string"
-          }
-        }
-      }
-    },
     "AddAccountRelationRequest" : {
       "type" : "object",
       "properties" : {
-        "headers" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "string"
-          }
-        },
-        "ifiID" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "accountID" : {
-          "type" : "string"
-        },
         "relationshipType" : {
-          "type" : "string"
+          "type" : "string",
+          "example" : "Father",
+          "description" : "Relationship to the account"
         },
         "relatedAccountID" : {
-          "type" : "string"
+          "type" : "string",
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db",
+          "description" : "ID of the related account ID"
         },
         "status" : {
-          "type" : "string"
+          "type" : "string",
+          "example" : "ACTIVE",
+          "description" : "Status of the relationship"
         },
         "attributes" : {
           "type" : "object",
+          "description" : "Any additional information which you would like to provide",
           "additionalProperties" : {
             "type" : "string"
           }
@@ -11332,6 +11370,37 @@
           "items" : {
             "$ref" : "#/definitions/Tag"
           }
+        }
+      }
+    },
+    "AddBeneficiaryAccountForBeneficiaryFusionRequest" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "string",
+          "example" : "ENABLED",
+          "description" : "Status of the Beneficiary Account"
+        },
+        "nickname" : {
+          "type" : "string",
+          "example" : "true",
+          "description" : "Nickname of the Beneficiary Account"
+        },
+        "accountInfo" : {
+          "$ref" : "#/definitions/BeneficiaryAccountInfo"
+        },
+        "attributes" : {
+          "type" : "object",
+          "description" : "Any additional information which you would like to provide",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "verified" : {
+          "type" : "boolean"
+        },
+        "default" : {
+          "type" : "boolean"
         }
       }
     },
@@ -11382,7 +11451,7 @@
     },
     "AddBundleRequest" : {
       "type" : "object",
-      "required" : [ "name" ],
+      "required" : [ "name", "productMappingRequest", "shortCode" ],
       "properties" : {
         "name" : {
           "type" : "string",
@@ -11403,18 +11472,11 @@
           "example" : "Bundle related to savings accounts. Consists of a savings account product and a related debit card",
           "description" : "The detailed description of the bundle"
         },
-        "accountProducts" : {
+        "productMappingRequest" : {
           "type" : "array",
-          "description" : "The list of account products which will be a part of the bundle",
+          "description" : "The mapping of account products to payment products",
           "items" : {
-            "$ref" : "#/definitions/ProductInfoRequest"
-          }
-        },
-        "paymentProducts" : {
-          "type" : "array",
-          "description" : "The list of payment products which will be a part of the bundle",
-          "items" : {
-            "$ref" : "#/definitions/ProductInfoRequest"
+            "$ref" : "#/definitions/ProductMappingRequest"
           }
         },
         "attributes" : {
@@ -11630,15 +11692,6 @@
           "additionalProperties" : {
             "type" : "string"
           }
-        }
-      }
-    },
-    "AddPaymentProductInBundleRequest" : {
-      "type" : "object",
-      "properties" : {
-        "paymentProduct" : {
-          "description" : "The payment product which will be a part of the bundle",
-          "$ref" : "#/definitions/ProductInfoRequest"
         }
       }
     },
@@ -11923,6 +11976,92 @@
         }
       }
     },
+    "BeneficiaryAccountResponse" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "ifiID" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "status" : {
+          "type" : "string"
+        },
+        "beneficiaryID" : {
+          "type" : "string"
+        },
+        "parentAccountHolderID" : {
+          "type" : "string"
+        },
+        "nickname" : {
+          "type" : "string"
+        },
+        "accountInfo" : {
+          "$ref" : "#/definitions/BeneficiaryAccountInfo"
+        },
+        "attributes" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "createdAt" : {
+          "type" : "string"
+        },
+        "updatedAt" : {
+          "type" : "string"
+        },
+        "headers" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "verified" : {
+          "type" : "boolean"
+        },
+        "default" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "BeneficiaryAccountTransactionFusionRequest" : {
+      "type" : "object",
+      "properties" : {
+        "currency" : {
+          "type" : "string"
+        },
+        "amount" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "transactionCode" : {
+          "type" : "string"
+        },
+        "debitAccountID" : {
+          "type" : "string"
+        },
+        "beneficiaryAccountID" : {
+          "type" : "string"
+        },
+        "transactionTime" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "remarks" : {
+          "type" : "string"
+        },
+        "attributes" : {
+          "type" : "object",
+          "description" : "Any additional information which you would like to provide",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
     "BeneficiaryAccountTransferRequest" : {
       "type" : "object",
       "required" : [ "debitAccountID", "remarks", "transactionCode", "transactionTime" ],
@@ -11986,6 +12125,83 @@
         "totalElements" : {
           "type" : "integer",
           "format" : "int64"
+        }
+      }
+    },
+    "BeneficiaryResponse" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "ifiID" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "accountHolderID" : {
+          "type" : "string"
+        },
+        "salutation" : {
+          "type" : "string"
+        },
+        "firstName" : {
+          "type" : "string"
+        },
+        "middleName" : {
+          "type" : "string"
+        },
+        "lastName" : {
+          "type" : "string"
+        },
+        "gender" : {
+          "type" : "string"
+        },
+        "profilePicURL" : {
+          "type" : "string"
+        },
+        "relationship" : {
+          "type" : "string"
+        },
+        "status" : {
+          "type" : "string"
+        },
+        "type" : {
+          "type" : "string",
+          "enum" : [ "REAL", "LEGAL", "HEADLESS" ]
+        },
+        "dob" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "vectors" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/BeneficiaryVector"
+          }
+        },
+        "accounts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/BeneficiaryAccount"
+          }
+        },
+        "customFields" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "createdAt" : {
+          "type" : "string"
+        },
+        "updatedAt" : {
+          "type" : "string"
+        },
+        "headers" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
         }
       }
     },
@@ -12058,6 +12274,17 @@
         "createdAt" : {
           "type" : "string",
           "format" : "date-time"
+        }
+      }
+    },
+    "BeneficiaryTransactionFusionResponse" : {
+      "type" : "object",
+      "properties" : {
+        "transactionID" : {
+          "type" : "string"
+        },
+        "status" : {
+          "type" : "string"
         }
       }
     },
@@ -12218,64 +12445,6 @@
           "additionalProperties" : {
             "type" : "string"
           }
-        }
-      }
-    },
-    "BundleResponse" : {
-      "type" : "object",
-      "properties" : {
-        "id" : {
-          "type" : "string"
-        },
-        "ifiID" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "vboID" : {
-          "type" : "string"
-        },
-        "name" : {
-          "type" : "string"
-        },
-        "accountProducts" : {
-          "type" : "array",
-          "uniqueItems" : true,
-          "items" : {
-            "$ref" : "#/definitions/ProductInfoResponse"
-          }
-        },
-        "paymentProducts" : {
-          "type" : "array",
-          "uniqueItems" : true,
-          "items" : {
-            "$ref" : "#/definitions/ProductInfoResponse"
-          }
-        },
-        "status" : {
-          "type" : "string"
-        },
-        "attributes" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "object"
-          }
-        },
-        "createdAt" : {
-          "type" : "string",
-          "format" : "date-time"
-        },
-        "updatedAt" : {
-          "type" : "string",
-          "format" : "date-time"
-        },
-        "shortCode" : {
-          "type" : "string"
-        },
-        "picURL" : {
-          "type" : "string"
-        },
-        "description" : {
-          "type" : "string"
         }
       }
     },
@@ -13910,40 +14079,8 @@
         }
       }
     },
-    "FusionConfig" : {
-      "type" : "object",
-      "properties" : {
-        "key" : {
-          "type" : "string"
-        },
-        "value" : {
-          "type" : "string"
-        },
-        "type" : {
-          "type" : "string"
-        },
-        "description" : {
-          "type" : "string"
-        },
-        "id" : {
-          "type" : "string",
-          "format" : "uuid"
-        },
-        "createdBy" : {
-          "type" : "string"
-        },
-        "updatedBy" : {
-          "type" : "string"
-        },
-        "createdAt" : {
-          "type" : "string",
-          "format" : "date-time"
-        },
-        "updatedAt" : {
-          "type" : "string",
-          "format" : "date-time"
-        }
-      }
+    "FusionConfigResponse" : {
+      "type" : "object"
     },
     "FusionListCardsRequest" : {
       "type" : "object",
@@ -14104,6 +14241,128 @@
           "type" : "array",
           "items" : {
             "$ref" : "#/definitions/AccountRelation"
+          }
+        }
+      }
+    },
+    "GetAccountResponse" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "vectors" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AccountVectorResponse"
+          }
+        },
+        "accessors" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AccountAccessorResponse"
+          }
+        },
+        "relationships" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AccountRelationResponse"
+          }
+        },
+        "ifiID" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "ownerAccountHolderID" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "productFamilyID" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "productID" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "programIDs" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "status" : {
+          "type" : "string"
+        },
+        "tags" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Tag"
+          }
+        },
+        "attributes" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "createdAt" : {
+          "type" : "string"
+        },
+        "updatedAt" : {
+          "type" : "string"
+        }
+      }
+    },
+    "GetAccountTransaction" : {
+      "type" : "object",
+      "properties" : {
+        "accountID" : {
+          "type" : "string"
+        },
+        "transactionID" : {
+          "type" : "string"
+        },
+        "reversedTransactionID" : {
+          "type" : "string"
+        },
+        "reversalTransactionIDs" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "previousBalance" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "newBalance" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "timestamp" : {
+          "type" : "string"
+        },
+        "amount" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "currency" : {
+          "type" : "string"
+        },
+        "recordType" : {
+          "type" : "string"
+        },
+        "remarks" : {
+          "type" : "string"
+        },
+        "attributes" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
           }
         }
       }
@@ -14411,6 +14670,80 @@
         }
       }
     },
+    "GetTransactionPolicyResponse" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "ifiId" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "code" : {
+          "type" : "string"
+        },
+        "status" : {
+          "type" : "string",
+          "enum" : [ "ENABLED", "DISABLED" ]
+        },
+        "description" : {
+          "type" : "string"
+        },
+        "attributes" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "object"
+          }
+        },
+        "policyViolationAction" : {
+          "type" : "string",
+          "enum" : [ "DECLINE_AND_NOTIFY", "DECLINE", "NOTIFY" ]
+        },
+        "txnConstraints" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/PolicyTxnConstraint"
+          }
+        },
+        "txnLimits" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/PolicyTxnRule"
+          }
+        },
+        "balanceLimits" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/PolicyBalanceRule"
+          }
+        },
+        "volumeLimits" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/PolicyAggregateRule"
+          }
+        },
+        "velocityLimits" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/PolicyAggregateRule"
+          }
+        },
+        "validFrom" : {
+          "type" : "string"
+        },
+        "validUntil" : {
+          "type" : "string"
+        },
+        "createdAt" : {
+          "type" : "string"
+        },
+        "updatedAt" : {
+          "type" : "string"
+        }
+      }
+    },
     "GetTransactionsResponse" : {
       "type" : "object",
       "properties" : {
@@ -14421,6 +14754,9 @@
           }
         }
       }
+    },
+    "IBundleView" : {
+      "type" : "object"
     },
     "InsertFormFactorResponse" : {
       "type" : "object",
@@ -14832,17 +15168,8 @@
         "resource" : {
           "type" : "string"
         },
-        "serviceInstanceJID" : {
-          "type" : "boolean"
-        },
         "serviceViewName" : {
           "type" : "string"
-        },
-        "serviceViewJID" : {
-          "type" : "boolean"
-        },
-        "defaultServiceNode" : {
-          "type" : "boolean"
         },
         "jidOfAGroup" : {
           "type" : "boolean"
@@ -14855,6 +15182,15 @@
         },
         "proxyServiceJID" : {
           "type" : "boolean"
+        },
+        "serviceViewJID" : {
+          "type" : "boolean"
+        },
+        "defaultServiceNode" : {
+          "type" : "boolean"
+        },
+        "serviceInstanceJID" : {
+          "type" : "boolean"
         }
       }
     },
@@ -14863,6 +15199,9 @@
       "properties" : {
         "asBoolean" : {
           "type" : "boolean"
+        },
+        "asNumber" : {
+          "$ref" : "#/definitions/Number"
         },
         "asDouble" : {
           "type" : "number",
@@ -14896,9 +15235,6 @@
         "asShort" : {
           "type" : "integer",
           "format" : "int32"
-        },
-        "asNumber" : {
-          "$ref" : "#/definitions/Number"
         },
         "asString" : {
           "type" : "string"
@@ -14915,17 +15251,17 @@
         "jsonArray" : {
           "type" : "boolean"
         },
-        "jsonObject" : {
-          "type" : "boolean"
-        },
-        "jsonPrimitive" : {
-          "type" : "boolean"
-        },
         "jsonNull" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
           "$ref" : "#/definitions/JsonNull"
+        },
+        "jsonObject" : {
+          "type" : "boolean"
+        },
+        "jsonPrimitive" : {
+          "type" : "boolean"
         }
       }
     },
@@ -14934,6 +15270,33 @@
       "properties" : {
         "asBoolean" : {
           "type" : "boolean"
+        },
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
+        },
+        "asJsonPrimitive" : {
+          "$ref" : "#/definitions/JsonPrimitive"
+        },
+        "asJsonObject" : {
+          "$ref" : "#/definitions/JsonObject"
+        },
+        "jsonArray" : {
+          "type" : "boolean"
+        },
+        "jsonNull" : {
+          "type" : "boolean"
+        },
+        "asJsonNull" : {
+          "$ref" : "#/definitions/JsonNull"
+        },
+        "jsonObject" : {
+          "type" : "boolean"
+        },
+        "jsonPrimitive" : {
+          "type" : "boolean"
+        },
+        "asNumber" : {
+          "$ref" : "#/definitions/Number"
         },
         "asDouble" : {
           "type" : "number",
@@ -14967,33 +15330,6 @@
         "asShort" : {
           "type" : "integer",
           "format" : "int32"
-        },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
-        },
-        "asJsonPrimitive" : {
-          "$ref" : "#/definitions/JsonPrimitive"
-        },
-        "asJsonObject" : {
-          "$ref" : "#/definitions/JsonObject"
-        },
-        "jsonArray" : {
-          "type" : "boolean"
-        },
-        "jsonObject" : {
-          "type" : "boolean"
-        },
-        "jsonPrimitive" : {
-          "type" : "boolean"
-        },
-        "jsonNull" : {
-          "type" : "boolean"
-        },
-        "asJsonNull" : {
-          "$ref" : "#/definitions/JsonNull"
-        },
-        "asNumber" : {
-          "$ref" : "#/definitions/Number"
         },
         "asString" : {
           "type" : "string"
@@ -15006,6 +15342,33 @@
         "asBoolean" : {
           "type" : "boolean"
         },
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
+        },
+        "asJsonPrimitive" : {
+          "$ref" : "#/definitions/JsonPrimitive"
+        },
+        "asJsonObject" : {
+          "$ref" : "#/definitions/JsonObject"
+        },
+        "jsonArray" : {
+          "type" : "boolean"
+        },
+        "jsonNull" : {
+          "type" : "boolean"
+        },
+        "asJsonNull" : {
+          "$ref" : "#/definitions/JsonNull"
+        },
+        "jsonObject" : {
+          "type" : "boolean"
+        },
+        "jsonPrimitive" : {
+          "type" : "boolean"
+        },
+        "asNumber" : {
+          "$ref" : "#/definitions/Number"
+        },
         "asDouble" : {
           "type" : "number",
           "format" : "double"
@@ -15038,33 +15401,6 @@
         "asShort" : {
           "type" : "integer",
           "format" : "int32"
-        },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
-        },
-        "asJsonPrimitive" : {
-          "$ref" : "#/definitions/JsonPrimitive"
-        },
-        "asJsonObject" : {
-          "$ref" : "#/definitions/JsonObject"
-        },
-        "jsonArray" : {
-          "type" : "boolean"
-        },
-        "jsonObject" : {
-          "type" : "boolean"
-        },
-        "jsonPrimitive" : {
-          "type" : "boolean"
-        },
-        "jsonNull" : {
-          "type" : "boolean"
-        },
-        "asJsonNull" : {
-          "$ref" : "#/definitions/JsonNull"
-        },
-        "asNumber" : {
-          "$ref" : "#/definitions/Number"
         },
         "asString" : {
           "type" : "string"
@@ -15077,6 +15413,33 @@
         "asBoolean" : {
           "type" : "boolean"
         },
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
+        },
+        "asJsonPrimitive" : {
+          "$ref" : "#/definitions/JsonPrimitive"
+        },
+        "asJsonObject" : {
+          "$ref" : "#/definitions/JsonObject"
+        },
+        "jsonArray" : {
+          "type" : "boolean"
+        },
+        "jsonNull" : {
+          "type" : "boolean"
+        },
+        "asJsonNull" : {
+          "$ref" : "#/definitions/JsonNull"
+        },
+        "jsonObject" : {
+          "type" : "boolean"
+        },
+        "jsonPrimitive" : {
+          "type" : "boolean"
+        },
+        "asNumber" : {
+          "$ref" : "#/definitions/Number"
+        },
         "asDouble" : {
           "type" : "number",
           "format" : "double"
@@ -15109,33 +15472,6 @@
         "asShort" : {
           "type" : "integer",
           "format" : "int32"
-        },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
-        },
-        "asJsonPrimitive" : {
-          "$ref" : "#/definitions/JsonPrimitive"
-        },
-        "asJsonObject" : {
-          "$ref" : "#/definitions/JsonObject"
-        },
-        "jsonArray" : {
-          "type" : "boolean"
-        },
-        "jsonObject" : {
-          "type" : "boolean"
-        },
-        "jsonPrimitive" : {
-          "type" : "boolean"
-        },
-        "jsonNull" : {
-          "type" : "boolean"
-        },
-        "asJsonNull" : {
-          "$ref" : "#/definitions/JsonNull"
-        },
-        "asNumber" : {
-          "$ref" : "#/definitions/Number"
         },
         "asString" : {
           "type" : "string"
@@ -15157,6 +15493,9 @@
         "string" : {
           "type" : "boolean"
         },
+        "asNumber" : {
+          "$ref" : "#/definitions/Number"
+        },
         "asDouble" : {
           "type" : "number",
           "format" : "double"
@@ -15190,9 +15529,6 @@
           "type" : "integer",
           "format" : "int32"
         },
-        "asNumber" : {
-          "$ref" : "#/definitions/Number"
-        },
         "asString" : {
           "type" : "string"
         },
@@ -15208,17 +15544,17 @@
         "jsonArray" : {
           "type" : "boolean"
         },
-        "jsonObject" : {
-          "type" : "boolean"
-        },
-        "jsonPrimitive" : {
-          "type" : "boolean"
-        },
         "jsonNull" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
           "$ref" : "#/definitions/JsonNull"
+        },
+        "jsonObject" : {
+          "type" : "boolean"
+        },
+        "jsonPrimitive" : {
+          "type" : "boolean"
         }
       }
     },
@@ -15542,6 +15878,95 @@
         }
       }
     },
+    "POPResponse" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "ifiID" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "label" : {
+          "type" : "string"
+        },
+        "entityID" : {
+          "type" : "string"
+        },
+        "entityType" : {
+          "type" : "string"
+        },
+        "address" : {
+          "$ref" : "#/definitions/Address"
+        },
+        "contactList" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Contact"
+          }
+        },
+        "status" : {
+          "type" : "string"
+        },
+        "attributes" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "createdAt" : {
+          "type" : "string"
+        },
+        "updatedAt" : {
+          "type" : "string"
+        },
+        "headers" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "default" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "PageMetadata" : {
+      "type" : "object",
+      "properties" : {
+        "size" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "totalElements" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "totalPages" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "number" : {
+          "type" : "integer",
+          "format" : "int64"
+        }
+      }
+    },
+    "PagedModel" : {
+      "type" : "object",
+      "properties" : {
+        "content" : {
+          "type" : "array",
+          "items" : {
+            "type" : "object"
+          }
+        },
+        "metadata" : {
+          "$ref" : "#/definitions/PageMetadata"
+        }
+      }
+    },
     "PaginatedResponse" : {
       "type" : "object",
       "properties" : {
@@ -15566,7 +15991,7 @@
         }
       }
     },
-    "PaginatedResponseFusionConfig" : {
+    "PaginatedResponseFusionConfigResponse" : {
       "type" : "object",
       "properties" : {
         "nextPageIndex" : {
@@ -15578,7 +16003,7 @@
         "entities" : {
           "type" : "array",
           "items" : {
-            "$ref" : "#/definitions/FusionConfig"
+            "$ref" : "#/definitions/FusionConfigResponse"
           }
         },
         "hasNext" : {
@@ -16297,33 +16722,16 @@
         }
       }
     },
-    "ProductInfoResponse" : {
+    "ProductMappingRequest" : {
       "type" : "object",
       "properties" : {
-        "id" : {
-          "type" : "string"
+        "accountProductInfoRequest" : {
+          "$ref" : "#/definitions/ProductInfoRequest"
         },
-        "productID" : {
-          "type" : "string"
-        },
-        "type" : {
-          "type" : "string",
-          "enum" : [ "ACCOUNT", "PAYMENT" ]
-        },
-        "programIDs" : {
-          "type" : "string"
-        },
-        "ifiID" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "shortCode" : {
-          "type" : "string"
-        },
-        "attributes" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "object"
+        "paymentProductInfoRequest" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/ProductInfoRequest"
           }
         }
       }
@@ -16446,12 +16854,12 @@
         "zetaSignature" : {
           "$ref" : "#/definitions/ZetaSignature"
         },
+        "signatoryJID" : {
+          "$ref" : "#/definitions/JID"
+        },
         "payloadVersion" : {
           "type" : "integer",
           "format" : "int32"
-        },
-        "signatoryJID" : {
-          "$ref" : "#/definitions/JID"
         },
         "signed" : {
           "type" : "boolean"
@@ -16907,6 +17315,46 @@
     },
     "TransferRequest" : {
       "type" : "object",
+      "required" : [ "amount", "creditAccountID", "currency", "debitAccountID", "remarks", "requestID", "transferCode", "transferTime" ],
+      "properties" : {
+        "requestID" : {
+          "type" : "string"
+        },
+        "currency" : {
+          "type" : "string",
+          "enum" : [ "INR", "USD", "EUR", "IDR", "VND" ]
+        },
+        "amount" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "transferCode" : {
+          "type" : "string"
+        },
+        "debitAccountID" : {
+          "type" : "string"
+        },
+        "creditAccountID" : {
+          "type" : "string"
+        },
+        "transferTime" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "remarks" : {
+          "type" : "string"
+        },
+        "attributes" : {
+          "type" : "object",
+          "description" : "Any additional information which you would like to provide",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "TransferRequestV1" : {
+      "type" : "object",
       "required" : [ "amount", "creditAccountID", "debitAccountID", "remarks", "requestID", "transferCode", "transferTime" ],
       "properties" : {
         "requestID" : {
@@ -17046,6 +17494,29 @@
         }
       }
     },
+    "UpdateBeneficiaryAccountFusionRequest" : {
+      "type" : "object",
+      "properties" : {
+        "nickname" : {
+          "type" : "string"
+        },
+        "accountInfo" : {
+          "$ref" : "#/definitions/BeneficiaryAccountInfo"
+        },
+        "status" : {
+          "type" : "string"
+        },
+        "attributes" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "verified" : {
+          "type" : "boolean"
+        }
+      }
+    },
     "UpdateBeneficiaryAccountRequest" : {
       "type" : "object",
       "properties" : {
@@ -17154,35 +17625,6 @@
           "type" : "string",
           "example" : "Savings Bundle",
           "description" : "The name which would be assigned to the bundle"
-        },
-        "accountProducts" : {
-          "type" : "array",
-          "description" : "The list of account products which will be a part of the bundle",
-          "items" : {
-            "$ref" : "#/definitions/ProductInfoRequest"
-          }
-        },
-        "paymentProducts" : {
-          "type" : "array",
-          "description" : "The list of payment products which will be a part of the bundle",
-          "items" : {
-            "$ref" : "#/definitions/ProductInfoRequest"
-          }
-        },
-        "status" : {
-          "type" : "string"
-        },
-        "attributes" : {
-          "type" : "object",
-          "description" : "Any additional information which is specific to the bundle",
-          "additionalProperties" : {
-            "type" : "object"
-          }
-        },
-        "shortCode" : {
-          "type" : "string",
-          "example" : "SVNG",
-          "description" : "The short code to identify the bundle"
         },
         "picURL" : {
           "type" : "string",

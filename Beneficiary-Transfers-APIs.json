@@ -237,7 +237,6 @@
     "/api/v2/ifi/{ifiID}/individuals/{individualID}/beneficiaries/{beneficiaryID}/accounts/{accountID}/transfers" : {
       "post" : {
         "tags" : [ "Beneficiary Transfers" ],
-        "summary" : "Transfer Funds to Beneficiary Account",
         "description" : "Perform transfer to a beneficiary account of an individual.",
         "operationId" : "transferToBeneficiaryAccount",
         "parameters" : [ {
@@ -268,21 +267,12 @@
             "type" : "string"
           },
           "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
-        }, {
-          "name" : "accountID",
-          "in" : "path",
-          "description" : "ID of the beneficiary account to which the transfer is being performed",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          },
-          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
         } ],
         "requestBody" : {
           "content" : {
             "*/*" : {
               "schema" : {
-                "$ref" : "#/components/schemas/BeneficiaryAccountTransferRequest"
+                "$ref" : "#/components/schemas/BeneficiaryAccountTransactionFusionRequest"
               }
             }
           },
@@ -294,7 +284,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/BeneficiaryTransactionResponse"
+                  "$ref" : "#/components/schemas/BeneficiaryTransactionFusionResponse"
                 }
               }
             }
@@ -385,15 +375,29 @@
           },
           "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
         }, {
-          "name" : "pageSize",
+          "name" : "sortBy",
           "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
           }
         }, {
-          "name" : "pageNumber",
+          "name" : "pageSize",
           "in" : "query",
+          "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
@@ -405,7 +409,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetBeneficiaryTransactionListResponse"
+                  "$ref" : "#/components/schemas/PagedModel"
                 }
               }
             }
@@ -462,6 +466,41 @@
   },
   "components" : {
     "schemas" : {
+      "BeneficiaryAccountTransactionFusionRequest" : {
+        "type" : "object",
+        "properties" : {
+          "currency" : {
+            "type" : "string"
+          },
+          "amount" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "transactionCode" : {
+            "type" : "string"
+          },
+          "debitAccountID" : {
+            "type" : "string"
+          },
+          "beneficiaryAccountID" : {
+            "type" : "string"
+          },
+          "transactionTime" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "remarks" : {
+            "type" : "string"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            },
+            "description" : "Any additional information which you would like to provide"
+          }
+        }
+      },
       "BeneficiaryAccountTransferRequest" : {
         "required" : [ "debitAccountID", "remarks", "transactionCode", "transactionTime" ],
         "type" : "object",
@@ -579,6 +618,17 @@
           }
         }
       },
+      "BeneficiaryTransactionFusionResponse" : {
+        "type" : "object",
+        "properties" : {
+          "transactionID" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "string"
+          }
+        }
+      },
       "BeneficiaryTransactionResponse" : {
         "type" : "object",
         "properties" : {
@@ -680,6 +730,9 @@
           "asBoolean" : {
             "type" : "boolean"
           },
+          "asNumber" : {
+            "$ref" : "#/components/schemas/Number"
+          },
           "asDouble" : {
             "type" : "number",
             "format" : "double"
@@ -713,9 +766,6 @@
           "asShort" : {
             "type" : "integer",
             "format" : "int32"
-          },
-          "asNumber" : {
-            "$ref" : "#/components/schemas/Number"
           },
           "asString" : {
             "type" : "string"
@@ -732,17 +782,17 @@
           "jsonArray" : {
             "type" : "boolean"
           },
-          "jsonObject" : {
-            "type" : "boolean"
-          },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
           "jsonNull" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
+          "jsonPrimitive" : {
+            "type" : "boolean"
           }
         }
       },
@@ -751,6 +801,33 @@
         "properties" : {
           "asBoolean" : {
             "type" : "boolean"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
+          "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonNull" : {
+            "type" : "boolean"
+          },
+          "asJsonNull" : {
+            "$ref" : "#/components/schemas/JsonNull"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
+          "jsonPrimitive" : {
+            "type" : "boolean"
+          },
+          "asNumber" : {
+            "$ref" : "#/components/schemas/Number"
           },
           "asDouble" : {
             "type" : "number",
@@ -785,33 +862,6 @@
           "asShort" : {
             "type" : "integer",
             "format" : "int32"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
-          },
-          "jsonArray" : {
-            "type" : "boolean"
-          },
-          "jsonObject" : {
-            "type" : "boolean"
-          },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
-          "jsonNull" : {
-            "type" : "boolean"
-          },
-          "asJsonNull" : {
-            "$ref" : "#/components/schemas/JsonNull"
-          },
-          "asNumber" : {
-            "$ref" : "#/components/schemas/Number"
           },
           "asString" : {
             "type" : "string"
@@ -824,6 +874,33 @@
           "asBoolean" : {
             "type" : "boolean"
           },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
+          "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonNull" : {
+            "type" : "boolean"
+          },
+          "asJsonNull" : {
+            "$ref" : "#/components/schemas/JsonNull"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
+          "jsonPrimitive" : {
+            "type" : "boolean"
+          },
+          "asNumber" : {
+            "$ref" : "#/components/schemas/Number"
+          },
           "asDouble" : {
             "type" : "number",
             "format" : "double"
@@ -857,33 +934,6 @@
           "asShort" : {
             "type" : "integer",
             "format" : "int32"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
-          },
-          "jsonArray" : {
-            "type" : "boolean"
-          },
-          "jsonObject" : {
-            "type" : "boolean"
-          },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
-          "jsonNull" : {
-            "type" : "boolean"
-          },
-          "asJsonNull" : {
-            "$ref" : "#/components/schemas/JsonNull"
-          },
-          "asNumber" : {
-            "$ref" : "#/components/schemas/Number"
           },
           "asString" : {
             "type" : "string"
@@ -905,6 +955,9 @@
           "string" : {
             "type" : "boolean"
           },
+          "asNumber" : {
+            "$ref" : "#/components/schemas/Number"
+          },
           "asDouble" : {
             "type" : "number",
             "format" : "double"
@@ -939,9 +992,6 @@
             "type" : "integer",
             "format" : "int32"
           },
-          "asNumber" : {
-            "$ref" : "#/components/schemas/Number"
-          },
           "asString" : {
             "type" : "string"
           },
@@ -957,17 +1007,17 @@
           "jsonArray" : {
             "type" : "boolean"
           },
-          "jsonObject" : {
-            "type" : "boolean"
-          },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
           "jsonNull" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
+          "jsonPrimitive" : {
+            "type" : "boolean"
           }
         }
       },
@@ -985,6 +1035,42 @@
       },
       "Number" : {
         "type" : "object"
+      },
+      "PageMetadata" : {
+        "type" : "object",
+        "properties" : {
+          "size" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "totalElements" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "totalPages" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "number" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }
+      },
+      "PagedModel" : {
+        "type" : "object",
+        "properties" : {
+          "content" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "properties" : { }
+            }
+          },
+          "metadata" : {
+            "$ref" : "#/components/schemas/PageMetadata"
+          }
+        }
       },
       "Posting" : {
         "type" : "object",

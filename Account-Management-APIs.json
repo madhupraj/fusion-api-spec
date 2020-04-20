@@ -764,7 +764,7 @@
           "content" : {
             "*/*" : {
               "schema" : {
-                "$ref" : "#/components/schemas/TransferRequest"
+                "$ref" : "#/components/schemas/TransferRequestV1"
               }
             }
           },
@@ -1020,7 +1020,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/Accessor"
+                  "$ref" : "#/components/schemas/AccountAccessorResponse"
                 }
               }
             }
@@ -1106,7 +1106,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/AccountRelation"
+                  "$ref" : "#/components/schemas/AccountRelationResponse"
                 }
               }
             }
@@ -1154,7 +1154,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/AccountRelation"
+                  "$ref" : "#/components/schemas/AccountRelationResponse"
                 }
               }
             }
@@ -1165,6 +1165,7 @@
     "/api/v2/ifi/{ifiID}/accounts/{accountID}/transactionPolicies" : {
       "get" : {
         "tags" : [ "Account Management" ],
+        "summary" : "Get transaction policies of account by accountID",
         "operationId" : "getTransactionPoliciesByAccount",
         "parameters" : [ {
           "name" : "ifiID",
@@ -1185,6 +1186,35 @@
             "type" : "string"
           },
           "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "asc", "desc" ]
+          }
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
         } ],
         "responses" : {
           "200" : {
@@ -1192,7 +1222,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetAllTransactionPoliciesResponse"
+                  "$ref" : "#/components/schemas/GetTransactionPolicyResponse"
                 }
               }
             }
@@ -1224,6 +1254,36 @@
             "type" : "string"
           },
           "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "asc", "desc" ]
+          }
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "maximum" : 50,
+            "type" : "integer",
+            "format" : "int32"
+          }
         } ],
         "requestBody" : {
           "content" : {
@@ -1242,7 +1302,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetAccountTransactionListResponse"
+                  "$ref" : "#/components/schemas/GetAccountTransaction"
                 }
               }
             }
@@ -1290,7 +1350,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/AccountTransaction"
+                  "$ref" : "#/components/schemas/GetAccountTransaction"
                 }
               }
             }
@@ -1376,7 +1436,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/AccountVector"
+                  "$ref" : "#/components/schemas/AccountVectorResponse"
                 }
               }
             }
@@ -1424,7 +1484,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/AccountVector"
+                  "$ref" : "#/components/schemas/AccountVectorResponse"
                 }
               }
             }
@@ -1462,7 +1522,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/AccountInfo"
+                  "$ref" : "#/components/schemas/AccountInfoResponse"
                 }
               }
             }
@@ -1660,6 +1720,45 @@
           }
         }
       },
+      "AccountAccessorResponse" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "ifiID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "accountHolderID" : {
+            "type" : "string"
+          },
+          "accountID" : {
+            "type" : "string"
+          },
+          "transactionPolicyIDs" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "status" : {
+            "type" : "string"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "createdAt" : {
+            "type" : "string"
+          },
+          "updatedAt" : {
+            "type" : "string"
+          }
+        }
+      },
       "AccountInfo" : {
         "type" : "object",
         "properties" : {
@@ -1757,6 +1856,88 @@
           }
         }
       },
+      "AccountInfoResponse" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "vectors" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/AccountVectorResponse"
+            }
+          },
+          "accessors" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/AccountAccessorResponse"
+            }
+          },
+          "relationships" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/AccountRelationResponse"
+            }
+          },
+          "ifiID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "ownerAccountHolderID" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "productFamilyID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "productFamilyName" : {
+            "type" : "string"
+          },
+          "productID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "productName" : {
+            "type" : "string"
+          },
+          "programIDs" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "balance" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "currency" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "string"
+          },
+          "accountingType" : {
+            "type" : "string",
+            "enum" : [ "ASSET", "LIABILITY", "INCOME", "EXPENSE", "EQUITY" ]
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "createdAt" : {
+            "type" : "string"
+          },
+          "updatedAt" : {
+            "type" : "string"
+          }
+        }
+      },
       "AccountRelation" : {
         "type" : "object",
         "properties" : {
@@ -1798,6 +1979,42 @@
           "updatedAt" : {
             "type" : "string",
             "format" : "date-time"
+          }
+        }
+      },
+      "AccountRelationResponse" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "ifiID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "accountID" : {
+            "type" : "string"
+          },
+          "relatedAccountID" : {
+            "type" : "string"
+          },
+          "relationshipType" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "string"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "createdAt" : {
+            "type" : "string"
+          },
+          "updatedAt" : {
+            "type" : "string"
           }
         }
       },
@@ -1913,14 +2130,11 @@
           }
         }
       },
-      "AddAccountAccessorRequest" : {
+      "AccountVectorResponse" : {
         "type" : "object",
         "properties" : {
-          "headers" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
-            }
+          "id" : {
+            "type" : "string"
           },
           "ifiID" : {
             "type" : "integer",
@@ -1929,14 +2143,11 @@
           "accountID" : {
             "type" : "string"
           },
-          "accountHolderID" : {
+          "value" : {
             "type" : "string"
           },
-          "transactionPolicyIDs" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
-            }
+          "type" : {
+            "type" : "string"
           },
           "status" : {
             "type" : "string"
@@ -1946,39 +2157,68 @@
             "additionalProperties" : {
               "type" : "string"
             }
+          },
+          "createdAt" : {
+            "type" : "string"
+          },
+          "updatedAt" : {
+            "type" : "string"
+          }
+        }
+      },
+      "AddAccountAccessorRequest" : {
+        "type" : "object",
+        "properties" : {
+          "accountHolderID" : {
+            "type" : "string",
+            "description" : "ID of the account holder for whom the account belongs",
+            "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+          },
+          "transactionPolicyIDs" : {
+            "type" : "array",
+            "description" : "ID of the transaction policies assosciated with the account",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "status" : {
+            "type" : "string",
+            "description" : "Status of the account Accessor",
+            "example" : "ACTIVE"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            },
+            "description" : "Any additional information which you would like to provide"
           }
         }
       },
       "AddAccountRelationRequest" : {
         "type" : "object",
         "properties" : {
-          "headers" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
-            }
-          },
-          "ifiID" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "accountID" : {
-            "type" : "string"
-          },
           "relationshipType" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Relationship to the account",
+            "example" : "Father"
           },
           "relatedAccountID" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "ID of the related account ID",
+            "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
           },
           "status" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Status of the relationship",
+            "example" : "ACTIVE"
           },
           "attributes" : {
             "type" : "object",
             "additionalProperties" : {
               "type" : "string"
-            }
+            },
+            "description" : "Any additional information which you would like to provide"
           }
         }
       },
@@ -2075,6 +2315,57 @@
           }
         }
       },
+      "GetAccountTransaction" : {
+        "type" : "object",
+        "properties" : {
+          "accountID" : {
+            "type" : "string"
+          },
+          "transactionID" : {
+            "type" : "string"
+          },
+          "reversedTransactionID" : {
+            "type" : "string"
+          },
+          "reversalTransactionIDs" : {
+            "uniqueItems" : true,
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "previousBalance" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "newBalance" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "timestamp" : {
+            "type" : "string"
+          },
+          "amount" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "currency" : {
+            "type" : "string"
+          },
+          "recordType" : {
+            "type" : "string"
+          },
+          "remarks" : {
+            "type" : "string"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
       "GetAccountTransactionListResponse" : {
         "type" : "object",
         "properties" : {
@@ -2127,6 +2418,81 @@
             "items" : {
               "$ref" : "#/components/schemas/TransactionPolicyResponse"
             }
+          }
+        }
+      },
+      "GetTransactionPolicyResponse" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "ifiId" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "code" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "string",
+            "enum" : [ "ENABLED", "DISABLED" ]
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object",
+              "properties" : { }
+            }
+          },
+          "policyViolationAction" : {
+            "type" : "string",
+            "enum" : [ "DECLINE_AND_NOTIFY", "DECLINE", "NOTIFY" ]
+          },
+          "txnConstraints" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyTxnConstraint"
+            }
+          },
+          "txnLimits" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyTxnRule"
+            }
+          },
+          "balanceLimits" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyBalanceRule"
+            }
+          },
+          "volumeLimits" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyAggregateRule"
+            }
+          },
+          "velocityLimits" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyAggregateRule"
+            }
+          },
+          "validFrom" : {
+            "type" : "string"
+          },
+          "validUntil" : {
+            "type" : "string"
+          },
+          "createdAt" : {
+            "type" : "string"
+          },
+          "updatedAt" : {
+            "type" : "string"
           }
         }
       },
@@ -2412,7 +2778,7 @@
           }
         }
       },
-      "TransferRequest" : {
+      "TransferRequestV1" : {
         "required" : [ "amount", "creditAccountID", "debitAccountID", "remarks", "requestID", "transferCode", "transferTime" ],
         "type" : "object",
         "properties" : {

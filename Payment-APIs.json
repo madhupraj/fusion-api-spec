@@ -51,27 +51,20 @@
   },
   "components" : {
     "schemas" : {
-      "Money" : {
-        "type" : "object",
-        "properties" : {
-          "currency" : {
-            "type" : "string"
-          },
-          "amount" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
-        }
-      },
       "TransferRequest" : {
-        "required" : [ "amount", "creditAccountID", "debitAccountID", "remarks", "requestID", "transferCode", "transferTime" ],
+        "required" : [ "amount", "creditAccountID", "currency", "debitAccountID", "remarks", "requestID", "transferCode", "transferTime" ],
         "type" : "object",
         "properties" : {
           "requestID" : {
             "type" : "string"
           },
+          "currency" : {
+            "type" : "string",
+            "enum" : [ "INR", "USD", "EUR", "IDR", "VND" ]
+          },
           "amount" : {
-            "$ref" : "#/components/schemas/Money"
+            "type" : "integer",
+            "format" : "int64"
           },
           "transferCode" : {
             "type" : "string"

@@ -59,7 +59,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/PaginatedResponseFusionConfig"
+                  "$ref" : "#/components/schemas/PaginatedResponseFusionConfigResponse"
                 }
               }
             }
@@ -84,7 +84,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/FusionConfig"
+                  "$ref" : "#/components/schemas/FusionConfigResponse"
                 }
               }
             }
@@ -110,7 +110,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/FusionConfig"
+                  "$ref" : "#/components/schemas/FusionConfigResponse"
                 }
               }
             }
@@ -144,7 +144,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/FusionConfig"
+                  "$ref" : "#/components/schemas/FusionConfigResponse"
                 }
               }
             }
@@ -6221,6 +6221,34 @@
             "type" : "string"
           },
           "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
         } ],
         "responses" : {
           "200" : {
@@ -6228,7 +6256,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/BeneficiaryListResponse"
+                  "$ref" : "#/components/schemas/PagedModel"
                 }
               }
             }
@@ -6274,7 +6302,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/Beneficiary"
+                  "$ref" : "#/components/schemas/BeneficiaryResponse"
                 }
               }
             }
@@ -6321,7 +6349,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/Beneficiary"
+                  "$ref" : "#/components/schemas/BeneficiaryResponse"
                 }
               }
             }
@@ -6376,7 +6404,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/Beneficiary"
+                  "$ref" : "#/components/schemas/BeneficiaryResponse"
                 }
               }
             }
@@ -6421,7 +6449,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/Beneficiary"
+                  "$ref" : "#/components/schemas/BeneficiaryResponse"
                 }
               }
             }
@@ -6459,6 +6487,34 @@
           "schema" : {
             "type" : "string"
           }
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
         } ],
         "responses" : {
           "200" : {
@@ -6466,7 +6522,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/BeneficiaryAccountListResponse"
+                  "$ref" : "#/components/schemas/PagedModel"
                 }
               }
             }
@@ -6507,7 +6563,7 @@
           "content" : {
             "*/*" : {
               "schema" : {
-                "$ref" : "#/components/schemas/AddBeneficiaryAccountForBeneficiaryRequest"
+                "$ref" : "#/components/schemas/AddBeneficiaryAccountForBeneficiaryFusionRequest"
               }
             }
           },
@@ -6519,7 +6575,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/BeneficiaryAccount"
+                  "$ref" : "#/components/schemas/BeneficiaryAccountResponse"
                 }
               }
             }
@@ -6575,7 +6631,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/BeneficiaryAccount"
+                  "$ref" : "#/components/schemas/BeneficiaryAccountResponse"
                 }
               }
             }
@@ -6625,7 +6681,7 @@
           "content" : {
             "*/*" : {
               "schema" : {
-                "$ref" : "#/components/schemas/UpdateBeneficiaryAccountRequest"
+                "$ref" : "#/components/schemas/UpdateBeneficiaryAccountFusionRequest"
               }
             }
           },
@@ -6637,7 +6693,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/BeneficiaryAccount"
+                  "$ref" : "#/components/schemas/BeneficiaryAccountResponse"
                 }
               }
             }
@@ -6687,7 +6743,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/BeneficiaryAccount"
+                  "$ref" : "#/components/schemas/BeneficiaryAccountResponse"
                 }
               }
             }
@@ -7780,6 +7836,37 @@
           }
         }
       },
+      "AddBeneficiaryAccountForBeneficiaryFusionRequest" : {
+        "type" : "object",
+        "properties" : {
+          "status" : {
+            "type" : "string",
+            "description" : "Status of the Beneficiary Account",
+            "example" : "ENABLED"
+          },
+          "nickname" : {
+            "type" : "string",
+            "description" : "Nickname of the Beneficiary Account",
+            "example" : "true"
+          },
+          "accountInfo" : {
+            "$ref" : "#/components/schemas/BeneficiaryAccountInfo"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            },
+            "description" : "Any additional information which you would like to provide"
+          },
+          "verified" : {
+            "type" : "boolean"
+          },
+          "default" : {
+            "type" : "boolean"
+          }
+        }
+      },
       "AddBeneficiaryAccountForBeneficiaryRequest" : {
         "type" : "object",
         "properties" : {
@@ -8305,6 +8392,57 @@
           }
         }
       },
+      "BeneficiaryAccountResponse" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "ifiID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "status" : {
+            "type" : "string"
+          },
+          "beneficiaryID" : {
+            "type" : "string"
+          },
+          "parentAccountHolderID" : {
+            "type" : "string"
+          },
+          "nickname" : {
+            "type" : "string"
+          },
+          "accountInfo" : {
+            "$ref" : "#/components/schemas/BeneficiaryAccountInfo"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "createdAt" : {
+            "type" : "string"
+          },
+          "updatedAt" : {
+            "type" : "string"
+          },
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "verified" : {
+            "type" : "boolean"
+          },
+          "default" : {
+            "type" : "boolean"
+          }
+        }
+      },
       "BeneficiaryListResponse" : {
         "type" : "object",
         "properties" : {
@@ -8323,6 +8461,83 @@
           "totalElements" : {
             "type" : "integer",
             "format" : "int64"
+          }
+        }
+      },
+      "BeneficiaryResponse" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "ifiID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "accountHolderID" : {
+            "type" : "string"
+          },
+          "salutation" : {
+            "type" : "string"
+          },
+          "firstName" : {
+            "type" : "string"
+          },
+          "middleName" : {
+            "type" : "string"
+          },
+          "lastName" : {
+            "type" : "string"
+          },
+          "gender" : {
+            "type" : "string"
+          },
+          "profilePicURL" : {
+            "type" : "string"
+          },
+          "relationship" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "string",
+            "enum" : [ "REAL", "LEGAL", "HEADLESS" ]
+          },
+          "dob" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "vectors" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/BeneficiaryVector"
+            }
+          },
+          "accounts" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/BeneficiaryAccount"
+            }
+          },
+          "customFields" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "createdAt" : {
+            "type" : "string"
+          },
+          "updatedAt" : {
+            "type" : "string"
+          },
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
           }
         }
       },
@@ -10002,40 +10217,8 @@
           }
         }
       },
-      "FusionConfig" : {
-        "type" : "object",
-        "properties" : {
-          "key" : {
-            "type" : "string"
-          },
-          "value" : {
-            "type" : "string"
-          },
-          "type" : {
-            "type" : "string"
-          },
-          "description" : {
-            "type" : "string"
-          },
-          "id" : {
-            "type" : "string",
-            "format" : "uuid"
-          },
-          "createdBy" : {
-            "type" : "string"
-          },
-          "updatedBy" : {
-            "type" : "string"
-          },
-          "createdAt" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "updatedAt" : {
-            "type" : "string",
-            "format" : "date-time"
-          }
-        }
+      "FusionConfigResponse" : {
+        "type" : "object"
       },
       "GenericCreateApplicationResponse" : {
         "type" : "object",
@@ -10636,17 +10819,8 @@
           "resource" : {
             "type" : "string"
           },
-          "serviceInstanceJID" : {
-            "type" : "boolean"
-          },
           "serviceViewName" : {
             "type" : "string"
-          },
-          "serviceViewJID" : {
-            "type" : "boolean"
-          },
-          "defaultServiceNode" : {
-            "type" : "boolean"
           },
           "jidOfAGroup" : {
             "type" : "boolean"
@@ -10659,6 +10833,15 @@
           },
           "proxyServiceJID" : {
             "type" : "boolean"
+          },
+          "serviceViewJID" : {
+            "type" : "boolean"
+          },
+          "defaultServiceNode" : {
+            "type" : "boolean"
+          },
+          "serviceInstanceJID" : {
+            "type" : "boolean"
           }
         }
       },
@@ -10667,6 +10850,9 @@
         "properties" : {
           "asBoolean" : {
             "type" : "boolean"
+          },
+          "asNumber" : {
+            "$ref" : "#/components/schemas/Number"
           },
           "asDouble" : {
             "type" : "number",
@@ -10701,9 +10887,6 @@
           "asShort" : {
             "type" : "integer",
             "format" : "int32"
-          },
-          "asNumber" : {
-            "$ref" : "#/components/schemas/Number"
           },
           "asString" : {
             "type" : "string"
@@ -10720,17 +10903,17 @@
           "jsonArray" : {
             "type" : "boolean"
           },
-          "jsonObject" : {
-            "type" : "boolean"
-          },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
           "jsonNull" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
+          "jsonPrimitive" : {
+            "type" : "boolean"
           }
         }
       },
@@ -10739,6 +10922,33 @@
         "properties" : {
           "asBoolean" : {
             "type" : "boolean"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
+          "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonNull" : {
+            "type" : "boolean"
+          },
+          "asJsonNull" : {
+            "$ref" : "#/components/schemas/JsonNull"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
+          "jsonPrimitive" : {
+            "type" : "boolean"
+          },
+          "asNumber" : {
+            "$ref" : "#/components/schemas/Number"
           },
           "asDouble" : {
             "type" : "number",
@@ -10773,33 +10983,6 @@
           "asShort" : {
             "type" : "integer",
             "format" : "int32"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
-          },
-          "jsonArray" : {
-            "type" : "boolean"
-          },
-          "jsonObject" : {
-            "type" : "boolean"
-          },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
-          "jsonNull" : {
-            "type" : "boolean"
-          },
-          "asJsonNull" : {
-            "$ref" : "#/components/schemas/JsonNull"
-          },
-          "asNumber" : {
-            "$ref" : "#/components/schemas/Number"
           },
           "asString" : {
             "type" : "string"
@@ -10812,6 +10995,33 @@
           "asBoolean" : {
             "type" : "boolean"
           },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
+          "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonNull" : {
+            "type" : "boolean"
+          },
+          "asJsonNull" : {
+            "$ref" : "#/components/schemas/JsonNull"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
+          "jsonPrimitive" : {
+            "type" : "boolean"
+          },
+          "asNumber" : {
+            "$ref" : "#/components/schemas/Number"
+          },
           "asDouble" : {
             "type" : "number",
             "format" : "double"
@@ -10845,33 +11055,6 @@
           "asShort" : {
             "type" : "integer",
             "format" : "int32"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
-          },
-          "jsonArray" : {
-            "type" : "boolean"
-          },
-          "jsonObject" : {
-            "type" : "boolean"
-          },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
-          "jsonNull" : {
-            "type" : "boolean"
-          },
-          "asJsonNull" : {
-            "$ref" : "#/components/schemas/JsonNull"
-          },
-          "asNumber" : {
-            "$ref" : "#/components/schemas/Number"
           },
           "asString" : {
             "type" : "string"
@@ -10884,6 +11067,33 @@
           "asBoolean" : {
             "type" : "boolean"
           },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
+          "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonNull" : {
+            "type" : "boolean"
+          },
+          "asJsonNull" : {
+            "$ref" : "#/components/schemas/JsonNull"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
+          "jsonPrimitive" : {
+            "type" : "boolean"
+          },
+          "asNumber" : {
+            "$ref" : "#/components/schemas/Number"
+          },
           "asDouble" : {
             "type" : "number",
             "format" : "double"
@@ -10917,33 +11127,6 @@
           "asShort" : {
             "type" : "integer",
             "format" : "int32"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
-          },
-          "jsonArray" : {
-            "type" : "boolean"
-          },
-          "jsonObject" : {
-            "type" : "boolean"
-          },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
-          "jsonNull" : {
-            "type" : "boolean"
-          },
-          "asJsonNull" : {
-            "$ref" : "#/components/schemas/JsonNull"
-          },
-          "asNumber" : {
-            "$ref" : "#/components/schemas/Number"
           },
           "asString" : {
             "type" : "string"
@@ -10965,6 +11148,9 @@
           "string" : {
             "type" : "boolean"
           },
+          "asNumber" : {
+            "$ref" : "#/components/schemas/Number"
+          },
           "asDouble" : {
             "type" : "number",
             "format" : "double"
@@ -10999,9 +11185,6 @@
             "type" : "integer",
             "format" : "int32"
           },
-          "asNumber" : {
-            "$ref" : "#/components/schemas/Number"
-          },
           "asString" : {
             "type" : "string"
           },
@@ -11017,17 +11200,17 @@
           "jsonArray" : {
             "type" : "boolean"
           },
-          "jsonObject" : {
-            "type" : "boolean"
-          },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
           "jsonNull" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
+          "jsonPrimitive" : {
+            "type" : "boolean"
           }
         }
       },
@@ -11351,7 +11534,43 @@
           }
         }
       },
-      "PaginatedResponseFusionConfig" : {
+      "PageMetadata" : {
+        "type" : "object",
+        "properties" : {
+          "size" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "totalElements" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "totalPages" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "number" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }
+      },
+      "PagedModel" : {
+        "type" : "object",
+        "properties" : {
+          "content" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "properties" : { }
+            }
+          },
+          "metadata" : {
+            "$ref" : "#/components/schemas/PageMetadata"
+          }
+        }
+      },
+      "PaginatedResponseFusionConfigResponse" : {
         "type" : "object",
         "properties" : {
           "nextPageIndex" : {
@@ -11363,7 +11582,7 @@
           "entities" : {
             "type" : "array",
             "items" : {
-              "$ref" : "#/components/schemas/FusionConfig"
+              "$ref" : "#/components/schemas/FusionConfigResponse"
             }
           },
           "hasNext" : {
@@ -12172,12 +12391,12 @@
           "zetaSignature" : {
             "$ref" : "#/components/schemas/ZetaSignature"
           },
+          "signatoryJID" : {
+            "$ref" : "#/components/schemas/JID"
+          },
           "payloadVersion" : {
             "type" : "integer",
             "format" : "int32"
-          },
-          "signatoryJID" : {
-            "$ref" : "#/components/schemas/JID"
           },
           "signed" : {
             "type" : "boolean"
@@ -12718,6 +12937,29 @@
           },
           "mothersMaidenName" : {
             "type" : "string"
+          }
+        }
+      },
+      "UpdateBeneficiaryAccountFusionRequest" : {
+        "type" : "object",
+        "properties" : {
+          "nickname" : {
+            "type" : "string"
+          },
+          "accountInfo" : {
+            "$ref" : "#/components/schemas/BeneficiaryAccountInfo"
+          },
+          "status" : {
+            "type" : "string"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "verified" : {
+            "type" : "boolean"
           }
         }
       },

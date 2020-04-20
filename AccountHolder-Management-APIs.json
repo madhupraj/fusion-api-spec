@@ -758,7 +758,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetAccountHolderRelationListResponse"
+                  "$ref" : "#/components/schemas/AccountHolderResponse"
                 }
               }
             }
@@ -766,45 +766,6 @@
           "201" : {
             "description" : "",
             "content" : { }
-          }
-        }
-      }
-    },
-    "/api/v2/ifi/{ifiID}/accountHolders/{accountHolderID}" : {
-      "get" : {
-        "tags" : [ "AccountHolder Management" ],
-        "summary" : "Get all details of the account holder",
-        "operationId" : "getAccountHolderByID",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the account",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "example" : 123123
-        }, {
-          "name" : "accountHolderID",
-          "in" : "path",
-          "description" : "ID of the account holder whose details are being retrieved",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          },
-          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/AccountHolder"
-                }
-              }
-            }
           }
         }
       }
@@ -824,17 +785,31 @@
             "format" : "int64"
           },
           "example" : 123123
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "accountHolderType",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "REAL", "LEGAL", "HEADLESS" ]
+          }
         } ],
-        "requestBody" : {
-          "content" : {
-            "*/*" : {
-              "schema" : {
-                "type" : "string"
-              }
-            }
-          },
-          "required" : false
-        },
         "responses" : {
           "200" : {
             "description" : "successful operation",
@@ -842,45 +817,6 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/GetAllAccountHoldersResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v2/ifi/{ifiID}/individualApplications/{applicationID}" : {
-      "get" : {
-        "tags" : [ "AccountHolder Management" ],
-        "summary" : "Get the application details for an individual by ID",
-        "operationId" : "getAccountHolder",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the application exists",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "example" : 123123
-        }, {
-          "name" : "applicationID",
-          "in" : "path",
-          "description" : "ID of the application which is being fetched",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          },
-          "example" : "123123"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/AccountHolder"
                 }
               }
             }
@@ -912,6 +848,39 @@
             "type" : "string"
           },
           "example" : "123123"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "asc", "desc" ]
+          }
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "minimum" : 1,
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "minimum" : 1,
+            "type" : "integer",
+            "format" : "int64"
+          }
         } ],
         "responses" : {
           "200" : {
@@ -919,7 +888,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetPOPListResponse"
+                  "$ref" : "#/components/schemas/PagedModel"
                 }
               }
             }
@@ -966,7 +935,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/POP"
+                  "$ref" : "#/components/schemas/POPResponse"
                 }
               }
             }
@@ -1018,7 +987,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/POP"
+                  "$ref" : "#/components/schemas/POPResponse"
                 }
               }
             }
@@ -1050,6 +1019,37 @@
             "type" : "string"
           },
           "example" : "123123"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "asc", "desc" ]
+          }
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "minimum" : 1,
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "minimum" : 1,
+            "type" : "integer",
+            "format" : "int64"
+          }
         } ],
         "responses" : {
           "200" : {
@@ -1057,7 +1057,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetAccountHolderRelationListResponse"
+                  "$ref" : "#/components/schemas/PagedModel"
                 }
               }
             }
@@ -1104,7 +1104,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/AccountHolderRelation"
+                  "$ref" : "#/components/schemas/AccountHolderRelationResponse"
                 }
               }
             }
@@ -1156,7 +1156,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/AccountHolderRelation"
+                  "$ref" : "#/components/schemas/AccountHolderRelationResponse"
                 }
               }
             }
@@ -1205,7 +1205,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/AccountHolderVector"
+                  "$ref" : "#/components/schemas/AccountHolderVectorResponse"
                 }
               }
             }
@@ -1257,7 +1257,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/AccountHolderVector"
+                  "$ref" : "#/components/schemas/AccountHolderVectorResponse"
                 }
               }
             }
@@ -1268,6 +1268,7 @@
     "/api/v2/ifi/{ifiID}/individualByVector/{vectorType}/{vectorValue}" : {
       "get" : {
         "tags" : [ "AccountHolder Management" ],
+        "summary" : "Get the Account Holder by Vector",
         "operationId" : "getAccountHolderByVector",
         "parameters" : [ {
           "name" : "ifiID",
@@ -1300,7 +1301,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/AccountHolder"
+                  "$ref" : "#/components/schemas/AccountHolderVectorResponse"
                 }
               }
             }
@@ -1312,7 +1313,7 @@
       "get" : {
         "tags" : [ "AccountHolder Management" ],
         "summary" : "Get details of an individual by ID",
-        "operationId" : "getAccountHolders",
+        "operationId" : "getAccountHolderByID",
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
@@ -1339,7 +1340,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/AccountHolder"
+                  "$ref" : "#/components/schemas/AccountHolderResponse"
                 }
               }
             }
@@ -1588,6 +1589,131 @@
           }
         }
       },
+      "AccountHolderRelationResponse" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "ifiID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "individualID" : {
+            "type" : "string"
+          },
+          "relatedIndividualID" : {
+            "type" : "string"
+          },
+          "relationshipType" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "string"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "createdAt" : {
+            "type" : "string"
+          },
+          "updatedAt" : {
+            "type" : "string"
+          },
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "AccountHolderResponse" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "ifiID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "vectors" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/AccountHolderVectorResponse"
+            }
+          },
+          "type" : {
+            "type" : "string",
+            "enum" : [ "REAL", "LEGAL", "HEADLESS" ]
+          },
+          "status" : {
+            "type" : "string"
+          },
+          "salutation" : {
+            "type" : "string"
+          },
+          "firstName" : {
+            "type" : "string"
+          },
+          "middleName" : {
+            "type" : "string"
+          },
+          "lastName" : {
+            "type" : "string"
+          },
+          "profilePicURL" : {
+            "type" : "string"
+          },
+          "dob" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "gender" : {
+            "type" : "string"
+          },
+          "mothersMaidenName" : {
+            "type" : "string"
+          },
+          "pops" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/POPResponse"
+            }
+          },
+          "tags" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Tag"
+            }
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "createdAt" : {
+            "type" : "string"
+          },
+          "updatedAt" : {
+            "type" : "string"
+          },
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "kycstatus" : {
+            "$ref" : "#/components/schemas/KYCStatus"
+          }
+        }
+      },
       "AccountHolderVector" : {
         "type" : "object",
         "properties" : {
@@ -1637,6 +1763,51 @@
             "type" : "array",
             "items" : {
               "$ref" : "#/components/schemas/Tag"
+            }
+          }
+        }
+      },
+      "AccountHolderVectorResponse" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "individualID" : {
+            "type" : "string"
+          },
+          "ifiID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "status" : {
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "string"
+          },
+          "value" : {
+            "type" : "string"
+          },
+          "verified" : {
+            "type" : "boolean"
+          },
+          "createdAt" : {
+            "type" : "string"
+          },
+          "updatedAt" : {
+            "type" : "string"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
             }
           }
         }
@@ -2024,6 +2195,96 @@
           },
           "default" : {
             "type" : "boolean"
+          }
+        }
+      },
+      "POPResponse" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "ifiID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "label" : {
+            "type" : "string"
+          },
+          "entityID" : {
+            "type" : "string"
+          },
+          "entityType" : {
+            "type" : "string"
+          },
+          "address" : {
+            "$ref" : "#/components/schemas/Address"
+          },
+          "contactList" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Contact"
+            }
+          },
+          "status" : {
+            "type" : "string"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "createdAt" : {
+            "type" : "string"
+          },
+          "updatedAt" : {
+            "type" : "string"
+          },
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "default" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "PageMetadata" : {
+        "type" : "object",
+        "properties" : {
+          "size" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "totalElements" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "totalPages" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "number" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }
+      },
+      "PagedModel" : {
+        "type" : "object",
+        "properties" : {
+          "content" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "properties" : { }
+            }
+          },
+          "metadata" : {
+            "$ref" : "#/components/schemas/PageMetadata"
           }
         }
       },
