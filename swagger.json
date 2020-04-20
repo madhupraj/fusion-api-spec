@@ -12076,11 +12076,62 @@
         "transactionID" : {
           "type" : "string"
         },
+        "paymentID" : {
+          "type" : "string"
+        },
+        "receiptID" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "transactionCode" : {
+          "type" : "string"
+        },
+        "debits" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Posting"
+          }
+        },
+        "reversedReceiptID" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "time" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "towards" : {
+          "type" : "string"
+        },
+        "transferAmount" : {
+          "$ref" : "#/definitions/Money"
+        },
+        "payerInfo" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "payeeInfo" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
         "status" : {
           "type" : "string"
         },
         "transferType" : {
           "type" : "string"
+        },
+        "attributes" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "statusDetails" : {
+          "$ref" : "#/definitions/JsonObject"
         }
       }
     },
@@ -14813,6 +14864,14 @@
         "asBoolean" : {
           "type" : "boolean"
         },
+        "asDouble" : {
+          "type" : "number",
+          "format" : "double"
+        },
+        "asFloat" : {
+          "type" : "number",
+          "format" : "float"
+        },
         "asLong" : {
           "type" : "integer",
           "format" : "int64"
@@ -14837,14 +14896,6 @@
         "asShort" : {
           "type" : "integer",
           "format" : "int32"
-        },
-        "asDouble" : {
-          "type" : "number",
-          "format" : "double"
-        },
-        "asFloat" : {
-          "type" : "number",
-          "format" : "float"
         },
         "asNumber" : {
           "$ref" : "#/definitions/Number"
@@ -14884,6 +14935,14 @@
         "asBoolean" : {
           "type" : "boolean"
         },
+        "asDouble" : {
+          "type" : "number",
+          "format" : "double"
+        },
+        "asFloat" : {
+          "type" : "number",
+          "format" : "float"
+        },
         "asLong" : {
           "type" : "integer",
           "format" : "int64"
@@ -14920,14 +14979,6 @@
         },
         "jsonArray" : {
           "type" : "boolean"
-        },
-        "asDouble" : {
-          "type" : "number",
-          "format" : "double"
-        },
-        "asFloat" : {
-          "type" : "number",
-          "format" : "float"
         },
         "jsonObject" : {
           "type" : "boolean"
@@ -14955,6 +15006,14 @@
         "asBoolean" : {
           "type" : "boolean"
         },
+        "asDouble" : {
+          "type" : "number",
+          "format" : "double"
+        },
+        "asFloat" : {
+          "type" : "number",
+          "format" : "float"
+        },
         "asLong" : {
           "type" : "integer",
           "format" : "int64"
@@ -14991,14 +15050,6 @@
         },
         "jsonArray" : {
           "type" : "boolean"
-        },
-        "asDouble" : {
-          "type" : "number",
-          "format" : "double"
-        },
-        "asFloat" : {
-          "type" : "number",
-          "format" : "float"
         },
         "jsonObject" : {
           "type" : "boolean"
@@ -15026,6 +15077,14 @@
         "asBoolean" : {
           "type" : "boolean"
         },
+        "asDouble" : {
+          "type" : "number",
+          "format" : "double"
+        },
+        "asFloat" : {
+          "type" : "number",
+          "format" : "float"
+        },
         "asLong" : {
           "type" : "integer",
           "format" : "int64"
@@ -15062,14 +15121,6 @@
         },
         "jsonArray" : {
           "type" : "boolean"
-        },
-        "asDouble" : {
-          "type" : "number",
-          "format" : "double"
-        },
-        "asFloat" : {
-          "type" : "number",
-          "format" : "float"
         },
         "jsonObject" : {
           "type" : "boolean"
@@ -15103,6 +15154,17 @@
         "asBoolean" : {
           "type" : "boolean"
         },
+        "string" : {
+          "type" : "boolean"
+        },
+        "asDouble" : {
+          "type" : "number",
+          "format" : "double"
+        },
+        "asFloat" : {
+          "type" : "number",
+          "format" : "float"
+        },
         "asLong" : {
           "type" : "integer",
           "format" : "int64"
@@ -15127,17 +15189,6 @@
         "asShort" : {
           "type" : "integer",
           "format" : "int32"
-        },
-        "string" : {
-          "type" : "boolean"
-        },
-        "asDouble" : {
-          "type" : "number",
-          "format" : "double"
-        },
-        "asFloat" : {
-          "type" : "number",
-          "format" : "float"
         },
         "asNumber" : {
           "$ref" : "#/definitions/Number"
@@ -16392,15 +16443,15 @@
         "type" : {
           "type" : "string"
         },
-        "signatoryJID" : {
-          "$ref" : "#/definitions/JID"
-        },
         "zetaSignature" : {
           "$ref" : "#/definitions/ZetaSignature"
         },
         "payloadVersion" : {
           "type" : "integer",
           "format" : "int32"
+        },
+        "signatoryJID" : {
+          "$ref" : "#/definitions/JID"
         },
         "signed" : {
           "type" : "boolean"

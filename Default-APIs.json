@@ -10668,6 +10668,14 @@
           "asBoolean" : {
             "type" : "boolean"
           },
+          "asDouble" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "asFloat" : {
+            "type" : "number",
+            "format" : "float"
+          },
           "asLong" : {
             "type" : "integer",
             "format" : "int64"
@@ -10693,14 +10701,6 @@
           "asShort" : {
             "type" : "integer",
             "format" : "int32"
-          },
-          "asDouble" : {
-            "type" : "number",
-            "format" : "double"
-          },
-          "asFloat" : {
-            "type" : "number",
-            "format" : "float"
           },
           "asNumber" : {
             "$ref" : "#/components/schemas/Number"
@@ -10740,6 +10740,14 @@
           "asBoolean" : {
             "type" : "boolean"
           },
+          "asDouble" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "asFloat" : {
+            "type" : "number",
+            "format" : "float"
+          },
           "asLong" : {
             "type" : "integer",
             "format" : "int64"
@@ -10777,14 +10785,6 @@
           },
           "jsonArray" : {
             "type" : "boolean"
-          },
-          "asDouble" : {
-            "type" : "number",
-            "format" : "double"
-          },
-          "asFloat" : {
-            "type" : "number",
-            "format" : "float"
           },
           "jsonObject" : {
             "type" : "boolean"
@@ -10812,6 +10812,14 @@
           "asBoolean" : {
             "type" : "boolean"
           },
+          "asDouble" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "asFloat" : {
+            "type" : "number",
+            "format" : "float"
+          },
           "asLong" : {
             "type" : "integer",
             "format" : "int64"
@@ -10849,14 +10857,6 @@
           },
           "jsonArray" : {
             "type" : "boolean"
-          },
-          "asDouble" : {
-            "type" : "number",
-            "format" : "double"
-          },
-          "asFloat" : {
-            "type" : "number",
-            "format" : "float"
           },
           "jsonObject" : {
             "type" : "boolean"
@@ -10884,6 +10884,14 @@
           "asBoolean" : {
             "type" : "boolean"
           },
+          "asDouble" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "asFloat" : {
+            "type" : "number",
+            "format" : "float"
+          },
           "asLong" : {
             "type" : "integer",
             "format" : "int64"
@@ -10921,14 +10929,6 @@
           },
           "jsonArray" : {
             "type" : "boolean"
-          },
-          "asDouble" : {
-            "type" : "number",
-            "format" : "double"
-          },
-          "asFloat" : {
-            "type" : "number",
-            "format" : "float"
           },
           "jsonObject" : {
             "type" : "boolean"
@@ -10962,6 +10962,17 @@
           "asBoolean" : {
             "type" : "boolean"
           },
+          "string" : {
+            "type" : "boolean"
+          },
+          "asDouble" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "asFloat" : {
+            "type" : "number",
+            "format" : "float"
+          },
           "asLong" : {
             "type" : "integer",
             "format" : "int64"
@@ -10987,17 +10998,6 @@
           "asShort" : {
             "type" : "integer",
             "format" : "int32"
-          },
-          "string" : {
-            "type" : "boolean"
-          },
-          "asDouble" : {
-            "type" : "number",
-            "format" : "double"
-          },
-          "asFloat" : {
-            "type" : "number",
-            "format" : "float"
           },
           "asNumber" : {
             "$ref" : "#/components/schemas/Number"
@@ -12169,15 +12169,15 @@
           "type" : {
             "type" : "string"
           },
-          "signatoryJID" : {
-            "$ref" : "#/components/schemas/JID"
-          },
           "zetaSignature" : {
             "$ref" : "#/components/schemas/ZetaSignature"
           },
           "payloadVersion" : {
             "type" : "integer",
             "format" : "int32"
+          },
+          "signatoryJID" : {
+            "$ref" : "#/components/schemas/JID"
           },
           "signed" : {
             "type" : "boolean"
