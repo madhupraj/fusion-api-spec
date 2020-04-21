@@ -8,168 +8,6 @@
     "name" : "Default"
   } ],
   "paths" : {
-    "/api/v1/fusion-config" : {
-      "get" : {
-        "operationId" : "getAllFusionConfigs",
-        "parameters" : [ {
-          "name" : "pageNumber",
-          "in" : "query",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
-        }, {
-          "name" : "pageSize",
-          "in" : "query",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
-        }, {
-          "name" : "sortBy",
-          "in" : "query",
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "sortOrder",
-          "in" : "query",
-          "schema" : {
-            "type" : "string",
-            "enum" : [ "asc", "desc" ]
-          }
-        }, {
-          "name" : "pageIndex",
-          "in" : "query",
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "lastFetchedId",
-          "in" : "query",
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/PaginatedResponseFusionConfigResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post" : {
-        "operationId" : "createFusionConfig",
-        "requestBody" : {
-          "content" : {
-            "*/*" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/AddFusionConfigRequest"
-              }
-            }
-          },
-          "required" : false
-        },
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/FusionConfigResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/fusion-config/{configID}" : {
-      "get" : {
-        "operationId" : "getFusionConfigByID",
-        "parameters" : [ {
-          "name" : "configID",
-          "in" : "path",
-          "description" : "ID of the fusionConfig whose details are being retrieved",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/FusionConfigResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put" : {
-        "operationId" : "updateFusionConfig",
-        "parameters" : [ {
-          "name" : "configID",
-          "in" : "path",
-          "description" : "ID of the fusionConfig whose details are being updated",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "*/*" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/UpdateFusionConfigRequest"
-              }
-            }
-          },
-          "required" : false
-        },
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/FusionConfigResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete" : {
-        "operationId" : "deleteConfigByID",
-        "parameters" : [ {
-          "name" : "configID",
-          "in" : "path",
-          "description" : "ID of the fusionConfig whose details are being deleted",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "default" : {
-            "description" : "successful operation",
-            "content" : { }
-          }
-        }
-      }
-    },
     "/api/v1/ifi/{ifiID}/accountHolders/{accountHolderID}/policyMappings" : {
       "get" : {
         "summary" : "Get PolicyMappings for a given ifi, accountHolderId",
@@ -542,7 +380,7 @@
           "content" : {
             "*/*" : {
               "schema" : {
-                "$ref" : "#/components/schemas/CreateAddCorporateApplicationRequest"
+                "$ref" : "#/components/schemas/JsonObject"
               }
             }
           },
@@ -2169,6 +2007,34 @@
             "type" : "integer",
             "format" : "int64"
           }
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
         } ],
         "responses" : {
           "200" : {
@@ -2237,6 +2103,34 @@
           "schema" : {
             "type" : "integer",
             "format" : "int64"
+          }
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
           }
         } ],
         "requestBody" : {
@@ -2813,6 +2707,34 @@
             "type" : "integer",
             "format" : "int64"
           }
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
         } ],
         "responses" : {
           "200" : {
@@ -3007,6 +2929,157 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/fusion-config" : {
+      "get" : {
+        "operationId" : "getAllFusionConfigs",
+        "parameters" : [ {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "maximum" : 50,
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "asc", "desc" ]
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PagedModel"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "operationId" : "createFusionConfig",
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AddFusionConfigRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/FusionConfigResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/fusion-config/{configID}" : {
+      "get" : {
+        "operationId" : "getFusionConfigByID",
+        "parameters" : [ {
+          "name" : "configID",
+          "in" : "path",
+          "description" : "ID of the fusionConfig whose details are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/FusionConfigResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "operationId" : "updateFusionConfig",
+        "parameters" : [ {
+          "name" : "configID",
+          "in" : "path",
+          "description" : "ID of the fusionConfig whose details are being updated",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateFusionConfigRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/FusionConfigResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "operationId" : "deleteConfigByID",
+        "parameters" : [ {
+          "name" : "configID",
+          "in" : "path",
+          "description" : "ID of the fusionConfig whose details are being deleted",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "successful operation",
+            "content" : { }
           }
         }
       }
@@ -4962,7 +5035,18 @@
         }, {
           "name" : "status",
           "in" : "query",
-          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
           "schema" : {
             "type" : "string"
           }
@@ -4989,7 +5073,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/Account"
+                  "$ref" : "#/components/schemas/PagedModel"
                 }
               }
             }
@@ -5014,7 +5098,7 @@
           "content" : {
             "*/*" : {
               "schema" : {
-                "$ref" : "#/components/schemas/EditIndividualApplicationRequest"
+                "$ref" : "#/components/schemas/EditIndividualApplicationStandardRequest"
               }
             }
           },
@@ -5051,7 +5135,7 @@
           "content" : {
             "*/*" : {
               "schema" : {
-                "$ref" : "#/components/schemas/CreateAccountHolderWithAutoApprovalRequest"
+                "$ref" : "#/components/schemas/CreateAccountHolderWithAutoApprovalStandardRequest"
               }
             }
           },
@@ -5088,7 +5172,7 @@
           "content" : {
             "*/*" : {
               "schema" : {
-                "$ref" : "#/components/schemas/CreateAccountHolderApplicationRequest"
+                "$ref" : "#/components/schemas/CreateAccountHolderApplicationStandardRequest"
               }
             }
           },
@@ -5164,7 +5248,7 @@
           "content" : {
             "*/*" : {
               "schema" : {
-                "$ref" : "#/components/schemas/UpdateAccountHolderApplicationRequest"
+                "$ref" : "#/components/schemas/UpdateAccountHolderApplicationStandardRequest"
               }
             }
           },
@@ -5247,7 +5331,7 @@
           "content" : {
             "*/*" : {
               "schema" : {
-                "$ref" : "#/components/schemas/UpdateKycStatusRequest"
+                "$ref" : "#/components/schemas/UpdateKycStatusStandardRequest"
               }
             }
           },
@@ -5378,7 +5462,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/TransactionPolicyResponse"
+                  "$ref" : "#/components/schemas/PolicyMappingStandardResponse"
                 }
               }
             }
@@ -5415,7 +5499,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/Product"
+                  "$ref" : "#/components/schemas/ProductResponse"
                 }
               }
             }
@@ -5452,7 +5536,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ProductFamily"
+                  "$ref" : "#/components/schemas/ProductFamilyResponse"
                 }
               }
             }
@@ -5516,24 +5600,49 @@
             "type" : "integer",
             "format" : "int64"
           }
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "showLimits",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "boolean"
+          }
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
         } ],
-        "requestBody" : {
-          "content" : {
-            "*/*" : {
-              "schema" : {
-                "type" : "boolean"
-              }
-            }
-          },
-          "required" : false
-        },
         "responses" : {
           "200" : {
             "description" : "successful operation",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetAllTransactionPoliciesResponse"
+                  "$ref" : "#/components/schemas/PagedModel"
                 }
               }
             }
@@ -5553,6 +5662,38 @@
             "type" : "integer",
             "format" : "int64"
           }
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "description" : "No of products needed in response",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "example" : 10
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "description" : "Page number for products needed in response",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "example" : "test"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
         } ],
         "responses" : {
           "200" : {
@@ -5560,7 +5701,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetCoaListResponse"
+                  "$ref" : "#/components/schemas/PagedModel"
                 }
               }
             }
@@ -5622,6 +5763,34 @@
           "schema" : {
             "type" : "string"
           }
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
         } ],
         "responses" : {
           "200" : {
@@ -5629,7 +5798,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ListEntityGroupResponse"
+                  "$ref" : "#/components/schemas/PagedModel"
                 }
               }
             }
@@ -5677,6 +5846,34 @@
           "schema" : {
             "type" : "string"
           }
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
         } ],
         "responses" : {
           "200" : {
@@ -5684,7 +5881,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetProductListResponse"
+                  "$ref" : "#/components/schemas/PagedModel"
                 }
               }
             }
@@ -5719,7 +5916,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/Product"
+                  "$ref" : "#/components/schemas/ProductResponse"
                 }
               }
             }
@@ -5756,7 +5953,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ProductFamily"
+                  "$ref" : "#/components/schemas/ProductFamilyResponse"
                 }
               }
             }
@@ -5776,6 +5973,38 @@
             "type" : "integer",
             "format" : "int64"
           }
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "description" : "No of products needed in response",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "example" : 10
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "description" : "Page number for products needed in response",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "example" : "test"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
         } ],
         "responses" : {
           "200" : {
@@ -5783,7 +6012,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetProductFamilyListResponse"
+                  "$ref" : "#/components/schemas/PagedModel"
                 }
               }
             }
@@ -5803,6 +6032,38 @@
             "type" : "integer",
             "format" : "int64"
           }
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "description" : "No of products needed in response",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "example" : 10
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "description" : "Page number for products needed in response",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "example" : "test"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
         } ],
         "responses" : {
           "200" : {
@@ -5810,7 +6071,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetProductListResponse"
+                  "$ref" : "#/components/schemas/PagedModel"
                 }
               }
             }
@@ -5881,7 +6142,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/TransactionPolicyResponse"
+                  "$ref" : "#/components/schemas/TransactionPolicyStandardResponse"
                 }
               }
             }
@@ -5925,7 +6186,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/TransactionPolicyResponse"
+                  "$ref" : "#/components/schemas/TransactionPolicyStandardResponse"
                 }
               }
             }
@@ -5962,7 +6223,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/TransactionPolicyResponse"
+                  "$ref" : "#/components/schemas/TransactionPolicyStandardResponse"
                 }
               }
             }
@@ -6874,6 +7135,34 @@
             "type" : "integer",
             "format" : "int64"
           }
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
         } ],
         "responses" : {
           "200" : {
@@ -6881,7 +7170,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetAggregateExpressionListResponse"
+                  "$ref" : "#/components/schemas/PagedModel"
                 }
               }
             }
@@ -7047,7 +7336,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetPolicyResponsePayload"
+                  "$ref" : "#/components/schemas/PolicyResponse"
                 }
               }
             }
@@ -7181,6 +7470,18 @@
             "format" : "int32"
           },
           "example" : "test"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
         } ],
         "responses" : {
           "200" : {
@@ -7188,7 +7489,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetProductListResponse"
+                  "$ref" : "#/components/schemas/PagedModel"
                 }
               }
             }
@@ -7248,6 +7549,22 @@
             "format" : "int32"
           },
           "example" : "test"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "description" : "Sort By needed in response",
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "createdAt"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "description" : "Sort Order needed in response",
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "asc"
         } ],
         "responses" : {
           "200" : {
@@ -7255,7 +7572,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/Account"
+                  "$ref" : "#/components/schemas/PagedModel"
                 }
               }
             }
@@ -7613,6 +7930,9 @@
           "kycStatus" : {
             "$ref" : "#/components/schemas/KYCStatus"
           },
+          "documents" : {
+            "$ref" : "#/components/schemas/Documents"
+          },
           "attributes" : {
             "type" : "object",
             "additionalProperties" : {
@@ -7744,6 +8064,9 @@
           },
           "kycStatus" : {
             "$ref" : "#/components/schemas/KYCStatus"
+          },
+          "documents" : {
+            "$ref" : "#/components/schemas/Documents"
           },
           "attributes" : {
             "type" : "object",
@@ -9024,6 +9347,66 @@
           }
         }
       },
+      "CreateAccountHolderApplicationStandardRequest" : {
+        "type" : "object",
+        "properties" : {
+          "description" : {
+            "type" : "string"
+          },
+          "salutation" : {
+            "type" : "string"
+          },
+          "firstName" : {
+            "type" : "string"
+          },
+          "middleName" : {
+            "type" : "string"
+          },
+          "lastName" : {
+            "type" : "string"
+          },
+          "profilePicURL" : {
+            "type" : "string"
+          },
+          "dob" : {
+            "type" : "string"
+          },
+          "gender" : {
+            "type" : "string"
+          },
+          "mothersMaidenName" : {
+            "type" : "string"
+          },
+          "kycDetails" : {
+            "$ref" : "#/components/schemas/KYCDetails"
+          },
+          "vectors" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Vector"
+            }
+          },
+          "pops" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/POP"
+            }
+          },
+          "customFields" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object",
+              "properties" : { }
+            }
+          },
+          "tags" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Tag"
+            }
+          }
+        }
+      },
       "CreateAccountHolderWithAutoApprovalRequest" : {
         "type" : "object",
         "properties" : {
@@ -9101,11 +9484,70 @@
           }
         }
       },
-      "CreateAddCorporateApplicationRequest" : {
+      "CreateAccountHolderWithAutoApprovalStandardRequest" : {
         "type" : "object",
         "properties" : {
-          "ifiParams" : {
-            "$ref" : "#/components/schemas/JsonObject"
+          "ifiID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "individualType" : {
+            "type" : "string"
+          },
+          "salutation" : {
+            "type" : "string"
+          },
+          "firstName" : {
+            "type" : "string"
+          },
+          "middleName" : {
+            "type" : "string"
+          },
+          "lastName" : {
+            "type" : "string"
+          },
+          "profilePicURL" : {
+            "type" : "string"
+          },
+          "dob" : {
+            "type" : "string"
+          },
+          "gender" : {
+            "type" : "string"
+          },
+          "mothersMaidenName" : {
+            "type" : "string"
+          },
+          "kycDetails" : {
+            "$ref" : "#/components/schemas/KYCDetails"
+          },
+          "vectors" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Vector"
+            }
+          },
+          "pops" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/POP"
+            }
+          },
+          "customFields" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object",
+              "properties" : { }
+            }
+          },
+          "tags" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Tag"
+            }
           }
         }
       },
@@ -9718,6 +10160,29 @@
           }
         }
       },
+      "Documents" : {
+        "type" : "object",
+        "properties" : {
+          "cin" : {
+            "type" : "string"
+          },
+          "cinURL" : {
+            "type" : "string"
+          },
+          "pan" : {
+            "type" : "string"
+          },
+          "panURL" : {
+            "type" : "string"
+          },
+          "gstin" : {
+            "type" : "string"
+          },
+          "gstinURL" : {
+            "type" : "string"
+          }
+        }
+      },
       "ECDHEncryptedCardPayload" : {
         "type" : "object",
         "properties" : {
@@ -9952,6 +10417,27 @@
           },
           "source" : {
             "type" : "string"
+          }
+        }
+      },
+      "EditIndividualApplicationStandardRequest" : {
+        "type" : "object",
+        "properties" : {
+          "ifiID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "individualID" : {
+            "type" : "string"
+          },
+          "tags" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Tag"
+            }
           }
         }
       },
@@ -10218,7 +10704,45 @@
         }
       },
       "FusionConfigResponse" : {
-        "type" : "object"
+        "type" : "object",
+        "properties" : {
+          "key" : {
+            "type" : "string",
+            "description" : "The key of the key-value pair",
+            "example" : "123123"
+          },
+          "value" : {
+            "type" : "string",
+            "description" : "The value of the key-value pair",
+            "example" : "test"
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "The type for the key-value config",
+            "example" : "SANDBOX_VBO_MAPPING"
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "The description for the key-value config",
+            "example" : "Description of the key"
+          },
+          "id" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "createdBy" : {
+            "type" : "string"
+          },
+          "updatedBy" : {
+            "type" : "string"
+          },
+          "createdAt" : {
+            "type" : "string"
+          },
+          "updatedAt" : {
+            "type" : "string"
+          }
+        }
       },
       "GenericCreateApplicationResponse" : {
         "type" : "object",
@@ -10358,6 +10882,10 @@
             "items" : {
               "$ref" : "#/components/schemas/Coa"
             }
+          },
+          "count" : {
+            "type" : "integer",
+            "format" : "int64"
           }
         }
       },
@@ -10409,6 +10937,10 @@
             "items" : {
               "$ref" : "#/components/schemas/PolicyMappingResponse"
             }
+          },
+          "count" : {
+            "type" : "integer",
+            "format" : "int64"
           }
         }
       },
@@ -10440,6 +10972,10 @@
             "items" : {
               "$ref" : "#/components/schemas/ProductFamily"
             }
+          },
+          "count" : {
+            "type" : "integer",
+            "format" : "int64"
           }
         }
       },
@@ -10457,6 +10993,10 @@
             "items" : {
               "$ref" : "#/components/schemas/Product"
             }
+          },
+          "count" : {
+            "type" : "integer",
+            "format" : "int64"
           }
         }
       },
@@ -10822,8 +11362,14 @@
           "serviceInstanceJID" : {
             "type" : "boolean"
           },
+          "primaryServiceName" : {
+            "type" : "string"
+          },
           "serviceViewName" : {
             "type" : "string"
+          },
+          "bareJID" : {
+            "$ref" : "#/components/schemas/JID"
           },
           "serviceViewJID" : {
             "type" : "boolean"
@@ -10833,12 +11379,6 @@
           },
           "jidOfAGroup" : {
             "type" : "boolean"
-          },
-          "primaryServiceName" : {
-            "type" : "string"
-          },
-          "bareJID" : {
-            "$ref" : "#/components/schemas/JID"
           },
           "proxyServiceJID" : {
             "type" : "boolean"
@@ -10891,11 +11431,11 @@
           "asString" : {
             "type" : "string"
           },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
           },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
@@ -10923,6 +11463,30 @@
           "asBoolean" : {
             "type" : "boolean"
           },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
+          "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
+          "jsonPrimitive" : {
+            "type" : "boolean"
+          },
+          "jsonNull" : {
+            "type" : "boolean"
+          },
+          "asJsonNull" : {
+            "$ref" : "#/components/schemas/JsonNull"
+          },
           "asNumber" : {
             "$ref" : "#/components/schemas/Number"
           },
@@ -10959,30 +11523,6 @@
           "asShort" : {
             "type" : "integer",
             "format" : "int32"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
-          },
-          "jsonArray" : {
-            "type" : "boolean"
-          },
-          "jsonObject" : {
-            "type" : "boolean"
-          },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
-          "jsonNull" : {
-            "type" : "boolean"
-          },
-          "asJsonNull" : {
-            "$ref" : "#/components/schemas/JsonNull"
           },
           "asString" : {
             "type" : "string"
@@ -10995,6 +11535,30 @@
           "asBoolean" : {
             "type" : "boolean"
           },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
+          "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
+          "jsonPrimitive" : {
+            "type" : "boolean"
+          },
+          "jsonNull" : {
+            "type" : "boolean"
+          },
+          "asJsonNull" : {
+            "$ref" : "#/components/schemas/JsonNull"
+          },
           "asNumber" : {
             "$ref" : "#/components/schemas/Number"
           },
@@ -11031,30 +11595,6 @@
           "asShort" : {
             "type" : "integer",
             "format" : "int32"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
-          },
-          "jsonArray" : {
-            "type" : "boolean"
-          },
-          "jsonObject" : {
-            "type" : "boolean"
-          },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
-          "jsonNull" : {
-            "type" : "boolean"
-          },
-          "asJsonNull" : {
-            "$ref" : "#/components/schemas/JsonNull"
           },
           "asString" : {
             "type" : "string"
@@ -11067,6 +11607,30 @@
           "asBoolean" : {
             "type" : "boolean"
           },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
+          "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
+          "jsonPrimitive" : {
+            "type" : "boolean"
+          },
+          "jsonNull" : {
+            "type" : "boolean"
+          },
+          "asJsonNull" : {
+            "$ref" : "#/components/schemas/JsonNull"
+          },
           "asNumber" : {
             "$ref" : "#/components/schemas/Number"
           },
@@ -11103,30 +11667,6 @@
           "asShort" : {
             "type" : "integer",
             "format" : "int32"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
-          },
-          "jsonArray" : {
-            "type" : "boolean"
-          },
-          "jsonObject" : {
-            "type" : "boolean"
-          },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
-          "jsonNull" : {
-            "type" : "boolean"
-          },
-          "asJsonNull" : {
-            "$ref" : "#/components/schemas/JsonNull"
           },
           "asString" : {
             "type" : "string"
@@ -11188,11 +11728,11 @@
           "asString" : {
             "type" : "string"
           },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
           },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
@@ -11303,6 +11843,10 @@
             "items" : {
               "$ref" : "#/components/schemas/EntityGroup"
             }
+          },
+          "count" : {
+            "type" : "integer",
+            "format" : "int64"
           }
         }
       },
@@ -11567,30 +12111,6 @@
           },
           "metadata" : {
             "$ref" : "#/components/schemas/PageMetadata"
-          }
-        }
-      },
-      "PaginatedResponseFusionConfigResponse" : {
-        "type" : "object",
-        "properties" : {
-          "nextPageIndex" : {
-            "type" : "string"
-          },
-          "prevPageIndex" : {
-            "type" : "string"
-          },
-          "entities" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/FusionConfigResponse"
-            }
-          },
-          "hasNext" : {
-            "type" : "boolean"
-          },
-          "totalCount" : {
-            "type" : "integer",
-            "format" : "int64"
           }
         }
       },
@@ -12019,6 +12539,82 @@
           }
         }
       },
+      "PolicyMappingStandardResponse" : {
+        "type" : "object"
+      },
+      "PolicyResponse" : {
+        "type" : "object",
+        "properties" : {
+          "ifi" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "id" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "code" : {
+            "type" : "string"
+          },
+          "desc" : {
+            "type" : "string"
+          },
+          "version" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "txnConstraints" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyTxnConstraint"
+            }
+          },
+          "policyTxnRules" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyTxnRule"
+            }
+          },
+          "policyBalanceRules" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyBalanceRule"
+            }
+          },
+          "policyAggregateRules" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyAggregateRule"
+            }
+          },
+          "effectiveFrom" : {
+            "type" : "string"
+          },
+          "expiresAt" : {
+            "type" : "string"
+          },
+          "createdAt" : {
+            "type" : "string"
+          },
+          "updatedAt" : {
+            "type" : "string"
+          },
+          "policyViolationAction" : {
+            "type" : "string",
+            "enum" : [ "DECLINE_AND_NOTIFY", "DECLINE", "NOTIFY" ]
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "state" : {
+            "type" : "string",
+            "enum" : [ "ENABLED", "DISABLED" ]
+          }
+        }
+      },
       "PolicyTxnConstraint" : {
         "type" : "object",
         "properties" : {
@@ -12272,6 +12868,12 @@
             }
           }
         }
+      },
+      "ProductFamilyResponse" : {
+        "type" : "object"
+      },
+      "ProductResponse" : {
+        "type" : "object"
       },
       "PublicPaymentRequestWrapper" : {
         "type" : "object",
@@ -12854,6 +13456,9 @@
           }
         }
       },
+      "TransactionPolicyStandardResponse" : {
+        "type" : "object"
+      },
       "TxnCategory" : {
         "type" : "object",
         "properties" : {
@@ -12931,6 +13536,42 @@
           "dob" : {
             "type" : "string",
             "format" : "date"
+          },
+          "gender" : {
+            "type" : "string"
+          },
+          "mothersMaidenName" : {
+            "type" : "string"
+          }
+        }
+      },
+      "UpdateAccountHolderApplicationStandardRequest" : {
+        "type" : "object",
+        "properties" : {
+          "applicationID" : {
+            "type" : "string"
+          },
+          "ifiID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "salutation" : {
+            "type" : "string"
+          },
+          "firstName" : {
+            "type" : "string"
+          },
+          "middleName" : {
+            "type" : "string"
+          },
+          "lastName" : {
+            "type" : "string"
+          },
+          "profilePicURL" : {
+            "type" : "string"
+          },
+          "dob" : {
+            "type" : "string"
           },
           "gender" : {
             "type" : "string"
@@ -13104,6 +13745,32 @@
           "expiryTime" : {
             "type" : "string",
             "format" : "date-time"
+          },
+          "kycStatusPostExpiry" : {
+            "type" : "string"
+          },
+          "kycAttributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "authType" : {
+            "type" : "string"
+          },
+          "authData" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          }
+        }
+      },
+      "UpdateKycStatusStandardRequest" : {
+        "type" : "object",
+        "properties" : {
+          "kycStatus" : {
+            "type" : "string"
+          },
+          "expiryTime" : {
+            "type" : "string"
           },
           "kycStatusPostExpiry" : {
             "type" : "string"

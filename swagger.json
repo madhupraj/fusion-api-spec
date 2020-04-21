@@ -30,132 +30,6 @@
     "name" : "SupportCentre"
   } ],
   "paths" : {
-    "/api/v1/fusion-config" : {
-      "get" : {
-        "operationId" : "getAllFusionConfigs",
-        "parameters" : [ {
-          "name" : "pageNumber",
-          "in" : "query",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        }, {
-          "name" : "pageSize",
-          "in" : "query",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        }, {
-          "name" : "sortBy",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "sortOrder",
-          "in" : "query",
-          "required" : false,
-          "type" : "string",
-          "enum" : [ "asc", "desc" ]
-        }, {
-          "name" : "pageIndex",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "lastFetchedId",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/PaginatedResponseFusionConfigResponse"
-            }
-          }
-        }
-      },
-      "post" : {
-        "operationId" : "createFusionConfig",
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/AddFusionConfigRequest"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/FusionConfigResponse"
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/fusion-config/{configID}" : {
-      "get" : {
-        "operationId" : "getFusionConfigByID",
-        "parameters" : [ {
-          "name" : "configID",
-          "in" : "path",
-          "description" : "ID of the fusionConfig whose details are being retrieved",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/FusionConfigResponse"
-            }
-          }
-        }
-      },
-      "put" : {
-        "operationId" : "updateFusionConfig",
-        "parameters" : [ {
-          "name" : "configID",
-          "in" : "path",
-          "description" : "ID of the fusionConfig whose details are being updated",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/UpdateFusionConfigRequest"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/FusionConfigResponse"
-            }
-          }
-        }
-      },
-      "delete" : {
-        "operationId" : "deleteConfigByID",
-        "parameters" : [ {
-          "name" : "configID",
-          "in" : "path",
-          "description" : "ID of the fusionConfig whose details are being deleted",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "default" : {
-            "description" : "successful operation"
-          }
-        }
-      }
-    },
     "/api/v1/ifi/{ifiID}/accountHolder/headless" : {
       "post" : {
         "tags" : [ "AccountHolder Management" ],
@@ -1158,7 +1032,7 @@
           "name" : "body",
           "required" : false,
           "schema" : {
-            "$ref" : "#/definitions/CreateAddCorporateApplicationRequest"
+            "$ref" : "#/definitions/JsonObject"
           }
         } ],
         "responses" : {
@@ -2588,6 +2462,28 @@
           "required" : true,
           "type" : "integer",
           "format" : "int64"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
         } ],
         "responses" : {
           "200" : {
@@ -2650,6 +2546,28 @@
           "schema" : {
             "type" : "string"
           }
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
         } ],
         "responses" : {
           "200" : {
@@ -3090,6 +3008,28 @@
           "required" : true,
           "type" : "integer",
           "format" : "int64"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
         } ],
         "responses" : {
           "200" : {
@@ -3241,6 +3181,123 @@
             "schema" : {
               "$ref" : "#/definitions/FormFactorProduct"
             }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/fusion-config" : {
+      "get" : {
+        "operationId" : "getAllFusionConfigs",
+        "parameters" : [ {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "maximum" : 50,
+          "format" : "int64"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "enum" : [ "asc", "desc" ]
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/PagedModel"
+            }
+          }
+        }
+      },
+      "post" : {
+        "operationId" : "createFusionConfig",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/AddFusionConfigRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/FusionConfigResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/fusion-config/{configID}" : {
+      "get" : {
+        "operationId" : "getFusionConfigByID",
+        "parameters" : [ {
+          "name" : "configID",
+          "in" : "path",
+          "description" : "ID of the fusionConfig whose details are being retrieved",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/FusionConfigResponse"
+            }
+          }
+        }
+      },
+      "put" : {
+        "operationId" : "updateFusionConfig",
+        "parameters" : [ {
+          "name" : "configID",
+          "in" : "path",
+          "description" : "ID of the fusionConfig whose details are being updated",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/UpdateFusionConfigRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/FusionConfigResponse"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "operationId" : "deleteConfigByID",
+        "parameters" : [ {
+          "name" : "configID",
+          "in" : "path",
+          "description" : "ID of the fusionConfig whose details are being deleted",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "successful operation"
           }
         }
       }
@@ -6883,7 +6940,17 @@
         }, {
           "name" : "status",
           "in" : "query",
-          "required" : true,
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
           "type" : "string"
         }, {
           "name" : "pageSize",
@@ -6902,7 +6969,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/Account"
+              "$ref" : "#/definitions/PagedModel"
             }
           }
         }
@@ -6924,7 +6991,7 @@
           "name" : "body",
           "required" : false,
           "schema" : {
-            "$ref" : "#/definitions/EditIndividualApplicationRequest"
+            "$ref" : "#/definitions/EditIndividualApplicationStandardRequest"
           }
         } ],
         "responses" : {
@@ -6953,7 +7020,7 @@
           "name" : "body",
           "required" : false,
           "schema" : {
-            "$ref" : "#/definitions/CreateAccountHolderWithAutoApprovalRequest"
+            "$ref" : "#/definitions/CreateAccountHolderWithAutoApprovalStandardRequest"
           }
         } ],
         "responses" : {
@@ -6982,7 +7049,7 @@
           "name" : "body",
           "required" : false,
           "schema" : {
-            "$ref" : "#/definitions/CreateAccountHolderApplicationRequest"
+            "$ref" : "#/definitions/CreateAccountHolderApplicationStandardRequest"
           }
         } ],
         "responses" : {
@@ -7041,7 +7108,7 @@
           "name" : "body",
           "required" : false,
           "schema" : {
-            "$ref" : "#/definitions/UpdateAccountHolderApplicationRequest"
+            "$ref" : "#/definitions/UpdateAccountHolderApplicationStandardRequest"
           }
         } ],
         "responses" : {
@@ -7105,7 +7172,7 @@
           "name" : "body",
           "required" : false,
           "schema" : {
-            "$ref" : "#/definitions/UpdateKycStatusRequest"
+            "$ref" : "#/definitions/UpdateKycStatusStandardRequest"
           }
         } ],
         "responses" : {
@@ -7205,7 +7272,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/TransactionPolicyResponse"
+              "$ref" : "#/definitions/PolicyMappingStandardResponse"
             }
           }
         }
@@ -7234,7 +7301,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/Product"
+              "$ref" : "#/definitions/ProductResponse"
             }
           }
         }
@@ -7263,7 +7330,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/ProductFamily"
+              "$ref" : "#/definitions/ProductFamilyResponse"
             }
           }
         }
@@ -7315,34 +7382,38 @@
           "type" : "integer",
           "format" : "int64"
         }, {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
         }, {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
         }, {
-          "in" : "body",
-          "name" : "body",
+          "name" : "showLimits",
+          "in" : "query",
+          "required" : true,
+          "type" : "boolean"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
           "required" : false,
-          "schema" : {
-            "type" : "boolean"
-          }
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
         } ],
         "responses" : {
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/GetAllTransactionPoliciesResponse"
+              "$ref" : "#/definitions/PagedModel"
             }
           }
         }
@@ -7359,12 +7430,38 @@
           "required" : true,
           "type" : "integer",
           "format" : "int64"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "description" : "No of products needed in response",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32",
+          "x-example" : 10
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "description" : "Page number for products needed in response",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32",
+          "x-example" : "test"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
         } ],
         "responses" : {
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/GetCoaListResponse"
+              "$ref" : "#/definitions/PagedModel"
             }
           }
         }
@@ -7414,12 +7511,34 @@
           "in" : "query",
           "required" : true,
           "type" : "string"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
         } ],
         "responses" : {
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/ListEntityGroupResponse"
+              "$ref" : "#/definitions/PagedModel"
             }
           }
         }
@@ -7456,12 +7575,34 @@
           "in" : "query",
           "required" : true,
           "type" : "string"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
         } ],
         "responses" : {
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/GetProductListResponse"
+              "$ref" : "#/definitions/PagedModel"
             }
           }
         }
@@ -7489,7 +7630,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/Product"
+              "$ref" : "#/definitions/ProductResponse"
             }
           }
         }
@@ -7519,7 +7660,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/ProductFamily"
+              "$ref" : "#/definitions/ProductFamilyResponse"
             }
           }
         }
@@ -7536,12 +7677,38 @@
           "required" : true,
           "type" : "integer",
           "format" : "int64"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "description" : "No of products needed in response",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32",
+          "x-example" : 10
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "description" : "Page number for products needed in response",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32",
+          "x-example" : "test"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
         } ],
         "responses" : {
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/GetProductFamilyListResponse"
+              "$ref" : "#/definitions/PagedModel"
             }
           }
         }
@@ -7558,12 +7725,38 @@
           "required" : true,
           "type" : "integer",
           "format" : "int64"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "description" : "No of products needed in response",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32",
+          "x-example" : 10
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "description" : "Page number for products needed in response",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32",
+          "x-example" : "test"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
         } ],
         "responses" : {
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/GetProductListResponse"
+              "$ref" : "#/definitions/PagedModel"
             }
           }
         }
@@ -7626,7 +7819,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/TransactionPolicyResponse"
+              "$ref" : "#/definitions/TransactionPolicyStandardResponse"
             }
           }
         }
@@ -7660,7 +7853,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/TransactionPolicyResponse"
+              "$ref" : "#/definitions/TransactionPolicyStandardResponse"
             }
           }
         }
@@ -7689,7 +7882,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/TransactionPolicyResponse"
+              "$ref" : "#/definitions/TransactionPolicyStandardResponse"
             }
           }
         }
@@ -9373,12 +9566,34 @@
           "required" : true,
           "type" : "integer",
           "format" : "int64"
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
         } ],
         "responses" : {
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/GetAggregateExpressionListResponse"
+              "$ref" : "#/definitions/PagedModel"
             }
           }
         }
@@ -9534,7 +9749,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/GetPolicyResponsePayload"
+              "$ref" : "#/definitions/PolicyResponse"
             }
           }
         }
@@ -9642,12 +9857,22 @@
           "type" : "integer",
           "format" : "int32",
           "x-example" : "test"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
         } ],
         "responses" : {
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/GetProductListResponse"
+              "$ref" : "#/definitions/PagedModel"
             }
           }
         }
@@ -9697,12 +9922,26 @@
           "type" : "integer",
           "format" : "int32",
           "x-example" : "test"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "description" : "Sort By needed in response",
+          "required" : false,
+          "type" : "string",
+          "x-example" : "createdAt"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "description" : "Sort Order needed in response",
+          "required" : false,
+          "type" : "string",
+          "x-example" : "asc"
         } ],
         "responses" : {
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/Account"
+              "$ref" : "#/definitions/PagedModel"
             }
           }
         }
@@ -10988,6 +11227,9 @@
         "kycStatus" : {
           "$ref" : "#/definitions/KYCStatus"
         },
+        "documents" : {
+          "$ref" : "#/definitions/Documents"
+        },
         "attributes" : {
           "type" : "object",
           "example" : "myCode : ABC",
@@ -11117,6 +11359,9 @@
         },
         "kycStatus" : {
           "$ref" : "#/definitions/KYCStatus"
+        },
+        "documents" : {
+          "$ref" : "#/definitions/Documents"
         },
         "attributes" : {
           "type" : "object",
@@ -12850,6 +13095,65 @@
         }
       }
     },
+    "CreateAccountHolderApplicationStandardRequest" : {
+      "type" : "object",
+      "properties" : {
+        "description" : {
+          "type" : "string"
+        },
+        "salutation" : {
+          "type" : "string"
+        },
+        "firstName" : {
+          "type" : "string"
+        },
+        "middleName" : {
+          "type" : "string"
+        },
+        "lastName" : {
+          "type" : "string"
+        },
+        "profilePicURL" : {
+          "type" : "string"
+        },
+        "dob" : {
+          "type" : "string"
+        },
+        "gender" : {
+          "type" : "string"
+        },
+        "mothersMaidenName" : {
+          "type" : "string"
+        },
+        "kycDetails" : {
+          "$ref" : "#/definitions/KYCDetails"
+        },
+        "vectors" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Vector"
+          }
+        },
+        "pops" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/POP"
+          }
+        },
+        "customFields" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "object"
+          }
+        },
+        "tags" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Tag"
+          }
+        }
+      }
+    },
     "CreateAccountHolderRequest" : {
       "type" : "object",
       "properties" : {
@@ -12978,11 +13282,69 @@
         }
       }
     },
-    "CreateAddCorporateApplicationRequest" : {
+    "CreateAccountHolderWithAutoApprovalStandardRequest" : {
       "type" : "object",
       "properties" : {
-        "ifiParams" : {
-          "$ref" : "#/definitions/JsonObject"
+        "ifiID" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "description" : {
+          "type" : "string"
+        },
+        "individualType" : {
+          "type" : "string"
+        },
+        "salutation" : {
+          "type" : "string"
+        },
+        "firstName" : {
+          "type" : "string"
+        },
+        "middleName" : {
+          "type" : "string"
+        },
+        "lastName" : {
+          "type" : "string"
+        },
+        "profilePicURL" : {
+          "type" : "string"
+        },
+        "dob" : {
+          "type" : "string"
+        },
+        "gender" : {
+          "type" : "string"
+        },
+        "mothersMaidenName" : {
+          "type" : "string"
+        },
+        "kycDetails" : {
+          "$ref" : "#/definitions/KYCDetails"
+        },
+        "vectors" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Vector"
+          }
+        },
+        "pops" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/POP"
+          }
+        },
+        "customFields" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "object"
+          }
+        },
+        "tags" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Tag"
+          }
         }
       }
     },
@@ -13586,6 +13948,29 @@
         }
       }
     },
+    "Documents" : {
+      "type" : "object",
+      "properties" : {
+        "cin" : {
+          "type" : "string"
+        },
+        "cinURL" : {
+          "type" : "string"
+        },
+        "pan" : {
+          "type" : "string"
+        },
+        "panURL" : {
+          "type" : "string"
+        },
+        "gstin" : {
+          "type" : "string"
+        },
+        "gstinURL" : {
+          "type" : "string"
+        }
+      }
+    },
     "ECDHEncryptedCardPayload" : {
       "type" : "object",
       "properties" : {
@@ -13823,6 +14208,27 @@
         },
         "source" : {
           "type" : "string"
+        }
+      }
+    },
+    "EditIndividualApplicationStandardRequest" : {
+      "type" : "object",
+      "properties" : {
+        "ifiID" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "description" : {
+          "type" : "string"
+        },
+        "individualID" : {
+          "type" : "string"
+        },
+        "tags" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Tag"
+          }
         }
       }
     },
@@ -14087,7 +14493,45 @@
       }
     },
     "FusionConfigResponse" : {
-      "type" : "object"
+      "type" : "object",
+      "properties" : {
+        "key" : {
+          "type" : "string",
+          "example" : "123123",
+          "description" : "The key of the key-value pair"
+        },
+        "value" : {
+          "type" : "string",
+          "example" : "test",
+          "description" : "The value of the key-value pair"
+        },
+        "type" : {
+          "type" : "string",
+          "example" : "SANDBOX_VBO_MAPPING",
+          "description" : "The type for the key-value config"
+        },
+        "description" : {
+          "type" : "string",
+          "example" : "Description of the key",
+          "description" : "The description for the key-value config"
+        },
+        "id" : {
+          "type" : "string",
+          "format" : "uuid"
+        },
+        "createdBy" : {
+          "type" : "string"
+        },
+        "updatedBy" : {
+          "type" : "string"
+        },
+        "createdAt" : {
+          "type" : "string"
+        },
+        "updatedAt" : {
+          "type" : "string"
+        }
+      }
     },
     "FusionListCardsRequest" : {
       "type" : "object",
@@ -14554,6 +14998,10 @@
           "items" : {
             "$ref" : "#/definitions/Coa"
           }
+        },
+        "count" : {
+          "type" : "integer",
+          "format" : "int64"
         }
       }
     },
@@ -14626,6 +15074,10 @@
           "items" : {
             "$ref" : "#/definitions/PolicyMappingResponse"
           }
+        },
+        "count" : {
+          "type" : "integer",
+          "format" : "int64"
         }
       }
     },
@@ -14657,6 +15109,10 @@
           "items" : {
             "$ref" : "#/definitions/ProductFamily"
           }
+        },
+        "count" : {
+          "type" : "integer",
+          "format" : "int64"
         }
       }
     },
@@ -14674,6 +15130,10 @@
           "items" : {
             "$ref" : "#/definitions/Product"
           }
+        },
+        "count" : {
+          "type" : "integer",
+          "format" : "int64"
         }
       }
     },
@@ -15178,8 +15638,14 @@
         "serviceInstanceJID" : {
           "type" : "boolean"
         },
+        "primaryServiceName" : {
+          "type" : "string"
+        },
         "serviceViewName" : {
           "type" : "string"
+        },
+        "bareJID" : {
+          "$ref" : "#/definitions/JID"
         },
         "serviceViewJID" : {
           "type" : "boolean"
@@ -15189,12 +15655,6 @@
         },
         "jidOfAGroup" : {
           "type" : "boolean"
-        },
-        "primaryServiceName" : {
-          "type" : "string"
-        },
-        "bareJID" : {
-          "$ref" : "#/definitions/JID"
         },
         "proxyServiceJID" : {
           "type" : "boolean"
@@ -15246,11 +15706,11 @@
         "asString" : {
           "type" : "string"
         },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
-        },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
+        },
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
         },
         "asJsonObject" : {
           "$ref" : "#/definitions/JsonObject"
@@ -15278,6 +15738,30 @@
         "asBoolean" : {
           "type" : "boolean"
         },
+        "asJsonPrimitive" : {
+          "$ref" : "#/definitions/JsonPrimitive"
+        },
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
+        },
+        "asJsonObject" : {
+          "$ref" : "#/definitions/JsonObject"
+        },
+        "jsonArray" : {
+          "type" : "boolean"
+        },
+        "jsonObject" : {
+          "type" : "boolean"
+        },
+        "jsonPrimitive" : {
+          "type" : "boolean"
+        },
+        "jsonNull" : {
+          "type" : "boolean"
+        },
+        "asJsonNull" : {
+          "$ref" : "#/definitions/JsonNull"
+        },
         "asNumber" : {
           "$ref" : "#/definitions/Number"
         },
@@ -15313,30 +15797,6 @@
         "asShort" : {
           "type" : "integer",
           "format" : "int32"
-        },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
-        },
-        "asJsonPrimitive" : {
-          "$ref" : "#/definitions/JsonPrimitive"
-        },
-        "asJsonObject" : {
-          "$ref" : "#/definitions/JsonObject"
-        },
-        "jsonArray" : {
-          "type" : "boolean"
-        },
-        "jsonObject" : {
-          "type" : "boolean"
-        },
-        "jsonPrimitive" : {
-          "type" : "boolean"
-        },
-        "jsonNull" : {
-          "type" : "boolean"
-        },
-        "asJsonNull" : {
-          "$ref" : "#/definitions/JsonNull"
         },
         "asString" : {
           "type" : "string"
@@ -15349,6 +15809,30 @@
         "asBoolean" : {
           "type" : "boolean"
         },
+        "asJsonPrimitive" : {
+          "$ref" : "#/definitions/JsonPrimitive"
+        },
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
+        },
+        "asJsonObject" : {
+          "$ref" : "#/definitions/JsonObject"
+        },
+        "jsonArray" : {
+          "type" : "boolean"
+        },
+        "jsonObject" : {
+          "type" : "boolean"
+        },
+        "jsonPrimitive" : {
+          "type" : "boolean"
+        },
+        "jsonNull" : {
+          "type" : "boolean"
+        },
+        "asJsonNull" : {
+          "$ref" : "#/definitions/JsonNull"
+        },
         "asNumber" : {
           "$ref" : "#/definitions/Number"
         },
@@ -15384,30 +15868,6 @@
         "asShort" : {
           "type" : "integer",
           "format" : "int32"
-        },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
-        },
-        "asJsonPrimitive" : {
-          "$ref" : "#/definitions/JsonPrimitive"
-        },
-        "asJsonObject" : {
-          "$ref" : "#/definitions/JsonObject"
-        },
-        "jsonArray" : {
-          "type" : "boolean"
-        },
-        "jsonObject" : {
-          "type" : "boolean"
-        },
-        "jsonPrimitive" : {
-          "type" : "boolean"
-        },
-        "jsonNull" : {
-          "type" : "boolean"
-        },
-        "asJsonNull" : {
-          "$ref" : "#/definitions/JsonNull"
         },
         "asString" : {
           "type" : "string"
@@ -15420,6 +15880,30 @@
         "asBoolean" : {
           "type" : "boolean"
         },
+        "asJsonPrimitive" : {
+          "$ref" : "#/definitions/JsonPrimitive"
+        },
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
+        },
+        "asJsonObject" : {
+          "$ref" : "#/definitions/JsonObject"
+        },
+        "jsonArray" : {
+          "type" : "boolean"
+        },
+        "jsonObject" : {
+          "type" : "boolean"
+        },
+        "jsonPrimitive" : {
+          "type" : "boolean"
+        },
+        "jsonNull" : {
+          "type" : "boolean"
+        },
+        "asJsonNull" : {
+          "$ref" : "#/definitions/JsonNull"
+        },
         "asNumber" : {
           "$ref" : "#/definitions/Number"
         },
@@ -15455,30 +15939,6 @@
         "asShort" : {
           "type" : "integer",
           "format" : "int32"
-        },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
-        },
-        "asJsonPrimitive" : {
-          "$ref" : "#/definitions/JsonPrimitive"
-        },
-        "asJsonObject" : {
-          "$ref" : "#/definitions/JsonObject"
-        },
-        "jsonArray" : {
-          "type" : "boolean"
-        },
-        "jsonObject" : {
-          "type" : "boolean"
-        },
-        "jsonPrimitive" : {
-          "type" : "boolean"
-        },
-        "jsonNull" : {
-          "type" : "boolean"
-        },
-        "asJsonNull" : {
-          "$ref" : "#/definitions/JsonNull"
         },
         "asString" : {
           "type" : "string"
@@ -15539,11 +15999,11 @@
         "asString" : {
           "type" : "string"
         },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
-        },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
+        },
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
         },
         "asJsonObject" : {
           "$ref" : "#/definitions/JsonObject"
@@ -15654,6 +16114,10 @@
           "items" : {
             "$ref" : "#/definitions/EntityGroup"
           }
+        },
+        "count" : {
+          "type" : "integer",
+          "format" : "int64"
         }
       }
     },
@@ -15971,54 +16435,6 @@
         },
         "metadata" : {
           "$ref" : "#/definitions/PageMetadata"
-        }
-      }
-    },
-    "PaginatedResponse" : {
-      "type" : "object",
-      "properties" : {
-        "nextPageIndex" : {
-          "type" : "string"
-        },
-        "prevPageIndex" : {
-          "type" : "string"
-        },
-        "entities" : {
-          "type" : "array",
-          "items" : {
-            "type" : "object"
-          }
-        },
-        "hasNext" : {
-          "type" : "boolean"
-        },
-        "totalCount" : {
-          "type" : "integer",
-          "format" : "int64"
-        }
-      }
-    },
-    "PaginatedResponseFusionConfigResponse" : {
-      "type" : "object",
-      "properties" : {
-        "nextPageIndex" : {
-          "type" : "string"
-        },
-        "prevPageIndex" : {
-          "type" : "string"
-        },
-        "entities" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/FusionConfigResponse"
-          }
-        },
-        "hasNext" : {
-          "type" : "boolean"
-        },
-        "totalCount" : {
-          "type" : "integer",
-          "format" : "int64"
         }
       }
     },
@@ -16445,6 +16861,82 @@
         }
       }
     },
+    "PolicyMappingStandardResponse" : {
+      "type" : "object"
+    },
+    "PolicyResponse" : {
+      "type" : "object",
+      "properties" : {
+        "ifi" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "id" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "code" : {
+          "type" : "string"
+        },
+        "desc" : {
+          "type" : "string"
+        },
+        "version" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "txnConstraints" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/PolicyTxnConstraint"
+          }
+        },
+        "policyTxnRules" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/PolicyTxnRule"
+          }
+        },
+        "policyBalanceRules" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/PolicyBalanceRule"
+          }
+        },
+        "policyAggregateRules" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/PolicyAggregateRule"
+          }
+        },
+        "effectiveFrom" : {
+          "type" : "string"
+        },
+        "expiresAt" : {
+          "type" : "string"
+        },
+        "createdAt" : {
+          "type" : "string"
+        },
+        "updatedAt" : {
+          "type" : "string"
+        },
+        "policyViolationAction" : {
+          "type" : "string",
+          "enum" : [ "DECLINE_AND_NOTIFY", "DECLINE", "NOTIFY" ]
+        },
+        "attributes" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "state" : {
+          "type" : "string",
+          "enum" : [ "ENABLED", "DISABLED" ]
+        }
+      }
+    },
     "PolicyTxnConstraint" : {
       "type" : "object",
       "properties" : {
@@ -16699,6 +17191,9 @@
         }
       }
     },
+    "ProductFamilyResponse" : {
+      "type" : "object"
+    },
     "ProductInfoRequest" : {
       "type" : "object",
       "required" : [ "productID" ],
@@ -16742,6 +17237,9 @@
           }
         }
       }
+    },
+    "ProductResponse" : {
+      "type" : "object"
     },
     "PublicPaymentRequestWrapper" : {
       "type" : "object",
@@ -17320,6 +17818,9 @@
         }
       }
     },
+    "TransactionPolicyStandardResponse" : {
+      "type" : "object"
+    },
     "TransferRequest" : {
       "type" : "object",
       "required" : [ "amount", "creditAccountID", "currency", "debitAccountID", "remarks", "requestID", "transferCode", "transferTime" ],
@@ -17492,6 +17993,42 @@
         "dob" : {
           "type" : "string",
           "format" : "date"
+        },
+        "gender" : {
+          "type" : "string"
+        },
+        "mothersMaidenName" : {
+          "type" : "string"
+        }
+      }
+    },
+    "UpdateAccountHolderApplicationStandardRequest" : {
+      "type" : "object",
+      "properties" : {
+        "applicationID" : {
+          "type" : "string"
+        },
+        "ifiID" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "salutation" : {
+          "type" : "string"
+        },
+        "firstName" : {
+          "type" : "string"
+        },
+        "middleName" : {
+          "type" : "string"
+        },
+        "lastName" : {
+          "type" : "string"
+        },
+        "profilePicURL" : {
+          "type" : "string"
+        },
+        "dob" : {
+          "type" : "string"
         },
         "gender" : {
           "type" : "string"
@@ -17690,6 +18227,32 @@
         "expiryTime" : {
           "type" : "string",
           "format" : "date-time"
+        },
+        "kycStatusPostExpiry" : {
+          "type" : "string"
+        },
+        "kycAttributes" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "authType" : {
+          "type" : "string"
+        },
+        "authData" : {
+          "$ref" : "#/definitions/JsonObject"
+        }
+      }
+    },
+    "UpdateKycStatusStandardRequest" : {
+      "type" : "object",
+      "properties" : {
+        "kycStatus" : {
+          "type" : "string"
+        },
+        "expiryTime" : {
+          "type" : "string"
         },
         "kycStatusPostExpiry" : {
           "type" : "string"
