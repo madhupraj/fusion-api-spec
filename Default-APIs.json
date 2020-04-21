@@ -6459,6 +6459,265 @@
         }
       }
     },
+    "/api/v2/ifi/{ifiID}/companies/{companyID}/beneficiaries" : {
+      "get" : {
+        "summary" : "Get all the beneficiaries of a company",
+        "operationId" : "getBeneficiaries",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary details are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "companyID",
+          "in" : "path",
+          "description" : "ID of the company for whom the beneficiaries list are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PagedModel"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Create a new beneficiary of a company",
+        "operationId" : "createBeneficiary",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "companyID",
+          "in" : "path",
+          "description" : "ID of the company for whom the beneficiary is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CreateCorporateBeneficiaryRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CorporateBeneficiaryResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/companies/{companyID}/beneficiaries/{beneficiaryID}" : {
+      "get" : {
+        "summary" : "Get details of a beneficiary by ID",
+        "operationId" : "getBeneficiaryByID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary exists",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "companyID",
+          "in" : "path",
+          "description" : "ID of the company for whom the beneficiary details are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "description" : "ID of the beneficiary whose details are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CorporateBeneficiaryResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "summary" : "Update a beneficiary of a company",
+        "operationId" : "updateBeneficiary",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "companyID",
+          "in" : "path",
+          "description" : "ID of the company for whom the beneficiary is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "description" : "ID of the beneficiary which is being updated belonging to an company",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "f0e68249-aed0-4359-9df2-a89a350567e9"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateCorporateBeneficiaryRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CorporateBeneficiaryResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "Delete a beneficiary of a company",
+        "operationId" : "deleteBeneficiary",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "companyID",
+          "in" : "path",
+          "description" : "ID of the company for whom the beneficiary is being created",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "description" : "ID of the beneficiary which is being updated belonging to an company",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "f0e68249-aed0-4359-9df2-a89a350567e9"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CorporateBeneficiaryResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v2/ifi/{ifiID}/individuals/{individualID}/beneficiaries" : {
       "get" : {
         "summary" : "Get all the beneficiaries of an individual",
@@ -9257,6 +9516,89 @@
           }
         }
       },
+      "CorporateBeneficiaryResponse" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "ID of the Beneficiary being created by the company",
+            "example" : "93480e72-b883-46fa-8f3f-abe326ab9df7"
+          },
+          "ifiID" : {
+            "type" : "integer",
+            "description" : "ID of the IFI (on-boarded organization) under which the beneficiary is being created",
+            "format" : "int64",
+            "example" : 123123
+          },
+          "companyID" : {
+            "type" : "string",
+            "description" : "ID of the company for whom the beneficiary is being created",
+            "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+          },
+          "firstName" : {
+            "type" : "string",
+            "description" : "First name of the beneficiary being created",
+            "example" : "Chandler"
+          },
+          "middleName" : {
+            "type" : "string",
+            "description" : "Middle name of the beneficiary being created",
+            "example" : "Muriel"
+          },
+          "lastName" : {
+            "type" : "string",
+            "description" : "Last name of the beneficiary being created",
+            "example" : "Bing"
+          },
+          "gender" : {
+            "type" : "string",
+            "description" : "Gender of the beneficiary being created",
+            "example" : "Male"
+          },
+          "profilePicURL" : {
+            "type" : "string",
+            "description" : "Profile pic URL of the beneficiary being created",
+            "example" : "http://abc.com"
+          },
+          "relationship" : {
+            "type" : "string",
+            "description" : "Relation of the beneficiary being created with the individual",
+            "example" : "Brother"
+          },
+          "status" : {
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "Type of the Account Holder for whom the beneficiary being created",
+            "example" : "LEGAL",
+            "enum" : [ "REAL", "LEGAL", "HEADLESS" ]
+          },
+          "vectors" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/BeneficiaryVector"
+            }
+          },
+          "customFields" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            },
+            "description" : "Any additional information which you would like to provide"
+          },
+          "createdAt" : {
+            "type" : "string",
+            "description" : "Date/Time of the Beneficiary when created",
+            "example" : "2020-02-18T06:24:14.000+00:00"
+          },
+          "updatedAt" : {
+            "type" : "string",
+            "description" : "Date/Time of the Beneficiary when updated",
+            "example" : "2020-02-18T06:24:14.000+00:00"
+          }
+        }
+      },
       "CreateAccountHolderApplicationRequest" : {
         "type" : "object",
         "properties" : {
@@ -9680,6 +10022,9 @@
             "format" : "int64"
           }
         }
+      },
+      "CreateCorporateBeneficiaryRequest" : {
+        "type" : "object"
       },
       "CreateCouponAccountingPolicyRequest" : {
         "type" : "object",
@@ -11362,6 +11707,9 @@
           "serviceInstanceJID" : {
             "type" : "boolean"
           },
+          "proxyServiceJID" : {
+            "type" : "boolean"
+          },
           "primaryServiceName" : {
             "type" : "string"
           },
@@ -11378,9 +11726,6 @@
             "type" : "boolean"
           },
           "jidOfAGroup" : {
-            "type" : "boolean"
-          },
-          "proxyServiceJID" : {
             "type" : "boolean"
           }
         }
@@ -11431,61 +11776,61 @@
           "asString" : {
             "type" : "string"
           },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
           },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
           },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
-          },
-          "jsonArray" : {
+          "jsonNull" : {
             "type" : "boolean"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
           },
           "jsonObject" : {
             "type" : "boolean"
           },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
-          "jsonNull" : {
-            "type" : "boolean"
-          },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
+          },
+          "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonPrimitive" : {
+            "type" : "boolean"
           }
         }
       },
       "JsonElement" : {
         "type" : "object",
         "properties" : {
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
           "asBoolean" : {
+            "type" : "boolean"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "jsonNull" : {
             "type" : "boolean"
           },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
-          },
-          "jsonArray" : {
-            "type" : "boolean"
-          },
           "jsonObject" : {
-            "type" : "boolean"
-          },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
-          "jsonNull" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
+          },
+          "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonPrimitive" : {
+            "type" : "boolean"
           },
           "asNumber" : {
             "$ref" : "#/components/schemas/Number"
@@ -11532,32 +11877,32 @@
       "JsonNull" : {
         "type" : "object",
         "properties" : {
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
           "asBoolean" : {
+            "type" : "boolean"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "jsonNull" : {
             "type" : "boolean"
           },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
-          },
-          "jsonArray" : {
-            "type" : "boolean"
-          },
           "jsonObject" : {
-            "type" : "boolean"
-          },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
-          "jsonNull" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
+          },
+          "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonPrimitive" : {
+            "type" : "boolean"
           },
           "asNumber" : {
             "$ref" : "#/components/schemas/Number"
@@ -11604,32 +11949,32 @@
       "JsonObject" : {
         "type" : "object",
         "properties" : {
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
           "asBoolean" : {
+            "type" : "boolean"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "jsonNull" : {
             "type" : "boolean"
           },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
-          },
-          "jsonArray" : {
-            "type" : "boolean"
-          },
           "jsonObject" : {
-            "type" : "boolean"
-          },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
-          "jsonNull" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
+          },
+          "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonPrimitive" : {
+            "type" : "boolean"
           },
           "asNumber" : {
             "$ref" : "#/components/schemas/Number"
@@ -11728,29 +12073,29 @@
           "asString" : {
             "type" : "string"
           },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
           },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
           },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
-          },
-          "jsonArray" : {
+          "jsonNull" : {
             "type" : "boolean"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
           },
           "jsonObject" : {
             "type" : "boolean"
           },
-          "jsonPrimitive" : {
-            "type" : "boolean"
-          },
-          "jsonNull" : {
-            "type" : "boolean"
-          },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
+          },
+          "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonPrimitive" : {
+            "type" : "boolean"
           }
         }
       },
@@ -12990,11 +13335,11 @@
           "type" : {
             "type" : "string"
           },
-          "signatoryJID" : {
-            "$ref" : "#/components/schemas/JID"
-          },
           "zetaSignature" : {
             "$ref" : "#/components/schemas/ZetaSignature"
+          },
+          "signatoryJID" : {
+            "$ref" : "#/components/schemas/JID"
           },
           "payloadVersion" : {
             "type" : "integer",
@@ -13702,6 +14047,62 @@
             "additionalProperties" : {
               "type" : "string"
             }
+          }
+        }
+      },
+      "UpdateCorporateBeneficiaryRequest" : {
+        "type" : "object",
+        "properties" : {
+          "firstName" : {
+            "type" : "string",
+            "description" : "First name of the beneficiary being created",
+            "example" : "Chandler"
+          },
+          "middleName" : {
+            "type" : "string",
+            "description" : "Middle name of the beneficiary being created",
+            "example" : "Muriel"
+          },
+          "lastName" : {
+            "type" : "string",
+            "description" : "Last name of the beneficiary being created",
+            "example" : "Bing"
+          },
+          "gender" : {
+            "type" : "string",
+            "description" : "Gender of the beneficiary being created",
+            "example" : "Male"
+          },
+          "salutation" : {
+            "type" : "string",
+            "description" : "Salutation of the beneficiary being created",
+            "example" : "Mr"
+          },
+          "relationship" : {
+            "type" : "string",
+            "description" : "Relation of the beneficiary being created with the individual",
+            "example" : "Brother"
+          },
+          "profilePicURL" : {
+            "type" : "string",
+            "description" : "Profile pic URL of the beneficiary being created",
+            "example" : "http://abc.com"
+          },
+          "dob" : {
+            "type" : "string",
+            "description" : "Date of Birth of the account holder being created",
+            "format" : "date-time"
+          },
+          "type" : {
+            "type" : "string",
+            "enum" : [ "REAL", "LEGAL", "HEADLESS" ]
+          },
+          "customFields" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            },
+            "description" : "Any additional information which you would like to provide"
           }
         }
       },
