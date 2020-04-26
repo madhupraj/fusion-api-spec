@@ -851,14 +851,12 @@
         }, {
           "name" : "sortBy",
           "in" : "query",
-          "required" : true,
           "schema" : {
             "type" : "string"
           }
         }, {
           "name" : "sortOrder",
           "in" : "query",
-          "required" : true,
           "schema" : {
             "type" : "string",
             "enum" : [ "asc", "desc" ]
