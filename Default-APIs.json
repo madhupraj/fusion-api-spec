@@ -11701,9 +11701,6 @@
           "defaultServiceNode" : {
             "type" : "boolean"
           },
-          "serviceViewName" : {
-            "type" : "string"
-          },
           "jidOfAGroup" : {
             "type" : "boolean"
           },
@@ -11715,6 +11712,9 @@
           },
           "proxyServiceJID" : {
             "type" : "boolean"
+          },
+          "serviceViewName" : {
+            "type" : "string"
           }
         }
       },
