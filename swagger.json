@@ -1994,6 +1994,42 @@
         }
       }
     },
+    "/api/v1/ifi/{ifiID}/bundles/{bundleID}/issueAccountProducts" : {
+      "post" : {
+        "summary" : "Issue specific Account from a bundle ",
+        "description" : "",
+        "operationId" : "issueAccountProduct",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the Account is being issued",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "bundleID",
+          "in" : "path",
+          "description" : "ID of the bundle whose account product is being issued",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/IssueAccountProductsRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/IssueAccountArtifactResponse"
+            }
+          }
+        }
+      }
+    },
     "/api/v1/ifi/{ifiID}/bundles/{bundleID}/issueBundle" : {
       "post" : {
         "summary" : "Issue bundle to a specific individual/company",
@@ -8100,7 +8136,7 @@
         }
       }
     },
-    "/api/v2/ifi/{ifiID}/bundles/{bundleID}/issueAccount" : {
+    "/api/v2/ifi/{ifiID}/bundles/{bundleID}/issueAccountProducts" : {
       "post" : {
         "summary" : "Issue specific Account from a bundle ",
         "description" : "",
@@ -8123,7 +8159,7 @@
           "name" : "body",
           "required" : false,
           "schema" : {
-            "$ref" : "#/definitions/IssueAccountArtifactRequest"
+            "$ref" : "#/definitions/IssueAccountProductsRequest"
           }
         } ],
         "responses" : {
@@ -8203,6 +8239,45 @@
             "description" : "successful operation",
             "schema" : {
               "$ref" : "#/definitions/IssueFormFactorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/bundles/{bundleID}/issuePaymentProducts" : {
+      "post" : {
+        "summary" : "Issue specific Account from a bundle ",
+        "description" : "",
+        "operationId" : "issuePaymentProducts",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the Account is being issued",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "bundleID",
+          "in" : "path",
+          "description" : "ID of the bundle whose account product is being issued",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/IssuePaymentProductRequest"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/IssueAccountArtifactResponse"
             }
           }
         }
@@ -15681,6 +15756,20 @@
         }
       }
     },
+    "IssueAccountProductsRequest" : {
+      "type" : "object",
+      "properties" : {
+        "requestID" : {
+          "type" : "string"
+        },
+        "issueAccountArtifactRequests" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/IssueAccountArtifactRequest"
+          }
+        }
+      }
+    },
     "IssueBundleRequest" : {
       "type" : "object",
       "required" : [ "accountHolderID" ],
@@ -15812,6 +15901,44 @@
         }
       }
     },
+    "IssuePaymentProductRequest" : {
+      "type" : "object",
+      "required" : [ "paymentProductID", "phoneNumber", "targetAccountID" ],
+      "properties" : {
+        "targetAccountID" : {
+          "type" : "string",
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db",
+          "description" : "ID of the individual's account which is to be linked to the resource/card"
+        },
+        "phoneNumber" : {
+          "type" : "string",
+          "example" : "+919876543210",
+          "description" : "The phone number to be assosciated with the account and the card"
+        },
+        "paymentProductID" : {
+          "type" : "string",
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db",
+          "description" : "ID of the account product ID which is part of the issuing bundle"
+        },
+        "accountHolderID" : {
+          "type" : "string",
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db",
+          "description" : "ID of the individual being issued with the resource."
+        },
+        "attributes" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "object"
+          }
+        },
+        "headers" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
     "IssuePaymentProductResponse" : {
       "type" : "object",
       "properties" : {
@@ -15922,23 +16049,23 @@
         "serviceInstanceJID" : {
           "type" : "boolean"
         },
-        "primaryServiceName" : {
-          "type" : "string"
-        },
-        "serviceViewName" : {
-          "type" : "string"
-        },
-        "bareJID" : {
-          "$ref" : "#/definitions/JID"
-        },
         "serviceViewJID" : {
           "type" : "boolean"
         },
         "defaultServiceNode" : {
           "type" : "boolean"
         },
+        "serviceViewName" : {
+          "type" : "string"
+        },
         "jidOfAGroup" : {
           "type" : "boolean"
+        },
+        "primaryServiceName" : {
+          "type" : "string"
+        },
+        "bareJID" : {
+          "$ref" : "#/definitions/JID"
         },
         "proxyServiceJID" : {
           "type" : "boolean"
@@ -17643,12 +17770,12 @@
         "signatoryJID" : {
           "$ref" : "#/definitions/JID"
         },
-        "zetaSignature" : {
-          "$ref" : "#/definitions/ZetaSignature"
-        },
         "payloadVersion" : {
           "type" : "integer",
           "format" : "int32"
+        },
+        "zetaSignature" : {
+          "$ref" : "#/definitions/ZetaSignature"
         },
         "signed" : {
           "type" : "boolean"

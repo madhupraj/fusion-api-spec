@@ -1508,6 +1508,52 @@
         }
       }
     },
+    "/api/v1/ifi/{ifiID}/bundles/{bundleID}/issueAccountProducts" : {
+      "post" : {
+        "summary" : "Issue specific Account from a bundle ",
+        "operationId" : "issueAccountProduct",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the Account is being issued",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "bundleID",
+          "in" : "path",
+          "description" : "ID of the bundle whose account product is being issued",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/IssueAccountProductsRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/IssueAccountArtifactResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/ifi/{ifiID}/bundles/{bundleID}/issueBundle" : {
       "post" : {
         "summary" : "Issue bundle to a specific individual/company",
@@ -6278,7 +6324,7 @@
         }
       }
     },
-    "/api/v2/ifi/{ifiID}/bundles/{bundleID}/issueAccount" : {
+    "/api/v2/ifi/{ifiID}/bundles/{bundleID}/issueAccountProducts" : {
       "post" : {
         "summary" : "Issue specific Account from a bundle ",
         "operationId" : "issueAccountProduct",
@@ -6304,7 +6350,7 @@
           "content" : {
             "*/*" : {
               "schema" : {
-                "$ref" : "#/components/schemas/IssueAccountArtifactRequest"
+                "$ref" : "#/components/schemas/IssueAccountProductsRequest"
               }
             }
           },
@@ -6409,6 +6455,55 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/IssueFormFactorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/bundles/{bundleID}/issuePaymentProducts" : {
+      "post" : {
+        "summary" : "Issue specific Account from a bundle ",
+        "operationId" : "issuePaymentProducts",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the Account is being issued",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "bundleID",
+          "in" : "path",
+          "description" : "ID of the bundle whose account product is being issued",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/IssuePaymentProductRequest"
+                }
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/IssueAccountArtifactResponse"
                 }
               }
             }
@@ -11454,6 +11549,20 @@
           }
         }
       },
+      "IssueAccountProductsRequest" : {
+        "type" : "object",
+        "properties" : {
+          "requestID" : {
+            "type" : "string"
+          },
+          "issueAccountArtifactRequests" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/IssueAccountArtifactRequest"
+            }
+          }
+        }
+      },
       "IssueBundleRequest" : {
         "required" : [ "accountHolderID" ],
         "type" : "object",
@@ -11698,23 +11807,23 @@
           "serviceInstanceJID" : {
             "type" : "boolean"
           },
-          "primaryServiceName" : {
-            "type" : "string"
-          },
-          "serviceViewName" : {
-            "type" : "string"
-          },
-          "bareJID" : {
-            "$ref" : "#/components/schemas/JID"
-          },
           "serviceViewJID" : {
             "type" : "boolean"
           },
           "defaultServiceNode" : {
             "type" : "boolean"
           },
+          "serviceViewName" : {
+            "type" : "string"
+          },
           "jidOfAGroup" : {
             "type" : "boolean"
+          },
+          "primaryServiceName" : {
+            "type" : "string"
+          },
+          "bareJID" : {
+            "$ref" : "#/components/schemas/JID"
           },
           "proxyServiceJID" : {
             "type" : "boolean"
@@ -13329,12 +13438,12 @@
           "signatoryJID" : {
             "$ref" : "#/components/schemas/JID"
           },
-          "zetaSignature" : {
-            "$ref" : "#/components/schemas/ZetaSignature"
-          },
           "payloadVersion" : {
             "type" : "integer",
             "format" : "int32"
+          },
+          "zetaSignature" : {
+            "$ref" : "#/components/schemas/ZetaSignature"
           },
           "signed" : {
             "type" : "boolean"
