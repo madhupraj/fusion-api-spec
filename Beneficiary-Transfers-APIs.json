@@ -8,6 +8,177 @@
     "name" : "Beneficiary Transfers"
   } ],
   "paths" : {
+    "/api/v1/ifi/{ifiID}/companies/{companyID}/beneficiaries/{beneficiaryID}/transfers" : {
+      "post" : {
+        "tags" : [ "Beneficiary Transfers" ],
+        "summary" : "Perform transfer to a beneficiary account of an company",
+        "operationId" : "transferToBeneficiaryAccount",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary transfer is being performed",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "companyID",
+          "in" : "path",
+          "description" : "ID of the company who is performing the beneficiary transfer",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "description" : "ID of the beneficiary to whom the transfer is being performed",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/BeneficiaryAccountTransactionFusionRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BeneficiaryTransactionFusionResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/companies/{companyID}/beneficiaryTransfers" : {
+      "get" : {
+        "tags" : [ "Beneficiary Transfers" ],
+        "summary" : "Get all the beneficiary transfers of an company",
+        "operationId" : "getAllBeneficiaryTransfers",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary whose transfers are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "companyID",
+          "in" : "path",
+          "description" : "ID of the company for whom the beneficiary transfers are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PagedModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/companies/{companyID}/beneficiaryTransfers/{transferID}" : {
+      "get" : {
+        "tags" : [ "Beneficiary Transfers" ],
+        "summary" : "Get the details of a transfer by ID",
+        "operationId" : "getBeneficiaryTransferByID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary transfer exists",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "companyID",
+          "in" : "path",
+          "description" : "ID of the company for whom the beneficiary transfer details are being fetched",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "transferID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BeneficiaryTransaction"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/ifi/{ifiID}/individuals/{individualID}/beneficiaries/{beneficiaryID}/accounts/{accountID}/transfers" : {
       "post" : {
         "tags" : [ "Beneficiary Transfers" ],
@@ -234,6 +405,177 @@
         }
       }
     },
+    "/api/v2/ifi/{ifiID}/companies/{companyID}/beneficiaries/{beneficiaryID}/transfers" : {
+      "post" : {
+        "tags" : [ "Beneficiary Transfers" ],
+        "summary" : "Perform transfer to a beneficiary account of an company",
+        "operationId" : "transferToBeneficiaryAccount",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary transfer is being performed",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "companyID",
+          "in" : "path",
+          "description" : "ID of the company who is performing the beneficiary transfer",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "description" : "ID of the beneficiary to whom the transfer is being performed",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/BeneficiaryAccountTransactionFusionRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BeneficiaryTransactionFusionResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/companies/{companyID}/beneficiaryTransfers" : {
+      "get" : {
+        "tags" : [ "Beneficiary Transfers" ],
+        "summary" : "Get all the beneficiary transfers of an company",
+        "operationId" : "getAllBeneficiaryTransfers",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary whose transfers are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "companyID",
+          "in" : "path",
+          "description" : "ID of the company for whom the beneficiary transfers are being retrieved",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PagedModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/companies/{companyID}/beneficiaryTransfers/{transferID}" : {
+      "get" : {
+        "tags" : [ "Beneficiary Transfers" ],
+        "summary" : "Get the details of a transfer by ID",
+        "operationId" : "getBeneficiaryTransferByID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary transfer exists",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "companyID",
+          "in" : "path",
+          "description" : "ID of the company for whom the beneficiary transfer details are being fetched",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "transferID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BeneficiaryTransaction"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v2/ifi/{ifiID}/individuals/{individualID}/beneficiaries/{beneficiaryID}/accounts/{accountID}/transfers" : {
       "post" : {
         "tags" : [ "Beneficiary Transfers" ],
@@ -285,64 +627,6 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/BeneficiaryTransactionFusionResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v2/ifi/{ifiID}/individuals/{individualID}/beneficiaries/{beneficiaryID}/transfers" : {
-      "post" : {
-        "tags" : [ "Beneficiary Transfers" ],
-        "description" : "Perform transfer to an individual beneficiary's default account",
-        "operationId" : "transferToDefaultBeneficiaryAccount",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary transfer is being performed",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "example" : 123123
-        }, {
-          "name" : "individualID",
-          "in" : "path",
-          "description" : "ID of the individual who is performing the beneficiary transfer",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          },
-          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
-        }, {
-          "name" : "beneficiaryID",
-          "in" : "path",
-          "description" : "ID of the beneficiary to whom the transfer is being performed",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          },
-          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
-        } ],
-        "requestBody" : {
-          "content" : {
-            "*/*" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/BeneficiaryAccountTransferRequest"
-              }
-            }
-          },
-          "required" : false
-        },
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/BeneficiaryTransactionResponse"
                 }
               }
             }
@@ -470,20 +754,27 @@
         "type" : "object",
         "properties" : {
           "currency" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Currency in which money need to be transacted ",
+            "example" : "INR"
           },
           "amount" : {
             "type" : "integer",
-            "format" : "int64"
+            "description" : "Amount that need to be transferred",
+            "format" : "int64",
+            "example" : 500
           },
           "transactionCode" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "TransactionCode regarding the transaction"
           },
           "debitAccountID" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "ID of the account from which money has to be deducted"
           },
           "beneficiaryAccountID" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "ID of the beneficiary's account in which money is being transferred"
           },
           "transactionTime" : {
             "type" : "integer",
@@ -946,10 +1237,10 @@
           "number" : {
             "type" : "boolean"
           },
-          "boolean" : {
+          "asBoolean" : {
             "type" : "boolean"
           },
-          "asBoolean" : {
+          "boolean" : {
             "type" : "boolean"
           },
           "asNumber" : {

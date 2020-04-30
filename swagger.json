@@ -2564,6 +2564,588 @@
         }
       }
     },
+    "/api/v1/ifi/{ifiID}/companies/{companyID}/beneficiaries" : {
+      "get" : {
+        "summary" : "Get all the beneficiaries of a company",
+        "description" : "",
+        "operationId" : "getBeneficiaries",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary details are being retrieved",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "companyID",
+          "in" : "path",
+          "description" : "ID of the company for whom the beneficiaries list are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/PagedModel"
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Create a new beneficiary of a company",
+        "description" : "",
+        "operationId" : "createBeneficiary",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary is being created",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "companyID",
+          "in" : "path",
+          "description" : "ID of the company for whom the beneficiary is being created",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/CreateCorporateBeneficiaryRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/CorporateBeneficiaryResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/companies/{companyID}/beneficiaries/{beneficiaryID}" : {
+      "get" : {
+        "summary" : "Get details of a beneficiary by ID",
+        "description" : "",
+        "operationId" : "getBeneficiaryByID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary exists",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "companyID",
+          "in" : "path",
+          "description" : "ID of the company for whom the beneficiary details are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "description" : "ID of the beneficiary whose details are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/CorporateBeneficiaryResponse"
+            }
+          }
+        }
+      },
+      "put" : {
+        "summary" : "Update a beneficiary of a company",
+        "description" : "",
+        "operationId" : "updateBeneficiary",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary is being created",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "companyID",
+          "in" : "path",
+          "description" : "ID of the company for whom the beneficiary is being created",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "description" : "ID of the beneficiary which is being updated belonging to an company",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "f0e68249-aed0-4359-9df2-a89a350567e9"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/UpdateCorporateBeneficiaryRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/CorporateBeneficiaryResponse"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "Delete a beneficiary of a company",
+        "description" : "",
+        "operationId" : "deleteBeneficiary",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary is being created",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "companyID",
+          "in" : "path",
+          "description" : "ID of the company for whom the beneficiary is being created",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "description" : "ID of the beneficiary which is being updated belonging to an company",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "f0e68249-aed0-4359-9df2-a89a350567e9"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/CorporateBeneficiaryResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/companies/{companyID}/beneficiaries/{beneficiaryID}/accounts" : {
+      "get" : {
+        "summary" : "Get all the accounts of a beneficiary",
+        "description" : "",
+        "operationId" : "getBeneficiaryAccounts",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary accounts are being retrieved",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "companyID",
+          "in" : "path",
+          "description" : "ID of the company for whom the beneficiary is being created",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/PagedModel"
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Create a new beneficiary account of a beneficiary",
+        "description" : "",
+        "operationId" : "createBeneficiaryAccount",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary is being created",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "companyID",
+          "in" : "path",
+          "description" : "ID of the company for whom the beneficiary is",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "description" : "ID of the beneficiary whose account is being created",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/CreateCorporateBeneficiaryAccountRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/CorporateBeneficiaryAccountResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/companies/{companyID}/beneficiaries/{beneficiaryID}/accounts/{accountID}" : {
+      "get" : {
+        "summary" : "Get details of a specific beneficiary account of an company's beneficiary ",
+        "description" : "",
+        "operationId" : "getBeneficiaryAccountByID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary account being retrieved exists",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "companyID",
+          "in" : "path",
+          "description" : "ID of the company for whom the beneficiary account being retrieved exists",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "description" : "ID of the beneficiary whose beneficiary account details are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the beneficiary account whose details are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/BeneficiaryAccountResponse"
+            }
+          }
+        }
+      },
+      "put" : {
+        "summary" : "Update a account of a beneficiary",
+        "description" : "",
+        "operationId" : "updateBeneficiaryAccount",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary is being created",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "companyID",
+          "in" : "path",
+          "description" : "ID of the company for whom the beneficiary is being created",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "description" : "ID of the beneficiary which is being updated belonging to an company",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "f0e68249-aed0-4359-9df2-a89a350567e9"
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the account being updated",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "f0e68249-aed0-4359-9df2-a89a350567e9"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/UpdateCorporateBeneficiaryAccountRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/CorporateBeneficiaryAccountResponse"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "Delete a account of a beneficiary",
+        "description" : "",
+        "operationId" : "deleteBeneficiaryAccount",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary is being created",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "companyID",
+          "in" : "path",
+          "description" : "ID of the company for whom the beneficiary is being created",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "description" : "ID of the beneficiary which is being updated belonging to an company",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "f0e68249-aed0-4359-9df2-a89a350567e9"
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the account being updated",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "f0e68249-aed0-4359-9df2-a89a350567e9"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/CorporateBeneficiaryAccountResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/companies/{companyID}/beneficiaries/{beneficiaryID}/transfers" : {
+      "post" : {
+        "tags" : [ "Beneficiary Transfers" ],
+        "summary" : "Perform transfer to a beneficiary account of an company",
+        "description" : "",
+        "operationId" : "transferToBeneficiaryAccount",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary transfer is being performed",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "companyID",
+          "in" : "path",
+          "description" : "ID of the company who is performing the beneficiary transfer",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "description" : "ID of the beneficiary to whom the transfer is being performed",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/BeneficiaryAccountTransactionFusionRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/BeneficiaryTransactionFusionResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/companies/{companyID}/beneficiaryTransfers" : {
+      "get" : {
+        "tags" : [ "Beneficiary Transfers" ],
+        "summary" : "Get all the beneficiary transfers of an company",
+        "description" : "",
+        "operationId" : "getAllBeneficiaryTransfers",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary whose transfers are being retrieved",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "companyID",
+          "in" : "path",
+          "description" : "ID of the company for whom the beneficiary transfers are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/PagedModel"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/companies/{companyID}/beneficiaryTransfers/{transferID}" : {
+      "get" : {
+        "tags" : [ "Beneficiary Transfers" ],
+        "summary" : "Get the details of a transfer by ID",
+        "description" : "",
+        "operationId" : "getBeneficiaryTransferByID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary transfer exists",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "companyID",
+          "in" : "path",
+          "description" : "ID of the company for whom the beneficiary transfer details are being fetched",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "transferID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/BeneficiaryTransaction"
+            }
+          }
+        }
+      }
+    },
     "/api/v1/ifi/{ifiID}/corporate/applications" : {
       "get" : {
         "summary" : "Get all the applications of an IFI of a specific applicationType ",
@@ -8525,6 +9107,382 @@
         }
       }
     },
+    "/api/v2/ifi/{ifiID}/companies/{companyID}/beneficiaries/{beneficiaryID}/accounts" : {
+      "get" : {
+        "summary" : "Get all the accounts of a beneficiary",
+        "description" : "",
+        "operationId" : "getBeneficiaryAccounts",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary accounts are being retrieved",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "companyID",
+          "in" : "path",
+          "description" : "ID of the company for whom the beneficiary is being created",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/PagedModel"
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Create a new beneficiary account of a beneficiary",
+        "description" : "",
+        "operationId" : "createBeneficiaryAccount",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary is being created",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "companyID",
+          "in" : "path",
+          "description" : "ID of the company for whom the beneficiary is",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "description" : "ID of the beneficiary whose account is being created",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/CreateCorporateBeneficiaryAccountRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/CorporateBeneficiaryAccountResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/companies/{companyID}/beneficiaries/{beneficiaryID}/accounts/{accountID}" : {
+      "get" : {
+        "summary" : "Get details of a specific beneficiary account of an company's beneficiary ",
+        "description" : "",
+        "operationId" : "getBeneficiaryAccountByID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary account being retrieved exists",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "companyID",
+          "in" : "path",
+          "description" : "ID of the company for whom the beneficiary account being retrieved exists",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "description" : "ID of the beneficiary whose beneficiary account details are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the beneficiary account whose details are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/BeneficiaryAccountResponse"
+            }
+          }
+        }
+      },
+      "put" : {
+        "summary" : "Update a account of a beneficiary",
+        "description" : "",
+        "operationId" : "updateBeneficiaryAccount",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary is being created",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "companyID",
+          "in" : "path",
+          "description" : "ID of the company for whom the beneficiary is being created",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "description" : "ID of the beneficiary which is being updated belonging to an company",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "f0e68249-aed0-4359-9df2-a89a350567e9"
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the account being updated",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "f0e68249-aed0-4359-9df2-a89a350567e9"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/UpdateCorporateBeneficiaryAccountRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/CorporateBeneficiaryAccountResponse"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "Delete a account of a beneficiary",
+        "description" : "",
+        "operationId" : "deleteBeneficiaryAccount",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary is being created",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "companyID",
+          "in" : "path",
+          "description" : "ID of the company for whom the beneficiary is being created",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "description" : "ID of the beneficiary which is being updated belonging to an company",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "f0e68249-aed0-4359-9df2-a89a350567e9"
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the account being updated",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "f0e68249-aed0-4359-9df2-a89a350567e9"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/CorporateBeneficiaryAccountResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/companies/{companyID}/beneficiaries/{beneficiaryID}/transfers" : {
+      "post" : {
+        "tags" : [ "Beneficiary Transfers" ],
+        "summary" : "Perform transfer to a beneficiary account of an company",
+        "description" : "",
+        "operationId" : "transferToBeneficiaryAccount",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary transfer is being performed",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "companyID",
+          "in" : "path",
+          "description" : "ID of the company who is performing the beneficiary transfer",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "beneficiaryID",
+          "in" : "path",
+          "description" : "ID of the beneficiary to whom the transfer is being performed",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/BeneficiaryAccountTransactionFusionRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/BeneficiaryTransactionFusionResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/companies/{companyID}/beneficiaryTransfers" : {
+      "get" : {
+        "tags" : [ "Beneficiary Transfers" ],
+        "summary" : "Get all the beneficiary transfers of an company",
+        "description" : "",
+        "operationId" : "getAllBeneficiaryTransfers",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary whose transfers are being retrieved",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "companyID",
+          "in" : "path",
+          "description" : "ID of the company for whom the beneficiary transfers are being retrieved",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/PagedModel"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/companies/{companyID}/beneficiaryTransfers/{transferID}" : {
+      "get" : {
+        "tags" : [ "Beneficiary Transfers" ],
+        "summary" : "Get the details of a transfer by ID",
+        "description" : "",
+        "operationId" : "getBeneficiaryTransferByID",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary transfer exists",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "companyID",
+          "in" : "path",
+          "description" : "ID of the company for whom the beneficiary transfer details are being fetched",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "name" : "transferID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/BeneficiaryTransaction"
+            }
+          }
+        }
+      }
+    },
     "/api/v2/ifi/{ifiID}/getAllAccountHolders" : {
       "get" : {
         "tags" : [ "AccountHolder Management" ],
@@ -9551,52 +10509,6 @@
             "description" : "successful operation",
             "schema" : {
               "$ref" : "#/definitions/BeneficiaryAccountResponse"
-            }
-          }
-        }
-      }
-    },
-    "/api/v2/ifi/{ifiID}/individuals/{individualID}/beneficiaries/{beneficiaryID}/transfers" : {
-      "post" : {
-        "tags" : [ "Beneficiary Transfers" ],
-        "summary" : "",
-        "description" : "Perform transfer to an individual beneficiary's default account",
-        "operationId" : "transferToDefaultBeneficiaryAccount",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the beneficiary transfer is being performed",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64",
-          "x-example" : 123123
-        }, {
-          "name" : "individualID",
-          "in" : "path",
-          "description" : "ID of the individual who is performing the beneficiary transfer",
-          "required" : true,
-          "type" : "string",
-          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
-        }, {
-          "name" : "beneficiaryID",
-          "in" : "path",
-          "description" : "ID of the beneficiary to whom the transfer is being performed",
-          "required" : true,
-          "type" : "string",
-          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
-        }, {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/BeneficiaryAccountTransferRequest"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/BeneficiaryTransactionResponse"
             }
           }
         }
@@ -12567,20 +13479,27 @@
       "type" : "object",
       "properties" : {
         "currency" : {
-          "type" : "string"
+          "type" : "string",
+          "example" : "INR",
+          "description" : "Currency in which money need to be transacted "
         },
         "amount" : {
           "type" : "integer",
-          "format" : "int64"
+          "format" : "int64",
+          "example" : 500,
+          "description" : "Amount that need to be transferred"
         },
         "transactionCode" : {
-          "type" : "string"
+          "type" : "string",
+          "description" : "TransactionCode regarding the transaction"
         },
         "debitAccountID" : {
-          "type" : "string"
+          "type" : "string",
+          "description" : "ID of the account from which money has to be deducted"
         },
         "beneficiaryAccountID" : {
-          "type" : "string"
+          "type" : "string",
+          "description" : "ID of the beneficiary's account in which money is being transferred"
         },
         "transactionTime" : {
           "type" : "integer",
@@ -13290,6 +14209,67 @@
         }
       }
     },
+    "CorporateBeneficiaryAccountResponse" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "example" : "93480e72-b883-46fa-8f3f-abe326ab9df7",
+          "description" : "ID of the Beneficiary account being created by the company"
+        },
+        "ifiID" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "status" : {
+          "type" : "string",
+          "example" : "ENABLED",
+          "description" : "Status of the Beneficiary Account"
+        },
+        "beneficiaryID" : {
+          "type" : "string",
+          "example" : "93480e72-b883-46fa-8f3f-abe326ab9df7",
+          "description" : "ID of the Beneficiary of the company whose account is being created"
+        },
+        "companyID" : {
+          "type" : "string",
+          "example" : "93480e72-b883-46fa-8f3f-abe326ab9df7",
+          "description" : "ID of the company creating beneficiary account"
+        },
+        "nickname" : {
+          "type" : "string",
+          "example" : "true",
+          "description" : "Nickname of the Beneficiary Account"
+        },
+        "accountInfo" : {
+          "$ref" : "#/definitions/BeneficiaryAccountInfo"
+        },
+        "attributes" : {
+          "type" : "object",
+          "description" : "Any additional information which you would like to provide",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "type" : {
+          "type" : "string",
+          "example" : "ZETA",
+          "description" : "Type of beneficiary ie NEFT or IMPS or ZETA"
+        },
+        "createdAt" : {
+          "type" : "string"
+        },
+        "updatedAt" : {
+          "type" : "string"
+        },
+        "verified" : {
+          "type" : "boolean"
+        },
+        "default" : {
+          "type" : "boolean"
+        }
+      }
+    },
     "CorporateBeneficiaryResponse" : {
       "type" : "object",
       "properties" : {
@@ -13829,6 +14809,42 @@
         "rootNodeId" : {
           "type" : "integer",
           "format" : "int64"
+        }
+      }
+    },
+    "CreateCorporateBeneficiaryAccountRequest" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "string",
+          "example" : "ENABLED",
+          "description" : "Status of the Beneficiary Account"
+        },
+        "nickname" : {
+          "type" : "string",
+          "example" : "true",
+          "description" : "Nickname of the Beneficiary Account"
+        },
+        "accountInfo" : {
+          "$ref" : "#/definitions/BeneficiaryAccountInfo"
+        },
+        "attributes" : {
+          "type" : "object",
+          "description" : "Any additional information which you would like to provide",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "type" : {
+          "type" : "string",
+          "example" : "ZETA",
+          "description" : "Type of beneficiary ie NEFT or IMPS or ZETA"
+        },
+        "verified" : {
+          "type" : "boolean"
+        },
+        "default" : {
+          "type" : "boolean"
         }
       }
     },
@@ -16049,25 +17065,25 @@
         "serviceInstanceJID" : {
           "type" : "boolean"
         },
-        "serviceViewJID" : {
-          "type" : "boolean"
-        },
-        "defaultServiceNode" : {
-          "type" : "boolean"
+        "primaryServiceName" : {
+          "type" : "string"
         },
         "serviceViewName" : {
           "type" : "string"
         },
+        "defaultServiceNode" : {
+          "type" : "boolean"
+        },
         "jidOfAGroup" : {
           "type" : "boolean"
         },
-        "primaryServiceName" : {
-          "type" : "string"
+        "proxyServiceJID" : {
+          "type" : "boolean"
         },
         "bareJID" : {
           "$ref" : "#/definitions/JID"
         },
-        "proxyServiceJID" : {
+        "serviceViewJID" : {
           "type" : "boolean"
         }
       }
@@ -16362,10 +17378,10 @@
         "number" : {
           "type" : "boolean"
         },
-        "boolean" : {
+        "asBoolean" : {
           "type" : "boolean"
         },
-        "asBoolean" : {
+        "boolean" : {
           "type" : "boolean"
         },
         "asNumber" : {
@@ -17599,6 +18615,14 @@
           "items" : {
             "$ref" : "#/definitions/Tag"
           }
+        },
+        "createdAt" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "updatedAt" : {
+          "type" : "string",
+          "format" : "date-time"
         }
       }
     },
@@ -17770,12 +18794,12 @@
         "signatoryJID" : {
           "$ref" : "#/definitions/JID"
         },
+        "zetaSignature" : {
+          "$ref" : "#/definitions/ZetaSignature"
+        },
         "payloadVersion" : {
           "type" : "integer",
           "format" : "int32"
-        },
-        "zetaSignature" : {
-          "$ref" : "#/definitions/ZetaSignature"
         },
         "signed" : {
           "type" : "boolean"
@@ -18595,6 +19619,41 @@
           "additionalProperties" : {
             "type" : "string"
           }
+        }
+      }
+    },
+    "UpdateCorporateBeneficiaryAccountRequest" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "string",
+          "example" : "ENABLED",
+          "description" : "Status of the Beneficiary Account"
+        },
+        "nickname" : {
+          "type" : "string",
+          "example" : "true",
+          "description" : "Nickname of the Beneficiary Account"
+        },
+        "accountInfo" : {
+          "$ref" : "#/definitions/BeneficiaryAccountInfo"
+        },
+        "attributes" : {
+          "type" : "object",
+          "description" : "Any additional information which you would like to provide",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "Type of beneficiary ie NEFT or IMPS or ZETA"
+        },
+        "verified" : {
+          "type" : "boolean"
+        },
+        "default" : {
+          "type" : "boolean"
         }
       }
     },
