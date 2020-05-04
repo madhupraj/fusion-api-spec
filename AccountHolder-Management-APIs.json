@@ -1525,12 +1525,10 @@
             }
           },
           "createdAt" : {
-            "type" : "string",
-            "format" : "date-time"
+            "type" : "string"
           },
           "updatedAt" : {
-            "type" : "string",
-            "format" : "date-time"
+            "type" : "string"
           },
           "kycstatus" : {
             "$ref" : "#/components/schemas/KYCStatus"

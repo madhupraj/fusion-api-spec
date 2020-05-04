@@ -298,6 +298,9 @@
             "type" : "integer",
             "format" : "int64"
           },
+          "requestId" : {
+            "type" : "string"
+          },
           "id" : {
             "type" : "string"
           },
