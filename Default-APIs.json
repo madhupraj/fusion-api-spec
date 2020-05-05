@@ -1600,7 +1600,7 @@
         }
       }
     },
-    "/api/v1/ifi/{ifiID}/bundles/{bundleID}/issueBundleOveridingAssessment" : {
+    "/api/v1/ifi/{ifiID}/bundles/{bundleID}/issueBundleOverridingAssessment" : {
       "post" : {
         "summary" : "Issue bundle to a specific individual/company without Assessment irrespective of ifi whitelisting",
         "operationId" : "issueBundleOverridingOFACCheck",
@@ -1626,7 +1626,7 @@
           "content" : {
             "*/*" : {
               "schema" : {
-                "$ref" : "#/components/schemas/IssueBundleRequest"
+                "$ref" : "#/components/schemas/OverrideIssuanceRequest"
               }
             }
           },
@@ -10779,6 +10779,11 @@
           "formID" : {
             "type" : "string"
           },
+          "requestID" : {
+            "maxLength" : 50,
+            "minLength" : 0,
+            "type" : "string"
+          },
           "spoolID" : {
             "type" : "string"
           },
@@ -10840,6 +10845,11 @@
       "CreateAccountHolderWithAutoApprovalStandardRequest" : {
         "type" : "object",
         "properties" : {
+          "requestID" : {
+            "maxLength" : 50,
+            "minLength" : 0,
+            "type" : "string"
+          },
           "ifiID" : {
             "type" : "integer",
             "format" : "int64"
@@ -12484,6 +12494,9 @@
         "required" : [ "accountHolderID", "bundleID" ],
         "type" : "object",
         "properties" : {
+          "requestID" : {
+            "type" : "string"
+          },
           "bundleID" : {
             "type" : "string"
           },
@@ -12511,7 +12524,11 @@
         "type" : "object",
         "properties" : {
           "requestID" : {
-            "type" : "string"
+            "maxLength" : 37,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "requestID as an idempotent key",
+            "example" : "ba3673211-g586-4acb-859e-bb9c60d3qu72"
           },
           "issueAccountArtifactRequests" : {
             "type" : "array",
@@ -12525,6 +12542,13 @@
         "required" : [ "accountHolderID" ],
         "type" : "object",
         "properties" : {
+          "requestID" : {
+            "maxLength" : 37,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "requestID as an idempotent key",
+            "example" : "ba3673211-g586-4acb-859e-bb9c60d3qu72"
+          },
           "name" : {
             "type" : "string",
             "description" : "The name which would be preferred in the account name",
@@ -12564,6 +12588,11 @@
       "IssueBundleResponse" : {
         "type" : "object",
         "properties" : {
+          "requestID" : {
+            "type" : "string",
+            "description" : "requestID as an idempotent key",
+            "example" : "ba3673211-g586-4acb-859e-bb9c60d3qu72"
+          },
           "bundleID" : {
             "type" : "string"
           },
@@ -12585,6 +12614,11 @@
         "required" : [ "formFactorProductID", "resourceID", "targetAccountID" ],
         "type" : "object",
         "properties" : {
+          "requestID" : {
+            "type" : "string",
+            "description" : "requestID as an idempotent key",
+            "example" : "ba3673211-g586-4acb-859e-bb9c60d3qu72"
+          },
           "formFactorProductID" : {
             "type" : "string",
             "description" : "ID of the form factor/card which is being issued",
@@ -12630,6 +12664,11 @@
       "IssueFormFactorResponse" : {
         "type" : "object",
         "properties" : {
+          "requestID" : {
+            "type" : "string",
+            "description" : "requestID as an idempotent key",
+            "example" : "ba3673211-g586-4acb-859e-bb9c60d3qu72"
+          },
           "bundleID" : {
             "type" : "string"
           },
@@ -12685,6 +12724,13 @@
         "required" : [ "phoneNumber", "resourceProductID", "targetAccountID" ],
         "type" : "object",
         "properties" : {
+          "requestID" : {
+            "maxLength" : 37,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "requestID as an idempotent key",
+            "example" : "ba3673211-g586-4acb-859e-bb9c60d3qu72"
+          },
           "targetAccountID" : {
             "type" : "string",
             "description" : "ID of the individual's account which is to be linked to the resource/card",
@@ -12723,6 +12769,11 @@
       "IssueResourceResponse" : {
         "type" : "object",
         "properties" : {
+          "requestID" : {
+            "type" : "string",
+            "description" : "requestID as an idempotent key",
+            "example" : "ba3673211-g586-4acb-859e-bb9c60d3qu72"
+          },
           "bundleID" : {
             "type" : "string"
           },
@@ -12765,12 +12816,6 @@
           "serviceInstanceJID" : {
             "type" : "boolean"
           },
-          "primaryServiceName" : {
-            "type" : "string"
-          },
-          "serviceViewName" : {
-            "type" : "string"
-          },
           "bareJID" : {
             "$ref" : "#/components/schemas/JID"
           },
@@ -12785,6 +12830,12 @@
           },
           "proxyServiceJID" : {
             "type" : "boolean"
+          },
+          "primaryServiceName" : {
+            "type" : "string"
+          },
+          "serviceViewName" : {
+            "type" : "string"
           }
         }
       },
@@ -12834,25 +12885,25 @@
           "asString" : {
             "type" : "string"
           },
-          "jsonObject" : {
-            "type" : "boolean"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
           },
           "jsonPrimitive" : {
             "type" : "boolean"
           },
           "jsonNull" : {
-            "type" : "boolean"
-          },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
-          },
-          "jsonArray" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -12866,25 +12917,25 @@
           "asBoolean" : {
             "type" : "boolean"
           },
-          "jsonObject" : {
-            "type" : "boolean"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
           },
           "jsonPrimitive" : {
             "type" : "boolean"
           },
           "jsonNull" : {
-            "type" : "boolean"
-          },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
-          },
-          "jsonArray" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -12938,25 +12989,25 @@
           "asBoolean" : {
             "type" : "boolean"
           },
-          "jsonObject" : {
-            "type" : "boolean"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
           },
           "jsonPrimitive" : {
             "type" : "boolean"
           },
           "jsonNull" : {
-            "type" : "boolean"
-          },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
-          },
-          "jsonArray" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -13010,25 +13061,25 @@
           "asBoolean" : {
             "type" : "boolean"
           },
-          "jsonObject" : {
-            "type" : "boolean"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
           },
           "jsonPrimitive" : {
             "type" : "boolean"
           },
           "jsonNull" : {
-            "type" : "boolean"
-          },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
-          },
-          "jsonArray" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -13082,10 +13133,10 @@
           "number" : {
             "type" : "boolean"
           },
-          "boolean" : {
+          "asBoolean" : {
             "type" : "boolean"
           },
-          "asBoolean" : {
+          "boolean" : {
             "type" : "boolean"
           },
           "asNumber" : {
@@ -13131,25 +13182,25 @@
           "asString" : {
             "type" : "string"
           },
-          "jsonObject" : {
-            "type" : "boolean"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "jsonArray" : {
+            "type" : "boolean"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
           },
           "jsonPrimitive" : {
             "type" : "boolean"
           },
           "jsonNull" : {
-            "type" : "boolean"
-          },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
-          },
-          "jsonArray" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -13422,6 +13473,39 @@
           },
           "orderedAt" : {
             "type" : "string"
+          }
+        }
+      },
+      "OverrideIssuanceRequest" : {
+        "type" : "object",
+        "properties" : {
+          "requestID" : {
+            "type" : "string",
+            "description" : "The request-id of the request that needs to be overriden",
+            "example" : "ba3673211-g586-4acb-859e-bb9c60d3qu72"
+          },
+          "ifiID" : {
+            "minimum" : 1,
+            "type" : "integer",
+            "description" : "The request-id of the request that needs to be overriden",
+            "format" : "int64"
+          },
+          "remarks" : {
+            "type" : "string",
+            "description" : "Operator provided remarks/reasons for issuance",
+            "example" : "Different than SDN"
+          },
+          "action" : {
+            "pattern" : "APPROVE|DECLINE",
+            "type" : "string",
+            "description" : "Operator provided remarks/reasons for issuance",
+            "example" : "Different than SDN"
+          },
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
           }
         }
       },
