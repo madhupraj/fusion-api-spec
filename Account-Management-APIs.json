@@ -744,6 +744,55 @@
         }
       }
     },
+    "/api/v1/ifi/{ifiID}/transactions/{transactionID}/reversal" : {
+      "post" : {
+        "tags" : [ "Account Management" ],
+        "summary" : "Reversal from one account to another",
+        "operationId" : "reversals",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account transfer is being performed",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "transactionID",
+          "in" : "path",
+          "description" : "ID of the transaction for which reversal is required",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ReversalRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/A2AReversalTransactionResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/ifi/{ifiID}/transfers" : {
       "post" : {
         "tags" : [ "Account Management" ],
@@ -1583,6 +1632,60 @@
   },
   "components" : {
     "schemas" : {
+      "A2AReversalTransactionResponse" : {
+        "type" : "object",
+        "properties" : {
+          "requestID" : {
+            "type" : "string",
+            "description" : "Request id for A2A Reversal",
+            "example" : "93480e72-b883-46fa-8f3f-abe326ab9df7"
+          },
+          "paymentType" : {
+            "type" : "string",
+            "description" : "Denotes type of payment response",
+            "example" : "REVERSAL"
+          },
+          "transactionID" : {
+            "type" : "string",
+            "description" : "Denotes transaction id for which reversal needs to be done",
+            "example" : "20181206084927090_687_375231000459"
+          },
+          "revertTransactionID" : {
+            "type" : "string",
+            "description" : "Denotes reverted transaction id for corresponding transaction id",
+            "example" : "20200429121612790_14_revert_375231000459_reversal_dfdsrdkedddsdd"
+          },
+          "transferCode" : {
+            "type" : "string",
+            "description" : "Denotes reversal transfer code",
+            "example" : "ATLAS_P2M_AUTH-REVERSAL"
+          },
+          "amount" : {
+            "type" : "integer",
+            "description" : "Amount for which reversal is required",
+            "format" : "int64",
+            "example" : 1
+          },
+          "currency" : {
+            "type" : "string",
+            "description" : "Currency for which reversal is required",
+            "example" : "INR"
+          },
+          "remark" : {
+            "type" : "string",
+            "description" : "Remark of the reversal",
+            "example" : "Reversal of vbo1"
+          },
+          "status" : {
+            "type" : "string",
+            "description" : "Status of the reversal",
+            "example" : "SUCCESS/FAILED"
+          },
+          "statusDetails" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          }
+        }
+      },
       "Accessor" : {
         "type" : "object",
         "properties" : {
@@ -2496,6 +2599,303 @@
           }
         }
       },
+      "JsonArray" : {
+        "type" : "object",
+        "properties" : {
+          "asBoolean" : {
+            "type" : "boolean"
+          },
+          "asNumber" : {
+            "$ref" : "#/components/schemas/Number"
+          },
+          "asDouble" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "asFloat" : {
+            "type" : "number",
+            "format" : "float"
+          },
+          "asLong" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "asInt" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "asByte" : {
+            "pattern" : "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
+            "type" : "string",
+            "format" : "byte"
+          },
+          "asCharacter" : {
+            "type" : "string"
+          },
+          "asBigDecimal" : {
+            "type" : "number"
+          },
+          "asBigInteger" : {
+            "type" : "integer"
+          },
+          "asShort" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "asString" : {
+            "type" : "string"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "jsonPrimitive" : {
+            "type" : "boolean"
+          },
+          "jsonNull" : {
+            "type" : "boolean"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
+          "jsonArray" : {
+            "type" : "boolean"
+          },
+          "asJsonNull" : {
+            "$ref" : "#/components/schemas/JsonNull"
+          }
+        }
+      },
+      "JsonNull" : {
+        "type" : "object",
+        "properties" : {
+          "asBoolean" : {
+            "type" : "boolean"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "jsonPrimitive" : {
+            "type" : "boolean"
+          },
+          "jsonNull" : {
+            "type" : "boolean"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
+          "jsonArray" : {
+            "type" : "boolean"
+          },
+          "asJsonNull" : {
+            "$ref" : "#/components/schemas/JsonNull"
+          },
+          "asNumber" : {
+            "$ref" : "#/components/schemas/Number"
+          },
+          "asDouble" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "asFloat" : {
+            "type" : "number",
+            "format" : "float"
+          },
+          "asLong" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "asInt" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "asByte" : {
+            "pattern" : "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
+            "type" : "string",
+            "format" : "byte"
+          },
+          "asCharacter" : {
+            "type" : "string"
+          },
+          "asBigDecimal" : {
+            "type" : "number"
+          },
+          "asBigInteger" : {
+            "type" : "integer"
+          },
+          "asShort" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "asString" : {
+            "type" : "string"
+          }
+        }
+      },
+      "JsonObject" : {
+        "type" : "object",
+        "properties" : {
+          "asBoolean" : {
+            "type" : "boolean"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "jsonPrimitive" : {
+            "type" : "boolean"
+          },
+          "jsonNull" : {
+            "type" : "boolean"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
+          "jsonArray" : {
+            "type" : "boolean"
+          },
+          "asJsonNull" : {
+            "$ref" : "#/components/schemas/JsonNull"
+          },
+          "asNumber" : {
+            "$ref" : "#/components/schemas/Number"
+          },
+          "asDouble" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "asFloat" : {
+            "type" : "number",
+            "format" : "float"
+          },
+          "asLong" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "asInt" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "asByte" : {
+            "pattern" : "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
+            "type" : "string",
+            "format" : "byte"
+          },
+          "asCharacter" : {
+            "type" : "string"
+          },
+          "asBigDecimal" : {
+            "type" : "number"
+          },
+          "asBigInteger" : {
+            "type" : "integer"
+          },
+          "asShort" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "asString" : {
+            "type" : "string"
+          }
+        }
+      },
+      "JsonPrimitive" : {
+        "type" : "object",
+        "properties" : {
+          "number" : {
+            "type" : "boolean"
+          },
+          "boolean" : {
+            "type" : "boolean"
+          },
+          "asBoolean" : {
+            "type" : "boolean"
+          },
+          "asNumber" : {
+            "$ref" : "#/components/schemas/Number"
+          },
+          "asDouble" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "asFloat" : {
+            "type" : "number",
+            "format" : "float"
+          },
+          "asLong" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "asInt" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "asByte" : {
+            "pattern" : "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
+            "type" : "string",
+            "format" : "byte"
+          },
+          "asCharacter" : {
+            "type" : "string"
+          },
+          "asBigDecimal" : {
+            "type" : "number"
+          },
+          "asBigInteger" : {
+            "type" : "integer"
+          },
+          "asShort" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "string" : {
+            "type" : "boolean"
+          },
+          "asString" : {
+            "type" : "string"
+          },
+          "jsonObject" : {
+            "type" : "boolean"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "jsonPrimitive" : {
+            "type" : "boolean"
+          },
+          "jsonNull" : {
+            "type" : "boolean"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
+          "jsonArray" : {
+            "type" : "boolean"
+          },
+          "asJsonNull" : {
+            "$ref" : "#/components/schemas/JsonNull"
+          }
+        }
+      },
       "Money" : {
         "type" : "object",
         "properties" : {
@@ -2507,6 +2907,9 @@
             "format" : "int64"
           }
         }
+      },
+      "Number" : {
+        "type" : "object"
       },
       "PolicyAggregateRule" : {
         "type" : "object",
@@ -2673,6 +3076,55 @@
           },
           "errorCode" : {
             "type" : "string"
+          }
+        }
+      },
+      "ReversalRequest" : {
+        "required" : [ "amount", "currency", "remarks", "requestID", "transferCode" ],
+        "type" : "object",
+        "properties" : {
+          "requestID" : {
+            "type" : "string",
+            "description" : "Request id for A2A Reversal",
+            "example" : "93480e72-b883-46fa-8f3f-abe326ab9df7"
+          },
+          "currency" : {
+            "type" : "string",
+            "description" : "Currency for which reversal is required",
+            "example" : "INR"
+          },
+          "amount" : {
+            "type" : "integer",
+            "description" : "Amount for which reversal is required",
+            "format" : "int64",
+            "example" : 1
+          },
+          "transferCode" : {
+            "type" : "string",
+            "description" : "Denotes reversal transfer code",
+            "example" : "ATLAS_P2M_AUTH-REVERSAL"
+          },
+          "doPartialReversal" : {
+            "type" : "boolean",
+            "description" : "Pass this as true or false for partial reversal of transaction",
+            "example" : true
+          },
+          "remarks" : {
+            "type" : "string",
+            "description" : "Remark of the reversal",
+            "example" : "Reversal of vbo1"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
           }
         }
       },

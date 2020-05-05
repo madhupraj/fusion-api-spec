@@ -3825,14 +3825,12 @@
           "name" : "sortBy",
           "in" : "query",
           "required" : false,
-          "type" : "string",
-          "enum" : [ "createdAt", "updatedAt" ]
+          "type" : "string"
         }, {
           "name" : "sortOrder",
           "in" : "query",
           "required" : false,
-          "type" : "string",
-          "enum" : [ "asc", "desc" ]
+          "type" : "string"
         } ],
         "responses" : {
           "200" : {
@@ -6637,6 +6635,45 @@
             "description" : "successful operation",
             "schema" : {
               "$ref" : "#/definitions/GetTransactionsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/transactions/{transactionID}/reversal" : {
+      "post" : {
+        "tags" : [ "Account Management" ],
+        "summary" : "Reversal from one account to another",
+        "description" : "",
+        "operationId" : "reversals",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account transfer is being performed",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "transactionID",
+          "in" : "path",
+          "description" : "ID of the transaction for which reversal is required",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/ReversalRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/A2AReversalTransactionResponse"
             }
           }
         }
@@ -11447,6 +11484,62 @@
     }
   },
   "definitions" : {
+    "A2AReversalTransactionResponse" : {
+      "type" : "object",
+      "properties" : {
+        "requestID" : {
+          "type" : "string",
+          "example" : "93480e72-b883-46fa-8f3f-abe326ab9df7",
+          "description" : "Request id for A2A Reversal"
+        },
+        "paymentType" : {
+          "type" : "string",
+          "example" : "REVERSAL",
+          "description" : "Denotes type of payment response"
+        },
+        "transactionID" : {
+          "type" : "string",
+          "example" : "20181206084927090_687_375231000459",
+          "description" : "Denotes transaction id for which reversal needs to be done"
+        },
+        "revertTransactionID" : {
+          "type" : "string",
+          "example" : "20200429121612790_14_revert_375231000459_reversal_dfdsrdkedddsdd",
+          "description" : "Denotes reverted transaction id for corresponding transaction id"
+        },
+        "transferCode" : {
+          "type" : "string",
+          "example" : "ATLAS_P2M_AUTH-REVERSAL",
+          "description" : "Denotes reversal transfer code"
+        },
+        "amount" : {
+          "type" : "integer",
+          "format" : "int64",
+          "example" : 1,
+          "description" : "Amount for which reversal is required"
+        },
+        "currency" : {
+          "type" : "string",
+          "example" : "INR",
+          "description" : "Currency for which reversal is required"
+        },
+        "remark" : {
+          "type" : "string",
+          "example" : "Reversal of vbo1",
+          "description" : "Remark of the reversal"
+        },
+        "status" : {
+          "type" : "string",
+          "example" : "SUCCESS/FAILED",
+          "description" : "Status of the reversal"
+        },
+        "statusDetails" : {
+          "example" : "Transaction code is invalid",
+          "description" : "Status details in case reversal fails",
+          "$ref" : "#/definitions/JsonObject"
+        }
+      }
+    },
     "Accessor" : {
       "type" : "object",
       "properties" : {
@@ -17063,8 +17156,17 @@
         "serviceInstanceJID" : {
           "type" : "boolean"
         },
+        "primaryServiceName" : {
+          "type" : "string"
+        },
         "serviceViewName" : {
           "type" : "string"
+        },
+        "bareJID" : {
+          "$ref" : "#/definitions/JID"
+        },
+        "serviceViewJID" : {
+          "type" : "boolean"
         },
         "defaultServiceNode" : {
           "type" : "boolean"
@@ -17074,15 +17176,6 @@
         },
         "proxyServiceJID" : {
           "type" : "boolean"
-        },
-        "bareJID" : {
-          "$ref" : "#/definitions/JID"
-        },
-        "serviceViewJID" : {
-          "type" : "boolean"
-        },
-        "primaryServiceName" : {
-          "type" : "string"
         }
       }
     },
@@ -17131,11 +17224,11 @@
         "asString" : {
           "type" : "string"
         },
-        "jsonArray" : {
-          "type" : "boolean"
-        },
         "jsonObject" : {
           "type" : "boolean"
+        },
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
         },
         "jsonPrimitive" : {
           "type" : "boolean"
@@ -17143,17 +17236,17 @@
         "jsonNull" : {
           "type" : "boolean"
         },
-        "asJsonNull" : {
-          "$ref" : "#/definitions/JsonNull"
+        "asJsonPrimitive" : {
+          "$ref" : "#/definitions/JsonPrimitive"
         },
         "asJsonObject" : {
           "$ref" : "#/definitions/JsonObject"
         },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
+        "jsonArray" : {
+          "type" : "boolean"
         },
-        "asJsonPrimitive" : {
-          "$ref" : "#/definitions/JsonPrimitive"
+        "asJsonNull" : {
+          "$ref" : "#/definitions/JsonNull"
         }
       }
     },
@@ -17163,16 +17256,25 @@
         "asBoolean" : {
           "type" : "boolean"
         },
-        "jsonArray" : {
-          "type" : "boolean"
-        },
         "jsonObject" : {
           "type" : "boolean"
+        },
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
         },
         "jsonPrimitive" : {
           "type" : "boolean"
         },
         "jsonNull" : {
+          "type" : "boolean"
+        },
+        "asJsonPrimitive" : {
+          "$ref" : "#/definitions/JsonPrimitive"
+        },
+        "asJsonObject" : {
+          "$ref" : "#/definitions/JsonObject"
+        },
+        "jsonArray" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
@@ -17213,15 +17315,6 @@
         "asShort" : {
           "type" : "integer",
           "format" : "int32"
-        },
-        "asJsonObject" : {
-          "$ref" : "#/definitions/JsonObject"
-        },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
-        },
-        "asJsonPrimitive" : {
-          "$ref" : "#/definitions/JsonPrimitive"
         },
         "asString" : {
           "type" : "string"
@@ -17234,16 +17327,25 @@
         "asBoolean" : {
           "type" : "boolean"
         },
-        "jsonArray" : {
-          "type" : "boolean"
-        },
         "jsonObject" : {
           "type" : "boolean"
+        },
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
         },
         "jsonPrimitive" : {
           "type" : "boolean"
         },
         "jsonNull" : {
+          "type" : "boolean"
+        },
+        "asJsonPrimitive" : {
+          "$ref" : "#/definitions/JsonPrimitive"
+        },
+        "asJsonObject" : {
+          "$ref" : "#/definitions/JsonObject"
+        },
+        "jsonArray" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
@@ -17284,15 +17386,6 @@
         "asShort" : {
           "type" : "integer",
           "format" : "int32"
-        },
-        "asJsonObject" : {
-          "$ref" : "#/definitions/JsonObject"
-        },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
-        },
-        "asJsonPrimitive" : {
-          "$ref" : "#/definitions/JsonPrimitive"
         },
         "asString" : {
           "type" : "string"
@@ -17305,16 +17398,25 @@
         "asBoolean" : {
           "type" : "boolean"
         },
-        "jsonArray" : {
-          "type" : "boolean"
-        },
         "jsonObject" : {
           "type" : "boolean"
+        },
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
         },
         "jsonPrimitive" : {
           "type" : "boolean"
         },
         "jsonNull" : {
+          "type" : "boolean"
+        },
+        "asJsonPrimitive" : {
+          "$ref" : "#/definitions/JsonPrimitive"
+        },
+        "asJsonObject" : {
+          "$ref" : "#/definitions/JsonObject"
+        },
+        "jsonArray" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
@@ -17355,15 +17457,6 @@
         "asShort" : {
           "type" : "integer",
           "format" : "int32"
-        },
-        "asJsonObject" : {
-          "$ref" : "#/definitions/JsonObject"
-        },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
-        },
-        "asJsonPrimitive" : {
-          "$ref" : "#/definitions/JsonPrimitive"
         },
         "asString" : {
           "type" : "string"
@@ -17424,11 +17517,11 @@
         "asString" : {
           "type" : "string"
         },
-        "jsonArray" : {
-          "type" : "boolean"
-        },
         "jsonObject" : {
           "type" : "boolean"
+        },
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
         },
         "jsonPrimitive" : {
           "type" : "boolean"
@@ -17436,17 +17529,17 @@
         "jsonNull" : {
           "type" : "boolean"
         },
-        "asJsonNull" : {
-          "$ref" : "#/definitions/JsonNull"
+        "asJsonPrimitive" : {
+          "$ref" : "#/definitions/JsonPrimitive"
         },
         "asJsonObject" : {
           "$ref" : "#/definitions/JsonObject"
         },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
+        "jsonArray" : {
+          "type" : "boolean"
         },
-        "asJsonPrimitive" : {
-          "$ref" : "#/definitions/JsonPrimitive"
+        "asJsonNull" : {
+          "$ref" : "#/definitions/JsonNull"
         }
       }
     },
@@ -19082,6 +19175,55 @@
         "modifiedAt" : {
           "type" : "string",
           "format" : "date-time"
+        }
+      }
+    },
+    "ReversalRequest" : {
+      "type" : "object",
+      "required" : [ "amount", "currency", "remarks", "requestID", "transferCode" ],
+      "properties" : {
+        "requestID" : {
+          "type" : "string",
+          "example" : "93480e72-b883-46fa-8f3f-abe326ab9df7",
+          "description" : "Request id for A2A Reversal"
+        },
+        "currency" : {
+          "type" : "string",
+          "example" : "INR",
+          "description" : "Currency for which reversal is required"
+        },
+        "amount" : {
+          "type" : "integer",
+          "format" : "int64",
+          "example" : 1,
+          "description" : "Amount for which reversal is required"
+        },
+        "transferCode" : {
+          "type" : "string",
+          "example" : "ATLAS_P2M_AUTH-REVERSAL",
+          "description" : "Denotes reversal transfer code"
+        },
+        "doPartialReversal" : {
+          "type" : "boolean",
+          "example" : true,
+          "description" : "Pass this as true or false for partial reversal of transaction"
+        },
+        "remarks" : {
+          "type" : "string",
+          "example" : "Reversal of vbo1",
+          "description" : "Remark of the reversal"
+        },
+        "attributes" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "headers" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
         }
       }
     },
