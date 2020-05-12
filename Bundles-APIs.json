@@ -98,9 +98,9 @@
           "name" : "pageNumber",
           "in" : "query",
           "description" : "Page number of the request",
+          "required" : true,
           "schema" : {
-            "maximum" : 50,
-            "minimum" : 0,
+            "minimum" : 1,
             "type" : "integer",
             "format" : "int64"
           }
@@ -108,7 +108,10 @@
           "name" : "pageSize",
           "in" : "query",
           "description" : "Page Size of the request",
+          "required" : true,
           "schema" : {
+            "maximum" : 50,
+            "minimum" : 1,
             "type" : "integer",
             "format" : "int64"
           }
@@ -124,8 +127,7 @@
           "in" : "query",
           "description" : "Order of the request i.e asc or desc",
           "schema" : {
-            "type" : "string",
-            "enum" : [ "asc", "desc" ]
+            "type" : "string"
           }
         } ],
         "responses" : {

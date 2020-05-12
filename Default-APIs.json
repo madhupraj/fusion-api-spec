@@ -370,11 +370,13 @@
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the application is being created",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         } ],
         "requestBody" : {
           "content" : {
@@ -411,11 +413,13 @@
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the application is being created",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         } ],
         "requestBody" : {
           "content" : {
@@ -2094,27 +2098,34 @@
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the application is being created",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         }, {
           "name" : "pageSize",
           "in" : "query",
           "required" : true,
           "schema" : {
+            "maximum" : 50,
+            "minimum" : 1,
             "type" : "integer",
             "format" : "int64"
           }
         }, {
           "name" : "pageNumber",
           "in" : "query",
+          "description" : "Page number for programs needed in response",
           "required" : true,
           "schema" : {
+            "minimum" : 1,
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : "test"
         }, {
           "name" : "sortBy",
           "in" : "query",
@@ -2134,11 +2145,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "type" : "array",
-                  "items" : {
-                    "type" : "object",
-                    "properties" : { }
-                  }
+                  "$ref" : "#/components/schemas/PagedModel"
                 }
               }
             }
@@ -2157,11 +2164,13 @@
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the application is being created",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         }, {
           "name" : "companyID",
           "in" : "path",
@@ -2176,7 +2185,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/Company"
+                  "$ref" : "#/components/schemas/CompanyResponse"
                 }
               }
             }
@@ -2752,27 +2761,34 @@
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the application is being created",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         }, {
           "name" : "pageSize",
           "in" : "query",
           "required" : true,
           "schema" : {
+            "maximum" : 50,
+            "minimum" : 1,
             "type" : "integer",
             "format" : "int64"
           }
         }, {
           "name" : "pageNumber",
           "in" : "query",
+          "description" : "Page number for programs needed in response",
           "required" : true,
           "schema" : {
+            "minimum" : 1,
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : "test"
         }, {
           "name" : "sortBy",
           "in" : "query",
@@ -2802,7 +2818,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GenericFetchApplicationResponse"
+                  "$ref" : "#/components/schemas/PagedModel"
                 }
               }
             }
@@ -2825,11 +2841,13 @@
         }, {
           "name" : "applicationID",
           "in" : "path",
+          "description" : "ID of the application which is being updated",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int32"
-          }
+          },
+          "example" : 123
         } ],
         "requestBody" : {
           "content" : {
@@ -2866,26 +2884,32 @@
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the application is being created",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         }, {
           "name" : "applicationID",
           "in" : "path",
+          "description" : "ID of the application which is being updated",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int32"
-          }
+          },
+          "example" : 123
         }, {
           "name" : "action",
           "in" : "path",
+          "description" : "Action to be performed on the application",
           "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "123"
         } ],
         "requestBody" : {
           "content" : {
@@ -2922,27 +2946,33 @@
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the application is being created",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         }, {
           "name" : "applicationID",
           "in" : "path",
+          "description" : "ID of the application which is being updated",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int32"
-          }
+          },
+          "example" : 123
         }, {
           "name" : "addCompanySectionID",
           "in" : "path",
+          "description" : "ID of the section which is being updated",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int32"
-          }
+          },
+          "example" : 123
         } ],
         "requestBody" : {
           "content" : {
@@ -2975,27 +3005,33 @@
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the application is being created",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         }, {
           "name" : "applicationID",
           "in" : "path",
+          "description" : "ID of the application which is being updated",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int32"
-          }
+          },
+          "example" : 123
         }, {
           "name" : "addCompanySectionID",
           "in" : "path",
+          "description" : "ID of the section which is being updated",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int32"
-          }
+          },
+          "example" : 123
         } ],
         "requestBody" : {
           "content" : {
@@ -3013,7 +3049,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/AddCompanyDataObject"
+                  "$ref" : "#/components/schemas/AddCompanyDataObjectResponse"
                 }
               }
             }
@@ -3028,27 +3064,33 @@
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the application is being created",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         }, {
           "name" : "applicationID",
           "in" : "path",
+          "description" : "ID of the application which is being updated",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int32"
-          }
+          },
+          "example" : 123
         }, {
           "name" : "addCorporateSectionID",
           "in" : "path",
+          "description" : "ID of the section which is being updated",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int32"
-          }
+          },
+          "example" : 123
         } ],
         "responses" : {
           "200" : {
@@ -3056,7 +3098,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/AddCorporateDataObject"
+                  "$ref" : "#/components/schemas/AddCorporateDataObjectResponse"
                 }
               }
             }
@@ -3069,27 +3111,33 @@
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the application is being created",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         }, {
           "name" : "applicationID",
           "in" : "path",
+          "description" : "ID of the application which is being updated",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int32"
-          }
+          },
+          "example" : 123
         }, {
           "name" : "addCorporateSectionID",
           "in" : "path",
+          "description" : "ID of the section which is being updated",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int32"
-          }
+          },
+          "example" : 123
         } ],
         "requestBody" : {
           "content" : {
@@ -3122,27 +3170,33 @@
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the application is being created",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         }, {
           "name" : "applicationID",
           "in" : "path",
+          "description" : "ID of the application which is being updated",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int32"
-          }
+          },
+          "example" : 123
         }, {
           "name" : "editCompanySectionID",
           "in" : "path",
+          "description" : "ID of the section which is being updated",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int32"
-          }
+          },
+          "example" : 123
         } ],
         "requestBody" : {
           "content" : {
@@ -3160,7 +3214,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetApplicationDetailsResponse"
+                  "$ref" : "#/components/schemas/ActionOnSectionResponse"
                 }
               }
             }
@@ -3175,27 +3229,33 @@
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the application is being created",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         }, {
           "name" : "applicationID",
           "in" : "path",
+          "description" : "ID of the application which is being updated",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int32"
-          }
+          },
+          "example" : 123
         }, {
           "name" : "editCompanySectionID",
           "in" : "path",
+          "description" : "ID of the section which is being updated",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int32"
-          }
+          },
+          "example" : 123
         } ],
         "responses" : {
           "200" : {
@@ -3203,7 +3263,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/EditCompanySectionDataObject"
+                  "$ref" : "#/components/schemas/EditCompanySectionDataObjectResponse"
                 }
               }
             }
@@ -3218,27 +3278,33 @@
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the application is being created",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         }, {
           "name" : "applicationID",
           "in" : "path",
+          "description" : "ID of the application which is being updated",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int32"
-          }
+          },
+          "example" : 123
         }, {
           "name" : "editCorporateSectionID",
           "in" : "path",
+          "description" : "ID of the section which is being updated",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int32"
-          }
+          },
+          "example" : 123
         } ],
         "responses" : {
           "200" : {
@@ -3246,7 +3312,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/EditCorporateDataObject"
+                  "$ref" : "#/components/schemas/EditCorporateDataObjectResponse"
                 }
               }
             }
@@ -3259,27 +3325,33 @@
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the application is being created",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         }, {
           "name" : "applicationID",
           "in" : "path",
+          "description" : "ID of the application which is being updated",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int32"
-          }
+          },
+          "example" : 123
         }, {
           "name" : "editCorporateSectionID",
           "in" : "path",
+          "description" : "ID of the section which is being updated",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int32"
-          }
+          },
+          "example" : 123
         } ],
         "requestBody" : {
           "content" : {
@@ -3297,7 +3369,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetApplicationDetailsResponse"
+                  "$ref" : "#/components/schemas/ActionOnSectionResponse"
                 }
               }
             }
@@ -3312,11 +3384,13 @@
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the application is being created",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         }, {
           "name" : "corporateID",
           "in" : "path",
@@ -3332,7 +3406,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/DeferredResultCorporate"
+                  "$ref" : "#/components/schemas/CorporateResponse"
                 }
               }
             }
@@ -3347,11 +3421,13 @@
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the application is being created",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         }, {
           "name" : "corporateID",
           "in" : "path",
@@ -3365,17 +3441,22 @@
           "in" : "query",
           "required" : true,
           "schema" : {
+            "maximum" : 50,
+            "minimum" : 1,
             "type" : "integer",
             "format" : "int64"
           }
         }, {
           "name" : "pageNumber",
           "in" : "query",
+          "description" : "Page number for programs needed in response",
           "required" : true,
           "schema" : {
+            "minimum" : 1,
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : "test"
         }, {
           "name" : "sortBy",
           "in" : "query",
@@ -3395,7 +3476,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/DeferredResultListCompany"
+                  "$ref" : "#/components/schemas/PagedModel"
                 }
               }
             }
@@ -3410,11 +3491,13 @@
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the company exists",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 123123
         }, {
           "name" : "corporateID",
           "in" : "path",
@@ -3437,7 +3520,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/DeferredResultCompany"
+                  "$ref" : "#/components/schemas/CompanyResponse"
                 }
               }
             }
@@ -5709,6 +5792,8 @@
           "in" : "query",
           "required" : true,
           "schema" : {
+            "maximum" : 50,
+            "minimum" : 1,
             "type" : "integer",
             "format" : "int32"
           }
@@ -5717,6 +5802,7 @@
           "in" : "query",
           "required" : true,
           "schema" : {
+            "minimum" : 1,
             "type" : "integer",
             "format" : "int32"
           }
@@ -6259,6 +6345,8 @@
           "in" : "query",
           "required" : true,
           "schema" : {
+            "maximum" : 50,
+            "minimum" : 1,
             "type" : "integer",
             "format" : "int64"
           }
@@ -6267,6 +6355,7 @@
           "in" : "query",
           "required" : true,
           "schema" : {
+            "minimum" : 1,
             "type" : "integer",
             "format" : "int64"
           }
@@ -6322,6 +6411,8 @@
           "description" : "No of products needed in response",
           "required" : true,
           "schema" : {
+            "maximum" : 50,
+            "minimum" : 1,
             "type" : "integer",
             "format" : "int32"
           },
@@ -6332,6 +6423,7 @@
           "description" : "Page number for products needed in response",
           "required" : true,
           "schema" : {
+            "minimum" : 1,
             "type" : "integer",
             "format" : "int32"
           },
@@ -6422,6 +6514,8 @@
           "in" : "query",
           "required" : true,
           "schema" : {
+            "maximum" : 50,
+            "minimum" : 1,
             "type" : "integer",
             "format" : "int64"
           }
@@ -6430,6 +6524,7 @@
           "in" : "query",
           "required" : true,
           "schema" : {
+            "minimum" : 1,
             "type" : "integer",
             "format" : "int64"
           }
@@ -6505,6 +6600,8 @@
           "in" : "query",
           "required" : true,
           "schema" : {
+            "maximum" : 50,
+            "minimum" : 1,
             "type" : "integer",
             "format" : "int64"
           }
@@ -6513,6 +6610,7 @@
           "in" : "query",
           "required" : true,
           "schema" : {
+            "minimum" : 1,
             "type" : "integer",
             "format" : "int64"
           }
@@ -6633,6 +6731,8 @@
           "description" : "No of products needed in response",
           "required" : true,
           "schema" : {
+            "maximum" : 50,
+            "minimum" : 1,
             "type" : "integer",
             "format" : "int32"
           },
@@ -6643,6 +6743,7 @@
           "description" : "Page number for products needed in response",
           "required" : true,
           "schema" : {
+            "minimum" : 1,
             "type" : "integer",
             "format" : "int32"
           },
@@ -6692,6 +6793,8 @@
           "description" : "No of products needed in response",
           "required" : true,
           "schema" : {
+            "maximum" : 50,
+            "minimum" : 1,
             "type" : "integer",
             "format" : "int32"
           },
@@ -6702,6 +6805,7 @@
           "description" : "Page number for products needed in response",
           "required" : true,
           "schema" : {
+            "minimum" : 1,
             "type" : "integer",
             "format" : "int32"
           },
@@ -7760,6 +7864,7 @@
           "in" : "query",
           "required" : true,
           "schema" : {
+            "minimum" : 1,
             "type" : "integer",
             "format" : "int64"
           }
@@ -7768,6 +7873,8 @@
           "in" : "query",
           "required" : true,
           "schema" : {
+            "maximum" : 50,
+            "minimum" : 1,
             "type" : "integer",
             "format" : "int64"
           }
@@ -8026,6 +8133,7 @@
           "in" : "query",
           "required" : true,
           "schema" : {
+            "minimum" : 1,
             "type" : "integer",
             "format" : "int64"
           }
@@ -8034,6 +8142,8 @@
           "in" : "query",
           "required" : true,
           "schema" : {
+            "maximum" : 50,
+            "minimum" : 1,
             "type" : "integer",
             "format" : "int64"
           }
@@ -8401,6 +8511,7 @@
           "in" : "query",
           "required" : true,
           "schema" : {
+            "minimum" : 1,
             "type" : "integer",
             "format" : "int64"
           }
@@ -8409,6 +8520,8 @@
           "in" : "query",
           "required" : true,
           "schema" : {
+            "maximum" : 50,
+            "minimum" : 1,
             "type" : "integer",
             "format" : "int64"
           }
@@ -8717,6 +8830,8 @@
           "description" : "No of products needed in response",
           "required" : true,
           "schema" : {
+            "maximum" : 50,
+            "minimum" : 1,
             "type" : "integer",
             "format" : "int32"
           },
@@ -8727,6 +8842,7 @@
           "description" : "Page number for products needed in response",
           "required" : true,
           "schema" : {
+            "minimum" : 1,
             "type" : "integer",
             "format" : "int32"
           },
@@ -8796,6 +8912,8 @@
           "description" : "No of programs needed in response",
           "required" : true,
           "schema" : {
+            "maximum" : 50,
+            "minimum" : 1,
             "type" : "integer",
             "format" : "int32"
           },
@@ -8806,6 +8924,7 @@
           "description" : "Page number for programs needed in response",
           "required" : true,
           "schema" : {
+            "minimum" : 1,
             "type" : "integer",
             "format" : "int32"
           },
@@ -9496,8 +9615,7 @@
           }
         }
       },
-      "AddCompanyDataObject" : {
-        "required" : [ "remarks", "sectionStatus", "type" ],
+      "AddCompanyDataObjectResponse" : {
         "type" : "object",
         "properties" : {
           "sectionId" : {
@@ -9516,19 +9634,13 @@
             "type" : "string"
           },
           "name" : {
-            "type" : "string",
-            "description" : "Name of the action being performed",
-            "example" : "Contract Change"
+            "type" : "string"
           },
           "logoURL" : {
-            "type" : "string",
-            "description" : "URL for the logo of the company",
-            "example" : "https://abc.com/logo.png"
+            "type" : "string"
           },
           "type" : {
             "type" : "string",
-            "description" : "Identification for the type of company which is being created",
-            "example" : "PRIVATE_LIMITED",
             "enum" : [ "LLP", "SOLE_PROPRIETOR", "TRUST", "PRIVATE_LIMITED", "PARTNER_FIRM", "PUBLIC", "NPO_NGO", "BRANCH_OFFICE", "LIAISON_OFFICE", "PUBLIC_COMPANY" ]
           },
           "pointsOfPresence" : {
@@ -9540,35 +9652,28 @@
           "kycStatus" : {
             "$ref" : "#/components/schemas/KYCStatus"
           },
+          "documents" : {
+            "$ref" : "#/components/schemas/Documents"
+          },
           "attributes" : {
             "type" : "object",
             "additionalProperties" : {
               "type" : "object",
               "properties" : { }
-            },
-            "description" : "Additional information for this entity",
-            "example" : "myCode : ABC"
+            }
           },
           "sectionStatus" : {
             "type" : "string",
-            "description" : "Current status of the section",
-            "example" : "IN_REVIEW",
             "enum" : [ "NEW", "PENDING", "TEMP_COMPLETED", "APPROVED", "REJECTED", "IN_REVIEW", "ACCEPTED" ]
           },
           "createdOn" : {
-            "type" : "string",
-            "description" : "Date on which this entity was created",
-            "format" : "date-time"
+            "type" : "string"
           },
           "updatedOn" : {
-            "type" : "string",
-            "description" : "Latest date on which this entity was updated",
-            "format" : "date-time"
+            "type" : "string"
           },
           "remarks" : {
-            "type" : "string",
-            "description" : "Additional remarks for the executing the action on the application",
-            "example" : "Application looks good"
+            "type" : "string"
           },
           "revisionId" : {
             "type" : "integer",
@@ -9576,8 +9681,7 @@
           }
         }
       },
-      "AddCorporateDataObject" : {
-        "required" : [ "remarks", "sectionStatus" ],
+      "AddCorporateDataObjectResponse" : {
         "type" : "object",
         "properties" : {
           "sectionId" : {
@@ -9603,63 +9707,43 @@
             "type" : "string"
           },
           "agreementNumber" : {
-            "type" : "string",
-            "description" : "Number of the agreement between the corporate and the issuer/VBO",
-            "example" : "123456"
-          },
-          "agreementURL" : {
-            "type" : "string",
-            "description" : "URL of the agreement between the corporate and the issuer/VBO",
-            "example" : "abc.com/agreement"
+            "type" : "string"
           },
           "agreementStartDate" : {
-            "type" : "string",
-            "description" : "Date from which the validity of the agreement starts",
-            "example" : "01/01/2019"
+            "type" : "string"
           },
           "agreementEndDate" : {
-            "type" : "string",
-            "description" : "Date on which the validity of the agreement ends",
-            "example" : "01/01/2019"
+            "type" : "string"
           },
           "signingAuthority" : {
             "$ref" : "#/components/schemas/SigningAuthority"
+          },
+          "agreementURL" : {
+            "type" : "string"
           },
           "attributes" : {
             "type" : "object",
             "additionalProperties" : {
               "type" : "object",
               "properties" : { }
-            },
-            "description" : "Additional information for this entity",
-            "example" : "myCode : ABC"
+            }
           },
           "sectionStatus" : {
             "type" : "string",
-            "description" : "Current status of the section",
-            "example" : "IN_REVIEW",
             "enum" : [ "NEW", "PENDING", "TEMP_COMPLETED", "APPROVED", "REJECTED", "IN_REVIEW", "ACCEPTED" ]
           },
           "ifiId" : {
             "type" : "integer",
-            "description" : "ID of the IFI (on-boarded organization) under which the corporate exists",
-            "format" : "int64",
-            "example" : 123456
+            "format" : "int64"
           },
           "createdOn" : {
-            "type" : "string",
-            "description" : "Date on which this entity was created",
-            "format" : "date-time"
+            "type" : "string"
           },
           "updatedOn" : {
-            "type" : "string",
-            "description" : "Latest date on which this entity was updated",
-            "format" : "date-time"
+            "type" : "string"
           },
           "remarks" : {
-            "type" : "string",
-            "description" : "Additional remarks for adding the corporate data",
-            "example" : "Application looks good"
+            "type" : "string"
           }
         }
       },
@@ -10427,7 +10511,7 @@
           }
         }
       },
-      "Company" : {
+      "CompanyResponse" : {
         "type" : "object",
         "properties" : {
           "id" : {
@@ -10443,6 +10527,16 @@
           },
           "name" : {
             "type" : "string"
+          },
+          "documents" : {
+            "$ref" : "#/components/schemas/Documents"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object",
+              "properties" : { }
+            }
           },
           "status" : {
             "type" : "string"
@@ -10465,19 +10559,10 @@
             "enum" : [ "LLP", "SOLE_PROPRIETOR", "TRUST", "PRIVATE_LIMITED", "PARTNER_FIRM", "PUBLIC", "NPO_NGO", "BRANCH_OFFICE", "LIAISON_OFFICE", "PUBLIC_COMPANY" ]
           },
           "createdOn" : {
-            "type" : "string",
-            "format" : "date-time"
+            "type" : "string"
           },
           "updatedOn" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "attributes" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "object",
-              "properties" : { }
-            }
+            "type" : "string"
           }
         }
       },
@@ -10659,6 +10744,39 @@
             "type" : "string",
             "description" : "Date/Time of the Beneficiary when updated",
             "example" : "2020-02-18T06:24:14.000+00:00"
+          }
+        }
+      },
+      "CorporateResponse" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "ifiId" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object",
+              "properties" : { }
+            }
+          },
+          "createdOn" : {
+            "type" : "string"
+          },
+          "updatedOn" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "string",
+            "enum" : [ "ENABLED", "DISABLED" ]
           }
         }
       },
@@ -11531,42 +11649,6 @@
       "CreateUserTransactionCategoryResponse" : {
         "type" : "object"
       },
-      "DeferredResultCompany" : {
-        "type" : "object",
-        "properties" : {
-          "result" : {
-            "type" : "object",
-            "properties" : { }
-          },
-          "setOrExpired" : {
-            "type" : "boolean"
-          }
-        }
-      },
-      "DeferredResultCorporate" : {
-        "type" : "object",
-        "properties" : {
-          "result" : {
-            "type" : "object",
-            "properties" : { }
-          },
-          "setOrExpired" : {
-            "type" : "boolean"
-          }
-        }
-      },
-      "DeferredResultListCompany" : {
-        "type" : "object",
-        "properties" : {
-          "result" : {
-            "type" : "object",
-            "properties" : { }
-          },
-          "setOrExpired" : {
-            "type" : "boolean"
-          }
-        }
-      },
       "DispatchOrderRequest" : {
         "type" : "object",
         "properties" : {
@@ -11639,8 +11721,7 @@
           }
         }
       },
-      "EditCompanySectionDataObject" : {
-        "required" : [ "companyId", "remarks", "sectionStatus", "type" ],
+      "EditCompanySectionDataObjectResponse" : {
         "type" : "object",
         "properties" : {
           "sectionId" : {
@@ -11659,29 +11740,19 @@
             "type" : "string"
           },
           "companyId" : {
-            "type" : "string",
-            "description" : "Identifier of the company which is being edited",
-            "example" : "ee64c930-c06f-49cb-9443-84b132b9d4e2"
+            "type" : "string"
           },
           "name" : {
-            "type" : "string",
-            "description" : "Name of the action being performed",
-            "example" : "Contract Change"
+            "type" : "string"
           },
           "logoURL" : {
-            "type" : "string",
-            "description" : "URL for the logo of the company",
-            "example" : "https://abc.com/logo.png"
+            "type" : "string"
           },
           "shortCode" : {
-            "type" : "string",
-            "description" : "Short code to be used as identifier for the company",
-            "example" : "ABCXYZ"
+            "type" : "string"
           },
           "type" : {
             "type" : "string",
-            "description" : "Identification for the type of company which is being edited",
-            "example" : "PRIVATE_LIMITED",
             "enum" : [ "LLP", "SOLE_PROPRIETOR", "TRUST", "PRIVATE_LIMITED", "PARTNER_FIRM", "PUBLIC", "NPO_NGO", "BRANCH_OFFICE", "LIAISON_OFFICE", "PUBLIC_COMPANY" ]
           },
           "pointsOfPresence" : {
@@ -11693,47 +11764,36 @@
           "kycStatus" : {
             "$ref" : "#/components/schemas/KYCStatus"
           },
+          "documents" : {
+            "$ref" : "#/components/schemas/Documents"
+          },
           "attributes" : {
             "type" : "object",
             "additionalProperties" : {
               "type" : "object",
               "properties" : { }
-            },
-            "description" : "Additional information for this entity",
-            "example" : "myCode : ABC"
+            }
           },
           "sectionStatus" : {
             "type" : "string",
-            "description" : "Current status of the section",
-            "example" : "IN_REVIEW",
             "enum" : [ "EDIT_INITIATED", "PENDING", "TEMP_COMPLETED", "APPROVED", "REJECTED", "IN_REVIEW", "ACCEPTED" ]
           },
           "createdOn" : {
-            "type" : "string",
-            "description" : "Date on which this entity was created",
-            "format" : "date-time"
+            "type" : "string"
           },
           "updatedOn" : {
-            "type" : "string",
-            "description" : "Latest date on which this entity was updated",
-            "format" : "date-time"
+            "type" : "string"
           },
           "remarks" : {
-            "type" : "string",
-            "description" : "Additional remarks for the executing the action on the application",
-            "example" : "Application looks good"
+            "type" : "string"
           },
           "revisionId" : {
             "type" : "integer",
             "format" : "int32"
-          },
-          "company" : {
-            "$ref" : "#/components/schemas/Company"
           }
         }
       },
-      "EditCorporateDataObject" : {
-        "required" : [ "corporateId", "remarks", "sectionStatus" ],
+      "EditCorporateDataObjectResponse" : {
         "type" : "object",
         "properties" : {
           "sectionId" : {
@@ -11753,7 +11813,6 @@
           },
           "corporateId" : {
             "type" : "integer",
-            "description" : "Identifier of the corporate which is being edited",
             "format" : "int32"
           },
           "revisionId" : {
@@ -11762,34 +11821,22 @@
           },
           "ifiId" : {
             "type" : "integer",
-            "description" : "ID of the IFI (on-boarded organization) under which the corporate exists",
-            "format" : "int64",
-            "example" : 123456
+            "format" : "int64"
           },
           "name" : {
-            "type" : "string",
-            "description" : "Name of the corporate",
-            "example" : "MYCOMPANY"
+            "type" : "string"
           },
           "agreementNumber" : {
-            "type" : "string",
-            "description" : "Number of the agreement between the corporate and the issuer/VBO",
-            "example" : "123456"
+            "type" : "string"
           },
           "agreementURL" : {
-            "type" : "string",
-            "description" : "URL of the agreement between the corporate and the issuer/VBO",
-            "example" : "abc.com/agreement"
+            "type" : "string"
           },
           "agreementStartDate" : {
-            "type" : "string",
-            "description" : "Date from which the validity of the agreement starts",
-            "example" : "01/01/2019"
+            "type" : "string"
           },
           "agreementEndDate" : {
-            "type" : "string",
-            "description" : "Date on which the validity of the agreement ends",
-            "example" : "01/01/2019"
+            "type" : "string"
           },
           "signingAuthority" : {
             "$ref" : "#/components/schemas/SigningAuthority"
@@ -11799,30 +11846,20 @@
             "additionalProperties" : {
               "type" : "object",
               "properties" : { }
-            },
-            "description" : "Additional information for this entity",
-            "example" : "myCode : ABC"
+            }
           },
           "sectionStatus" : {
             "type" : "string",
-            "description" : "Current status of the section",
-            "example" : "IN_REVIEW",
             "enum" : [ "EDIT_INITIATED", "PENDING", "TEMP_COMPLETED", "APPROVED", "REJECTED", "IN_REVIEW", "ACCEPTED" ]
           },
           "createdOn" : {
-            "type" : "string",
-            "description" : "Date on which this entity was created",
-            "format" : "date-time"
+            "type" : "string"
           },
           "updatedOn" : {
-            "type" : "string",
-            "description" : "Latest date on which this entity was updated",
-            "format" : "date-time"
+            "type" : "string"
           },
           "remarks" : {
-            "type" : "string",
-            "description" : "Additional remarks for the executing the action on the application",
-            "example" : "Application looks good"
+            "type" : "string"
           }
         }
       },
@@ -12203,22 +12240,6 @@
           }
         }
       },
-      "GenericFetchApplicationResponse" : {
-        "type" : "object",
-        "properties" : {
-          "signUpRequests" : {
-            "type" : "array",
-            "items" : {
-              "type" : "object",
-              "properties" : { }
-            }
-          },
-          "totalRequestCount" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
-        }
-      },
       "GetAggregateExpressionListResponse" : {
         "type" : "object",
         "properties" : {
@@ -12532,9 +12553,6 @@
         "required" : [ "accountHolderID", "bundleID" ],
         "type" : "object",
         "properties" : {
-          "requestID" : {
-            "type" : "string"
-          },
           "bundleID" : {
             "type" : "string"
           },
@@ -12876,11 +12894,6 @@
       "IssueResourceResponse" : {
         "type" : "object",
         "properties" : {
-          "requestID" : {
-            "type" : "string",
-            "description" : "requestID as an idempotent key",
-            "example" : "ba3673211-g586-4acb-859e-bb9c60d3qu72"
-          },
           "bundleID" : {
             "type" : "string"
           },
@@ -12992,6 +13005,12 @@
           "asString" : {
             "type" : "string"
           },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
           },
@@ -13009,12 +13028,6 @@
           },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
-          },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
           }
         }
       },
@@ -13023,6 +13036,12 @@
         "properties" : {
           "asBoolean" : {
             "type" : "boolean"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
           },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
@@ -13078,12 +13097,6 @@
           "asShort" : {
             "type" : "integer",
             "format" : "int32"
-          },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
           },
           "asString" : {
             "type" : "string"
@@ -13096,6 +13109,12 @@
           "asBoolean" : {
             "type" : "boolean"
           },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
           },
@@ -13150,12 +13169,6 @@
           "asShort" : {
             "type" : "integer",
             "format" : "int32"
-          },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
           },
           "asString" : {
             "type" : "string"
@@ -13168,6 +13181,12 @@
           "asBoolean" : {
             "type" : "boolean"
           },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
           },
@@ -13222,12 +13241,6 @@
           "asShort" : {
             "type" : "integer",
             "format" : "int32"
-          },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
           },
           "asString" : {
             "type" : "string"
@@ -13289,6 +13302,12 @@
           "asString" : {
             "type" : "string"
           },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
           },
@@ -13306,12 +13325,6 @@
           },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
-          },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
           }
         }
       },

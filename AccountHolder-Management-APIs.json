@@ -858,8 +858,7 @@
           "name" : "sortOrder",
           "in" : "query",
           "schema" : {
-            "type" : "string",
-            "enum" : [ "asc", "desc" ]
+            "type" : "string"
           }
         }, {
           "name" : "pageNumber",
@@ -875,6 +874,7 @@
           "in" : "query",
           "required" : true,
           "schema" : {
+            "maximum" : 50,
             "minimum" : 1,
             "type" : "integer",
             "format" : "int64"
@@ -1027,8 +1027,7 @@
           "name" : "sortOrder",
           "in" : "query",
           "schema" : {
-            "type" : "string",
-            "enum" : [ "asc", "desc" ]
+            "type" : "string"
           }
         }, {
           "name" : "pageNumber",
@@ -1044,6 +1043,7 @@
           "in" : "query",
           "required" : true,
           "schema" : {
+            "maximum" : 50,
             "minimum" : 1,
             "type" : "integer",
             "format" : "int64"
