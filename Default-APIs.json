@@ -7125,6 +7125,52 @@
         }
       }
     },
+    "/api/v2/ifi/{ifiID}/bundles/{bundleID}/issueBundleOverridingAssessment" : {
+      "post" : {
+        "summary" : "Issue bundle to a specific individual/company without Assessment irrespective of ifi whitelisting",
+        "operationId" : "issueBundleOverridingOFACCheck",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being issued",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "bundleID",
+          "in" : "path",
+          "description" : "ID of the bundle which is being issued",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/OverrideIssuanceRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/IssueBundleResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v2/ifi/{ifiID}/bundles/{bundleID}/issueFormFactor" : {
       "post" : {
         "summary" : "Issue specific form factor of a resource to a specific individual/company",
@@ -12936,14 +12982,8 @@
           "serviceInstanceJID" : {
             "type" : "boolean"
           },
-          "primaryServiceName" : {
-            "type" : "string"
-          },
           "serviceViewName" : {
             "type" : "string"
-          },
-          "bareJID" : {
-            "$ref" : "#/components/schemas/JID"
           },
           "serviceViewJID" : {
             "type" : "boolean"
@@ -12953,6 +12993,12 @@
           },
           "jidOfAGroup" : {
             "type" : "boolean"
+          },
+          "primaryServiceName" : {
+            "type" : "string"
+          },
+          "bareJID" : {
+            "$ref" : "#/components/schemas/JID"
           },
           "proxyServiceJID" : {
             "type" : "boolean"
@@ -13005,17 +13051,14 @@
           "asString" : {
             "type" : "string"
           },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
           },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
-          },
-          "jsonArray" : {
-            "type" : "boolean"
           },
           "jsonObject" : {
             "type" : "boolean"
@@ -13024,6 +13067,9 @@
             "type" : "boolean"
           },
           "jsonNull" : {
+            "type" : "boolean"
+          },
+          "jsonArray" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -13037,17 +13083,14 @@
           "asBoolean" : {
             "type" : "boolean"
           },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
           },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
-          },
-          "jsonArray" : {
-            "type" : "boolean"
           },
           "jsonObject" : {
             "type" : "boolean"
@@ -13056,6 +13099,9 @@
             "type" : "boolean"
           },
           "jsonNull" : {
+            "type" : "boolean"
+          },
+          "jsonArray" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -13109,17 +13155,14 @@
           "asBoolean" : {
             "type" : "boolean"
           },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
           },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
-          },
-          "jsonArray" : {
-            "type" : "boolean"
           },
           "jsonObject" : {
             "type" : "boolean"
@@ -13128,6 +13171,9 @@
             "type" : "boolean"
           },
           "jsonNull" : {
+            "type" : "boolean"
+          },
+          "jsonArray" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -13181,17 +13227,14 @@
           "asBoolean" : {
             "type" : "boolean"
           },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
           },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
-          },
-          "jsonArray" : {
-            "type" : "boolean"
           },
           "jsonObject" : {
             "type" : "boolean"
@@ -13200,6 +13243,9 @@
             "type" : "boolean"
           },
           "jsonNull" : {
+            "type" : "boolean"
+          },
+          "jsonArray" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -13302,17 +13348,14 @@
           "asString" : {
             "type" : "string"
           },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
           "asJsonArray" : {
             "$ref" : "#/components/schemas/JsonArray"
           },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
-          },
-          "jsonArray" : {
-            "type" : "boolean"
           },
           "jsonObject" : {
             "type" : "boolean"
@@ -13321,6 +13364,9 @@
             "type" : "boolean"
           },
           "jsonNull" : {
+            "type" : "boolean"
+          },
+          "jsonArray" : {
             "type" : "boolean"
           },
           "asJsonNull" : {
@@ -14603,12 +14649,12 @@
           "type" : {
             "type" : "string"
           },
-          "signatoryJID" : {
-            "$ref" : "#/components/schemas/JID"
-          },
           "payloadVersion" : {
             "type" : "integer",
             "format" : "int32"
+          },
+          "signatoryJID" : {
+            "$ref" : "#/components/schemas/JID"
           },
           "zetaSignature" : {
             "$ref" : "#/components/schemas/ZetaSignature"
@@ -15308,6 +15354,9 @@
           "dob" : {
             "type" : "string",
             "format" : "date-time"
+          },
+          "status" : {
+            "type" : "string"
           },
           "type" : {
             "type" : "string",
