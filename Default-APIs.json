@@ -12985,9 +12985,6 @@
           "primaryServiceName" : {
             "type" : "string"
           },
-          "serviceViewName" : {
-            "type" : "string"
-          },
           "bareJID" : {
             "$ref" : "#/components/schemas/JID"
           },
@@ -13002,6 +12999,9 @@
           },
           "proxyServiceJID" : {
             "type" : "boolean"
+          },
+          "serviceViewName" : {
+            "type" : "string"
           }
         }
       },
@@ -13299,10 +13299,10 @@
           "number" : {
             "type" : "boolean"
           },
-          "boolean" : {
+          "asBoolean" : {
             "type" : "boolean"
           },
-          "asBoolean" : {
+          "boolean" : {
             "type" : "boolean"
           },
           "asNumber" : {

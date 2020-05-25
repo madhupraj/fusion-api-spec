@@ -17404,9 +17404,6 @@
         "primaryServiceName" : {
           "type" : "string"
         },
-        "serviceViewName" : {
-          "type" : "string"
-        },
         "bareJID" : {
           "$ref" : "#/definitions/JID"
         },
@@ -17421,6 +17418,9 @@
         },
         "proxyServiceJID" : {
           "type" : "boolean"
+        },
+        "serviceViewName" : {
+          "type" : "string"
         }
       }
     },
@@ -17714,10 +17714,10 @@
         "number" : {
           "type" : "boolean"
         },
-        "boolean" : {
+        "asBoolean" : {
           "type" : "boolean"
         },
-        "asBoolean" : {
+        "boolean" : {
           "type" : "boolean"
         },
         "asNumber" : {
@@ -18153,13 +18153,10 @@
           "type" : "integer",
           "format" : "int64"
         },
+        "accountHolderID" : {
+          "type" : "string"
+        },
         "label" : {
-          "type" : "string"
-        },
-        "entityID" : {
-          "type" : "string"
-        },
-        "entityType" : {
           "type" : "string"
         },
         "address" : {
