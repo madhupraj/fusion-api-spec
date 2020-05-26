@@ -12637,6 +12637,9 @@
         "transactionID" : {
           "type" : "string"
         },
+        "postingID" : {
+          "type" : "string"
+        },
         "reversedTransactionID" : {
           "type" : "string"
         },
@@ -13216,6 +13219,10 @@
             "type" : "string"
           }
         },
+        "type" : {
+          "type" : "string",
+          "description" : "type of beneficiary Account, IMPS, NEFT ,ZETA "
+        },
         "verified" : {
           "type" : "boolean"
         },
@@ -13670,6 +13677,9 @@
           "type" : "integer",
           "format" : "int64"
         },
+        "isVerified" : {
+          "type" : "boolean"
+        },
         "status" : {
           "type" : "string"
         },
@@ -13688,6 +13698,9 @@
         "accountInfo" : {
           "$ref" : "#/definitions/BeneficiaryAccountInfo"
         },
+        "isDefault" : {
+          "type" : "boolean"
+        },
         "attributes" : {
           "type" : "object",
           "additionalProperties" : {
@@ -13701,12 +13714,6 @@
         "updatedAt" : {
           "type" : "string",
           "format" : "date-time"
-        },
-        "verified" : {
-          "type" : "boolean"
-        },
-        "default" : {
-          "type" : "boolean"
         }
       }
     },
@@ -15876,6 +15883,31 @@
         },
         "source" : {
           "type" : "string"
+        },
+        "salutation" : {
+          "type" : "string"
+        },
+        "firstName" : {
+          "type" : "string"
+        },
+        "middleName" : {
+          "type" : "string"
+        },
+        "lastName" : {
+          "type" : "string"
+        },
+        "profilePicURL" : {
+          "type" : "string"
+        },
+        "dob" : {
+          "type" : "string",
+          "format" : "date"
+        },
+        "gender" : {
+          "type" : "string"
+        },
+        "mothersMaidenName" : {
+          "type" : "string"
         }
       }
     },
@@ -16427,6 +16459,9 @@
           "type" : "string"
         },
         "transactionID" : {
+          "type" : "string"
+        },
+        "postingID" : {
           "type" : "string"
         },
         "reversedTransactionID" : {
@@ -17401,12 +17436,6 @@
         "serviceInstanceJID" : {
           "type" : "boolean"
         },
-        "primaryServiceName" : {
-          "type" : "string"
-        },
-        "bareJID" : {
-          "$ref" : "#/definitions/JID"
-        },
         "serviceViewJID" : {
           "type" : "boolean"
         },
@@ -17415,6 +17444,12 @@
         },
         "jidOfAGroup" : {
           "type" : "boolean"
+        },
+        "primaryServiceName" : {
+          "type" : "string"
+        },
+        "bareJID" : {
+          "$ref" : "#/definitions/JID"
         },
         "proxyServiceJID" : {
           "type" : "boolean"
@@ -17469,9 +17504,6 @@
         "asString" : {
           "type" : "string"
         },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
-        },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
         },
@@ -17492,6 +17524,9 @@
         },
         "asJsonNull" : {
           "$ref" : "#/definitions/JsonNull"
+        },
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
         }
       }
     },
@@ -17500,9 +17535,6 @@
       "properties" : {
         "asBoolean" : {
           "type" : "boolean"
-        },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
         },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
@@ -17560,6 +17592,9 @@
         "asShort" : {
           "type" : "integer",
           "format" : "int32"
+        },
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
         },
         "asString" : {
           "type" : "string"
@@ -17572,9 +17607,6 @@
         "asBoolean" : {
           "type" : "boolean"
         },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
-        },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
         },
@@ -17631,6 +17663,9 @@
         "asShort" : {
           "type" : "integer",
           "format" : "int32"
+        },
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
         },
         "asString" : {
           "type" : "string"
@@ -17643,9 +17678,6 @@
         "asBoolean" : {
           "type" : "boolean"
         },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
-        },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
         },
@@ -17703,6 +17735,9 @@
           "type" : "integer",
           "format" : "int32"
         },
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
+        },
         "asString" : {
           "type" : "string"
         }
@@ -17714,10 +17749,10 @@
         "number" : {
           "type" : "boolean"
         },
-        "asBoolean" : {
+        "boolean" : {
           "type" : "boolean"
         },
-        "boolean" : {
+        "asBoolean" : {
           "type" : "boolean"
         },
         "asNumber" : {
@@ -17762,9 +17797,6 @@
         "asString" : {
           "type" : "string"
         },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
-        },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
         },
@@ -17785,6 +17817,9 @@
         },
         "asJsonNull" : {
           "$ref" : "#/definitions/JsonNull"
+        },
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
         }
       }
     },
@@ -19907,7 +19942,13 @@
             "type" : "string"
           }
         },
+        "type" : {
+          "type" : "string"
+        },
         "verified" : {
+          "type" : "boolean"
+        },
+        "default" : {
           "type" : "boolean"
         }
       }
@@ -19946,17 +19987,17 @@
         "status" : {
           "type" : "string"
         },
+        "isVerified" : {
+          "type" : "boolean"
+        },
+        "isDefault" : {
+          "type" : "boolean"
+        },
         "attributes" : {
           "type" : "object",
           "additionalProperties" : {
             "type" : "string"
           }
-        },
-        "verified" : {
-          "type" : "boolean"
-        },
-        "default" : {
-          "type" : "boolean"
         }
       }
     },

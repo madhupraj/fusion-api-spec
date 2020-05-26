@@ -540,6 +540,9 @@
           "transactionID" : {
             "type" : "string"
           },
+          "postingID" : {
+            "type" : "string"
+          },
           "reversedTransactionID" : {
             "type" : "string"
           },

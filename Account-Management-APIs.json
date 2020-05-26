@@ -2144,6 +2144,9 @@
           "transactionID" : {
             "type" : "string"
           },
+          "postingID" : {
+            "type" : "string"
+          },
           "reversedTransactionID" : {
             "type" : "string"
           },
@@ -2431,6 +2434,9 @@
           "transactionID" : {
             "type" : "string"
           },
+          "postingID" : {
+            "type" : "string"
+          },
           "reversedTransactionID" : {
             "type" : "string"
           },
@@ -2649,9 +2655,6 @@
           "asString" : {
             "type" : "string"
           },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
@@ -2672,6 +2675,9 @@
           },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
           }
         }
       },
@@ -2680,9 +2686,6 @@
         "properties" : {
           "asBoolean" : {
             "type" : "boolean"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
           },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
@@ -2741,6 +2744,9 @@
           "asShort" : {
             "type" : "integer",
             "format" : "int32"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
           },
           "asString" : {
             "type" : "string"
@@ -2753,9 +2759,6 @@
           "asBoolean" : {
             "type" : "boolean"
           },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
@@ -2814,6 +2817,9 @@
             "type" : "integer",
             "format" : "int32"
           },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
           "asString" : {
             "type" : "string"
           }
@@ -2825,10 +2831,10 @@
           "number" : {
             "type" : "boolean"
           },
-          "asBoolean" : {
+          "boolean" : {
             "type" : "boolean"
           },
-          "boolean" : {
+          "asBoolean" : {
             "type" : "boolean"
           },
           "asNumber" : {
@@ -2874,9 +2880,6 @@
           "asString" : {
             "type" : "string"
           },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
@@ -2897,6 +2900,9 @@
           },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
           }
         }
       },

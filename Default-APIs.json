@@ -9608,6 +9608,10 @@
             },
             "description" : "Any additional information which you would like to provide"
           },
+          "type" : {
+            "type" : "string",
+            "description" : "type of beneficiary Account, IMPS, NEFT ,ZETA "
+          },
           "verified" : {
             "type" : "boolean"
           },
@@ -10019,6 +10023,9 @@
             "type" : "integer",
             "format" : "int64"
           },
+          "isVerified" : {
+            "type" : "boolean"
+          },
           "status" : {
             "type" : "string"
           },
@@ -10037,6 +10044,9 @@
           "accountInfo" : {
             "$ref" : "#/components/schemas/BeneficiaryAccountInfo"
           },
+          "isDefault" : {
+            "type" : "boolean"
+          },
           "attributes" : {
             "type" : "object",
             "additionalProperties" : {
@@ -10050,12 +10060,6 @@
           "updatedAt" : {
             "type" : "string",
             "format" : "date-time"
-          },
-          "verified" : {
-            "type" : "boolean"
-          },
-          "default" : {
-            "type" : "boolean"
           }
         }
       },
@@ -11942,6 +11946,31 @@
           },
           "source" : {
             "type" : "string"
+          },
+          "salutation" : {
+            "type" : "string"
+          },
+          "firstName" : {
+            "type" : "string"
+          },
+          "middleName" : {
+            "type" : "string"
+          },
+          "lastName" : {
+            "type" : "string"
+          },
+          "profilePicURL" : {
+            "type" : "string"
+          },
+          "dob" : {
+            "type" : "string",
+            "format" : "date"
+          },
+          "gender" : {
+            "type" : "string"
+          },
+          "mothersMaidenName" : {
+            "type" : "string"
           }
         }
       },
@@ -12982,12 +13011,6 @@
           "serviceInstanceJID" : {
             "type" : "boolean"
           },
-          "primaryServiceName" : {
-            "type" : "string"
-          },
-          "bareJID" : {
-            "$ref" : "#/components/schemas/JID"
-          },
           "serviceViewJID" : {
             "type" : "boolean"
           },
@@ -12996,6 +13019,12 @@
           },
           "jidOfAGroup" : {
             "type" : "boolean"
+          },
+          "primaryServiceName" : {
+            "type" : "string"
+          },
+          "bareJID" : {
+            "$ref" : "#/components/schemas/JID"
           },
           "proxyServiceJID" : {
             "type" : "boolean"
@@ -13051,9 +13080,6 @@
           "asString" : {
             "type" : "string"
           },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
@@ -13074,6 +13100,9 @@
           },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
           }
         }
       },
@@ -13082,9 +13111,6 @@
         "properties" : {
           "asBoolean" : {
             "type" : "boolean"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
           },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
@@ -13143,6 +13169,9 @@
           "asShort" : {
             "type" : "integer",
             "format" : "int32"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
           },
           "asString" : {
             "type" : "string"
@@ -13155,9 +13184,6 @@
           "asBoolean" : {
             "type" : "boolean"
           },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
@@ -13215,6 +13241,9 @@
           "asShort" : {
             "type" : "integer",
             "format" : "int32"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
           },
           "asString" : {
             "type" : "string"
@@ -13227,9 +13256,6 @@
           "asBoolean" : {
             "type" : "boolean"
           },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
@@ -13288,6 +13314,9 @@
             "type" : "integer",
             "format" : "int32"
           },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
           "asString" : {
             "type" : "string"
           }
@@ -13299,10 +13328,10 @@
           "number" : {
             "type" : "boolean"
           },
-          "asBoolean" : {
+          "boolean" : {
             "type" : "boolean"
           },
-          "boolean" : {
+          "asBoolean" : {
             "type" : "boolean"
           },
           "asNumber" : {
@@ -13348,9 +13377,6 @@
           "asString" : {
             "type" : "string"
           },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
@@ -13371,6 +13397,9 @@
           },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
           }
         }
       },
@@ -15261,7 +15290,13 @@
               "type" : "string"
             }
           },
+          "type" : {
+            "type" : "string"
+          },
           "verified" : {
+            "type" : "boolean"
+          },
+          "default" : {
             "type" : "boolean"
           }
         }
@@ -15300,17 +15335,17 @@
           "status" : {
             "type" : "string"
           },
+          "isVerified" : {
+            "type" : "boolean"
+          },
+          "isDefault" : {
+            "type" : "boolean"
+          },
           "attributes" : {
             "type" : "object",
             "additionalProperties" : {
               "type" : "string"
             }
-          },
-          "verified" : {
-            "type" : "boolean"
-          },
-          "default" : {
-            "type" : "boolean"
           }
         }
       },
