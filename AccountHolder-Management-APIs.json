@@ -1975,6 +1975,35 @@
           }
         }
       },
+      "ContactResponse" : {
+        "type" : "object",
+        "properties" : {
+          "firstName" : {
+            "type" : "string"
+          },
+          "lastName" : {
+            "type" : "string"
+          },
+          "vectors" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/AccountHolderVectorResponse"
+            }
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
       "CreateAccountHolderRequest" : {
         "type" : "object",
         "properties" : {
@@ -2218,7 +2247,7 @@
           "contactList" : {
             "type" : "array",
             "items" : {
-              "$ref" : "#/components/schemas/Contact"
+              "$ref" : "#/components/schemas/ContactResponse"
             }
           },
           "status" : {

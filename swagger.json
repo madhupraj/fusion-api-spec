@@ -14550,6 +14550,35 @@
         }
       }
     },
+    "ContactResponse" : {
+      "type" : "object",
+      "properties" : {
+        "firstName" : {
+          "type" : "string"
+        },
+        "lastName" : {
+          "type" : "string"
+        },
+        "vectors" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AccountHolderVectorResponse"
+          }
+        },
+        "attributes" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "headers" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
     "CorporateBeneficiaryAccountResponse" : {
       "type" : "object",
       "properties" : {
@@ -17436,17 +17465,8 @@
         "serviceInstanceJID" : {
           "type" : "boolean"
         },
-        "jidOfAGroup" : {
-          "type" : "boolean"
-        },
         "primaryServiceName" : {
           "type" : "string"
-        },
-        "serviceViewName" : {
-          "type" : "string"
-        },
-        "bareJID" : {
-          "$ref" : "#/definitions/JID"
         },
         "serviceViewJID" : {
           "type" : "boolean"
@@ -17454,8 +17474,17 @@
         "defaultServiceNode" : {
           "type" : "boolean"
         },
+        "jidOfAGroup" : {
+          "type" : "boolean"
+        },
         "proxyServiceJID" : {
           "type" : "boolean"
+        },
+        "serviceViewName" : {
+          "type" : "string"
+        },
+        "bareJID" : {
+          "$ref" : "#/definitions/JID"
         }
       }
     },
@@ -17465,24 +17494,24 @@
         "asBoolean" : {
           "type" : "boolean"
         },
-        "asNumber" : {
-          "$ref" : "#/definitions/Number"
+        "asFloat" : {
+          "type" : "number",
+          "format" : "float"
         },
         "asDouble" : {
           "type" : "number",
           "format" : "double"
         },
-        "asFloat" : {
-          "type" : "number",
-          "format" : "float"
+        "asInt" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "asNumber" : {
+          "$ref" : "#/definitions/Number"
         },
         "asLong" : {
           "type" : "integer",
           "format" : "int64"
-        },
-        "asInt" : {
-          "type" : "integer",
-          "format" : "int32"
         },
         "asByte" : {
           "type" : "string",
@@ -17504,16 +17533,13 @@
         "asString" : {
           "type" : "string"
         },
-        "asJsonPrimitive" : {
-          "$ref" : "#/definitions/JsonPrimitive"
-        },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
-        },
-        "asJsonObject" : {
-          "$ref" : "#/definitions/JsonObject"
-        },
         "jsonArray" : {
+          "type" : "boolean"
+        },
+        "asJsonNull" : {
+          "$ref" : "#/definitions/JsonNull"
+        },
+        "jsonNull" : {
           "type" : "boolean"
         },
         "jsonObject" : {
@@ -17522,62 +17548,65 @@
         "jsonPrimitive" : {
           "type" : "boolean"
         },
-        "jsonNull" : {
-          "type" : "boolean"
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
         },
-        "asJsonNull" : {
-          "$ref" : "#/definitions/JsonNull"
+        "asJsonObject" : {
+          "$ref" : "#/definitions/JsonObject"
+        },
+        "asJsonPrimitive" : {
+          "$ref" : "#/definitions/JsonPrimitive"
         }
       }
     },
     "JsonElement" : {
       "type" : "object",
       "properties" : {
-        "asBoolean" : {
-          "type" : "boolean"
-        },
-        "asJsonPrimitive" : {
-          "$ref" : "#/definitions/JsonPrimitive"
-        },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
-        },
-        "asJsonObject" : {
-          "$ref" : "#/definitions/JsonObject"
-        },
         "jsonArray" : {
           "type" : "boolean"
         },
-        "jsonObject" : {
-          "type" : "boolean"
-        },
-        "jsonPrimitive" : {
-          "type" : "boolean"
-        },
-        "jsonNull" : {
+        "asBoolean" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
           "$ref" : "#/definitions/JsonNull"
         },
-        "asNumber" : {
-          "$ref" : "#/definitions/Number"
+        "jsonNull" : {
+          "type" : "boolean"
         },
-        "asDouble" : {
-          "type" : "number",
-          "format" : "double"
+        "jsonObject" : {
+          "type" : "boolean"
         },
         "asFloat" : {
           "type" : "number",
           "format" : "float"
         },
-        "asLong" : {
-          "type" : "integer",
-          "format" : "int64"
+        "jsonPrimitive" : {
+          "type" : "boolean"
+        },
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
+        },
+        "asDouble" : {
+          "type" : "number",
+          "format" : "double"
         },
         "asInt" : {
           "type" : "integer",
           "format" : "int32"
+        },
+        "asNumber" : {
+          "$ref" : "#/definitions/Number"
+        },
+        "asJsonObject" : {
+          "$ref" : "#/definitions/JsonObject"
+        },
+        "asJsonPrimitive" : {
+          "$ref" : "#/definitions/JsonPrimitive"
+        },
+        "asLong" : {
+          "type" : "integer",
+          "format" : "int64"
         },
         "asByte" : {
           "type" : "string",
@@ -17604,51 +17633,51 @@
     "JsonNull" : {
       "type" : "object",
       "properties" : {
-        "asBoolean" : {
-          "type" : "boolean"
-        },
-        "asJsonPrimitive" : {
-          "$ref" : "#/definitions/JsonPrimitive"
-        },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
-        },
-        "asJsonObject" : {
-          "$ref" : "#/definitions/JsonObject"
-        },
         "jsonArray" : {
           "type" : "boolean"
         },
-        "jsonObject" : {
-          "type" : "boolean"
-        },
-        "jsonPrimitive" : {
-          "type" : "boolean"
-        },
-        "jsonNull" : {
+        "asBoolean" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
           "$ref" : "#/definitions/JsonNull"
         },
-        "asNumber" : {
-          "$ref" : "#/definitions/Number"
+        "jsonNull" : {
+          "type" : "boolean"
         },
-        "asDouble" : {
-          "type" : "number",
-          "format" : "double"
+        "jsonObject" : {
+          "type" : "boolean"
         },
         "asFloat" : {
           "type" : "number",
           "format" : "float"
         },
-        "asLong" : {
-          "type" : "integer",
-          "format" : "int64"
+        "jsonPrimitive" : {
+          "type" : "boolean"
+        },
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
+        },
+        "asDouble" : {
+          "type" : "number",
+          "format" : "double"
         },
         "asInt" : {
           "type" : "integer",
           "format" : "int32"
+        },
+        "asNumber" : {
+          "$ref" : "#/definitions/Number"
+        },
+        "asJsonObject" : {
+          "$ref" : "#/definitions/JsonObject"
+        },
+        "asJsonPrimitive" : {
+          "$ref" : "#/definitions/JsonPrimitive"
+        },
+        "asLong" : {
+          "type" : "integer",
+          "format" : "int64"
         },
         "asByte" : {
           "type" : "string",
@@ -17675,51 +17704,51 @@
     "JsonObject" : {
       "type" : "object",
       "properties" : {
-        "asBoolean" : {
-          "type" : "boolean"
-        },
-        "asJsonPrimitive" : {
-          "$ref" : "#/definitions/JsonPrimitive"
-        },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
-        },
-        "asJsonObject" : {
-          "$ref" : "#/definitions/JsonObject"
-        },
         "jsonArray" : {
           "type" : "boolean"
         },
-        "jsonObject" : {
-          "type" : "boolean"
-        },
-        "jsonPrimitive" : {
-          "type" : "boolean"
-        },
-        "jsonNull" : {
+        "asBoolean" : {
           "type" : "boolean"
         },
         "asJsonNull" : {
           "$ref" : "#/definitions/JsonNull"
         },
-        "asNumber" : {
-          "$ref" : "#/definitions/Number"
+        "jsonNull" : {
+          "type" : "boolean"
         },
-        "asDouble" : {
-          "type" : "number",
-          "format" : "double"
+        "jsonObject" : {
+          "type" : "boolean"
         },
         "asFloat" : {
           "type" : "number",
           "format" : "float"
         },
-        "asLong" : {
-          "type" : "integer",
-          "format" : "int64"
+        "jsonPrimitive" : {
+          "type" : "boolean"
+        },
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
+        },
+        "asDouble" : {
+          "type" : "number",
+          "format" : "double"
         },
         "asInt" : {
           "type" : "integer",
           "format" : "int32"
+        },
+        "asNumber" : {
+          "$ref" : "#/definitions/Number"
+        },
+        "asJsonObject" : {
+          "$ref" : "#/definitions/JsonObject"
+        },
+        "asJsonPrimitive" : {
+          "$ref" : "#/definitions/JsonPrimitive"
+        },
+        "asLong" : {
+          "type" : "integer",
+          "format" : "int64"
         },
         "asByte" : {
           "type" : "string",
@@ -17755,24 +17784,24 @@
         "asBoolean" : {
           "type" : "boolean"
         },
-        "asNumber" : {
-          "$ref" : "#/definitions/Number"
+        "asFloat" : {
+          "type" : "number",
+          "format" : "float"
         },
         "asDouble" : {
           "type" : "number",
           "format" : "double"
         },
-        "asFloat" : {
-          "type" : "number",
-          "format" : "float"
+        "asInt" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "asNumber" : {
+          "$ref" : "#/definitions/Number"
         },
         "asLong" : {
           "type" : "integer",
           "format" : "int64"
-        },
-        "asInt" : {
-          "type" : "integer",
-          "format" : "int32"
         },
         "asByte" : {
           "type" : "string",
@@ -17797,16 +17826,13 @@
         "asString" : {
           "type" : "string"
         },
-        "asJsonPrimitive" : {
-          "$ref" : "#/definitions/JsonPrimitive"
-        },
-        "asJsonArray" : {
-          "$ref" : "#/definitions/JsonArray"
-        },
-        "asJsonObject" : {
-          "$ref" : "#/definitions/JsonObject"
-        },
         "jsonArray" : {
+          "type" : "boolean"
+        },
+        "asJsonNull" : {
+          "$ref" : "#/definitions/JsonNull"
+        },
+        "jsonNull" : {
           "type" : "boolean"
         },
         "jsonObject" : {
@@ -17815,11 +17841,14 @@
         "jsonPrimitive" : {
           "type" : "boolean"
         },
-        "jsonNull" : {
-          "type" : "boolean"
+        "asJsonArray" : {
+          "$ref" : "#/definitions/JsonArray"
         },
-        "asJsonNull" : {
-          "$ref" : "#/definitions/JsonNull"
+        "asJsonObject" : {
+          "$ref" : "#/definitions/JsonObject"
+        },
+        "asJsonPrimitive" : {
+          "$ref" : "#/definitions/JsonPrimitive"
         }
       }
     },
@@ -18200,7 +18229,7 @@
         "contactList" : {
           "type" : "array",
           "items" : {
-            "$ref" : "#/definitions/Contact"
+            "$ref" : "#/definitions/ContactResponse"
           }
         },
         "status" : {
