@@ -1652,6 +1652,9 @@
           "status" : {
             "type" : "string"
           },
+          "kycDetailsStandardResponse" : {
+            "$ref" : "#/components/schemas/KYCDetailsStandardResponse"
+          },
           "salutation" : {
             "type" : "string"
           },
@@ -1706,9 +1709,6 @@
             "additionalProperties" : {
               "type" : "string"
             }
-          },
-          "kycstatus" : {
-            "$ref" : "#/components/schemas/KYCStatus"
           }
         }
       },
@@ -2118,6 +2118,29 @@
         "type" : "object",
         "properties" : {
           "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "KYCDetailsStandardResponse" : {
+        "type" : "object",
+        "properties" : {
+          "kycStatus" : {
+            "type" : "string"
+          },
+          "updateTime" : {
+            "type" : "string"
+          },
+          "expiryTime" : {
+            "type" : "string"
+          },
+          "kycStatusPostExpiry" : {
+            "type" : "string"
+          },
+          "kycAttributes" : {
             "type" : "object",
             "additionalProperties" : {
               "type" : "string"
