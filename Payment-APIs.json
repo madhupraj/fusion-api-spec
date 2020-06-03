@@ -52,7 +52,7 @@
   "components" : {
     "schemas" : {
       "TransferRequest" : {
-        "required" : [ "amount", "creditAccountID", "currency", "debitAccountID", "remarks", "requestID", "transferCode", "transferTime" ],
+        "required" : [ "amount", "currency", "transferTime" ],
         "type" : "object",
         "properties" : {
           "requestID" : {

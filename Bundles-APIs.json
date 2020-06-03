@@ -306,7 +306,7 @@
   "components" : {
     "schemas" : {
       "AddBundleRequest" : {
-        "required" : [ "name", "productMappingRequest", "shortCode" ],
+        "required" : [ "productMappingRequest" ],
         "type" : "object",
         "properties" : {
           "name" : {
@@ -391,7 +391,6 @@
         }
       },
       "ProductInfoRequest" : {
-        "required" : [ "productID" ],
         "type" : "object",
         "properties" : {
           "productID" : {
