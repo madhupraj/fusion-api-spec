@@ -288,7 +288,7 @@
         "properties" : {
           "code" : {
             "type" : "string",
-            "enum" : [ "LOST_OR_STOLEN", "DAMAGED", "HOTLISTED", "OTHER" ]
+            "enum" : [ "LOST_OR_STOLEN", "DAMAGED", "HOTLISTED", "OFAC_BLOCKED", "OTHER" ]
           },
           "description" : {
             "type" : "string"

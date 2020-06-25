@@ -522,6 +522,54 @@
         }
       }
     },
+    "/api/v1/ifi/{ifiID}/accounts/{accountID}/updateStatus" : {
+      "put" : {
+        "tags" : [ "Account Management" ],
+        "summary" : "Update Account Status",
+        "operationId" : "updateAccountStatus",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the Account",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateAccountStatusRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/UpdateAccountStatusResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/ifi/{ifiID}/accounts/{accountID}/vectors" : {
       "get" : {
         "tags" : [ "Account Management" ],
@@ -1404,6 +1452,54 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/GetAccountTransaction"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/accounts/{accountID}/updateStatus" : {
+      "put" : {
+        "tags" : [ "Account Management" ],
+        "summary" : "Update Account Status",
+        "operationId" : "updateAccountStatus",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization) under which the account",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "accountID",
+          "in" : "path",
+          "description" : "ID of the Account",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateAccountStatusRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/UpdateAccountStatusResponse"
                 }
               }
             }
@@ -2655,15 +2751,6 @@
           "asString" : {
             "type" : "string"
           },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
-          },
           "jsonArray" : {
             "type" : "boolean"
           },
@@ -2678,14 +2765,6 @@
           },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
-          }
-        }
-      },
-      "JsonNull" : {
-        "type" : "object",
-        "properties" : {
-          "asBoolean" : {
-            "type" : "boolean"
           },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
@@ -2695,6 +2774,14 @@
           },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
+          }
+        }
+      },
+      "JsonNull" : {
+        "type" : "object",
+        "properties" : {
+          "asBoolean" : {
+            "type" : "boolean"
           },
           "jsonArray" : {
             "type" : "boolean"
@@ -2747,6 +2834,15 @@
           "asShort" : {
             "type" : "integer",
             "format" : "int32"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
           },
           "asString" : {
             "type" : "string"
@@ -2759,15 +2855,6 @@
           "asBoolean" : {
             "type" : "boolean"
           },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
-          },
           "jsonArray" : {
             "type" : "boolean"
           },
@@ -2819,6 +2906,15 @@
           "asShort" : {
             "type" : "integer",
             "format" : "int32"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
           },
           "asString" : {
             "type" : "string"
@@ -2831,10 +2927,13 @@
           "number" : {
             "type" : "boolean"
           },
+          "boolean" : {
+            "type" : "boolean"
+          },
           "asBoolean" : {
             "type" : "boolean"
           },
-          "boolean" : {
+          "string" : {
             "type" : "boolean"
           },
           "asNumber" : {
@@ -2874,20 +2973,8 @@
             "type" : "integer",
             "format" : "int32"
           },
-          "string" : {
-            "type" : "boolean"
-          },
           "asString" : {
             "type" : "string"
-          },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
           },
           "jsonArray" : {
             "type" : "boolean"
@@ -2903,6 +2990,15 @@
           },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
           }
         }
       },
@@ -3291,6 +3387,30 @@
             "type" : "string"
           },
           "isRetriableFailure" : {
+            "type" : "string"
+          }
+        }
+      },
+      "UpdateAccountStatusRequest" : {
+        "type" : "object",
+        "properties" : {
+          "status" : {
+            "type" : "string",
+            "description" : "Status of the account to be changed"
+          }
+        }
+      },
+      "UpdateAccountStatusResponse" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "ifiID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "status" : {
             "type" : "string"
           }
         }
