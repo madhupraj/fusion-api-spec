@@ -1354,19 +1354,6 @@
           },
           "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
         }, {
-          "name" : "sortBy",
-          "in" : "query",
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "sortOrder",
-          "in" : "query",
-          "schema" : {
-            "type" : "string",
-            "enum" : [ "asc", "desc" ]
-          }
-        }, {
           "name" : "pageNumber",
           "in" : "query",
           "required" : true,
@@ -2467,6 +2454,79 @@
           }
         }
       },
+      "AggregateRule" : {
+        "type" : "object",
+        "properties" : {
+          "action" : {
+            "type" : "string",
+            "enum" : [ "DEBIT", "CREDIT", "DEBIT_REVERSAL", "CREDIT_REVERSAL" ]
+          },
+          "transactionCategoryCode" : {
+            "type" : "string"
+          },
+          "aggExpressionCode" : {
+            "type" : "string"
+          },
+          "dailyLimit" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "weeklyLimit" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "monthlyLimit" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "quarterlyLimit" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "yearlyLimit" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "errorCode" : {
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "string",
+            "enum" : [ "VELOCITY", "VOLUME" ]
+          }
+        }
+      },
+      "BalanceRule" : {
+        "type" : "object",
+        "properties" : {
+          "action" : {
+            "type" : "string",
+            "enum" : [ "DEBIT", "CREDIT", "DEBIT_REVERSAL", "CREDIT_REVERSAL" ]
+          },
+          "minRequiredBalanceAfter" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "maxAllowedBalanceAfter" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "minRequiredBalanceBefore" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "maxAllowedBalanceBefore" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "transactionCategoryCode" : {
+            "type" : "string"
+          },
+          "errorCode" : {
+            "type" : "string"
+          }
+        }
+      },
       "EmptyPayload" : {
         "type" : "object"
       },
@@ -2751,6 +2811,15 @@
           "asString" : {
             "type" : "string"
           },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
           "jsonArray" : {
             "type" : "boolean"
           },
@@ -2765,6 +2834,14 @@
           },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
+          }
+        }
+      },
+      "JsonNull" : {
+        "type" : "object",
+        "properties" : {
+          "asBoolean" : {
+            "type" : "boolean"
           },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
@@ -2774,14 +2851,6 @@
           },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
-          }
-        }
-      },
-      "JsonNull" : {
-        "type" : "object",
-        "properties" : {
-          "asBoolean" : {
-            "type" : "boolean"
           },
           "jsonArray" : {
             "type" : "boolean"
@@ -2834,15 +2903,6 @@
           "asShort" : {
             "type" : "integer",
             "format" : "int32"
-          },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
           },
           "asString" : {
             "type" : "string"
@@ -2855,6 +2915,15 @@
           "asBoolean" : {
             "type" : "boolean"
           },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
           "jsonArray" : {
             "type" : "boolean"
           },
@@ -2907,15 +2976,6 @@
             "type" : "integer",
             "format" : "int32"
           },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
-          },
           "asString" : {
             "type" : "string"
           }
@@ -2925,15 +2985,12 @@
         "type" : "object",
         "properties" : {
           "number" : {
-            "type" : "boolean"
-          },
-          "boolean" : {
             "type" : "boolean"
           },
           "asBoolean" : {
             "type" : "boolean"
           },
-          "string" : {
+          "boolean" : {
             "type" : "boolean"
           },
           "asNumber" : {
@@ -2973,8 +3030,20 @@
             "type" : "integer",
             "format" : "int32"
           },
+          "string" : {
+            "type" : "boolean"
+          },
           "asString" : {
             "type" : "string"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
           },
           "jsonArray" : {
             "type" : "boolean"
@@ -2990,15 +3059,6 @@
           },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
-          },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
           }
         }
       },
@@ -3251,88 +3311,169 @@
           }
         }
       },
-      "TransactionPolicyResponse" : {
+      "TransactionConstraint" : {
         "type" : "object",
         "properties" : {
-          "headers" : {
-            "type" : "object",
-            "additionalProperties" : {
+          "action" : {
+            "type" : "string",
+            "enum" : [ "DEBIT", "CREDIT", "DEBIT_REVERSAL", "CREDIT_REVERSAL" ]
+          },
+          "allowedTransactionCategoryCodes" : {
+            "type" : "array",
+            "items" : {
               "type" : "string"
             }
           },
-          "id" : {
-            "type" : "string"
+          "disallowedTransactionCategoryCodes" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
           },
-          "ifiId" : {
+          "allowedTimeSlices" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "disallowedTimeSlices" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "errorCode" : {
+            "type" : "string"
+          }
+        }
+      },
+      "TransactionPolicyResponse" : {
+        "type" : "object",
+        "properties" : {
+          "ifiID" : {
             "type" : "integer",
+            "description" : "ID of the on-boarded organization",
+            "format" : "int64",
+            "example" : 123123
+          },
+          "accountHolderID" : {
+            "type" : "string",
+            "description" : "ID of the account holder",
+            "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+          },
+          "coaID" : {
+            "type" : "integer",
+            "description" : "Code given to a transaction policy",
+            "format" : "int64"
+          },
+          "id" : {
+            "type" : "integer",
+            "description" : "Policy ID",
             "format" : "int64"
           },
           "code" : {
-            "type" : "string"
-          },
-          "status" : {
             "type" : "string",
-            "enum" : [ "ENABLED", "DISABLED" ]
+            "description" : "Coa ID of issuer to which the transaction policy would be associated"
           },
           "description" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Description of transaction policy"
+          },
+          "state" : {
+            "type" : "string",
+            "description" : "State of the transaction policy",
+            "example" : "ENABLED or DISABLED",
+            "enum" : [ "ENABLED", "DISABLED" ]
+          },
+          "scope" : {
+            "type" : "string",
+            "description" : "Scope of transaction policy",
+            "example" : "AGGREGATE_OF_ALL_ACCOUNTS_OF_ACCOUNT_HOLDER or EACH_ACCOUNT_OF_ACCOUNT_HOLDER",
+            "enum" : [ "AGGREGATE_OF_ALL_ACCOUNTS_OF_ACCOUNT_HOLDER", "EACH_ACCOUNT_OF_ACCOUNT_HOLDER" ]
+          },
+          "transactionConstraints" : {
+            "type" : "array",
+            "description" : "Transaction Constraints containing allowed/disallowed transaction categories and time slices",
+            "items" : {
+              "$ref" : "#/components/schemas/TransactionConstraint"
+            }
+          },
+          "transactionRules" : {
+            "type" : "array",
+            "description" : "Transaction rules to be applied on a particular posting",
+            "items" : {
+              "$ref" : "#/components/schemas/TransactionRule"
+            }
+          },
+          "balanceRules" : {
+            "type" : "array",
+            "description" : "Balance rules to be applied either on transacting account or group of accounts of account holder based on applicability criteria and policy scope ",
+            "items" : {
+              "$ref" : "#/components/schemas/BalanceRule"
+            }
+          },
+          "aggregateRules" : {
+            "type" : "array",
+            "description" : "Aggregate rules (daily, weekly, monthly, quarterly, yearly) to be applied based on applicability criteria and transaction category",
+            "items" : {
+              "$ref" : "#/components/schemas/AggregateRule"
+            }
+          },
+          "effectiveFrom" : {
+            "type" : "string",
+            "description" : "Effective date from when the transaction policy will be applied",
+            "example" : "2020-02-18T06:24:14.000Z"
+          },
+          "expiresAt" : {
+            "type" : "string",
+            "description" : "Expiry date for the transaction policy post which it will not be applied",
+            "example" : "2020-02-18T06:24:14.000Z"
+          },
+          "createdAt" : {
+            "type" : "string",
+            "description" : "Creation date of the transaction policy",
+            "example" : "2020-02-18T06:24:14.000Z"
+          },
+          "updatedAt" : {
+            "type" : "string",
+            "description" : "Last updated date of the transaction policy",
+            "example" : "2020-02-18T06:24:14.000Z"
+          },
+          "violationAction" : {
+            "type" : "string",
+            "description" : "Transaction policy violation action",
+            "example" : "DECLINE, NOTIFY, DECLINE_AND_NOTIFY",
+            "enum" : [ "DECLINE_AND_NOTIFY", "DECLINE", "NOTIFY" ]
           },
           "attributes" : {
             "type" : "object",
             "additionalProperties" : {
-              "type" : "object",
-              "properties" : { }
-            }
-          },
-          "validFrom" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "validUntil" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "policyViolationAction" : {
+              "type" : "string"
+            },
+            "description" : "Any additional information that you would like to associate with the transaction policy"
+          }
+        }
+      },
+      "TransactionRule" : {
+        "type" : "object",
+        "properties" : {
+          "action" : {
             "type" : "string",
-            "enum" : [ "DECLINE_AND_NOTIFY", "DECLINE", "NOTIFY" ]
+            "enum" : [ "DEBIT", "CREDIT", "DEBIT_REVERSAL", "CREDIT_REVERSAL" ]
           },
-          "txnConstraints" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/PolicyTxnConstraint"
-            }
+          "transactionCategoryCode" : {
+            "type" : "string"
           },
-          "txnLimits" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/PolicyTxnRule"
-            }
-          },
-          "balanceLimits" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/PolicyBalanceRule"
-            }
-          },
-          "volumeLimits" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/PolicyAggregateRule"
-            }
-          },
-          "velocityLimits" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/PolicyAggregateRule"
-            }
-          },
-          "createdAt" : {
+          "minRequiredAmount" : {
             "type" : "integer",
             "format" : "int64"
           },
-          "updatedAt" : {
+          "maxAllowedAmount" : {
             "type" : "integer",
             "format" : "int64"
+          },
+          "errorCode" : {
+            "type" : "string"
           }
         }
       },

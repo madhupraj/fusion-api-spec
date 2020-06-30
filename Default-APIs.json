@@ -124,7 +124,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ListAccountHolderPoliciesResponse"
+                  "$ref" : "#/components/schemas/ListTransactionPoliciesResponse"
                 }
               }
             }
@@ -158,7 +158,7 @@
           "content" : {
             "*/*" : {
               "schema" : {
-                "$ref" : "#/components/schemas/CreateAccountHolderPolicyRequest"
+                "$ref" : "#/components/schemas/CreateTransactionPolicyRequest"
               }
             }
           },
@@ -170,7 +170,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/AccountHolderPolicyResponse"
+                  "$ref" : "#/components/schemas/TransactionPolicyResponse"
                 }
               }
             }
@@ -218,7 +218,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/AccountHolderPolicyResponse"
+                  "$ref" : "#/components/schemas/TransactionPolicyResponse"
                 }
               }
             }
@@ -262,7 +262,7 @@
           "content" : {
             "*/*" : {
               "schema" : {
-                "$ref" : "#/components/schemas/ReplaceAccountHolderPolicyRequest"
+                "$ref" : "#/components/schemas/ReplaceTransactionPolicyRequest"
               }
             }
           },
@@ -274,7 +274,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/AccountHolderPolicyResponse"
+                  "$ref" : "#/components/schemas/TransactionPolicyResponse"
                 }
               }
             }
@@ -332,7 +332,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/AccountHolderPolicyResponse"
+                  "$ref" : "#/components/schemas/TransactionPolicyResponse"
                 }
               }
             }
@@ -8262,6 +8262,232 @@
         }
       }
     },
+    "/api/v2/ifi/{ifiID}/transactionPolicies" : {
+      "get" : {
+        "summary" : "Get all transaction policies for a given IFI",
+        "operationId" : "listAllTranasctionPolicies",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization).",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "type" : "string"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAllTransactionPoliciesResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Create TransactionPolicy",
+        "operationId" : "createTransactionPolicy",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CreateTransactionPolicyRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TransactionPolicyResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/transactionPolicies/{transactionPolicyID}" : {
+      "get" : {
+        "summary" : "Replace Transaction Policy",
+        "operationId" : "getTransactionPolicy",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization).",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "transactionPolicyID",
+          "in" : "path",
+          "description" : "Transaction Policy ID of the account holder",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123456789101112
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "type" : "integer",
+                "format" : "int64"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TransactionPolicyResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "summary" : "Replace Transaction Policy",
+        "operationId" : "replaceTransactionPolicy",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "transactionPolicyID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ReplaceTransactionPolicyRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TransactionPolicyResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/transactionPolicies/{transactionPolicyID}/{state}" : {
+      "patch" : {
+        "summary" : "Update TransactionPolicy State",
+        "operationId" : "updateTransactionPolicyState",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization).",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "transactionPolicyID",
+          "in" : "path",
+          "description" : "Transaction Policy ID of the account holder",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123456789101112
+        }, {
+          "name" : "state",
+          "in" : "path",
+          "description" : "Policy State of Transaction Policy",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "ENABLED", "DISABLED" ]
+          },
+          "example" : "ENABLED or DISABLED"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateTransactionPolicyState"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TransactionPolicyResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/health" : {
       "get" : {
         "operationId" : "healthCheck",
@@ -8433,113 +8659,6 @@
           "updatedAt" : {
             "type" : "string",
             "format" : "date-time"
-          }
-        }
-      },
-      "AccountHolderPolicyResponse" : {
-        "type" : "object",
-        "properties" : {
-          "ifiID" : {
-            "type" : "integer",
-            "description" : "ID of the on-boarded organization",
-            "format" : "int64",
-            "example" : 123123
-          },
-          "accountHolderID" : {
-            "type" : "string",
-            "description" : "ID of the account holder",
-            "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
-          },
-          "coaID" : {
-            "type" : "integer",
-            "description" : "Code given to a transaction policy",
-            "format" : "int64"
-          },
-          "id" : {
-            "type" : "integer",
-            "description" : "Policy ID",
-            "format" : "int64"
-          },
-          "code" : {
-            "type" : "string",
-            "description" : "Coa ID of issuer to which the transaction policy would be associated"
-          },
-          "description" : {
-            "type" : "string",
-            "description" : "Description of transaction policy"
-          },
-          "state" : {
-            "type" : "string",
-            "description" : "State of the transaction policy",
-            "example" : "ENABLED or DISABLED",
-            "enum" : [ "ENABLED", "DISABLED" ]
-          },
-          "scope" : {
-            "type" : "string",
-            "description" : "Scope of transaction policy",
-            "example" : "AGGREGATE_OF_ALL_ACCOUNTS_OF_ACCOUNT_HOLDER or EACH_ACCOUNT_OF_ACCOUNT_HOLDER",
-            "enum" : [ "AGGREGATE_OF_ALL_ACCOUNTS_OF_ACCOUNT_HOLDER", "EACH_ACCOUNT_OF_ACCOUNT_HOLDER" ]
-          },
-          "transactionConstraints" : {
-            "type" : "array",
-            "description" : "Transaction Constraints containing allowed/disallowed transaction categories and time slices",
-            "items" : {
-              "$ref" : "#/components/schemas/TransactionConstraint"
-            }
-          },
-          "transactionRules" : {
-            "type" : "array",
-            "description" : "Transaction rules to be applied on a particular posting",
-            "items" : {
-              "$ref" : "#/components/schemas/TransactionRule"
-            }
-          },
-          "balanceRules" : {
-            "type" : "array",
-            "description" : "Balance rules to be applied either on transacting account or group of accounts of account holder based on applicability criteria and policy scope ",
-            "items" : {
-              "$ref" : "#/components/schemas/BalanceRule"
-            }
-          },
-          "aggregateRules" : {
-            "type" : "array",
-            "description" : "Aggregate rules (daily, weekly, monthly, quarterly, yearly) to be applied based on applicability criteria and transaction category",
-            "items" : {
-              "$ref" : "#/components/schemas/AggregateRule"
-            }
-          },
-          "effectiveFrom" : {
-            "type" : "string",
-            "description" : "Effective date from when the transaction policy will be applied",
-            "example" : "2020-02-18T06:24:14.000Z"
-          },
-          "expiresAt" : {
-            "type" : "string",
-            "description" : "Expiry date for the transaction policy post which it will not be applied",
-            "example" : "2020-02-18T06:24:14.000Z"
-          },
-          "createdAt" : {
-            "type" : "string",
-            "description" : "Creation date of the transaction policy",
-            "example" : "2020-02-18T06:24:14.000Z"
-          },
-          "updatedAt" : {
-            "type" : "string",
-            "description" : "Last updated date of the transaction policy",
-            "example" : "2020-02-18T06:24:14.000Z"
-          },
-          "violationAction" : {
-            "type" : "string",
-            "description" : "Transaction policy violation action",
-            "example" : "DECLINE, NOTIFY, DECLINE_AND_NOTIFY",
-            "enum" : [ "DECLINE_AND_NOTIFY", "DECLINE", "NOTIFY" ]
-          },
-          "attributes" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
-            },
-            "description" : "Any additional information that you would like to associate with the transaction policy"
           }
         }
       },
@@ -9936,90 +10055,6 @@
           }
         }
       },
-      "CreateAccountHolderPolicyRequest" : {
-        "required" : [ "coaID", "violationAction" ],
-        "type" : "object",
-        "properties" : {
-          "code" : {
-            "type" : "string",
-            "description" : "Code given to a transaction policy",
-            "example" : "POLIN0012345"
-          },
-          "description" : {
-            "type" : "string",
-            "description" : "Description of transaction policy"
-          },
-          "scope" : {
-            "type" : "string",
-            "description" : "Scope of transaction policy",
-            "example" : "AGGREGATE_OF_ALL_ACCOUNTS_OF_ACCOUNT_HOLDER or EACH_ACCOUNT_OF_ACCOUNT_HOLDER",
-            "enum" : [ "AGGREGATE_OF_ALL_ACCOUNTS_OF_ACCOUNT_HOLDER", "EACH_ACCOUNT_OF_ACCOUNT_HOLDER" ]
-          },
-          "coaID" : {
-            "type" : "integer",
-            "description" : "Coa ID of issuer to which the transaction policy would be associated",
-            "format" : "int64"
-          },
-          "transactionConstraints" : {
-            "type" : "array",
-            "description" : "Transaction Constraints containing allowed/disallowed transaction categories and time slices",
-            "items" : {
-              "$ref" : "#/components/schemas/TransactionConstraint"
-            }
-          },
-          "transactionRules" : {
-            "type" : "array",
-            "description" : "Transaction rules to be applied on a particular posting",
-            "items" : {
-              "$ref" : "#/components/schemas/TransactionRule"
-            }
-          },
-          "balanceRules" : {
-            "type" : "array",
-            "description" : "Balance rules to be applied either on transacting account or group of accounts of account holder based on applicability criteria and policy scope ",
-            "items" : {
-              "$ref" : "#/components/schemas/BalanceRule"
-            }
-          },
-          "aggregateRules" : {
-            "type" : "array",
-            "description" : "Aggregate rules (daily, weekly, monthly, quarterly, yearly) to be applied based on applicability criteria and transaction category",
-            "items" : {
-              "$ref" : "#/components/schemas/AggregateRule"
-            }
-          },
-          "effectiveFrom" : {
-            "type" : "string",
-            "description" : "Effective date (epoch time in milliseconds) from when the transaction policy will be applied",
-            "example" : "2020-02-18T06:24:14.000Z"
-          },
-          "expiresAt" : {
-            "type" : "string",
-            "description" : "Expiry date (epoch time in milliseconds) for the transaction policy post which it will not be applied",
-            "example" : "2020-02-18T06:24:14.000Z"
-          },
-          "violationAction" : {
-            "type" : "string",
-            "description" : "Transaction policy violation action",
-            "example" : "DECLINE, NOTIFY, DECLINE_AND_NOTIFY",
-            "enum" : [ "DECLINE_AND_NOTIFY", "DECLINE", "NOTIFY" ]
-          },
-          "accountsApplicableTo" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
-            },
-            "description" : "Applicability or Filtering Criteria to pick account[s] of the account holder"
-          },
-          "attributes" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
-            },
-            "description" : "Any additional information that you would like to associate with the transaction policy"
-          }
-        }
-      },
       "CreateAccountHolderWithAutoApprovalRequest" : {
         "type" : "object",
         "properties" : {
@@ -10677,6 +10712,90 @@
             "additionalProperties" : {
               "type" : "string"
             }
+          }
+        }
+      },
+      "CreateTransactionPolicyRequest" : {
+        "required" : [ "coaID", "violationAction" ],
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "string",
+            "description" : "Code given to a transaction policy",
+            "example" : "POLIN0012345"
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "Description of transaction policy"
+          },
+          "scope" : {
+            "type" : "string",
+            "description" : "Scope of transaction policy",
+            "example" : "AGGREGATE_OF_ALL_ACCOUNTS_OF_ACCOUNT_HOLDER or EACH_ACCOUNT_OF_ACCOUNT_HOLDER",
+            "enum" : [ "AGGREGATE_OF_ALL_ACCOUNTS_OF_ACCOUNT_HOLDER", "EACH_ACCOUNT_OF_ACCOUNT_HOLDER" ]
+          },
+          "coaID" : {
+            "type" : "integer",
+            "description" : "Coa ID of issuer to which the transaction policy would be associated",
+            "format" : "int64"
+          },
+          "transactionConstraints" : {
+            "type" : "array",
+            "description" : "Transaction Constraints containing allowed/disallowed transaction categories and time slices",
+            "items" : {
+              "$ref" : "#/components/schemas/TransactionConstraint"
+            }
+          },
+          "transactionRules" : {
+            "type" : "array",
+            "description" : "Transaction rules to be applied on a particular posting",
+            "items" : {
+              "$ref" : "#/components/schemas/TransactionRule"
+            }
+          },
+          "balanceRules" : {
+            "type" : "array",
+            "description" : "Balance rules to be applied either on transacting account or group of accounts of account holder based on applicability criteria and policy scope ",
+            "items" : {
+              "$ref" : "#/components/schemas/BalanceRule"
+            }
+          },
+          "aggregateRules" : {
+            "type" : "array",
+            "description" : "Aggregate rules (daily, weekly, monthly, quarterly, yearly) to be applied based on applicability criteria and transaction category",
+            "items" : {
+              "$ref" : "#/components/schemas/AggregateRule"
+            }
+          },
+          "effectiveFrom" : {
+            "type" : "string",
+            "description" : "Effective date (epoch time in milliseconds) from when the transaction policy will be applied",
+            "example" : "2020-02-18T06:24:14.000Z"
+          },
+          "expiresAt" : {
+            "type" : "string",
+            "description" : "Expiry date (epoch time in milliseconds) for the transaction policy post which it will not be applied",
+            "example" : "2020-02-18T06:24:14.000Z"
+          },
+          "violationAction" : {
+            "type" : "string",
+            "description" : "Transaction policy violation action",
+            "example" : "DECLINE, NOTIFY, DECLINE_AND_NOTIFY",
+            "enum" : [ "DECLINE_AND_NOTIFY", "DECLINE", "NOTIFY" ]
+          },
+          "accountsApplicableTo" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            },
+            "description" : "Applicability or Filtering Criteria to pick account[s] of the account holder"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            },
+            "description" : "Any additional information that you would like to associate with the transaction policy"
           }
         }
       },
@@ -12006,6 +12125,15 @@
           "asString" : {
             "type" : "string"
           },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
           "jsonArray" : {
             "type" : "boolean"
           },
@@ -12020,6 +12148,14 @@
           },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
+          }
+        }
+      },
+      "JsonElement" : {
+        "type" : "object",
+        "properties" : {
+          "asBoolean" : {
+            "type" : "boolean"
           },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
@@ -12029,14 +12165,6 @@
           },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
-          }
-        }
-      },
-      "JsonElement" : {
-        "type" : "object",
-        "properties" : {
-          "asBoolean" : {
-            "type" : "boolean"
           },
           "jsonArray" : {
             "type" : "boolean"
@@ -12089,15 +12217,6 @@
           "asShort" : {
             "type" : "integer",
             "format" : "int32"
-          },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
           },
           "asString" : {
             "type" : "string"
@@ -12110,6 +12229,15 @@
           "asBoolean" : {
             "type" : "boolean"
           },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
           "jsonArray" : {
             "type" : "boolean"
           },
@@ -12161,15 +12289,6 @@
           "asShort" : {
             "type" : "integer",
             "format" : "int32"
-          },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
           },
           "asString" : {
             "type" : "string"
@@ -12182,6 +12301,15 @@
           "asBoolean" : {
             "type" : "boolean"
           },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
           "jsonArray" : {
             "type" : "boolean"
           },
@@ -12233,15 +12361,6 @@
           "asShort" : {
             "type" : "integer",
             "format" : "int32"
-          },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
           },
           "asString" : {
             "type" : "string"
@@ -12254,13 +12373,10 @@
           "number" : {
             "type" : "boolean"
           },
-          "boolean" : {
-            "type" : "boolean"
-          },
           "asBoolean" : {
             "type" : "boolean"
           },
-          "string" : {
+          "boolean" : {
             "type" : "boolean"
           },
           "asNumber" : {
@@ -12300,8 +12416,20 @@
             "type" : "integer",
             "format" : "int32"
           },
+          "string" : {
+            "type" : "boolean"
+          },
           "asString" : {
             "type" : "string"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
           },
           "jsonArray" : {
             "type" : "boolean"
@@ -12317,15 +12445,6 @@
           },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
-          },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
           }
         }
       },
@@ -12356,17 +12475,6 @@
             "type" : "object",
             "additionalProperties" : {
               "type" : "string"
-            }
-          }
-        }
-      },
-      "ListAccountHolderPoliciesResponse" : {
-        "type" : "object",
-        "properties" : {
-          "transactionPolicies" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/AccountHolderPolicyResponse"
             }
           }
         }
@@ -12433,6 +12541,17 @@
             "type" : "array",
             "items" : {
               "$ref" : "#/components/schemas/Payment"
+            }
+          }
+        }
+      },
+      "ListTransactionPoliciesResponse" : {
+        "type" : "object",
+        "properties" : {
+          "transactionPolicies" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/TransactionPolicyResponse"
             }
           }
         }
@@ -13532,6 +13651,9 @@
           "type" : {
             "type" : "string"
           },
+          "signatoryJID" : {
+            "$ref" : "#/components/schemas/JID"
+          },
           "zetaSignature" : {
             "$ref" : "#/components/schemas/ZetaSignature"
           },
@@ -13539,74 +13661,11 @@
             "type" : "integer",
             "format" : "int32"
           },
-          "signatoryJID" : {
-            "$ref" : "#/components/schemas/JID"
-          },
           "signed" : {
             "type" : "boolean"
           },
           "signature" : {
             "type" : "string"
-          }
-        }
-      },
-      "ReplaceAccountHolderPolicyRequest" : {
-        "type" : "object",
-        "properties" : {
-          "description" : {
-            "type" : "string",
-            "description" : "Description of transaction policy"
-          },
-          "transactionConstraints" : {
-            "type" : "array",
-            "description" : "Transaction Constraints containing allowed/disallowed transaction categories and time slices",
-            "items" : {
-              "$ref" : "#/components/schemas/TransactionConstraint"
-            }
-          },
-          "transactionRules" : {
-            "type" : "array",
-            "description" : "Transaction rules to be applied on a particular posting",
-            "items" : {
-              "$ref" : "#/components/schemas/TransactionRule"
-            }
-          },
-          "balanceRules" : {
-            "type" : "array",
-            "description" : "Balance rules to be applied either on transacting account or group of accounts of account holder based on applicability criteria and policy scope ",
-            "items" : {
-              "$ref" : "#/components/schemas/BalanceRule"
-            }
-          },
-          "aggregateRules" : {
-            "type" : "array",
-            "description" : "Aggregate rules (daily, weekly, monthly, quarterly, yearly) to be applied based on applicability criteria and transaction category",
-            "items" : {
-              "$ref" : "#/components/schemas/AggregateRule"
-            }
-          },
-          "effectiveFrom" : {
-            "type" : "string",
-            "description" : "Effective date (epoch time in milliseconds) from when the transaction policy will be applied",
-            "example" : "2020-02-18T06:24:14.000Z"
-          },
-          "expiresAt" : {
-            "type" : "string",
-            "description" : "Expiry date (epoch time in milliseconds) for the transaction policy post which it will not be applied",
-            "example" : "2020-02-18T06:24:14.000Z"
-          },
-          "policyViolationAction" : {
-            "type" : "string",
-            "description" : "Transaction policy violation action",
-            "example" : "DECLINE, NOTIFY, DECLINE_AND_NOTIFY",
-            "enum" : [ "DECLINE_AND_NOTIFY", "DECLINE", "NOTIFY" ]
-          },
-          "attributes" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
-            },
-            "description" : "Any additional information that you would like to associate with the transaction policy"
           }
         }
       },
@@ -13687,6 +13746,72 @@
           "code" : {
             "type" : "integer",
             "format" : "int64"
+          }
+        }
+      },
+      "ReplaceTransactionPolicyRequest" : {
+        "required" : [ "coaID" ],
+        "type" : "object",
+        "properties" : {
+          "description" : {
+            "type" : "string",
+            "description" : "Description of transaction policy"
+          },
+          "coaID" : {
+            "type" : "integer",
+            "description" : "Coa ID of issuer to which the transaction policy would be associated",
+            "format" : "int64"
+          },
+          "transactionConstraints" : {
+            "type" : "array",
+            "description" : "Transaction Constraints containing allowed/disallowed transaction categories and time slices",
+            "items" : {
+              "$ref" : "#/components/schemas/TransactionConstraint"
+            }
+          },
+          "transactionRules" : {
+            "type" : "array",
+            "description" : "Transaction rules to be applied on a particular posting",
+            "items" : {
+              "$ref" : "#/components/schemas/TransactionRule"
+            }
+          },
+          "balanceRules" : {
+            "type" : "array",
+            "description" : "Balance rules to be applied either on transacting account or group of accounts of account holder based on applicability criteria and policy scope ",
+            "items" : {
+              "$ref" : "#/components/schemas/BalanceRule"
+            }
+          },
+          "aggregateRules" : {
+            "type" : "array",
+            "description" : "Aggregate rules (daily, weekly, monthly, quarterly, yearly) to be applied based on applicability criteria and transaction category",
+            "items" : {
+              "$ref" : "#/components/schemas/AggregateRule"
+            }
+          },
+          "effectiveFrom" : {
+            "type" : "string",
+            "description" : "Effective date (epoch time in milliseconds) from when the transaction policy will be applied",
+            "example" : "2020-02-18T06:24:14.000Z"
+          },
+          "expiresAt" : {
+            "type" : "string",
+            "description" : "Expiry date (epoch time in milliseconds) for the transaction policy post which it will not be applied",
+            "example" : "2020-02-18T06:24:14.000Z"
+          },
+          "policyViolationAction" : {
+            "type" : "string",
+            "description" : "Transaction policy violation action",
+            "example" : "DECLINE, NOTIFY, DECLINE_AND_NOTIFY",
+            "enum" : [ "DECLINE_AND_NOTIFY", "DECLINE", "NOTIFY" ]
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            },
+            "description" : "Any additional information that you would like to associate with the transaction policy"
           }
         }
       },
@@ -13995,85 +14120,107 @@
       "TransactionPolicyResponse" : {
         "type" : "object",
         "properties" : {
-          "headers" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
-            }
+          "ifiID" : {
+            "type" : "integer",
+            "description" : "ID of the on-boarded organization",
+            "format" : "int64",
+            "example" : 123123
+          },
+          "accountHolderID" : {
+            "type" : "string",
+            "description" : "ID of the account holder",
+            "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+          },
+          "coaID" : {
+            "type" : "integer",
+            "description" : "Code given to a transaction policy",
+            "format" : "int64"
           },
           "id" : {
-            "type" : "string"
-          },
-          "ifiId" : {
             "type" : "integer",
+            "description" : "Policy ID",
             "format" : "int64"
           },
           "code" : {
-            "type" : "string"
-          },
-          "status" : {
             "type" : "string",
-            "enum" : [ "ENABLED", "DISABLED" ]
+            "description" : "Coa ID of issuer to which the transaction policy would be associated"
           },
           "description" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Description of transaction policy"
+          },
+          "state" : {
+            "type" : "string",
+            "description" : "State of the transaction policy",
+            "example" : "ENABLED or DISABLED",
+            "enum" : [ "ENABLED", "DISABLED" ]
+          },
+          "scope" : {
+            "type" : "string",
+            "description" : "Scope of transaction policy",
+            "example" : "AGGREGATE_OF_ALL_ACCOUNTS_OF_ACCOUNT_HOLDER or EACH_ACCOUNT_OF_ACCOUNT_HOLDER",
+            "enum" : [ "AGGREGATE_OF_ALL_ACCOUNTS_OF_ACCOUNT_HOLDER", "EACH_ACCOUNT_OF_ACCOUNT_HOLDER" ]
+          },
+          "transactionConstraints" : {
+            "type" : "array",
+            "description" : "Transaction Constraints containing allowed/disallowed transaction categories and time slices",
+            "items" : {
+              "$ref" : "#/components/schemas/TransactionConstraint"
+            }
+          },
+          "transactionRules" : {
+            "type" : "array",
+            "description" : "Transaction rules to be applied on a particular posting",
+            "items" : {
+              "$ref" : "#/components/schemas/TransactionRule"
+            }
+          },
+          "balanceRules" : {
+            "type" : "array",
+            "description" : "Balance rules to be applied either on transacting account or group of accounts of account holder based on applicability criteria and policy scope ",
+            "items" : {
+              "$ref" : "#/components/schemas/BalanceRule"
+            }
+          },
+          "aggregateRules" : {
+            "type" : "array",
+            "description" : "Aggregate rules (daily, weekly, monthly, quarterly, yearly) to be applied based on applicability criteria and transaction category",
+            "items" : {
+              "$ref" : "#/components/schemas/AggregateRule"
+            }
+          },
+          "effectiveFrom" : {
+            "type" : "string",
+            "description" : "Effective date from when the transaction policy will be applied",
+            "example" : "2020-02-18T06:24:14.000Z"
+          },
+          "expiresAt" : {
+            "type" : "string",
+            "description" : "Expiry date for the transaction policy post which it will not be applied",
+            "example" : "2020-02-18T06:24:14.000Z"
+          },
+          "createdAt" : {
+            "type" : "string",
+            "description" : "Creation date of the transaction policy",
+            "example" : "2020-02-18T06:24:14.000Z"
+          },
+          "updatedAt" : {
+            "type" : "string",
+            "description" : "Last updated date of the transaction policy",
+            "example" : "2020-02-18T06:24:14.000Z"
+          },
+          "violationAction" : {
+            "type" : "string",
+            "description" : "Transaction policy violation action",
+            "example" : "DECLINE, NOTIFY, DECLINE_AND_NOTIFY",
+            "enum" : [ "DECLINE_AND_NOTIFY", "DECLINE", "NOTIFY" ]
           },
           "attributes" : {
             "type" : "object",
             "additionalProperties" : {
-              "type" : "object",
-              "properties" : { }
-            }
-          },
-          "validFrom" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "validUntil" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "policyViolationAction" : {
-            "type" : "string",
-            "enum" : [ "DECLINE_AND_NOTIFY", "DECLINE", "NOTIFY" ]
-          },
-          "txnConstraints" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/PolicyTxnConstraint"
-            }
-          },
-          "txnLimits" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/PolicyTxnRule"
-            }
-          },
-          "balanceLimits" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/PolicyBalanceRule"
-            }
-          },
-          "volumeLimits" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/PolicyAggregateRule"
-            }
-          },
-          "velocityLimits" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/PolicyAggregateRule"
-            }
-          },
-          "createdAt" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "updatedAt" : {
-            "type" : "integer",
-            "format" : "int64"
+              "type" : "string"
+            },
+            "description" : "Any additional information that you would like to associate with the transaction policy"
           }
         }
       },
@@ -14556,6 +14703,17 @@
           "state" : {
             "type" : "string",
             "enum" : [ "ENABLED", "DISABLED" ]
+          }
+        }
+      },
+      "UpdateTransactionPolicyState" : {
+        "required" : [ "coaID" ],
+        "type" : "object",
+        "properties" : {
+          "coaID" : {
+            "type" : "integer",
+            "description" : "Coa ID of issuer to which the transaction policy would be associated",
+            "format" : "int64"
           }
         }
       },

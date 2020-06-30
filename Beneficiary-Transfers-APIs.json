@@ -1087,6 +1087,15 @@
           "asString" : {
             "type" : "string"
           },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
           "jsonArray" : {
             "type" : "boolean"
           },
@@ -1101,6 +1110,14 @@
           },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
+          }
+        }
+      },
+      "JsonNull" : {
+        "type" : "object",
+        "properties" : {
+          "asBoolean" : {
+            "type" : "boolean"
           },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
@@ -1110,14 +1127,6 @@
           },
           "asJsonObject" : {
             "$ref" : "#/components/schemas/JsonObject"
-          }
-        }
-      },
-      "JsonNull" : {
-        "type" : "object",
-        "properties" : {
-          "asBoolean" : {
-            "type" : "boolean"
           },
           "jsonArray" : {
             "type" : "boolean"
@@ -1170,15 +1179,6 @@
           "asShort" : {
             "type" : "integer",
             "format" : "int32"
-          },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
           },
           "asString" : {
             "type" : "string"
@@ -1191,6 +1191,15 @@
           "asBoolean" : {
             "type" : "boolean"
           },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
+          },
           "jsonArray" : {
             "type" : "boolean"
           },
@@ -1243,15 +1252,6 @@
             "type" : "integer",
             "format" : "int32"
           },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
-          },
           "asString" : {
             "type" : "string"
           }
@@ -1261,15 +1261,12 @@
         "type" : "object",
         "properties" : {
           "number" : {
-            "type" : "boolean"
-          },
-          "boolean" : {
             "type" : "boolean"
           },
           "asBoolean" : {
             "type" : "boolean"
           },
-          "string" : {
+          "boolean" : {
             "type" : "boolean"
           },
           "asNumber" : {
@@ -1309,8 +1306,20 @@
             "type" : "integer",
             "format" : "int32"
           },
+          "string" : {
+            "type" : "boolean"
+          },
           "asString" : {
             "type" : "string"
+          },
+          "asJsonPrimitive" : {
+            "$ref" : "#/components/schemas/JsonPrimitive"
+          },
+          "asJsonArray" : {
+            "$ref" : "#/components/schemas/JsonArray"
+          },
+          "asJsonObject" : {
+            "$ref" : "#/components/schemas/JsonObject"
           },
           "jsonArray" : {
             "type" : "boolean"
@@ -1326,15 +1335,6 @@
           },
           "asJsonNull" : {
             "$ref" : "#/components/schemas/JsonNull"
-          },
-          "asJsonPrimitive" : {
-            "$ref" : "#/components/schemas/JsonPrimitive"
-          },
-          "asJsonArray" : {
-            "$ref" : "#/components/schemas/JsonArray"
-          },
-          "asJsonObject" : {
-            "$ref" : "#/components/schemas/JsonObject"
           }
         }
       },
