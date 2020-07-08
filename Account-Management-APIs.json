@@ -1022,7 +1022,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetAccountAccessorListResponse"
+                  "$ref" : "#/components/schemas/GetAccountAccessorListStandardResponse"
                 }
               }
             }
@@ -1156,7 +1156,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetAccountRelationListResponse"
+                  "$ref" : "#/components/schemas/GetAccountRelationListStandardResponse"
                 }
               }
             }
@@ -1525,7 +1525,7 @@
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetAccountVectorListResponse"
+                  "$ref" : "#/components/schemas/GetAccountVectorListStandardResponse"
                 }
               }
             }
@@ -2547,6 +2547,9 @@
           }
         }
       },
+      "GetAccountAccessorListStandardResponse" : {
+        "type" : "object"
+      },
       "GetAccountListResponse" : {
         "type" : "object",
         "properties" : {
@@ -2580,6 +2583,9 @@
             }
           }
         }
+      },
+      "GetAccountRelationListStandardResponse" : {
+        "type" : "object"
       },
       "GetAccountTransaction" : {
         "type" : "object",
@@ -2672,6 +2678,9 @@
             }
           }
         }
+      },
+      "GetAccountVectorListStandardResponse" : {
+        "type" : "object"
       },
       "GetAllTransactionPoliciesResponse" : {
         "type" : "object",
@@ -2811,6 +2820,9 @@
           "asString" : {
             "type" : "string"
           },
+          "asJsonNull" : {
+            "$ref" : "#/components/schemas/JsonNull"
+          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
@@ -2831,9 +2843,6 @@
           },
           "jsonNull" : {
             "type" : "boolean"
-          },
-          "asJsonNull" : {
-            "$ref" : "#/components/schemas/JsonNull"
           }
         }
       },
@@ -2843,6 +2852,12 @@
           "asBoolean" : {
             "type" : "boolean"
           },
+          "asJsonNull" : {
+            "$ref" : "#/components/schemas/JsonNull"
+          },
+          "asNumber" : {
+            "$ref" : "#/components/schemas/Number"
+          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
@@ -2863,12 +2878,6 @@
           },
           "jsonNull" : {
             "type" : "boolean"
-          },
-          "asJsonNull" : {
-            "$ref" : "#/components/schemas/JsonNull"
-          },
-          "asNumber" : {
-            "$ref" : "#/components/schemas/Number"
           },
           "asDouble" : {
             "type" : "number",
@@ -2915,6 +2924,12 @@
           "asBoolean" : {
             "type" : "boolean"
           },
+          "asJsonNull" : {
+            "$ref" : "#/components/schemas/JsonNull"
+          },
+          "asNumber" : {
+            "$ref" : "#/components/schemas/Number"
+          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
@@ -2935,12 +2950,6 @@
           },
           "jsonNull" : {
             "type" : "boolean"
-          },
-          "asJsonNull" : {
-            "$ref" : "#/components/schemas/JsonNull"
-          },
-          "asNumber" : {
-            "$ref" : "#/components/schemas/Number"
           },
           "asDouble" : {
             "type" : "number",
@@ -2987,10 +2996,10 @@
           "number" : {
             "type" : "boolean"
           },
-          "asBoolean" : {
+          "boolean" : {
             "type" : "boolean"
           },
-          "boolean" : {
+          "asBoolean" : {
             "type" : "boolean"
           },
           "asNumber" : {
@@ -3036,6 +3045,9 @@
           "asString" : {
             "type" : "string"
           },
+          "asJsonNull" : {
+            "$ref" : "#/components/schemas/JsonNull"
+          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
@@ -3056,9 +3068,6 @@
           },
           "jsonNull" : {
             "type" : "boolean"
-          },
-          "asJsonNull" : {
-            "$ref" : "#/components/schemas/JsonNull"
           }
         }
       },

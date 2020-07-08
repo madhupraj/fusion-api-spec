@@ -6680,7 +6680,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/GetAccountAccessorListResponse"
+              "$ref" : "#/definitions/GetAccountAccessorListStandardResponse"
             }
           }
         }
@@ -6820,7 +6820,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/GetAccountRelationListResponse"
+              "$ref" : "#/definitions/GetAccountRelationListStandardResponse"
             }
           }
         }
@@ -7125,7 +7125,7 @@
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/GetAccountVectorListResponse"
+              "$ref" : "#/definitions/GetAccountVectorListStandardResponse"
             }
           }
         }
@@ -9234,6 +9234,126 @@
         }
       }
     },
+    "/api/v2/ifi/{ifiID}/errorCodes" : {
+      "get" : {
+        "summary" : "Get All Policy Errors",
+        "description" : "",
+        "operationId" : "getPolicyErrors",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization).",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GetPolicyErrorsResponse"
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Create Policy Error Code",
+        "description" : "",
+        "operationId" : "createPolicyErrorCode",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization).",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/AddPolicyErrorCodeRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/PolicyErrorCodeResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/errorCodes/{errorCode}" : {
+      "get" : {
+        "summary" : "Get Policy Error Code",
+        "description" : "",
+        "operationId" : "getPolicyErrorCode",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization).",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "errorCode",
+          "in" : "path",
+          "description" : "Policy Error Code ",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "ERIN0012345"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/PolicyErrorCodeResponse"
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "update a policy error",
+        "description" : "",
+        "operationId" : "updatePolicyErrorCode",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization).",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64",
+          "x-example" : 123123
+        }, {
+          "name" : "errorCode",
+          "in" : "path",
+          "description" : "Policy Error Code ",
+          "required" : true,
+          "type" : "string",
+          "x-example" : "ERIN0012345"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/UpdatePolicyErrorCodeRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/PolicyErrorCodeResponse"
+            }
+          }
+        }
+      }
+    },
     "/api/v2/ifi/{ifiID}/getAllAccountHolders" : {
       "get" : {
         "tags" : [ "AccountHolder Management" ],
@@ -10984,6 +11104,109 @@
             "description" : "successful operation",
             "schema" : {
               "$ref" : "#/definitions/Resource"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/transactionCategories" : {
+      "get" : {
+        "summary" : "Get All TransactionCategory for an IFI",
+        "description" : "",
+        "operationId" : "getAllTransactionCategories",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "minimum" : 1,
+          "format" : "int64"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "type" : "integer",
+          "maximum" : 50,
+          "minimum" : 1,
+          "format" : "int64"
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GetAllTxnCategoriesResponsePayload"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/transactionCategories/addTransactionCategory" : {
+      "post" : {
+        "summary" : "Create TransactionCategory for an IFI",
+        "description" : "",
+        "operationId" : "addTransactionCategory",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/AddTransactionCategoryRequestV2"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/AddPolicyTransactionCategoryResponsePayload"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/transactionCategories/{code}" : {
+      "get" : {
+        "summary" : "Get TransactionCategory for an IFI and Code",
+        "description" : "",
+        "operationId" : "getTransactionCategory",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "code",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GetPolicyTransactionCategoryResponsePayload"
             }
           }
         }
@@ -12833,6 +13056,78 @@
           "type" : "object",
           "additionalProperties" : {
             "type" : "string"
+          }
+        }
+      }
+    },
+    "AddPolicyErrorCodeRequest" : {
+      "type" : "object",
+      "properties" : {
+        "code" : {
+          "type" : "string",
+          "example" : "ERIN0012345",
+          "description" : "Code given to a policy error code"
+        },
+        "errorCode" : {
+          "type" : "string",
+          "example" : "TRANSACTION_OUTSIDE_TIME_RANGE",
+          "description" : "ErrorCode given to a policy "
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "Description of policy error"
+        },
+        "attributes" : {
+          "type" : "object",
+          "description" : "Any additional information that you would like to associate with the transaction policy",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "AddPolicyTransactionCategoryResponsePayload" : {
+      "type" : "object",
+      "properties" : {
+        "headers" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "code" : {
+          "type" : "string"
+        },
+        "desc" : {
+          "type" : "string"
+        },
+        "attrs" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/TxnCategoryAttrs"
+          }
+        }
+      }
+    },
+    "AddTransactionCategoryRequestV2" : {
+      "type" : "object",
+      "required" : [ "code", "description", "ifiID" ],
+      "properties" : {
+        "ifiID" : {
+          "type" : "integer",
+          "format" : "int64",
+          "minimum" : 1
+        },
+        "code" : {
+          "type" : "string"
+        },
+        "description" : {
+          "type" : "string"
+        },
+        "transactionCategoryAttributes" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/TransactionCategoryStructure"
           }
         }
       }
@@ -15552,6 +15847,9 @@
         }
       }
     },
+    "GetAccountAccessorListStandardResponse" : {
+      "type" : "object"
+    },
     "GetAccountBalanceResponse" : {
       "type" : "object",
       "properties" : {
@@ -15637,6 +15935,9 @@
           }
         }
       }
+    },
+    "GetAccountRelationListStandardResponse" : {
+      "type" : "object"
     },
     "GetAccountResponse" : {
       "type" : "object",
@@ -15800,6 +16101,9 @@
           }
         }
       }
+    },
+    "GetAccountVectorListStandardResponse" : {
+      "type" : "object"
     },
     "GetAggregateExpressionListResponse" : {
       "type" : "object",
@@ -16013,6 +16317,18 @@
         }
       }
     },
+    "GetPolicyErrorsResponse" : {
+      "type" : "object",
+      "properties" : {
+        "errorCodes" : {
+          "type" : "array",
+          "description" : "list of policy error codes",
+          "items" : {
+            "$ref" : "#/definitions/PolicyError"
+          }
+        }
+      }
+    },
     "GetPolicyResponsePayload" : {
       "type" : "object",
       "properties" : {
@@ -16024,6 +16340,29 @@
         },
         "policy" : {
           "$ref" : "#/definitions/Policy"
+        }
+      }
+    },
+    "GetPolicyTransactionCategoryResponsePayload" : {
+      "type" : "object",
+      "properties" : {
+        "headers" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "code" : {
+          "type" : "string"
+        },
+        "desc" : {
+          "type" : "string"
+        },
+        "attrs" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/TxnCategoryAttrs"
+          }
         }
       }
     },
@@ -16838,6 +17177,9 @@
         "asString" : {
           "type" : "string"
         },
+        "asJsonNull" : {
+          "$ref" : "#/definitions/JsonNull"
+        },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
         },
@@ -16858,9 +17200,6 @@
         },
         "jsonNull" : {
           "type" : "boolean"
-        },
-        "asJsonNull" : {
-          "$ref" : "#/definitions/JsonNull"
         }
       }
     },
@@ -16870,6 +17209,12 @@
         "asBoolean" : {
           "type" : "boolean"
         },
+        "asJsonNull" : {
+          "$ref" : "#/definitions/JsonNull"
+        },
+        "asNumber" : {
+          "$ref" : "#/definitions/Number"
+        },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
         },
@@ -16890,12 +17235,6 @@
         },
         "jsonNull" : {
           "type" : "boolean"
-        },
-        "asJsonNull" : {
-          "$ref" : "#/definitions/JsonNull"
-        },
-        "asNumber" : {
-          "$ref" : "#/definitions/Number"
         },
         "asDouble" : {
           "type" : "number",
@@ -16941,6 +17280,12 @@
         "asBoolean" : {
           "type" : "boolean"
         },
+        "asJsonNull" : {
+          "$ref" : "#/definitions/JsonNull"
+        },
+        "asNumber" : {
+          "$ref" : "#/definitions/Number"
+        },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
         },
@@ -16961,12 +17306,6 @@
         },
         "jsonNull" : {
           "type" : "boolean"
-        },
-        "asJsonNull" : {
-          "$ref" : "#/definitions/JsonNull"
-        },
-        "asNumber" : {
-          "$ref" : "#/definitions/Number"
         },
         "asDouble" : {
           "type" : "number",
@@ -17012,6 +17351,12 @@
         "asBoolean" : {
           "type" : "boolean"
         },
+        "asJsonNull" : {
+          "$ref" : "#/definitions/JsonNull"
+        },
+        "asNumber" : {
+          "$ref" : "#/definitions/Number"
+        },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
         },
@@ -17032,12 +17377,6 @@
         },
         "jsonNull" : {
           "type" : "boolean"
-        },
-        "asJsonNull" : {
-          "$ref" : "#/definitions/JsonNull"
-        },
-        "asNumber" : {
-          "$ref" : "#/definitions/Number"
         },
         "asDouble" : {
           "type" : "number",
@@ -17083,10 +17422,10 @@
         "number" : {
           "type" : "boolean"
         },
-        "asBoolean" : {
+        "boolean" : {
           "type" : "boolean"
         },
-        "boolean" : {
+        "asBoolean" : {
           "type" : "boolean"
         },
         "asNumber" : {
@@ -17131,6 +17470,9 @@
         "asString" : {
           "type" : "string"
         },
+        "asJsonNull" : {
+          "$ref" : "#/definitions/JsonNull"
+        },
         "asJsonPrimitive" : {
           "$ref" : "#/definitions/JsonPrimitive"
         },
@@ -17151,9 +17493,6 @@
         },
         "jsonNull" : {
           "type" : "boolean"
-        },
-        "asJsonNull" : {
-          "$ref" : "#/definitions/JsonNull"
         }
       }
     },
@@ -18014,6 +18353,76 @@
         },
         "errorCode" : {
           "type" : "string"
+        }
+      }
+    },
+    "PolicyError" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "code" : {
+          "type" : "string"
+        },
+        "ifiID" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "errorCode" : {
+          "type" : "string"
+        },
+        "description" : {
+          "type" : "string"
+        },
+        "createdAt" : {
+          "type" : "string"
+        },
+        "updatedAt" : {
+          "type" : "string"
+        },
+        "attributes" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "PolicyErrorCodeResponse" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "example" : "97b93d25-7883-4745-ab10-cc084898393a",
+          "description" : "unique identifier"
+        },
+        "ifiID" : {
+          "type" : "integer",
+          "format" : "int64",
+          "example" : 140793,
+          "description" : "ID of the on-boarded organization"
+        },
+        "code" : {
+          "type" : "string",
+          "example" : "ERCIN0012345",
+          "description" : "Code given to a policy error code"
+        },
+        "errorCode" : {
+          "type" : "string",
+          "example" : "TRANSACTION_OUTSIDE_TIME_RANGE",
+          "description" : "ErrorCode given to a policy "
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "Description of policy error"
+        },
+        "attributes" : {
+          "type" : "object",
+          "description" : "Any additional information that you would like to associate with the transaction policy",
+          "additionalProperties" : {
+            "type" : "string"
+          }
         }
       }
     },
@@ -19740,6 +20149,22 @@
         },
         "authData" : {
           "$ref" : "#/definitions/JsonObject"
+        }
+      }
+    },
+    "UpdatePolicyErrorCodeRequest" : {
+      "type" : "object",
+      "properties" : {
+        "description" : {
+          "type" : "string",
+          "description" : "Description of policy error"
+        },
+        "attributes" : {
+          "type" : "object",
+          "description" : "Any additional information that you would like to associate with the transaction policy",
+          "additionalProperties" : {
+            "type" : "string"
+          }
         }
       }
     },

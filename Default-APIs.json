@@ -7007,6 +7007,156 @@
         }
       }
     },
+    "/api/v2/ifi/{ifiID}/errorCodes" : {
+      "get" : {
+        "summary" : "Get All Policy Errors",
+        "operationId" : "getPolicyErrors",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization).",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetPolicyErrorsResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Create Policy Error Code",
+        "operationId" : "createPolicyErrorCode",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization).",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AddPolicyErrorCodeRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PolicyErrorCodeResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/errorCodes/{errorCode}" : {
+      "get" : {
+        "summary" : "Get Policy Error Code",
+        "operationId" : "getPolicyErrorCode",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization).",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "errorCode",
+          "in" : "path",
+          "description" : "Policy Error Code ",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "ERIN0012345"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PolicyErrorCodeResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "update a policy error",
+        "operationId" : "updatePolicyErrorCode",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "description" : "ID of the IFI (on-boarded organization).",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 123123
+        }, {
+          "name" : "errorCode",
+          "in" : "path",
+          "description" : "Policy Error Code ",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "ERIN0012345"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdatePolicyErrorCodeRequest"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PolicyErrorCodeResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v2/ifi/{ifiID}/individuals/{individualID}/beneficiaries" : {
       "get" : {
         "summary" : "Get all the beneficiaries of an individual",
@@ -8262,6 +8412,135 @@
         }
       }
     },
+    "/api/v2/ifi/{ifiID}/transactionCategories" : {
+      "get" : {
+        "summary" : "Get All TransactionCategory for an IFI",
+        "operationId" : "getAllTransactionCategories",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "minimum" : 1,
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "maximum" : 50,
+            "minimum" : 1,
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "sortBy",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sortOrder",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAllTxnCategoriesResponsePayload"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/transactionCategories/addTransactionCategory" : {
+      "post" : {
+        "summary" : "Create TransactionCategory for an IFI",
+        "operationId" : "addTransactionCategory",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AddTransactionCategoryRequestV2"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AddPolicyTransactionCategoryResponsePayload"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ifi/{ifiID}/transactionCategories/{code}" : {
+      "get" : {
+        "summary" : "Get TransactionCategory for an IFI and Code",
+        "operationId" : "getTransactionCategory",
+        "parameters" : [ {
+          "name" : "ifiID",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "code",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetPolicyTransactionCategoryResponsePayload"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v2/ifi/{ifiID}/transactionPolicies" : {
       "get" : {
         "summary" : "Get all transaction policies for a given IFI",
@@ -8916,6 +9195,78 @@
             "type" : "object",
             "additionalProperties" : {
               "type" : "string"
+            }
+          }
+        }
+      },
+      "AddPolicyErrorCodeRequest" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "string",
+            "description" : "Code given to a policy error code",
+            "example" : "ERIN0012345"
+          },
+          "errorCode" : {
+            "type" : "string",
+            "description" : "ErrorCode given to a policy ",
+            "example" : "TRANSACTION_OUTSIDE_TIME_RANGE"
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "Description of policy error"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            },
+            "description" : "Any additional information that you would like to associate with the transaction policy"
+          }
+        }
+      },
+      "AddPolicyTransactionCategoryResponsePayload" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "code" : {
+            "type" : "string"
+          },
+          "desc" : {
+            "type" : "string"
+          },
+          "attrs" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/TxnCategoryAttrs"
+            }
+          }
+        }
+      },
+      "AddTransactionCategoryRequestV2" : {
+        "required" : [ "code", "description", "ifiID" ],
+        "type" : "object",
+        "properties" : {
+          "ifiID" : {
+            "minimum" : 1,
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "code" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "transactionCategoryAttributes" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/TransactionCategoryStructure"
             }
           }
         }
@@ -11434,6 +11785,18 @@
           }
         }
       },
+      "GetPolicyErrorsResponse" : {
+        "type" : "object",
+        "properties" : {
+          "errorCodes" : {
+            "type" : "array",
+            "description" : "list of policy error codes",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyError"
+            }
+          }
+        }
+      },
       "GetPolicyResponsePayload" : {
         "type" : "object",
         "properties" : {
@@ -11445,6 +11808,29 @@
           },
           "policy" : {
             "$ref" : "#/components/schemas/Policy"
+          }
+        }
+      },
+      "GetPolicyTransactionCategoryResponsePayload" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "code" : {
+            "type" : "string"
+          },
+          "desc" : {
+            "type" : "string"
+          },
+          "attrs" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/TxnCategoryAttrs"
+            }
           }
         }
       },
@@ -12125,6 +12511,9 @@
           "asString" : {
             "type" : "string"
           },
+          "asJsonNull" : {
+            "$ref" : "#/components/schemas/JsonNull"
+          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
@@ -12145,9 +12534,6 @@
           },
           "jsonNull" : {
             "type" : "boolean"
-          },
-          "asJsonNull" : {
-            "$ref" : "#/components/schemas/JsonNull"
           }
         }
       },
@@ -12157,6 +12543,12 @@
           "asBoolean" : {
             "type" : "boolean"
           },
+          "asJsonNull" : {
+            "$ref" : "#/components/schemas/JsonNull"
+          },
+          "asNumber" : {
+            "$ref" : "#/components/schemas/Number"
+          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
@@ -12177,12 +12569,6 @@
           },
           "jsonNull" : {
             "type" : "boolean"
-          },
-          "asJsonNull" : {
-            "$ref" : "#/components/schemas/JsonNull"
-          },
-          "asNumber" : {
-            "$ref" : "#/components/schemas/Number"
           },
           "asDouble" : {
             "type" : "number",
@@ -12229,6 +12615,12 @@
           "asBoolean" : {
             "type" : "boolean"
           },
+          "asJsonNull" : {
+            "$ref" : "#/components/schemas/JsonNull"
+          },
+          "asNumber" : {
+            "$ref" : "#/components/schemas/Number"
+          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
@@ -12249,12 +12641,6 @@
           },
           "jsonNull" : {
             "type" : "boolean"
-          },
-          "asJsonNull" : {
-            "$ref" : "#/components/schemas/JsonNull"
-          },
-          "asNumber" : {
-            "$ref" : "#/components/schemas/Number"
           },
           "asDouble" : {
             "type" : "number",
@@ -12301,6 +12687,12 @@
           "asBoolean" : {
             "type" : "boolean"
           },
+          "asJsonNull" : {
+            "$ref" : "#/components/schemas/JsonNull"
+          },
+          "asNumber" : {
+            "$ref" : "#/components/schemas/Number"
+          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
@@ -12321,12 +12713,6 @@
           },
           "jsonNull" : {
             "type" : "boolean"
-          },
-          "asJsonNull" : {
-            "$ref" : "#/components/schemas/JsonNull"
-          },
-          "asNumber" : {
-            "$ref" : "#/components/schemas/Number"
           },
           "asDouble" : {
             "type" : "number",
@@ -12373,10 +12759,10 @@
           "number" : {
             "type" : "boolean"
           },
-          "asBoolean" : {
+          "boolean" : {
             "type" : "boolean"
           },
-          "boolean" : {
+          "asBoolean" : {
             "type" : "boolean"
           },
           "asNumber" : {
@@ -12422,6 +12808,9 @@
           "asString" : {
             "type" : "string"
           },
+          "asJsonNull" : {
+            "$ref" : "#/components/schemas/JsonNull"
+          },
           "asJsonPrimitive" : {
             "$ref" : "#/components/schemas/JsonPrimitive"
           },
@@ -12442,9 +12831,6 @@
           },
           "jsonNull" : {
             "type" : "boolean"
-          },
-          "asJsonNull" : {
-            "$ref" : "#/components/schemas/JsonNull"
           }
         }
       },
@@ -13189,6 +13575,76 @@
           },
           "errorCode" : {
             "type" : "string"
+          }
+        }
+      },
+      "PolicyError" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "code" : {
+            "type" : "string"
+          },
+          "ifiID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "errorCode" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "createdAt" : {
+            "type" : "string"
+          },
+          "updatedAt" : {
+            "type" : "string"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "PolicyErrorCodeResponse" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "unique identifier",
+            "example" : "97b93d25-7883-4745-ab10-cc084898393a"
+          },
+          "ifiID" : {
+            "type" : "integer",
+            "description" : "ID of the on-boarded organization",
+            "format" : "int64",
+            "example" : 140793
+          },
+          "code" : {
+            "type" : "string",
+            "description" : "Code given to a policy error code",
+            "example" : "ERCIN0012345"
+          },
+          "errorCode" : {
+            "type" : "string",
+            "description" : "ErrorCode given to a policy ",
+            "example" : "TRANSACTION_OUTSIDE_TIME_RANGE"
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "Description of policy error"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            },
+            "description" : "Any additional information that you would like to associate with the transaction policy"
           }
         }
       },
@@ -14680,6 +15136,22 @@
           },
           "authData" : {
             "$ref" : "#/components/schemas/JsonObject"
+          }
+        }
+      },
+      "UpdatePolicyErrorCodeRequest" : {
+        "type" : "object",
+        "properties" : {
+          "description" : {
+            "type" : "string",
+            "description" : "Description of policy error"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            },
+            "description" : "Any additional information that you would like to associate with the transaction policy"
           }
         }
       },
