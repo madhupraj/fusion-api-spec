@@ -15904,14 +15904,14 @@
         "serviceInstanceJID" : {
           "type" : "boolean"
         },
-        "serviceViewName" : {
-          "type" : "string"
-        },
         "serviceViewJID" : {
           "type" : "boolean"
         },
         "defaultServiceNode" : {
           "type" : "boolean"
+        },
+        "serviceViewName" : {
+          "type" : "string"
         },
         "jidOfAGroup" : {
           "type" : "boolean"
@@ -15933,13 +15933,6 @@
         "asBoolean" : {
           "type" : "boolean"
         },
-        "asNumber" : {
-          "$ref" : "#/definitions/Number"
-        },
-        "asDouble" : {
-          "type" : "number",
-          "format" : "double"
-        },
         "asFloat" : {
           "type" : "number",
           "format" : "float"
@@ -15951,6 +15944,13 @@
         "asInt" : {
           "type" : "integer",
           "format" : "int32"
+        },
+        "asNumber" : {
+          "$ref" : "#/definitions/Number"
+        },
+        "asDouble" : {
+          "type" : "number",
+          "format" : "double"
         },
         "asByte" : {
           "type" : "string",
@@ -16028,13 +16028,6 @@
         "jsonArray" : {
           "type" : "boolean"
         },
-        "asNumber" : {
-          "$ref" : "#/definitions/Number"
-        },
-        "asDouble" : {
-          "type" : "number",
-          "format" : "double"
-        },
         "asFloat" : {
           "type" : "number",
           "format" : "float"
@@ -16046,6 +16039,13 @@
         "asInt" : {
           "type" : "integer",
           "format" : "int32"
+        },
+        "asNumber" : {
+          "$ref" : "#/definitions/Number"
+        },
+        "asDouble" : {
+          "type" : "number",
+          "format" : "double"
         },
         "asByte" : {
           "type" : "string",
@@ -16099,13 +16099,6 @@
         "jsonArray" : {
           "type" : "boolean"
         },
-        "asNumber" : {
-          "$ref" : "#/definitions/Number"
-        },
-        "asDouble" : {
-          "type" : "number",
-          "format" : "double"
-        },
         "asFloat" : {
           "type" : "number",
           "format" : "float"
@@ -16117,6 +16110,13 @@
         "asInt" : {
           "type" : "integer",
           "format" : "int32"
+        },
+        "asNumber" : {
+          "$ref" : "#/definitions/Number"
+        },
+        "asDouble" : {
+          "type" : "number",
+          "format" : "double"
         },
         "asByte" : {
           "type" : "string",
@@ -16170,13 +16170,6 @@
         "jsonArray" : {
           "type" : "boolean"
         },
-        "asNumber" : {
-          "$ref" : "#/definitions/Number"
-        },
-        "asDouble" : {
-          "type" : "number",
-          "format" : "double"
-        },
         "asFloat" : {
           "type" : "number",
           "format" : "float"
@@ -16188,6 +16181,13 @@
         "asInt" : {
           "type" : "integer",
           "format" : "int32"
+        },
+        "asNumber" : {
+          "$ref" : "#/definitions/Number"
+        },
+        "asDouble" : {
+          "type" : "number",
+          "format" : "double"
         },
         "asByte" : {
           "type" : "string",
@@ -16217,21 +16217,14 @@
         "number" : {
           "type" : "boolean"
         },
-        "string" : {
+        "asBoolean" : {
           "type" : "boolean"
         },
         "boolean" : {
           "type" : "boolean"
         },
-        "asBoolean" : {
+        "string" : {
           "type" : "boolean"
-        },
-        "asNumber" : {
-          "$ref" : "#/definitions/Number"
-        },
-        "asDouble" : {
-          "type" : "number",
-          "format" : "double"
         },
         "asFloat" : {
           "type" : "number",
@@ -16244,6 +16237,13 @@
         "asInt" : {
           "type" : "integer",
           "format" : "int32"
+        },
+        "asNumber" : {
+          "$ref" : "#/definitions/Number"
+        },
+        "asDouble" : {
+          "type" : "number",
+          "format" : "double"
         },
         "asByte" : {
           "type" : "string",
