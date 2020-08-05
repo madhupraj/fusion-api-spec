@@ -1,52 +1,59 @@
 {
-  "openapi" : "3.0.1",
-  "info" : {
-    "title" : "API Reference",
-    "version" : "v1"
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Resource",
+    "version": "v1"
   },
-  "tags" : [ {
-    "name" : "Resource"
-  } ],
-  "paths" : {
-    "/api/v1/ifi/{ifiID}/resource_products/{resourceProductID}/resources/list" : {
-      "post" : {
-        "tags" : [ "Resource" ],
-        "description" : "List resource details by resourceProduct ID",
-        "operationId" : "filterResourceProductBasedResources",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
+  "tags": [
+    {
+      "name": "Resource"
+    }
+  ],
+  "paths": {
+    "/api/v1/ifi/{ifiID}/resource_products/{resourceProductID}/resources/list": {
+      "post": {
+        "tags": [
+          "Resource"
+        ],
+        "description": "List resource details by resourceProduct ID",
+        "operationId": "filterResourceProductBasedResources",
+        "parameters": [
+          {
+            "name": "ifiID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resourceProductID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
-        }, {
-          "name" : "resourceProductID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "*/*" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/Builder"
+        ],
+        "requestBody": {
+          "content": {
+            "*/*": {
+              "schema": {
+                "$ref": "#/components/schemas/Builder"
               }
             }
           },
-          "required" : false
+          "required": false
         },
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "type" : "array",
-                  "items" : {
-                    "$ref" : "#/components/schemas/Resource"
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Resource"
                   }
                 }
               }
@@ -55,33 +62,38 @@
         }
       }
     },
-    "/api/v1/ifi/{ifiID}/resources/{resourceID}" : {
-      "get" : {
-        "tags" : [ "Resource" ],
-        "description" : "Get resource details by ID",
-        "operationId" : "getResource",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
+    "/api/v1/ifi/{ifiID}/resources/{resourceID}": {
+      "get": {
+        "tags": [
+          "Resource"
+        ],
+        "description": "Get resource details by ID",
+        "operationId": "getResource",
+        "parameters": [
+          {
+            "name": "ifiID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resourceID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
-        }, {
-          "name" : "resourceID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Resource"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resource"
                 }
               }
             }
@@ -89,43 +101,48 @@
         }
       }
     },
-    "/api/v1/ifi/{ifiID}/resources/{resourceID}/target" : {
-      "patch" : {
-        "tags" : [ "Resource" ],
-        "description" : "Change the resource target account",
-        "operationId" : "updateResourceTarget",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
+    "/api/v1/ifi/{ifiID}/resources/{resourceID}/target": {
+      "patch": {
+        "tags": [
+          "Resource"
+        ],
+        "description": "Change the resource target account",
+        "operationId": "updateResourceTarget",
+        "parameters": [
+          {
+            "name": "ifiID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resourceID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
-        }, {
-          "name" : "resourceID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "*/*" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/Builder"
+        ],
+        "requestBody": {
+          "content": {
+            "*/*": {
+              "schema": {
+                "$ref": "#/components/schemas/Builder"
               }
             }
           },
-          "required" : false
+          "required": false
         },
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Resource"
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resource"
                 }
               }
             }
@@ -134,300 +151,326 @@
       }
     }
   },
-  "components" : {
-    "schemas" : {
-      "Builder" : {
-        "type" : "object"
+  "components": {
+    "schemas": {
+      "Builder": {
+        "type": "object"
       },
-      "FormFactor" : {
-        "type" : "object",
-        "properties" : {
-          "headers" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
+      "FormFactor": {
+        "type": "object",
+        "properties": {
+          "headers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
             }
           },
-          "id" : {
-            "type" : "string"
+          "id": {
+            "type": "string"
           },
-          "ifi" : {
-            "type" : "integer",
-            "format" : "int64"
+          "ifi": {
+            "type": "integer",
+            "format": "int64"
           },
-          "formFactorProductID" : {
-            "type" : "string"
+          "formFactorProductID": {
+            "type": "string"
           },
-          "formFactorID" : {
-            "type" : "string"
+          "formFactorID": {
+            "type": "string"
           },
-          "identityID" : {
-            "type" : "string"
+          "identityID": {
+            "type": "string"
           },
-          "targetURI" : {
-            "type" : "string"
+          "targetURI": {
+            "type": "string"
           },
-          "tags" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
           },
-          "attributes" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "object",
-              "properties" : { }
+          "attributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {}
             }
           },
-          "policies" : {
-            "$ref" : "#/components/schemas/Policies"
+          "policies": {
+            "$ref": "#/components/schemas/Policies"
           },
-          "status" : {
-            "type" : "string",
-            "enum" : [ "ACTIVE", "INACTIVE", "DELETED" ]
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "INACTIVE",
+              "DELETED"
+            ]
           },
-          "reason" : {
-            "$ref" : "#/components/schemas/StatusReason"
+          "reason": {
+            "$ref": "#/components/schemas/StatusReason"
           },
-          "createdAt" : {
-            "type" : "string",
-            "format" : "date-time"
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
           },
-          "modifiedAt" : {
-            "type" : "string",
-            "format" : "date-time"
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       },
-      "FormFactorProduct" : {
-        "type" : "object",
-        "properties" : {
-          "headers" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
+      "FormFactorProduct": {
+        "type": "object",
+        "properties": {
+          "headers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
             }
           },
-          "ifi" : {
-            "type" : "integer",
-            "format" : "int64"
+          "ifi": {
+            "type": "integer",
+            "format": "int64"
           },
-          "id" : {
-            "type" : "string"
+          "id": {
+            "type": "string"
           },
-          "code" : {
-            "type" : "string"
+          "code": {
+            "type": "string"
           },
-          "name" : {
-            "type" : "string"
+          "name": {
+            "type": "string"
           },
-          "description" : {
-            "type" : "string"
+          "description": {
+            "type": "string"
           },
-          "type" : {
-            "type" : "string"
+          "type": {
+            "type": "string"
           },
-          "policies" : {
-            "$ref" : "#/components/schemas/Policies"
+          "policies": {
+            "$ref": "#/components/schemas/Policies"
           },
-          "provider" : {
-            "type" : "string"
+          "provider": {
+            "type": "string"
           },
-          "skuID" : {
-            "type" : "string"
+          "skuID": {
+            "type": "string"
           },
-          "tags" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
           },
-          "attributes" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "object",
-              "properties" : { }
+          "attributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {}
             }
           },
-          "issuanceStatus" : {
-            "type" : "string",
-            "enum" : [ "ACTIVE", "INACTIVE", "DELETED" ]
+          "issuanceStatus": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "INACTIVE",
+              "DELETED"
+            ]
           },
-          "paymentStatus" : {
-            "type" : "string",
-            "enum" : [ "ACTIVE", "INACTIVE", "DELETED" ]
+          "paymentStatus": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "INACTIVE",
+              "DELETED"
+            ]
           },
-          "createdAt" : {
-            "type" : "string",
-            "format" : "date-time"
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
           },
-          "modifiedAt" : {
-            "type" : "string",
-            "format" : "date-time"
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       },
-      "Policies" : {
-        "type" : "object",
-        "properties" : {
-          "issuancePolicies" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
+      "Policies": {
+        "type": "object",
+        "properties": {
+          "issuancePolicies": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
           },
-          "paymentPolicies" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
+          "paymentPolicies": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
           }
         }
       },
-      "Resource" : {
-        "type" : "object",
-        "properties" : {
-          "headers" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
+      "Resource": {
+        "type": "object",
+        "properties": {
+          "headers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
             }
           },
-          "ifi" : {
-            "type" : "integer",
-            "format" : "int64"
+          "ifi": {
+            "type": "integer",
+            "format": "int64"
           },
-          "requestId" : {
-            "type" : "string"
+          "requestId": {
+            "type": "string"
           },
-          "id" : {
-            "type" : "string"
+          "id": {
+            "type": "string"
           },
-          "resourceProductId" : {
-            "type" : "string"
+          "resourceProductId": {
+            "type": "string"
           },
-          "resourceProduct" : {
-            "$ref" : "#/components/schemas/ResourceProduct"
+          "resourceProduct": {
+            "$ref": "#/components/schemas/ResourceProduct"
           },
-          "targetURI" : {
-            "type" : "string"
+          "targetURI": {
+            "type": "string"
           },
-          "formFactors" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/FormFactor"
+          "formFactors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FormFactor"
             }
           },
-          "authProfileId" : {
-            "type" : "string"
+          "authProfileId": {
+            "type": "string"
           },
-          "tags" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
           },
-          "vectors" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
+          "vectors": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
           },
-          "policies" : {
-            "$ref" : "#/components/schemas/Policies"
+          "policies": {
+            "$ref": "#/components/schemas/Policies"
           },
-          "attributes" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "object",
-              "properties" : { }
+          "attributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {}
             }
           },
-          "status" : {
-            "type" : "string",
-            "enum" : [ "ACTIVE", "INACTIVE", "DELETED" ]
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "INACTIVE",
+              "DELETED"
+            ]
           },
-          "createdAt" : {
-            "type" : "string",
-            "format" : "date-time"
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
           },
-          "modifiedAt" : {
-            "type" : "string",
-            "format" : "date-time"
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       },
-      "ResourceProduct" : {
-        "type" : "object",
-        "properties" : {
-          "headers" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
+      "ResourceProduct": {
+        "type": "object",
+        "properties": {
+          "headers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
             }
           },
-          "ifi" : {
-            "type" : "integer",
-            "format" : "int64"
+          "ifi": {
+            "type": "integer",
+            "format": "int64"
           },
-          "id" : {
-            "type" : "string"
+          "id": {
+            "type": "string"
           },
-          "code" : {
-            "type" : "string"
+          "code": {
+            "type": "string"
           },
-          "name" : {
-            "type" : "string"
+          "name": {
+            "type": "string"
           },
-          "description" : {
-            "type" : "string"
+          "description": {
+            "type": "string"
           },
-          "formFactorProducts" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/FormFactorProduct"
+          "formFactorProducts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FormFactorProduct"
             }
           },
-          "tags" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
           },
-          "policies" : {
-            "$ref" : "#/components/schemas/Policies"
+          "policies": {
+            "$ref": "#/components/schemas/Policies"
           },
-          "attributes" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "object",
-              "properties" : { }
+          "attributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {}
             }
           },
-          "status" : {
-            "type" : "string",
-            "enum" : [ "ACTIVE", "INACTIVE", "DELETED" ]
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "INACTIVE",
+              "DELETED"
+            ]
           },
-          "createdAt" : {
-            "type" : "string",
-            "format" : "date-time"
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
           },
-          "modifiedAt" : {
-            "type" : "string",
-            "format" : "date-time"
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       },
-      "StatusReason" : {
-        "type" : "object",
-        "properties" : {
-          "code" : {
-            "type" : "string",
-            "enum" : [ "LOST_OR_STOLEN", "DAMAGED", "HOTLISTED", "OFAC_BLOCKED", "OTHER" ]
+      "StatusReason": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "LOST_OR_STOLEN",
+              "DAMAGED",
+              "HOTLISTED",
+              "OFAC_BLOCKED",
+              "OTHER"
+            ]
           },
-          "description" : {
-            "type" : "string"
+          "description": {
+            "type": "string"
           }
         }
       }
