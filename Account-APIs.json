@@ -3,7 +3,7 @@
   "info": {
     "title": "Account",
     "version": "v1",
-    "description": "An Account is an atomic unit of asset or liability maintained by IFI  for their Account Holders. It corresponds to one ledger in the accounting system, and thus represents an integral value of balance in a specified currency. Simply put, Account is the entity that holds the Account Holder's funds or money."
+    "description": "An Account is an atomic unit of asset or liability maintained by IFI  for their Account Holders. It corresponds to one ledger in the accounting system, and thus represents an integral value of balance in a specified currency. Simply put, Account is the entity that holds the Account Holder's funds or money.\n\nDiscover the important functional concepts related to Account Holders and Application. In this article, you learn about:\n\n    Pool account\n    Funding account\n    Real Account Holder (RAH) account\n\nPool account\n\nFintech creates a current account with an issuer. The fintech then funds the current account to enable the issuer to maintain a pool account in the banking system. The pool account is used to flow the money from the banking system to the fintech's funding account in the Zeta system.\nFunding account\n\nFunding Accounts are maintained on the Zeta system to keep track of the transactions that a fintech and its associated entities perform. Fintech can disburse funds from their Funding Account to Account Holder’s Account. Zeta may fund fintech's Funding Account basis standing instructions from the Issuer or request from fintech."
   },
   "tags": [
     {
