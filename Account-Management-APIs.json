@@ -2,7 +2,8 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Account Management",
-    "version": "v1"
+    "version": "v1",
+    "description": "To create an Account, you need to issue Account/Payment products to an Account Holder by using Bundles as per the value offering of the fintech.\nFollow the below steps to issue an Account to an Account Holder:\n\n    Retrieve all Accounts\n    Issue an Account to an Account Holder\n        Issue an Account having single or multiple Account Product /Payment Product\n        Issue an Account: an Account Product\n        Issue an Account: Single or Multiple Account Products\n        Issue an Account: Single or Multiple Payment Products"
   },
   "tags": [
     {

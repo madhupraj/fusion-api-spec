@@ -2,7 +2,8 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Card List",
-    "version": "v1"
+    "version": "v1",
+    "description": "Fusion uses states to notify the operational status of cards. A card’s lifecycle consists of the following states:\nActive\n\nCard is fully operational and can be used for all the purposes it is issued for-ATM withdrawals, POS payments, e-commerce transactions, and so on.\nInactive\n\nCard, and all future transactions on it, are temporarily blocked. If you detect fraudulent transactions on the card, deactivate it to avoid further misuse. Inactive cards can be activated again.\nCanceled\n\nCard, and all future transactions on it, are permanently blocked. Canceled cards cannot be activated again. A new/replacement card must be ordered."
   },
   "tags": [
     {

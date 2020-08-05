@@ -2,7 +2,8 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Bundles",
-    "version": "v1"
+    "version": "v1",
+    "description": "Bundle is a construct through which you provision Account and Payment Products to your Account Holders. It is important to note that a Product can only be issued through a Bundle. Even if there is a single Product to be issued, it will be availed via the construct of a Bundle.\nAccount and Payment Products\n\nAs a fintech, you can use Bundles to package feature-rich business solutions or products and make them available to your Account Holders. In general, a Bundle consists of the following:\n\n    Account Products: Prepaid accounts such as benefits, gift, petty cash,GPR and so on.\n    Payment Products: Physical or virtual cards supported by Visa/RuPay/MasterCard networks.\n\nYou can configure many Bundles to address your liability use cases such as prepaid accounts. For example, a Bundle consisting of a reimbursement account (for example, petty cash or travel payments) to transfer expense-related settlements of Account Holders and a card powered by RuPay enabling Account Holders to spend the account balance.\nTypes of Account and Payment Products\n\nPossible types of Account Products can be prepaid accounts such as benefits, gifts, petty cash, GPR and Payment Products can be physical/virtual cards supported by Visa/RuPay/MasterCard networks.\nFusion supported Products\n\nCurrently, Fusion supports liability use cases such as prepaid accounts for Account Products and physical/virtual cards for Payment Products."
   },
   "tags": [
     {

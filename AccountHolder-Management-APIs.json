@@ -2,7 +2,8 @@
   "openapi": "3.0.1",
   "info": {
     "title": "AH Management",
-    "version": "v1"
+    "version": "v1",
+    "description": "An Account Holder is any person or corporate that has a banking relationship with an Issuing Financial Institution (IFI). For a clearer understanding and management, they are categorized into:\n\n    Real Account Holder (RAH): Also known as Individual, a Real Account Holder uses the banking products created by fintechs on Fusion. RAHs are identified and authenticated using various identifiers (phone number, email) and authentication procedures (KYC) prescribed by regulatory bodies. Examples of RAHs include prepaid and salary Account Holders.\n    Legal Account Holder (LAH): Also known as Corporate, a Legal Account Holder is any commercial business defined as a legal entity by regulatory bodies. Examples of LAHs include fintechs, partnership firms, merchants, and so on. Fintechs using Fusion to build their products are identified as LAHs on Fusion. Corporates who avail those products are identified as LAHs as well."
   },
   "tags": [
     {

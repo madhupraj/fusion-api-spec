@@ -2,7 +2,8 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Card Orders",
-    "version": "v1"
+    "version": "v1",
+    "description": "Order card for an Account Holder by creating a card order. A typical card order lifecycle consists of the following steps:\nStep 1. Create card order\n\nCreate a card order with details like Account Holder name, delivery address, card design, tracking ID, and so on. You can create a card order either using the Individual flow or Bulk card flow.\nStep 2. Share embossing file\n\nAn embossing file containing the order details is shared with the  embossing vendor .\n\nStep 3. Print card\n\nEmbossing vendor prints the card according to the specifications in the embossing file.\nStep 4. Deliver card\n\nEmbossing vendor delivers the card to the  recipient .\n\nStep 5. Activate card\n\nAccount Holder receives the card and activates.\n\nFor a detailed explanation on each step, see Create cards and Activate cards."
   },
   "tags": [
     {

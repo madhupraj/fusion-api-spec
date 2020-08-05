@@ -2,7 +2,8 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Account",
-    "version": "v1"
+    "version": "v1",
+    "description": "An Account is an atomic unit of asset or liability maintained by IFI  for their Account Holders. It corresponds to one ledger in the accounting system, and thus represents an integral value of balance in a specified currency. Simply put, Account is the entity that holds the Account Holder's funds or money."
   },
   "tags": [
     {
@@ -658,5 +659,15 @@
         }
       }
     }
-  }
+  },
+  "servers": [
+    {
+      "url": "",
+      "description": ""
+    },
+    {
+      "url": "",
+      "description": ""
+    }
+  ]
 }
