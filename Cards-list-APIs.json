@@ -1,53 +1,60 @@
 {
-  "openapi" : "3.0.1",
-  "info" : {
-    "title" : "API Reference",
-    "version" : "v1"
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Card List",
+    "version": "v1"
   },
-  "tags" : [ {
-    "name" : "Cards list"
-  } ],
-  "paths" : {
-    "/api/v1/ifi/{ifiID}/cards/list" : {
-      "post" : {
-        "tags" : [ "Cards list" ],
-        "description" : "The endpoint supports the following views -\n\nBASIC\nEXPANDED\nEXPANDED_SENSITIVE\nOne or multiple filters can be passed to get the results. EXPANDED_SENSITIVE view is supported only if you are PCI DSS compliant.",
-        "operationId" : "listCards",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
+  "tags": [
+    {
+      "name": "Cards list"
+    }
+  ],
+  "paths": {
+    "/api/v1/ifi/{ifiID}/cards/list": {
+      "post": {
+        "tags": [
+          "Cards list"
+        ],
+        "description": "The endpoint supports the following views -\n\nBASIC\nEXPANDED\nEXPANDED_SENSITIVE\nOne or multiple filters can be passed to get the results. EXPANDED_SENSITIVE view is supported only if you are PCI DSS compliant.",
+        "operationId": "listCards",
+        "parameters": [
+          {
+            "name": "ifiID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "X-Zeta-JWS",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
           }
-        }, {
-          "name" : "X-Zeta-JWS",
-          "in" : "header",
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "*/*" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/FusionListCardsRequest"
+        ],
+        "requestBody": {
+          "content": {
+            "*/*": {
+              "schema": {
+                "$ref": "#/components/schemas/FusionListCardsRequest"
               }
             }
           },
-          "required" : false
+          "required": false
         },
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "type" : "array",
-                  "items" : {
-                    "type" : "object",
-                    "properties" : { }
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {}
                   }
                 }
               }
@@ -57,32 +64,32 @@
       }
     }
   },
-  "components" : {
-    "schemas" : {
-      "FusionListCardsRequest" : {
-        "type" : "object",
-        "properties" : {
-          "filters" : {
-            "$ref" : "#/components/schemas/FusionListCardsRequestFilters"
+  "components": {
+    "schemas": {
+      "FusionListCardsRequest": {
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/FusionListCardsRequestFilters"
           }
         }
       },
-      "FusionListCardsRequestFilters" : {
-        "type" : "object",
-        "properties" : {
-          "cardID" : {
-            "type" : "string"
+      "FusionListCardsRequestFilters": {
+        "type": "object",
+        "properties": {
+          "cardID": {
+            "type": "string"
           },
-          "crn" : {
-            "type" : "string"
+          "crn": {
+            "type": "string"
           },
-          "panSHA" : {
-            "type" : "string"
+          "panSHA": {
+            "type": "string"
           },
-          "tags" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
           }
         }

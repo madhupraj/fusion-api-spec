@@ -1,45 +1,52 @@
 {
-  "openapi" : "3.0.1",
-  "info" : {
-    "title" : "API Reference",
-    "version" : "v1"
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Account",
+    "version": "v1"
   },
-  "tags" : [ {
-    "name" : "Account"
-  } ],
-  "paths" : {
-    "/api/v1/ifi/{ifiID}/accounts/{accountID}" : {
-      "get" : {
-        "tags" : [ "Account" ],
-        "description" : "Returns Account object given an accountID. The accountID should be a UUID.",
-        "operationId" : "getAccount",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization).",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
+  "tags": [
+    {
+      "name": "Account"
+    }
+  ],
+  "paths": {
+    "/api/v1/ifi/{ifiID}/accounts/{accountID}": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "description": "Returns Account object given an accountID. The accountID should be a UUID.",
+        "operationId": "getAccount",
+        "parameters": [
+          {
+            "name": "ifiID",
+            "in": "path",
+            "description": "ID of the IFI (on-boarded organization).",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "example": 123123
           },
-          "example" : 123123
-        }, {
-          "name" : "accountID",
-          "in" : "path",
-          "description" : "ID of the Account whose details are to be retrieved.",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          },
-          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Account"
+          {
+            "name": "accountID",
+            "in": "path",
+            "description": "ID of the Account whose details are to be retrieved.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "aa267641-f475-4acb-859e-bb9c60d3e9db"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Account"
                 }
               }
             }
@@ -47,38 +54,43 @@
         }
       }
     },
-    "/api/v1/ifi/{ifiID}/accounts/{accountID}/balance" : {
-      "get" : {
-        "tags" : [ "Account" ],
-        "description" : "Get Balance of the accountID provided.",
-        "operationId" : "getBalance",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization).",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
+    "/api/v1/ifi/{ifiID}/accounts/{accountID}/balance": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "description": "Get Balance of the accountID provided.",
+        "operationId": "getBalance",
+        "parameters": [
+          {
+            "name": "ifiID",
+            "in": "path",
+            "description": "ID of the IFI (on-boarded organization).",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "example": 123123
           },
-          "example" : 123123
-        }, {
-          "name" : "accountID",
-          "in" : "path",
-          "description" : "ID of the Account whose balance details are to be retrieved.",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          },
-          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/GetAccountBalanceResponse"
+          {
+            "name": "accountID",
+            "in": "path",
+            "description": "ID of the Account whose balance details are to be retrieved.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "aa267641-f475-4acb-859e-bb9c60d3e9db"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAccountBalanceResponse"
                 }
               }
             }
@@ -86,38 +98,43 @@
         }
       }
     },
-    "/api/v2/ifi/{ifiID}/accounts/{accountID}" : {
-      "get" : {
-        "tags" : [ "Account" ],
-        "description" : "Returns Account object given an accountID. The accountID should be a UUID.",
-        "operationId" : "getAccount",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization).",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
+    "/api/v2/ifi/{ifiID}/accounts/{accountID}": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "description": "Returns Account object given an accountID. The accountID should be a UUID.",
+        "operationId": "getAccount",
+        "parameters": [
+          {
+            "name": "ifiID",
+            "in": "path",
+            "description": "ID of the IFI (on-boarded organization).",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "example": 123123
           },
-          "example" : 123123
-        }, {
-          "name" : "accountID",
-          "in" : "path",
-          "description" : "ID of the Account whose details are to be retrieved.",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          },
-          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/GetAccountResponse"
+          {
+            "name": "accountID",
+            "in": "path",
+            "description": "ID of the Account whose details are to be retrieved.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "aa267641-f475-4acb-859e-bb9c60d3e9db"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAccountResponse"
                 }
               }
             }
@@ -125,38 +142,43 @@
         }
       }
     },
-    "/api/v2/ifi/{ifiID}/accounts/{accountID}/balance" : {
-      "get" : {
-        "tags" : [ "Account" ],
-        "description" : "Get Balance of the accountID provided.",
-        "operationId" : "getBalance",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization).",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
+    "/api/v2/ifi/{ifiID}/accounts/{accountID}/balance": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "description": "Get Balance of the accountID provided.",
+        "operationId": "getBalance",
+        "parameters": [
+          {
+            "name": "ifiID",
+            "in": "path",
+            "description": "ID of the IFI (on-boarded organization).",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "example": 123123
           },
-          "example" : 123123
-        }, {
-          "name" : "accountID",
-          "in" : "path",
-          "description" : "ID of the Account whose balance details are to be retrieved.",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          },
-          "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/GetAccountBalanceResponse"
+          {
+            "name": "accountID",
+            "in": "path",
+            "description": "ID of the Account whose balance details are to be retrieved.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "aa267641-f475-4acb-859e-bb9c60d3e9db"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAccountBalanceResponse"
                 }
               }
             }
@@ -165,465 +187,472 @@
       }
     }
   },
-  "components" : {
-    "schemas" : {
-      "Accessor" : {
-        "type" : "object",
-        "properties" : {
-          "headers" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
+  "components": {
+    "schemas": {
+      "Accessor": {
+        "type": "object",
+        "properties": {
+          "headers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
             }
           },
-          "id" : {
-            "type" : "string"
+          "id": {
+            "type": "string"
           },
-          "ifiID" : {
-            "type" : "integer",
-            "format" : "int64"
+          "ifiID": {
+            "type": "integer",
+            "format": "int64"
           },
-          "accountHolderID" : {
-            "type" : "string"
+          "accountHolderID": {
+            "type": "string"
           },
-          "accountID" : {
-            "type" : "string"
+          "accountID": {
+            "type": "string"
           },
-          "transactionPolicyIDs" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
+          "transactionPolicyIDs": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
           },
-          "status" : {
-            "type" : "string"
+          "status": {
+            "type": "string"
           },
-          "attributes" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
+          "attributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
             }
           },
-          "createdAt" : {
-            "type" : "string",
-            "format" : "date-time"
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
           },
-          "updatedAt" : {
-            "type" : "string",
-            "format" : "date-time"
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "title": ""
+      },
+      "Account": {
+        "type": "object",
+        "properties": {
+          "headers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "id": {
+            "type": "string"
+          },
+          "vectors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AccountVector"
+            }
+          },
+          "accessors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Accessor"
+            }
+          },
+          "relationships": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AccountRelation"
+            }
+          },
+          "ifiID": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "ownerAccountHolderID": {
+            "type": "string"
+          },
+          "accountProviderID": {
+            "type": "string"
+          },
+          "cardID": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "productFamilyID": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "productID": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "programIDs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ledgerID": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "status": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Tag"
+            }
+          },
+          "attributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       },
-      "Account" : {
-        "type" : "object",
-        "properties" : {
-          "headers" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
+      "AccountAccessorResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "ifiID": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "accountHolderID": {
+            "type": "string"
+          },
+          "accountID": {
+            "type": "string"
+          },
+          "transactionPolicyIDs": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
           },
-          "id" : {
-            "type" : "string"
+          "status": {
+            "type": "string"
           },
-          "vectors" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/AccountVector"
+          "attributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
             }
           },
-          "accessors" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/Accessor"
-            }
+          "createdAt": {
+            "type": "string"
           },
-          "relationships" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/AccountRelation"
-            }
-          },
-          "ifiID" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "ownerAccountHolderID" : {
-            "type" : "string"
-          },
-          "accountProviderID" : {
-            "type" : "string"
-          },
-          "cardID" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "name" : {
-            "type" : "string"
-          },
-          "productFamilyID" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "productID" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "programIDs" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
-            }
-          },
-          "ledgerID" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "status" : {
-            "type" : "string"
-          },
-          "tags" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/Tag"
-            }
-          },
-          "attributes" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
-            }
-          },
-          "createdAt" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "updatedAt" : {
-            "type" : "string",
-            "format" : "date-time"
+          "updatedAt": {
+            "type": "string"
           }
         }
       },
-      "AccountAccessorResponse" : {
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "string"
-          },
-          "ifiID" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "accountHolderID" : {
-            "type" : "string"
-          },
-          "accountID" : {
-            "type" : "string"
-          },
-          "transactionPolicyIDs" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
+      "AccountRelation": {
+        "type": "object",
+        "properties": {
+          "headers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
             }
           },
-          "status" : {
-            "type" : "string"
+          "id": {
+            "type": "string"
           },
-          "attributes" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
+          "ifiID": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "accountID": {
+            "type": "string"
+          },
+          "relatedAccountID": {
+            "type": "string"
+          },
+          "relationshipType": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "attributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
             }
           },
-          "createdAt" : {
-            "type" : "string"
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
           },
-          "updatedAt" : {
-            "type" : "string"
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       },
-      "AccountRelation" : {
-        "type" : "object",
-        "properties" : {
-          "headers" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
+      "AccountRelationResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "ifiID": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "accountID": {
+            "type": "string"
+          },
+          "relatedAccountID": {
+            "type": "string"
+          },
+          "relationshipType": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "attributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
             }
           },
-          "id" : {
-            "type" : "string"
+          "createdAt": {
+            "type": "string"
           },
-          "ifiID" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "accountID" : {
-            "type" : "string"
-          },
-          "relatedAccountID" : {
-            "type" : "string"
-          },
-          "relationshipType" : {
-            "type" : "string"
-          },
-          "status" : {
-            "type" : "string"
-          },
-          "attributes" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
-            }
-          },
-          "createdAt" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "updatedAt" : {
-            "type" : "string",
-            "format" : "date-time"
+          "updatedAt": {
+            "type": "string"
           }
         }
       },
-      "AccountRelationResponse" : {
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "string"
-          },
-          "ifiID" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "accountID" : {
-            "type" : "string"
-          },
-          "relatedAccountID" : {
-            "type" : "string"
-          },
-          "relationshipType" : {
-            "type" : "string"
-          },
-          "status" : {
-            "type" : "string"
-          },
-          "attributes" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
+      "AccountVector": {
+        "type": "object",
+        "properties": {
+          "headers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
             }
           },
-          "createdAt" : {
-            "type" : "string"
+          "id": {
+            "type": "string"
           },
-          "updatedAt" : {
-            "type" : "string"
-          }
-        }
-      },
-      "AccountVector" : {
-        "type" : "object",
-        "properties" : {
-          "headers" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
+          "ifiID": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "accountID": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "attributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
             }
           },
-          "id" : {
-            "type" : "string"
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
           },
-          "ifiID" : {
-            "type" : "integer",
-            "format" : "int64"
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
           },
-          "accountID" : {
-            "type" : "string"
-          },
-          "value" : {
-            "type" : "string"
-          },
-          "type" : {
-            "type" : "string"
-          },
-          "status" : {
-            "type" : "string"
-          },
-          "attributes" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
-            }
-          },
-          "createdAt" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "updatedAt" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "tags" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/Tag"
-            }
-          }
-        }
-      },
-      "AccountVectorResponse" : {
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "string"
-          },
-          "ifiID" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "accountID" : {
-            "type" : "string"
-          },
-          "value" : {
-            "type" : "string"
-          },
-          "type" : {
-            "type" : "string"
-          },
-          "status" : {
-            "type" : "string"
-          },
-          "attributes" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
-            }
-          },
-          "createdAt" : {
-            "type" : "string"
-          },
-          "updatedAt" : {
-            "type" : "string"
-          }
-        }
-      },
-      "GetAccountBalanceResponse" : {
-        "type" : "object",
-        "properties" : {
-          "headers" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
-            }
-          },
-          "balance" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "currency" : {
-            "type" : "string"
-          },
-          "lastTransactionID" : {
-            "type" : "string"
-          },
-          "accountingType" : {
-            "type" : "string",
-            "enum" : [ "ASSET", "LIABILITY", "INCOME", "EXPENSE", "EQUITY" ]
-          },
-          "attributes" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
+          "tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Tag"
             }
           }
         }
       },
-      "GetAccountResponse" : {
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "string"
+      "AccountVectorResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
           },
-          "vectors" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/AccountVectorResponse"
+          "ifiID": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "accountID": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "attributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
             }
           },
-          "accessors" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/AccountAccessorResponse"
-            }
+          "createdAt": {
+            "type": "string"
           },
-          "relationships" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/AccountRelationResponse"
-            }
-          },
-          "ifiID" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "ownerAccountHolderID" : {
-            "type" : "string"
-          },
-          "name" : {
-            "type" : "string"
-          },
-          "productFamilyID" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "productID" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "programIDs" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
-            }
-          },
-          "status" : {
-            "type" : "string"
-          },
-          "tags" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/Tag"
-            }
-          },
-          "attributes" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
-            }
-          },
-          "createdAt" : {
-            "type" : "string"
-          },
-          "updatedAt" : {
-            "type" : "string"
+          "updatedAt": {
+            "type": "string"
           }
         }
       },
-      "Tag" : {
-        "type" : "object",
-        "properties" : {
-          "type" : {
-            "type" : "string"
+      "GetAccountBalanceResponse": {
+        "type": "object",
+        "properties": {
+          "headers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
           },
-          "value" : {
-            "type" : "string"
+          "balance": {
+            "type": "integer",
+            "format": "int64"
           },
-          "attributes" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
+          "currency": {
+            "type": "string"
+          },
+          "lastTransactionID": {
+            "type": "string"
+          },
+          "accountingType": {
+            "type": "string",
+            "enum": [
+              "ASSET",
+              "LIABILITY",
+              "INCOME",
+              "EXPENSE",
+              "EQUITY"
+            ]
+          },
+          "attributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "GetAccountResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "vectors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AccountVectorResponse"
+            }
+          },
+          "accessors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AccountAccessorResponse"
+            }
+          },
+          "relationships": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AccountRelationResponse"
+            }
+          },
+          "ifiID": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "ownerAccountHolderID": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "productFamilyID": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "productID": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "programIDs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "status": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Tag"
+            }
+          },
+          "attributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        }
+      },
+      "Tag": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "attributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
             }
           }
         }

@@ -1,50 +1,57 @@
 {
-  "openapi" : "3.0.1",
-  "info" : {
-    "title" : "API Reference",
-    "version" : "v1"
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Form Factors",
+    "version": "v1"
   },
-  "tags" : [ {
-    "name" : "Form Factor"
-  } ],
-  "paths" : {
-    "/api/v1/ifi/{ifiID}/resources/{resourceID}/form_factors" : {
-      "post" : {
-        "tags" : [ "Form Factor" ],
-        "description" : "Add (already provisioned) form factor to an existing resource",
-        "operationId" : "insertFormFactor",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
+  "tags": [
+    {
+      "name": "Form Factor"
+    }
+  ],
+  "paths": {
+    "/api/v1/ifi/{ifiID}/resources/{resourceID}/form_factors": {
+      "post": {
+        "tags": [
+          "Form Factor"
+        ],
+        "description": "Add (already provisioned) form factor to an existing resource",
+        "operationId": "insertFormFactor",
+        "parameters": [
+          {
+            "name": "ifiID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resourceID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
-        }, {
-          "name" : "resourceID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "*/*" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/Builder"
+        ],
+        "requestBody": {
+          "content": {
+            "*/*": {
+              "schema": {
+                "$ref": "#/components/schemas/Builder"
               }
             }
           },
-          "required" : false
+          "required": false
         },
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/InsertFormFactorResponse"
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/InsertFormFactorResponse"
                 }
               }
             }
@@ -52,40 +59,46 @@
         }
       }
     },
-    "/api/v1/ifi/{ifiID}/resources/{resourceID}/form_factors/{formFactorID}" : {
-      "get" : {
-        "tags" : [ "Form Factor" ],
-        "description" : "Get form factor details by ID",
-        "operationId" : "getFormFactor",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
+    "/api/v1/ifi/{ifiID}/resources/{resourceID}/form_factors/{formFactorID}": {
+      "get": {
+        "tags": [
+          "Form Factor"
+        ],
+        "description": "Get form factor details by ID",
+        "operationId": "getFormFactor",
+        "parameters": [
+          {
+            "name": "ifiID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resourceID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "formFactorID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
-        }, {
-          "name" : "resourceID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "formFactorID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/FormFactor"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/FormFactor"
                 }
               }
             }
@@ -93,50 +106,56 @@
         }
       }
     },
-    "/api/v1/ifi/{ifiID}/resources/{resourceID}/form_factors/{formfactorID}" : {
-      "patch" : {
-        "tags" : [ "Form Factor" ],
-        "description" : "Change the resource linked form factor status",
-        "operationId" : "updateResourceLinkedFormFactor",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
+    "/api/v1/ifi/{ifiID}/resources/{resourceID}/form_factors/{formfactorID}": {
+      "patch": {
+        "tags": [
+          "Form Factor"
+        ],
+        "description": "Change the resource linked form factor status",
+        "operationId": "updateResourceLinkedFormFactor",
+        "parameters": [
+          {
+            "name": "ifiID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resourceID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "formfactorID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
-        }, {
-          "name" : "resourceID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "formfactorID",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "*/*" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/Builder"
+        ],
+        "requestBody": {
+          "content": {
+            "*/*": {
+              "schema": {
+                "$ref": "#/components/schemas/Builder"
               }
             }
           },
-          "required" : false
+          "required": false
         },
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/FormFactor"
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/FormFactor"
                 }
               }
             }
@@ -145,153 +164,167 @@
       }
     }
   },
-  "components" : {
-    "schemas" : {
-      "Builder" : {
-        "type" : "object"
+  "components": {
+    "schemas": {
+      "Builder": {
+        "type": "object"
       },
-      "FormFactor" : {
-        "type" : "object",
-        "properties" : {
-          "headers" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
+      "FormFactor": {
+        "type": "object",
+        "properties": {
+          "headers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
             }
           },
-          "id" : {
-            "type" : "string"
+          "id": {
+            "type": "string"
           },
-          "ifi" : {
-            "type" : "integer",
-            "format" : "int64"
+          "ifi": {
+            "type": "integer",
+            "format": "int64"
           },
-          "formFactorProductID" : {
-            "type" : "string"
+          "formFactorProductID": {
+            "type": "string"
           },
-          "formFactorID" : {
-            "type" : "string"
+          "formFactorID": {
+            "type": "string"
           },
-          "identityID" : {
-            "type" : "string"
+          "identityID": {
+            "type": "string"
           },
-          "targetURI" : {
-            "type" : "string"
+          "targetURI": {
+            "type": "string"
           },
-          "tags" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
           },
-          "attributes" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "object",
-              "properties" : { }
+          "attributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {}
             }
           },
-          "policies" : {
-            "$ref" : "#/components/schemas/Policies"
+          "policies": {
+            "$ref": "#/components/schemas/Policies"
           },
-          "status" : {
-            "type" : "string",
-            "enum" : [ "ACTIVE", "INACTIVE", "DELETED" ]
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "INACTIVE",
+              "DELETED"
+            ]
           },
-          "reason" : {
-            "$ref" : "#/components/schemas/StatusReason"
+          "reason": {
+            "$ref": "#/components/schemas/StatusReason"
           },
-          "createdAt" : {
-            "type" : "string",
-            "format" : "date-time"
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
           },
-          "modifiedAt" : {
-            "type" : "string",
-            "format" : "date-time"
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       },
-      "InsertFormFactorResponse" : {
-        "type" : "object",
-        "properties" : {
-          "headers" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
+      "InsertFormFactorResponse": {
+        "type": "object",
+        "properties": {
+          "headers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
             }
           },
-          "id" : {
-            "type" : "string"
+          "id": {
+            "type": "string"
           },
-          "ifi" : {
-            "type" : "integer",
-            "format" : "int64"
+          "ifi": {
+            "type": "integer",
+            "format": "int64"
           },
-          "formFactorProductID" : {
-            "type" : "string"
+          "formFactorProductID": {
+            "type": "string"
           },
-          "formFactorID" : {
-            "type" : "string"
+          "formFactorID": {
+            "type": "string"
           },
-          "targetURI" : {
-            "type" : "string"
+          "targetURI": {
+            "type": "string"
           },
-          "tags" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
           },
-          "attributes" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "object",
-              "properties" : { }
+          "attributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {}
             }
           },
-          "policies" : {
-            "$ref" : "#/components/schemas/Policies"
+          "policies": {
+            "$ref": "#/components/schemas/Policies"
           },
-          "status" : {
-            "type" : "string",
-            "enum" : [ "ACTIVE", "INACTIVE", "DELETED" ]
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "INACTIVE",
+              "DELETED"
+            ]
           },
-          "createdAt" : {
-            "type" : "string",
-            "format" : "date-time"
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
           },
-          "modifiedAt" : {
-            "type" : "string",
-            "format" : "date-time"
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       },
-      "Policies" : {
-        "type" : "object",
-        "properties" : {
-          "issuancePolicies" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
+      "Policies": {
+        "type": "object",
+        "properties": {
+          "issuancePolicies": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
           },
-          "paymentPolicies" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
+          "paymentPolicies": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
           }
         }
       },
-      "StatusReason" : {
-        "type" : "object",
-        "properties" : {
-          "code" : {
-            "type" : "string",
-            "enum" : [ "LOST_OR_STOLEN", "DAMAGED", "HOTLISTED", "OFAC_BLOCKED", "OTHER" ]
+      "StatusReason": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "LOST_OR_STOLEN",
+              "DAMAGED",
+              "HOTLISTED",
+              "OFAC_BLOCKED",
+              "OTHER"
+            ]
           },
-          "description" : {
-            "type" : "string"
+          "description": {
+            "type": "string"
           }
         }
       }

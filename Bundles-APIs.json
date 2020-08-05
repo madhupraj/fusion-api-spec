@@ -1,38 +1,44 @@
 {
-  "openapi" : "3.0.1",
-  "info" : {
-    "title" : "API Reference",
-    "version" : "v1"
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Bundles",
+    "version": "v1"
   },
-  "tags" : [ {
-    "name" : "Bundles"
-  } ],
-  "paths" : {
-    "/api/v1/ifi/{ifiID}/bundles" : {
-      "get" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Get all Bundles",
-        "description" : "Get all Bundles available for an IFI. The response returns a unique identifier for each available Bundle.",
-        "operationId" : "getAllBundles",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundles are being retrieved",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
+  "tags": [
+    {
+      "name": "Bundles"
+    }
+  ],
+  "paths": {
+    "/api/v1/ifi/{ifiID}/bundles": {
+      "get": {
+        "tags": [
+          "Bundles"
+        ],
+        "summary": "Get all Bundles",
+        "description": "Get all Bundles available for an IFI. The response returns a unique identifier for each available Bundle.",
+        "operationId": "getAllBundles",
+        "parameters": [
+          {
+            "name": "ifiID",
+            "in": "path",
+            "description": "ID of the IFI (on-boarded organization) under which the bundles are being retrieved",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "type" : "array",
-                  "items" : {
-                    "$ref" : "#/components/schemas/IBundleView"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IBundleView"
                   }
                 }
               }
@@ -41,37 +47,42 @@
         }
       }
     },
-    "/api/v1/ifi/{ifiID}/bundles/{bundleID}" : {
-      "get" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Get Bundle by Bundle ID",
-        "description" : "Returns Bundle by bundleID for an IFI.",
-        "operationId" : "getBundleByID",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundles are being retrieved by bundleID",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
+    "/api/v1/ifi/{ifiID}/bundles/{bundleID}": {
+      "get": {
+        "tags": [
+          "Bundles"
+        ],
+        "summary": "Get Bundle by Bundle ID",
+        "description": "Returns Bundle by bundleID for an IFI.",
+        "operationId": "getBundleByID",
+        "parameters": [
+          {
+            "name": "ifiID",
+            "in": "path",
+            "description": "ID of the IFI (on-boarded organization) under which the bundles are being retrieved by bundleID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "bundleID",
+            "in": "path",
+            "description": "ID of the bundle whose details are being retrieved",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
-        }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle whose details are being retrieved",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/IBundleView"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/IBundleView"
                 }
               }
             }
@@ -79,102 +90,114 @@
         }
       }
     },
-    "/api/v2/ifi/{ifiID}/bundles" : {
-      "get" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Get all Bundles",
-        "description" : "Get all Bundles available for an IFI. The response returns a unique identifier for each available Bundle.",
-        "operationId" : "getAllBundles",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundles are being retrieved",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
+    "/api/v2/ifi/{ifiID}/bundles": {
+      "get": {
+        "tags": [
+          "Bundles"
+        ],
+        "summary": "Get all Bundles",
+        "description": "Get all Bundles available for an IFI. The response returns a unique identifier for each available Bundle.",
+        "operationId": "getAllBundles",
+        "parameters": [
+          {
+            "name": "ifiID",
+            "in": "path",
+            "description": "ID of the IFI (on-boarded organization) under which the bundles are being retrieved",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "description": "Page number of the request",
+            "required": true,
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Page Size of the request",
+            "required": true,
+            "schema": {
+              "maximum": 50,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "Sort by a given value",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "description": "Order of the request i.e asc or desc",
+            "schema": {
+              "type": "string"
+            }
           }
-        }, {
-          "name" : "pageNumber",
-          "in" : "query",
-          "description" : "Page number of the request",
-          "required" : true,
-          "schema" : {
-            "minimum" : 1,
-            "type" : "integer",
-            "format" : "int64"
-          }
-        }, {
-          "name" : "pageSize",
-          "in" : "query",
-          "description" : "Page Size of the request",
-          "required" : true,
-          "schema" : {
-            "maximum" : 50,
-            "minimum" : 1,
-            "type" : "integer",
-            "format" : "int64"
-          }
-        }, {
-          "name" : "sortBy",
-          "in" : "query",
-          "description" : "Sort by a given value",
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "sortOrder",
-          "in" : "query",
-          "description" : "Order of the request i.e asc or desc",
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/PagedModel"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedModel"
                 }
               }
             }
           }
         }
       },
-      "post" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Create Bundle",
-        "description" : "Creates a Bundle",
-        "operationId" : "createBundle",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being created",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
+      "post": {
+        "tags": [
+          "Bundles"
+        ],
+        "summary": "Create Bundle",
+        "description": "Creates a Bundle",
+        "operationId": "createBundle",
+        "parameters": [
+          {
+            "name": "ifiID",
+            "in": "path",
+            "description": "ID of the IFI (on-boarded organization) under which the bundle is being created",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
           }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "*/*" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/AddBundleRequest"
+        ],
+        "requestBody": {
+          "content": {
+            "*/*": {
+              "schema": {
+                "$ref": "#/components/schemas/AddBundleRequest"
               }
             }
           },
-          "required" : false
+          "required": false
         },
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/IBundleView"
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/IBundleView"
                 }
               }
             }
@@ -182,119 +205,134 @@
         }
       }
     },
-    "/api/v2/ifi/{ifiID}/bundles/{bundleID}" : {
-      "get" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Get Bundle by Bundle ID",
-        "description" : "Returns Bundle by bundleID for an IFI.",
-        "operationId" : "getBundleByID",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundles are being retrieved by bundleID",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
+    "/api/v2/ifi/{ifiID}/bundles/{bundleID}": {
+      "get": {
+        "tags": [
+          "Bundles"
+        ],
+        "summary": "Get Bundle by Bundle ID",
+        "description": "Returns Bundle by bundleID for an IFI.",
+        "operationId": "getBundleByID",
+        "parameters": [
+          {
+            "name": "ifiID",
+            "in": "path",
+            "description": "ID of the IFI (on-boarded organization) under which the bundles are being retrieved by bundleID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "bundleID",
+            "in": "path",
+            "description": "ID of the bundle whose details are being retrieved",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
-        }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle whose details are being retrieved",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/IBundleView"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/IBundleView"
                 }
               }
             }
           }
         }
       },
-      "put" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Update Bundle",
-        "description" : "Update Bundle details",
-        "operationId" : "updateBundle",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being updated",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
+      "put": {
+        "tags": [
+          "Bundles"
+        ],
+        "summary": "Update Bundle",
+        "description": "Update Bundle details",
+        "operationId": "updateBundle",
+        "parameters": [
+          {
+            "name": "ifiID",
+            "in": "path",
+            "description": "ID of the IFI (on-boarded organization) under which the bundle is being updated",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "bundleID",
+            "in": "path",
+            "description": "ID of the bundle whose details are being updated",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
-        }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle whose details are being updated",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "*/*" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/UpdateBundleRequest"
+        ],
+        "requestBody": {
+          "content": {
+            "*/*": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBundleRequest"
               }
             }
           },
-          "required" : false
+          "required": false
         },
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/IBundleView"
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/IBundleView"
                 }
               }
             }
           }
         }
       },
-      "delete" : {
-        "tags" : [ "Bundles" ],
-        "summary" : "Delete Bundle",
-        "description" : "Delete a Bundle",
-        "operationId" : "deleteBundle",
-        "parameters" : [ {
-          "name" : "ifiID",
-          "in" : "path",
-          "description" : "ID of the IFI (on-boarded organization) under which the bundle is being deleted",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
+      "delete": {
+        "tags": [
+          "Bundles"
+        ],
+        "summary": "Delete Bundle",
+        "description": "Delete a Bundle",
+        "operationId": "deleteBundle",
+        "parameters": [
+          {
+            "name": "ifiID",
+            "in": "path",
+            "description": "ID of the IFI (on-boarded organization) under which the bundle is being deleted",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "bundleID",
+            "in": "path",
+            "description": "ID of the bundle which is being deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
-        }, {
-          "name" : "bundleID",
-          "in" : "path",
-          "description" : "ID of the bundle which is being deleted",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/IBundleView"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/IBundleView"
                 }
               }
             }
@@ -303,158 +341,160 @@
       }
     }
   },
-  "components" : {
-    "schemas" : {
-      "AddBundleRequest" : {
-        "required" : [ "productMappingRequest" ],
-        "type" : "object",
-        "properties" : {
-          "name" : {
-            "type" : "string",
-            "description" : "The name which would be assigned to the bundle",
-            "example" : "Savings Bundle"
+  "components": {
+    "schemas": {
+      "AddBundleRequest": {
+        "required": [
+          "productMappingRequest"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name which would be assigned to the bundle",
+            "example": "Savings Bundle"
           },
-          "shortCode" : {
-            "type" : "string",
-            "description" : "The short code to identify the bundle",
-            "example" : "SVNG"
+          "shortCode": {
+            "type": "string",
+            "description": "The short code to identify the bundle",
+            "example": "SVNG"
           },
-          "picURL" : {
-            "type" : "string",
-            "description" : "The URL to get the bundle's display pic"
+          "picURL": {
+            "type": "string",
+            "description": "The URL to get the bundle's display pic"
           },
-          "description" : {
-            "type" : "string",
-            "description" : "The detailed description of the bundle",
-            "example" : "Bundle related to savings accounts. Consists of a savings account product and a related debit card"
+          "description": {
+            "type": "string",
+            "description": "The detailed description of the bundle",
+            "example": "Bundle related to savings accounts. Consists of a savings account product and a related debit card"
           },
-          "productMappingRequest" : {
-            "type" : "array",
-            "description" : "The mapping of account products to payment products",
-            "items" : {
-              "$ref" : "#/components/schemas/ProductMappingRequest"
+          "productMappingRequest": {
+            "type": "array",
+            "description": "The mapping of account products to payment products",
+            "items": {
+              "$ref": "#/components/schemas/ProductMappingRequest"
             }
           },
-          "attributes" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "object",
-              "properties" : { }
+          "attributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {}
             },
-            "description" : "Any additional information which is specific to the bundle"
+            "description": "Any additional information which is specific to the bundle"
           },
-          "headers" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
+          "headers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
             }
           }
         }
       },
-      "IBundleView" : {
-        "type" : "object"
+      "IBundleView": {
+        "type": "object"
       },
-      "PageMetadata" : {
-        "type" : "object",
-        "properties" : {
-          "size" : {
-            "type" : "integer",
-            "format" : "int64"
+      "PageMetadata": {
+        "type": "object",
+        "properties": {
+          "size": {
+            "type": "integer",
+            "format": "int64"
           },
-          "totalElements" : {
-            "type" : "integer",
-            "format" : "int64"
+          "totalElements": {
+            "type": "integer",
+            "format": "int64"
           },
-          "totalPages" : {
-            "type" : "integer",
-            "format" : "int64"
+          "totalPages": {
+            "type": "integer",
+            "format": "int64"
           },
-          "number" : {
-            "type" : "integer",
-            "format" : "int64"
+          "number": {
+            "type": "integer",
+            "format": "int64"
           }
         }
       },
-      "PagedModel" : {
-        "type" : "object",
-        "properties" : {
-          "content" : {
-            "type" : "array",
-            "items" : {
-              "type" : "object",
-              "properties" : { }
+      "PagedModel": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {}
             }
           },
-          "metadata" : {
-            "$ref" : "#/components/schemas/PageMetadata"
+          "metadata": {
+            "$ref": "#/components/schemas/PageMetadata"
           }
         }
       },
-      "ProductInfoRequest" : {
-        "type" : "object",
-        "properties" : {
-          "productID" : {
-            "type" : "string",
-            "description" : "The UUID of the account product which will be a part of the bundle",
-            "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+      "ProductInfoRequest": {
+        "type": "object",
+        "properties": {
+          "productID": {
+            "type": "string",
+            "description": "The UUID of the account product which will be a part of the bundle",
+            "example": "aa267641-f475-4acb-859e-bb9c60d3e9db"
           },
-          "productFamilyID" : {
-            "type" : "string",
-            "description" : "The UUID of the product's family which will be a part of the bundle",
-            "example" : "aa267641-f475-4acb-859e-bb9c60d3e9db"
+          "productFamilyID": {
+            "type": "string",
+            "description": "The UUID of the product's family which will be a part of the bundle",
+            "example": "aa267641-f475-4acb-859e-bb9c60d3e9db"
           },
-          "programIDs" : {
-            "type" : "array",
-            "description" : "The UUIDs of the programs which will be associated to the account product at the time of issuance",
-            "items" : {
-              "type" : "string"
+          "programIDs": {
+            "type": "array",
+            "description": "The UUIDs of the programs which will be associated to the account product at the time of issuance",
+            "items": {
+              "type": "string"
             }
           },
-          "attributes" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "object",
-              "properties" : { }
+          "attributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {}
             },
-            "description" : "Any additional information which is specific to the product info"
+            "description": "Any additional information which is specific to the product info"
           }
         }
       },
-      "ProductMappingRequest" : {
-        "type" : "object",
-        "properties" : {
-          "accountProductInfoRequest" : {
-            "$ref" : "#/components/schemas/ProductInfoRequest"
+      "ProductMappingRequest": {
+        "type": "object",
+        "properties": {
+          "accountProductInfoRequest": {
+            "$ref": "#/components/schemas/ProductInfoRequest"
           },
-          "paymentProductInfoRequest" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/ProductInfoRequest"
+          "paymentProductInfoRequest": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductInfoRequest"
             }
           }
         }
       },
-      "UpdateBundleRequest" : {
-        "type" : "object",
-        "properties" : {
-          "name" : {
-            "type" : "string",
-            "description" : "The name which would be assigned to the bundle",
-            "example" : "Savings Bundle"
+      "UpdateBundleRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name which would be assigned to the bundle",
+            "example": "Savings Bundle"
           },
-          "picURL" : {
-            "type" : "string",
-            "description" : "The URL to get the bundle's display pic"
+          "picURL": {
+            "type": "string",
+            "description": "The URL to get the bundle's display pic"
           },
-          "description" : {
-            "type" : "string",
-            "description" : "The detailed description of the bundle",
-            "example" : "Bundle related to savings accounts. Consists of a savings account product and a related debit card"
+          "description": {
+            "type": "string",
+            "description": "The detailed description of the bundle",
+            "example": "Bundle related to savings accounts. Consists of a savings account product and a related debit card"
           },
-          "headers" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
+          "headers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
             }
           }
         }
