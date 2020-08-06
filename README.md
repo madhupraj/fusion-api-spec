@@ -1,1 +1,2 @@
 # fusion-api-spec
+# sample
