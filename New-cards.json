@@ -1,0 +1,4082 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Fusion Card API Reference Sample",
+    "version": "1.0.0",
+    "description": ""
+  },
+  "servers": [
+    {
+      "url": "https://fusion.preprod.zeta.in"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Card order"
+    },
+    {
+      "name": "Card lifecycle"
+    }
+  ],
+  "paths": {
+    "/api/v1/ifi/{ifiID}/cards/{cardID}/dispatch": {
+      "post": {
+        "operationId": "dispatchCardEmbossingRequest",
+        "summary": "Generate embossing file",
+        "description": "Ggenerate an embossing file based on the card SKU which contains details like cardholder's name, CVV, expiration date, and so on. This endpoint only applies to those orders that just have a single card ID to process in that specific order.</br> To obtain the card ID, use `orders/{orderID}/cards/list` endpoint. Fetch all the cards in the order and note the `cardID` of the card for which the embossing file is to be generated.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/dispatchCardEmbossingRequest"
+                  },
+                  {
+                    "example": {
+                      "plasticCode": "WHITEC",
+                      "thirdLineEmbossing": "Rohit",
+                      "fourthLineEmbossing": "Tandon",
+                      "deliveryAddress": {
+                        "name": "Atash Shaikh",
+                        "addressLine1": "Directiplex",
+                        "addressLine2": "Near Andheri Subway",
+                        "addressLine3": "Old Nagardas Road",
+                        "addressLine4": "Andheri East",
+                        "city": "Mumbai",
+                        "state": "Maharashtra",
+                        "country": "India",
+                        "postalCode": "400069",
+                        "contactNumber": 919090909090
+                      },
+                      "vendorAttributes": {
+                        "shipping-partner.name": "BLUEDART",
+                        "shipping-partner.trackingNumber": "098137643242412312414",
+                        "welcome-kit.fullName": "Rohit Tondon",
+                        "welcome-kit.qrCode": "c48tn73793cfh93cg24c872t478r4ft3ubdcy8g3cr",
+                        "welcome-kit.templateID": "template-id"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "tags": [
+          "Card order"
+        ],
+        "parameters": [
+          {
+            "name": "ifiID",
+            "description": "Unique identifier of the IFI.",
+            "example": "140827",
+            "schema": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 50
+            },
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "cardID",
+            "description": "Unique identifier of the card for which the embossing file is to be generated.",
+            "example": "f0c1bb24-d800-4024-bd34-67a61aaab588",
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DispatchCardResponse"
+                }
+              }
+            },
+            "description": "Request processed successfully"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableEntity"
+                }
+              }
+            },
+            "description": "Card cannot be dispatched"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            },
+            "description": "Error occurred. Please try again after some time."
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/cards/orders/{orderID}": {
+      "get": {
+        "summary": "Get card order details by Order ID",
+        "description": "Get details like quantity, card SKU, and expiry for a specific order.",
+        "tags": [
+          "Card order"
+        ],
+        "parameters": [
+          {
+            "name": "ifiID",
+            "description": "Unique identifier of the IFI",
+            "example": "140827",
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "orderID",
+            "description": "Unique identifier of the card order for which details are being fetched.",
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderRetreive"
+                }
+              }
+            },
+            "description": "Returns order details"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            },
+            "description": "Order does not exist"
+          }
+        }
+      }
+    },
+    "/api/v1/ifi/{ifiID}/resources/{resourceID}/form_factors/{formFactorID}": {
+      "patch": {
+        "operationId": "updateFormFactor",
+        "summary": "Deactivate/Activate/Delete card by Form Factor ID",
+        "description": " Use the endpoint to activate, deactivate, or delete a card by changing its status. Please note that if you are deleting the card, specifying the reason(request body parameter) is required.</br></br>To get the Resource ID and Form Factor ID for the endpoint, call the `/orders/{orderID}/cards/list` endpoint. The response returns an array of all the cards in the order with each card's ID and Resource ID. `cardID` provides the value for Form Factor ID, and note the Resource ID from `uri:resource://{resourceID}` parameter.",
+        "parameters": [
+          {
+            "name": "resourceID",
+            "in": "path",
+            "description": "Unique identifier of the Resource with which the Card is associated with.",
+            "required": true,
+            "example": "36bbdac7-8a11-4d97-8e83-fcac84d7b081",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "formFactorID",
+            "in": "path",
+            "description": "Unique identifier of the Card.",
+            "required": true,
+            "example": "c7845612-c10d-4524-beb4-10b834655c47",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ifiID",
+            "in": "path",
+            "description": "Unique identifier of the IFI.",
+            "required": true,
+            "example": "140827",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Specify the following parameters in the request body to change the status of the card. Please note that if you are deleting the card, specifying the reason (code, description) is required.<ul><li>`status`: Required. Status of the card.<br/>Supported values — `ACTIVE` to activate the card; `INACTIVE` to deactivate the card; `DELETED` to delete the card.</li><li>`code`: Code of the reason for changing the status of the card. Optional for activating/deactivating the card. Required for deleting the card.<br/>Supported values: `LOST_OR_STOLEN`, `DAMAGED`, `HOTLISTED`, `OFAC_BLOCKED`, `OTHER` </li><li>`description`: Human-readable description of the reason for changing the status of the card. Length must be less than 200 characters. Optional for activating/deactivating the card. Required for deleting the card.</li></ul>",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/updateFormFactorRequest"
+              },
+              "examples": {
+                "Deactivate": {
+                  "value": {
+                    "status": "INACTIVE",
+                    "reason": {
+                      "code": "OTHER",
+                      "description": "temporarily deactivated due to suspicious activity "
+                    }
+                  }
+                },
+                "Activate": {
+                  "value": {
+                    "status": "ACTIVE",
+                    "reason": {
+                      "code": "OTHER",
+                      "description": "card activated"
+                    }
+                  }
+                },
+                "Cancel": {
+                  "value": {
+                    "status": "DELETED",
+                    "reason": {
+                      "code": "DAMAGED",
+                      "description": "Card is damaged and needs to be replaced"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "tags": [
+          "Card lifecycle"
+        ],
+        "responses": {
+          "200": {
+            "description": "Card successfully deactivated"
+          },
+          "201": {
+            "description": "Card successfully canceled"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            },
+            "description": "Bad Request."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            },
+            "description": "Unexpected Error occoured.Please try agian after some time."
+          }
+        }
+      }
+    },
+    "/tenants/{tenantID}/payment/events/{eventName}/subscribe": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "callbackUrl"
+                ],
+                "type": "object",
+                "properties": {
+                  "callbackUrl": {
+                    "format": "uri",
+                    "type": "string",
+                    "example": "http://customer-prod-api.in/callback"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "callbacks": {
+          "PAYMENT_REQUESTED": {
+            "http://customer-prod-api.in/callback": {
+              "post": {
+                "requestBody": {
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/PAYMENT_REQUESTED"
+                      }
+                    }
+                  },
+                  "required": true
+                },
+                "responses": {
+                  "204": {
+                    "description": "Data accepted"
+                  }
+                },
+                "operationId": "PAYMENT_REQUESTED",
+                "description": "The PAYMENT_REQUESTED event triggers when a payment request is received by the payment engine. The engine determines the Account Holder, Wallet or Accounts to be used in the payment."
+              }
+            }
+          },
+          "PAYMENT_AUTHORIZATION_REQUESTED": {
+            "http://customer-prod-api.in/callback": {
+              "post": {
+                "requestBody": {
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/PAYMENT_AUTHORIZATION_REQUESTED"
+                      }
+                    }
+                  },
+                  "required": true
+                },
+                "responses": {
+                  "204": {
+                    "description": "Data accepted"
+                  }
+                },
+                "operationId": "PAYMENT_AUTHORIZATION_REQUESTED",
+                "description": "THE PAYMENT_AUTHORIZATION_REQUESTED triggers when a transaction plan is created for the payment and the plan is sent as a request to the payment authorizer to authorize the request."
+              }
+            }
+          },
+          "PAYMENT_AUTHORIZATION_RECEIVED": {
+            "http://customer-prod-api.in/callback": {
+              "post": {
+                "requestBody": {
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/PAYMENT_AUTHORIZATION_RECEIVED"
+                      }
+                    }
+                  },
+                  "required": true
+                },
+                "responses": {
+                  "204": {
+                    "description": "Data accepted"
+                  }
+                },
+                "operationId": "PAYMENT_AUTHORIZATION_RECEIVED",
+                "description": "The PAYMENT_AUTHORIZATION_RECEIVED event triggers when the transaction plan for the payement is successfully authorized by the payment authorizer."
+              }
+            }
+          },
+          "PAYMENT_EFFECTED": {
+            "http://customer-prod-api.in/callback": {
+              "post": {
+                "requestBody": {
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/PAYMENT_EFFECTED"
+                      }
+                    }
+                  },
+                  "required": true
+                },
+                "responses": {
+                  "204": {
+                    "description": "Data accepted"
+                  }
+                },
+                "operationId": "PAYMENT_EFFECTED",
+                "description": "The PAYMENT_EFFECTED event triggers when the host has successfully posted the entries as per the transaction plan."
+              }
+            }
+          },
+          "PAYMENT_CAPTURED": {
+            "http://customer-prod-api.in/callback": {
+              "post": {
+                "requestBody": {
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/PAYMENT_CAPTURED"
+                      }
+                    }
+                  },
+                  "required": true
+                },
+                "responses": {
+                  "204": {
+                    "description": "Data accepted"
+                  }
+                },
+                "operationId": "PAYMENT_CAPTURED",
+                "description": "The PAYMENT_CAPTURED event triggers when the response to the payment request is acknowledged by the requesting entity."
+              }
+            }
+          },
+          "PAYMENT_REVERSED": {
+            "http://customer-prod-api.in/callback": {
+              "post": {
+                "requestBody": {
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/PAYMENT_REVERSED"
+                      }
+                    }
+                  },
+                  "required": true
+                },
+                "responses": {
+                  "204": {
+                    "description": "Data accepted"
+                  }
+                },
+                "operationId": "PAYMENT_REVERSED",
+                "description": "The PAYMENT_REVERSED event triggers when the reversal payment request is CAPTURED."
+              }
+            }
+          },
+          "PAYMENT_REQUEST_DECLINED": {
+            "http://customer-prod-api.in/callback": {
+              "post": {
+                "requestBody": {
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/PAYMENT_REQUEST_DECLINED"
+                      }
+                    }
+                  },
+                  "required": true
+                },
+                "responses": {
+                  "204": {
+                    "description": "Data accepted"
+                  }
+                },
+                "operationId": "PAYMENT_REQUEST_DECLINED",
+                "description": "The PAYMENT_REQUEST_DECLINED event triggers when the engine declines the payment and returns a failure response for an invalid payment request."
+              }
+            }
+          }
+        },
+        "tags": [
+          "Events"
+        ],
+        "parameters": [
+          {
+            "name": "tenantID",
+            "description": "Tenant identifier",
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "eventName",
+            "description": "Select the name of the event that you want to subscribe to and receive the event payload.",
+            "schema": {
+              "$ref": "#/components/schemas/Events"
+            },
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Webhook created"
+          }
+        },
+        "operationId": "paymentTransactionsWebhookSubscribe",
+        "description": "This API registers a webhook to receive transactional events in the payment flow. Additionally, refer to the Callbacks tab to get a list of all events triggered during a payment."
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Events": {
+        "enum": [
+          "PAYMENT_REQUESTED",
+          "PAYMENT_AUTHORIZATION_REQUESTED",
+          "PAYMENT_AUTHORIZATION_RECEIVED",
+          "PAYMENT_EFFECTED",
+          "PAYMENT_CAPTURED",
+          "PAYMENT_REVERSED",
+          "PAYMENT_REQUEST_DECLINED"
+        ],
+        "type": "string"
+      },
+      "PAYMENT_REQUESTED": {
+        "title": "PAYMENT_REQUESTED",
+        "description": "",
+        "type": "object",
+        "properties": {
+          "topic": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "eventID": {
+            "type": "string"
+          },
+          "source": {
+            "type": "object",
+            "properties": {
+              "uri": {
+                "type": "string"
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "state": {
+                "type": "string"
+              }
+            }
+          },
+          "origin": {
+            "type": "object",
+            "properties": {
+              "instance": {
+                "type": "string"
+              },
+              "time": {
+                "format": "int32",
+                "type": "integer"
+              },
+              "flowID": {
+                "type": "string"
+              }
+            }
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "paymentID": {
+                "format": "int32",
+                "type": "integer"
+              },
+              "currentState": {
+                "type": "string"
+              },
+              "stateTransitions": {
+                "type": "object",
+                "properties": {
+                  "PAYMENT_REQUESTED": {
+                    "type": "object",
+                    "properties": {
+                      "time": {
+                        "format": "int32",
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              },
+              "payerInfo": {
+                "type": "object",
+                "properties": {
+                  "resourceID": {
+                    "type": "string"
+                  },
+                  "formFactorURI": {
+                    "type": "string"
+                  },
+                  "targetURI": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                }
+              },
+              "payerResource": {
+                "type": "object",
+                "properties": {
+                  "vectors": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "attributes": {
+                    "type": "object"
+                  },
+                  "resourceId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "payeeInfo": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "type": "string"
+                  }
+                }
+              },
+              "receipt": {
+                "type": "array",
+                "items": {}
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "super-card.trans-id": {
+                    "type": "string"
+                  },
+                  "super-card.rrn": {
+                    "type": "string"
+                  },
+                  "super-card.ifi": {
+                    "type": "string"
+                  },
+                  "super-card.card-6x4": {
+                    "type": "string"
+                  },
+                  "super-card.merchant-country": {
+                    "type": "string"
+                  },
+                  "journal.voucherCode": {
+                    "type": "string"
+                  },
+                  "super-card.merchant-city": {
+                    "type": "string"
+                  },
+                  "super-card.acquirer": {
+                    "type": "string"
+                  },
+                  "super-card.acs-txnId": {
+                    "type": "string"
+                  },
+                  "super-card.merchant-lat": {
+                    "type": "string"
+                  },
+                  "super-card.card-bin": {
+                    "type": "string"
+                  },
+                  "credentials.signatory": {
+                    "type": "string"
+                  },
+                  "super-card.stan": {
+                    "type": "string"
+                  },
+                  "super-card.mid": {
+                    "type": "string"
+                  },
+                  "super-card.tid": {
+                    "type": "string"
+                  },
+                  "super-card.mcc": {
+                    "type": "string"
+                  },
+                  "super-card.merchant-lon": {
+                    "type": "string"
+                  },
+                  "super-card.txn-type": {
+                    "type": "string"
+                  },
+                  "super-card.otp-enter-mode": {
+                    "type": "string"
+                  },
+                  "supercard-card.authentication-type": {
+                    "type": "string"
+                  },
+                  "super-card.merchant-name": {
+                    "type": "string"
+                  },
+                  "super-card.card-id": {
+                    "type": "string"
+                  },
+                  "super-card.ink": {
+                    "type": "string"
+                  },
+                  "super-card.init-time": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "publisher": {
+            "type": "object",
+            "properties": {
+              "appDomain": {
+                "type": "string"
+              },
+              "serviceName": {
+                "type": "string"
+              },
+              "nodeId": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "example": {
+          "topic": "_tenant_140827_RESOURCE",
+          "name": "RESOURCE_PAYMENT_CREATED",
+          "eventID": "fc529204-126e-4b37-8308-02bdd1a29b52",
+          "source": {
+            "uri": "resource://140827/0c97e84f-999d-4fdf-a53f-24cb99b11e76/870544000001",
+            "tags": [
+              "tag://VBO/ABC001",
+              "tag://VBO/ABC001"
+            ],
+            "state": "PAYMENT_REQUESTED"
+          },
+          "origin": {
+            "instance": "instance://default/payment/870544",
+            "time": 1582108024106,
+            "flowID": "4807977e-fe36-4f03-be80-3b67dfbf23a9"
+          },
+          "data": {
+            "paymentID": 870544000001,
+            "currentState": "PAYMENT_REQUESTED",
+            "stateTransitions": {
+              "PAYMENT_REQUESTED": {
+                "time": 1582108023741
+              }
+            },
+            "payerInfo": {
+              "resourceID": "0c97e84f-999d-4fdf-a53f-24cb99b11e76",
+              "formFactorURI": "card://ff936322-287f-43e4-9497-a86d94bd97a9",
+              "targetURI": "account://6b2dfb83-9276-422c-8781-07eda71fc261",
+              "type": "RESOURCE"
+            },
+            "payerResource": {
+              "vectors": [
+                "vector://USER/102172",
+                "vector://WALLET/102172"
+              ],
+              "attributes": {},
+              "resourceId": "02b15e3a-77be-41db-ab5b-fbf0d7d36ff7"
+            },
+            "payeeInfo": {
+              "type": "EXTERNAL_BUSINESS",
+              "name": "TEST MERCHANT",
+              "location": "MUMBAI"
+            },
+            "receipt": [],
+            "attributes": {
+              "super-card.trans-id": "M00001_T00001_111111_022030_486837818528_200219102702",
+              "super-card.rrn": "486837818528",
+              "super-card.ifi": "140827",
+              "super-card.card-6x4": "508645-xxxxxx-0289",
+              "super-card.merchant-country": "IN",
+              "journal.voucherCode": "RUPAY-508645_ECOM_AUTH",
+              "super-card.merchant-city": "MUMBAI",
+              "super-card.acquirer": "111111",
+              "super-card.acs-txnId": "028852720888773631103971827607",
+              "super-card.merchant-lat": "18.975",
+              "super-card.card-bin": "508645",
+              "credentials.signatory": "10276@zetauser.zeta.in/1",
+              "super-card.stan": "022030",
+              "super-card.mid": "M00001",
+              "super-card.tid": "T00001",
+              "super-card.mcc": "5411",
+              "super-card.merchant-lon": "72.825833",
+              "super-card.txn-type": "ECOM",
+              "super-card.otp-enter-mode": "manual",
+              "supercard-card.authentication-type": "DYNAMIC_PIN",
+              "super-card.merchant-name": "TEST MERCHANT",
+              "super-card.card-id": "resource://0c97e84f-999d-4fdf-a53f-24cb99b11e76_ff936322-287f-43e4-9497-a86d94bd97a9",
+              "super-card.ink": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36",
+              "super-card.init-time": "200219102702"
+            }
+          },
+          "publisher": {
+            "appDomain": "services.olympus",
+            "serviceName": "payment",
+            "nodeId": "870544"
+          }
+        }
+      },
+      "PAYMENT_AUTHORIZATION_REQUESTED": {
+        "title": "PAYMENT_AUTHORIZATION_REQUESTED",
+        "description": "",
+        "type": "object",
+        "properties": {
+          "topic": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "eventID": {
+            "type": "string"
+          },
+          "source": {
+            "type": "object",
+            "properties": {
+              "uri": {
+                "type": "string"
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "state": {
+                "type": "string"
+              }
+            }
+          },
+          "origin": {
+            "type": "object",
+            "properties": {
+              "instance": {
+                "type": "string"
+              },
+              "time": {
+                "format": "int32",
+                "type": "integer"
+              },
+              "flowID": {
+                "type": "string"
+              }
+            }
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "paymentID": {
+                "format": "int32",
+                "type": "integer"
+              },
+              "currentState": {
+                "type": "string"
+              },
+              "stateTransitions": {
+                "type": "object",
+                "properties": {
+                  "PAYMENT_AUTHORIZATION_REQUESTED": {
+                    "type": "object",
+                    "properties": {
+                      "time": {
+                        "format": "int32",
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "PAYMENT_REQUESTED": {
+                    "type": "object",
+                    "properties": {
+                      "time": {
+                        "format": "int32",
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              },
+              "payerInfo": {
+                "type": "object",
+                "properties": {
+                  "resourceID": {
+                    "type": "string"
+                  },
+                  "formFactorURI": {
+                    "type": "string"
+                  },
+                  "targetURI": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                }
+              },
+              "payerResource": {
+                "type": "object",
+                "properties": {
+                  "vectors": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "attributes": {
+                    "type": "object"
+                  },
+                  "resourceId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "payeeInfo": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "type": "string"
+                  }
+                }
+              },
+              "receipt": {
+                "type": "array",
+                "items": {}
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "super-card.trans-id": {
+                    "type": "string"
+                  },
+                  "super-card.tid": {
+                    "type": "string"
+                  },
+                  "super-card.rrn": {
+                    "type": "string"
+                  },
+                  "super-card.mcc": {
+                    "type": "string"
+                  },
+                  "super-card.ifi": {
+                    "type": "string"
+                  },
+                  "super-card.merchant-lon": {
+                    "type": "string"
+                  },
+                  "super-card.card-6x4": {
+                    "type": "string"
+                  },
+                  "super-card.merchant-country": {
+                    "type": "string"
+                  },
+                  "super-card.txn-type": {
+                    "type": "string"
+                  },
+                  "journal.voucherCode": {
+                    "type": "string"
+                  },
+                  "super-card.otp-enter-mode": {
+                    "type": "string"
+                  },
+                  "super-card.merchant-city": {
+                    "type": "string"
+                  },
+                  "super-card.acquirer": {
+                    "type": "string"
+                  },
+                  "super-card.acs-txnId": {
+                    "type": "string"
+                  },
+                  "super-card.merchant-lat": {
+                    "type": "string"
+                  },
+                  "super-card.merchant-name": {
+                    "type": "string"
+                  },
+                  "super-card.card-id": {
+                    "type": "string"
+                  },
+                  "super-card.card-bin": {
+                    "type": "string"
+                  },
+                  "super-card.stan": {
+                    "type": "string"
+                  },
+                  "super-card.ink": {
+                    "type": "string"
+                  },
+                  "super-card.mid": {
+                    "type": "string"
+                  },
+                  "super-card.init-time": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "publisher": {
+            "type": "object",
+            "properties": {
+              "appDomain": {
+                "type": "string"
+              },
+              "serviceName": {
+                "type": "string"
+              },
+              "nodeId": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "example": {
+          "topic": "_tenant_140827_RESOURCE",
+          "name": "RESOURCE_PAYMENT_UPDATED",
+          "eventID": "4991ff24-a812-4e03-8034-53deec073c79",
+          "source": {
+            "uri": "resource://140827/0c97e84f-999d-4fdf-a53f-24cb99b11e76/870544000001",
+            "tags": [
+              "tag://VBO/ABC001",
+              "tag://VBO/ABC001"
+            ],
+            "state": "PAYMENT_AUTHORIZATION_REQUESTED"
+          },
+          "origin": {
+            "instance": "instance://default/payment/870544",
+            "time": 1582108024179,
+            "flowID": "4807977e-fe36-4f03-be80-3b67dfbf23a9"
+          },
+          "data": {
+            "paymentID": 870544000001,
+            "currentState": "PAYMENT_AUTHORIZATION_REQUESTED",
+            "stateTransitions": {
+              "PAYMENT_AUTHORIZATION_REQUESTED": {
+                "time": 1582108024120
+              },
+              "PAYMENT_REQUESTED": {
+                "time": 1582108023741
+              }
+            },
+            "payerInfo": {
+              "resourceID": "0c97e84f-999d-4fdf-a53f-24cb99b11e76",
+              "formFactorURI": "card://ff936322-287f-43e4-9497-a86d94bd97a9",
+              "targetURI": "account://6b2dfb83-9276-422c-8781-07eda71fc261",
+              "type": "RESOURCE"
+            },
+            "payerResource": {
+              "vectors": [
+                "vector://USER/102172",
+                "vector://WALLET/102172"
+              ],
+              "attributes": {},
+              "resourceId": "02b15e3a-77be-41db-ab5b-fbf0d7d36ff7"
+            },
+            "payeeInfo": {
+              "type": "EXTERNAL_BUSINESS",
+              "name": "TEST MERCHANT",
+              "location": "MUMBAI"
+            },
+            "receipt": [],
+            "attributes": {
+              "super-card.trans-id": "M00001_T00001_111111_022030_486837818528_200219102702",
+              "super-card.tid": "T00001",
+              "super-card.rrn": "486837818528",
+              "super-card.mcc": "5411",
+              "super-card.ifi": "140827",
+              "super-card.merchant-lon": "72.825833",
+              "super-card.card-6x4": "508645-xxxxxx-0289",
+              "super-card.merchant-country": "IN",
+              "super-card.txn-type": "ECOM",
+              "journal.voucherCode": "RUPAY-508645_ECOM_AUTH",
+              "super-card.otp-enter-mode": "manual",
+              "super-card.merchant-city": "MUMBAI",
+              "super-card.acquirer": "111111",
+              "super-card.acs-txnId": "028852720888773631103971827607",
+              "super-card.merchant-lat": "18.975",
+              "super-card.merchant-name": "TEST MERCHANT",
+              "super-card.card-id": "resource://0c97e84f-999d-4fdf-a53f-24cb99b11e76_ff936322-287f-43e4-9497-a86d94bd97a9",
+              "super-card.card-bin": "508645",
+              "super-card.stan": "022030",
+              "super-card.ink": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36",
+              "super-card.mid": "M00001",
+              "super-card.init-time": "200219102702"
+            }
+          },
+          "publisher": {
+            "appDomain": "services.olympus",
+            "serviceName": "payment",
+            "nodeId": "870544"
+          }
+        }
+      },
+      "PAYMENT_AUTHORIZATION_RECEIVED": {
+        "title": "PAYMENT_AUTHORIZATION_RECEIVED",
+        "description": "",
+        "type": "object",
+        "properties": {
+          "topic": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "eventID": {
+            "type": "string"
+          },
+          "source": {
+            "type": "object",
+            "properties": {
+              "uri": {
+                "type": "string"
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "state": {
+                "type": "string"
+              }
+            }
+          },
+          "origin": {
+            "type": "object",
+            "properties": {
+              "instance": {
+                "type": "string"
+              },
+              "time": {
+                "format": "int32",
+                "type": "integer"
+              },
+              "flowID": {
+                "type": "string"
+              }
+            }
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "paymentID": {
+                "format": "int32",
+                "type": "integer"
+              },
+              "currentState": {
+                "type": "string"
+              },
+              "stateTransitions": {
+                "type": "object",
+                "properties": {
+                  "PAYMENT_AUTHORIZATION_RECEIVED": {
+                    "type": "object",
+                    "properties": {
+                      "time": {
+                        "format": "int32",
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "PAYMENT_AUTHORIZATION_REQUESTED": {
+                    "type": "object",
+                    "properties": {
+                      "time": {
+                        "format": "int32",
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "PAYMENT_REQUESTED": {
+                    "type": "object",
+                    "properties": {
+                      "time": {
+                        "format": "int32",
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              },
+              "payerInfo": {
+                "type": "object",
+                "properties": {
+                  "resourceID": {
+                    "type": "string"
+                  },
+                  "formFactorURI": {
+                    "type": "string"
+                  },
+                  "targetURI": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                }
+              },
+              "payerResource": {
+                "type": "object",
+                "properties": {
+                  "vectors": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "attributes": {
+                    "type": "object"
+                  },
+                  "resourceId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "payeeInfo": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "type": "string"
+                  }
+                }
+              },
+              "receipt": {
+                "type": "array",
+                "items": {}
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "super-card.trans-id": {
+                    "type": "string"
+                  },
+                  "super-card.tid": {
+                    "type": "string"
+                  },
+                  "super-card.rrn": {
+                    "type": "string"
+                  },
+                  "super-card.mcc": {
+                    "type": "string"
+                  },
+                  "super-card.ifi": {
+                    "type": "string"
+                  },
+                  "super-card.merchant-lon": {
+                    "type": "string"
+                  },
+                  "super-card.card-6x4": {
+                    "type": "string"
+                  },
+                  "super-card.merchant-country": {
+                    "type": "string"
+                  },
+                  "super-card.txn-type": {
+                    "type": "string"
+                  },
+                  "journal.voucherCode": {
+                    "type": "string"
+                  },
+                  "super-card.otp-enter-mode": {
+                    "type": "string"
+                  },
+                  "super-card.merchant-city": {
+                    "type": "string"
+                  },
+                  "super-card.acquirer": {
+                    "type": "string"
+                  },
+                  "super-card.acs-txnId": {
+                    "type": "string"
+                  },
+                  "super-card.merchant-lat": {
+                    "type": "string"
+                  },
+                  "super-card.merchant-name": {
+                    "type": "string"
+                  },
+                  "super-card.card-id": {
+                    "type": "string"
+                  },
+                  "super-card.card-bin": {
+                    "type": "string"
+                  },
+                  "super-card.stan": {
+                    "type": "string"
+                  },
+                  "super-card.ink": {
+                    "type": "string"
+                  },
+                  "super-card.mid": {
+                    "type": "string"
+                  },
+                  "super-card.init-time": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "publisher": {
+            "type": "object",
+            "properties": {
+              "appDomain": {
+                "type": "string"
+              },
+              "serviceName": {
+                "type": "string"
+              },
+              "nodeId": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "example": {
+          "topic": "_tenant_140827_RESOURCE",
+          "name": "RESOURCE_PAYMENT_UPDATED",
+          "eventID": "684e7082-b9da-4cf7-85cc-9a78f7be343f",
+          "source": {
+            "uri": "resource://140827/0c97e84f-999d-4fdf-a53f-24cb99b11e76/870544000001",
+            "tags": [
+              "tag://VBO/ABC001",
+              "tag://VBO/ABC001"
+            ],
+            "state": "PAYMENT_AUTHORIZATION_RECEIVED"
+          },
+          "origin": {
+            "instance": "instance://default/payment/870544",
+            "time": 1582108024655,
+            "flowID": "4807977e-fe36-4f03-be80-3b67dfbf23a9"
+          },
+          "data": {
+            "paymentID": 870544000001,
+            "currentState": "PAYMENT_AUTHORIZATION_RECEIVED",
+            "stateTransitions": {
+              "PAYMENT_AUTHORIZATION_RECEIVED": {
+                "time": 1582108024554
+              },
+              "PAYMENT_AUTHORIZATION_REQUESTED": {
+                "time": 1582108024120
+              },
+              "PAYMENT_REQUESTED": {
+                "time": 1582108023741
+              }
+            },
+            "payerInfo": {
+              "resourceID": "0c97e84f-999d-4fdf-a53f-24cb99b11e76",
+              "formFactorURI": "card://ff936322-287f-43e4-9497-a86d94bd97a9",
+              "targetURI": "account://6b2dfb83-9276-422c-8781-07eda71fc261",
+              "type": "RESOURCE"
+            },
+            "payerResource": {
+              "vectors": [
+                "vector://USER/102172",
+                "vector://WALLET/102172"
+              ],
+              "attributes": {},
+              "resourceId": "02b15e3a-77be-41db-ab5b-fbf0d7d36ff7"
+            },
+            "payeeInfo": {
+              "type": "EXTERNAL_BUSINESS",
+              "name": "TEST MERCHANT",
+              "location": "MUMBAI"
+            },
+            "receipt": [],
+            "attributes": {
+              "super-card.trans-id": "M00001_T00001_111111_022030_486837818528_200219102702",
+              "super-card.tid": "T00001",
+              "super-card.rrn": "486837818528",
+              "super-card.mcc": "5411",
+              "super-card.ifi": "140827",
+              "super-card.merchant-lon": "72.825833",
+              "super-card.card-6x4": "508645-xxxxxx-0289",
+              "super-card.merchant-country": "IN",
+              "super-card.txn-type": "ECOM",
+              "journal.voucherCode": "RUPAY-508645_ECOM_AUTH",
+              "super-card.otp-enter-mode": "manual",
+              "super-card.merchant-city": "MUMBAI",
+              "super-card.acquirer": "111111",
+              "super-card.acs-txnId": "028852720888773631103971827607",
+              "super-card.merchant-lat": "18.975",
+              "super-card.merchant-name": "TEST MERCHANT",
+              "super-card.card-id": "resource://0c97e84f-999d-4fdf-a53f-24cb99b11e76_ff936322-287f-43e4-9497-a86d94bd97a9",
+              "super-card.card-bin": "508645",
+              "super-card.stan": "022030",
+              "super-card.ink": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36",
+              "super-card.mid": "M00001",
+              "super-card.init-time": "200219102702"
+            }
+          },
+          "publisher": {
+            "appDomain": "services.olympus",
+            "serviceName": "payment",
+            "nodeId": "870544"
+          }
+        }
+      },
+      "PAYMENT_EFFECTED": {
+        "title": "PAYMENT_EFFECTED",
+        "description": "",
+        "type": "object",
+        "properties": {
+          "topic": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "eventID": {
+            "type": "string"
+          },
+          "source": {
+            "type": "object",
+            "properties": {
+              "uri": {
+                "type": "string"
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "state": {
+                "type": "string"
+              }
+            }
+          },
+          "origin": {
+            "type": "object",
+            "properties": {
+              "instance": {
+                "type": "string"
+              },
+              "time": {
+                "format": "int32",
+                "type": "integer"
+              },
+              "flowID": {
+                "type": "string"
+              }
+            }
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "paymentID": {
+                "format": "int32",
+                "type": "integer"
+              },
+              "currentState": {
+                "type": "string"
+              },
+              "stateTransitions": {
+                "type": "object",
+                "properties": {
+                  "PAYMENT_EFFECTED": {
+                    "type": "object",
+                    "properties": {
+                      "time": {
+                        "format": "int32",
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "PAYMENT_AUTHORIZATION_RECEIVED": {
+                    "type": "object",
+                    "properties": {
+                      "time": {
+                        "format": "int32",
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "PAYMENT_AUTHORIZATION_REQUESTED": {
+                    "type": "object",
+                    "properties": {
+                      "time": {
+                        "format": "int32",
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "PAYMENT_REQUESTED": {
+                    "type": "object",
+                    "properties": {
+                      "time": {
+                        "format": "int32",
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              },
+              "payerInfo": {
+                "type": "object",
+                "properties": {
+                  "resourceID": {
+                    "type": "string"
+                  },
+                  "formFactorURI": {
+                    "type": "string"
+                  },
+                  "targetURI": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                }
+              },
+              "payerResource": {
+                "type": "object",
+                "properties": {
+                  "vectors": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "attributes": {
+                    "type": "object"
+                  },
+                  "resourceId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "payeeInfo": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "type": "string"
+                  }
+                }
+              },
+              "receipt": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "receiptType": {
+                      "type": "string"
+                    },
+                    "paymentID": {
+                      "type": "string"
+                    },
+                    "paymentRequestID": {
+                      "type": "string"
+                    },
+                    "receiptID": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "transactionHash": {
+                      "type": "string"
+                    },
+                    "transactionCode": {
+                      "type": "string"
+                    },
+                    "paymentTo": {
+                      "type": "string"
+                    },
+                    "time": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "debits": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "postingID": {
+                            "type": "string"
+                          },
+                          "ifi": {
+                            "format": "int32",
+                            "type": "integer"
+                          },
+                          "value": {
+                            "type": "object",
+                            "properties": {
+                              "currency": {
+                                "type": "string"
+                              },
+                              "amount": {
+                                "format": "int32",
+                                "type": "integer"
+                              }
+                            }
+                          },
+                          "newBalance": {
+                            "type": "object",
+                            "properties": {
+                              "currency": {
+                                "type": "string"
+                              },
+                              "amount": {
+                                "format": "int32",
+                                "type": "integer"
+                              }
+                            }
+                          },
+                          "instrumentType": {
+                            "type": "string"
+                          },
+                          "attributes": {
+                            "type": "object"
+                          },
+                          "coupons": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "couponID": {
+                                  "type": "string"
+                                },
+                                "value": {
+                                  "type": "object",
+                                  "properties": {
+                                    "currency": {
+                                      "type": "string"
+                                    },
+                                    "amount": {
+                                      "format": "int32",
+                                      "type": "integer"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "credits": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "postingID": {
+                            "type": "string"
+                          },
+                          "ifi": {
+                            "format": "int32",
+                            "type": "integer"
+                          },
+                          "value": {
+                            "type": "object",
+                            "properties": {
+                              "currency": {
+                                "type": "string"
+                              },
+                              "amount": {
+                                "format": "int32",
+                                "type": "integer"
+                              }
+                            }
+                          },
+                          "newBalance": {
+                            "type": "object",
+                            "properties": {
+                              "currency": {
+                                "type": "string"
+                              },
+                              "amount": {
+                                "format": "int32",
+                                "type": "integer"
+                              }
+                            }
+                          },
+                          "instrumentType": {
+                            "type": "string"
+                          },
+                          "attributes": {
+                            "type": "object"
+                          },
+                          "coupons": {
+                            "type": "array",
+                            "items": {}
+                          }
+                        }
+                      }
+                    },
+                    "towards": {
+                      "type": "string"
+                    },
+                    "attributes": {
+                      "type": "object",
+                      "properties": {
+                        "super-card.trans-id": {
+                          "type": "string"
+                        },
+                        "super-card.tid": {
+                          "type": "string"
+                        },
+                        "super-card.rrn": {
+                          "type": "string"
+                        },
+                        "super-card.mcc": {
+                          "type": "string"
+                        },
+                        "payment.channelType": {
+                          "type": "string"
+                        },
+                        "super-card.ifi": {
+                          "type": "string"
+                        },
+                        "super-card.merchant-lon": {
+                          "type": "string"
+                        },
+                        "super-card.card-6x4": {
+                          "type": "string"
+                        },
+                        "super-card.merchant-country": {
+                          "type": "string"
+                        },
+                        "super-card.txn-type": {
+                          "type": "string"
+                        },
+                        "journal.voucherCode": {
+                          "type": "string"
+                        },
+                        "super-card.otp-enter-mode": {
+                          "type": "string"
+                        },
+                        "super-card.merchant-city": {
+                          "type": "string"
+                        },
+                        "super-card.acquirer": {
+                          "type": "string"
+                        },
+                        "super-card.acs-txnId": {
+                          "type": "string"
+                        },
+                        "super-card.merchant-lat": {
+                          "type": "string"
+                        },
+                        "super-card.merchant-name": {
+                          "type": "string"
+                        },
+                        "super-card.card-id": {
+                          "type": "string"
+                        },
+                        "super-card.card-bin": {
+                          "type": "string"
+                        },
+                        "super-card.stan": {
+                          "type": "string"
+                        },
+                        "super-card.ink": {
+                          "type": "string"
+                        },
+                        "super-card.mid": {
+                          "type": "string"
+                        },
+                        "super-card.init-time": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "value": {
+                      "type": "object",
+                      "properties": {
+                        "currency": {
+                          "type": "string"
+                        },
+                        "amount": {
+                          "format": "int32",
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "payerInfo": {
+                      "type": "object",
+                      "properties": {
+                        "resourceID": {
+                          "type": "string"
+                        },
+                        "formFactorURI": {
+                          "type": "string"
+                        },
+                        "targetURI": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "payeeInfo": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "location": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "attributes": {
+                "type": "object"
+              }
+            }
+          },
+          "publisher": {
+            "type": "object",
+            "properties": {
+              "appDomain": {
+                "type": "string"
+              },
+              "serviceName": {
+                "type": "string"
+              },
+              "nodeId": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "example": {
+          "topic": "_tenant_140827_RESOURCE",
+          "name": "RESOURCE_PAYMENT_UPDATED",
+          "eventID": "16dc2f80-fa4f-44e2-8a8b-32f65866bfe4",
+          "source": {
+            "uri": "resource://140827/0c97e84f-999d-4fdf-a53f-24cb99b11e76/870544000001",
+            "tags": [
+              "tag://VBO/ABC001",
+              "tag://VBO/ABC001"
+            ],
+            "state": "PAYMENT_EFFECTED"
+          },
+          "origin": {
+            "instance": "instance://default/payment/870544",
+            "time": 1582108025748,
+            "flowID": "4807977e-fe36-4f03-be80-3b67dfbf23a9"
+          },
+          "data": {
+            "paymentID": 870544000001,
+            "currentState": "PAYMENT_EFFECTED",
+            "stateTransitions": {
+              "PAYMENT_EFFECTED": {
+                "time": 1582108025692
+              },
+              "PAYMENT_AUTHORIZATION_RECEIVED": {
+                "time": 1582108024554
+              },
+              "PAYMENT_AUTHORIZATION_REQUESTED": {
+                "time": 1582108024120
+              },
+              "PAYMENT_REQUESTED": {
+                "time": 1582108023741
+              }
+            },
+            "payerInfo": {
+              "resourceID": "0c97e84f-999d-4fdf-a53f-24cb99b11e76",
+              "formFactorURI": "card://ff936322-287f-43e4-9497-a86d94bd97a9",
+              "targetURI": "account://6b2dfb83-9276-422c-8781-07eda71fc261",
+              "type": "RESOURCE"
+            },
+            "payerResource": {
+              "vectors": [
+                "vector://USER/102172",
+                "vector://WALLET/102172"
+              ],
+              "attributes": {},
+              "resourceId": "02b15e3a-77be-41db-ab5b-fbf0d7d36ff7"
+            },
+            "payeeInfo": {
+              "type": "EXTERNAL_BUSINESS",
+              "name": "TEST MERCHANT",
+              "location": "MUMBAI"
+            },
+            "receipt": [
+              {
+                "receiptType": "AUTHORIZATION",
+                "paymentID": "7ac269d3-3bdb-4c11-9fba-d993770f8881",
+                "paymentRequestID": "M00001_T00001_111111_022030_486837818528_200219102702",
+                "receiptID": 870544000001,
+                "transactionHash": "9WXGBg==",
+                "transactionCode": "402615",
+                "paymentTo": "1971050374361855296@ledger.zeta.in",
+                "time": 1582108025678,
+                "debits": [
+                  {
+                    "postingID": "556210",
+                    "ifi": 140827,
+                    "value": {
+                      "currency": "INR",
+                      "amount": 100
+                    },
+                    "newBalance": {
+                      "currency": "INR",
+                      "amount": 30564
+                    },
+                    "instrumentType": "MCC_VOUCHER_RECIPIENT",
+                    "attributes": {},
+                    "coupons": [
+                      {
+                        "couponID": "4a482f6e-fd8f-4e37-a9ab-8fffc408fc9d",
+                        "value": {
+                          "currency": "INR",
+                          "amount": 100
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "credits": [
+                  {
+                    "postingID": "267301",
+                    "ifi": 140827,
+                    "value": {
+                      "currency": "INR",
+                      "amount": 100
+                    },
+                    "newBalance": {
+                      "currency": "INR",
+                      "amount": 752507
+                    },
+                    "instrumentType": "SYSTEM",
+                    "attributes": {},
+                    "coupons": []
+                  }
+                ],
+                "towards": "Physical Super Card ECOM Purchase",
+                "attributes": {
+                  "super-card.trans-id": "M00001_T00001_111111_022030_486837818528_200219102702",
+                  "super-card.tid": "T00001",
+                  "super-card.rrn": "486837818528",
+                  "super-card.mcc": "5411",
+                  "payment.channelType": "SUPER_CARD",
+                  "super-card.ifi": "140827",
+                  "super-card.merchant-lon": "72.825833",
+                  "super-card.card-6x4": "508645-xxxxxx-0289",
+                  "super-card.merchant-country": "IN",
+                  "super-card.txn-type": "ECOM",
+                  "journal.voucherCode": "RUPAY-508645_ECOM_AUTH",
+                  "super-card.otp-enter-mode": "manual",
+                  "super-card.merchant-city": "MUMBAI",
+                  "super-card.acquirer": "111111",
+                  "super-card.acs-txnId": "028852720888773631103971827607",
+                  "super-card.merchant-lat": "18.975",
+                  "super-card.merchant-name": "TEST MERCHANT",
+                  "super-card.card-id": "resource://0c97e84f-999d-4fdf-a53f-24cb99b11e76_ff936322-287f-43e4-9497-a86d94bd97a9",
+                  "super-card.card-bin": "508645",
+                  "super-card.stan": "022030",
+                  "super-card.ink": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36",
+                  "super-card.mid": "M00001",
+                  "super-card.init-time": "200219102702"
+                },
+                "value": {
+                  "currency": "INR",
+                  "amount": 100
+                },
+                "payerInfo": {
+                  "resourceID": "0c97e84f-999d-4fdf-a53f-24cb99b11e76",
+                  "formFactorURI": "card://ff936322-287f-43e4-9497-a86d94bd97a9",
+                  "targetURI": "account://6b2dfb83-9276-422c-8781-07eda71fc261",
+                  "type": "RESOURCE"
+                },
+                "payeeInfo": {
+                  "type": "EXTERNAL_BUSINESS",
+                  "name": "TEST MERCHANT",
+                  "location": "MUMBAI"
+                }
+              }
+            ],
+            "attributes": {}
+          },
+          "publisher": {
+            "appDomain": "services.olympus",
+            "serviceName": "payment",
+            "nodeId": "870544"
+          }
+        }
+      },
+      "PAYMENT_CAPTURED": {
+        "title": "PAYMENT_CAPTURED",
+        "description": "",
+        "type": "object",
+        "properties": {
+          "topic": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "eventID": {
+            "type": "string"
+          },
+          "source": {
+            "type": "object",
+            "properties": {
+              "uri": {
+                "type": "string"
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "state": {
+                "type": "string"
+              }
+            }
+          },
+          "origin": {
+            "type": "object",
+            "properties": {
+              "instance": {
+                "type": "string"
+              },
+              "time": {
+                "format": "int32",
+                "type": "integer"
+              },
+              "flowID": {
+                "type": "string"
+              }
+            }
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "paymentID": {
+                "format": "int32",
+                "type": "integer"
+              },
+              "currentState": {
+                "type": "string"
+              },
+              "stateTransitions": {
+                "type": "object",
+                "properties": {
+                  "PAYMENT_EFFECTED": {
+                    "type": "object",
+                    "properties": {
+                      "time": {
+                        "format": "int32",
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "PAYMENT_CAPTURED": {
+                    "type": "object",
+                    "properties": {
+                      "time": {
+                        "format": "int32",
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "PAYMENT_AUTHORIZATION_RECEIVED": {
+                    "type": "object",
+                    "properties": {
+                      "time": {
+                        "format": "int32",
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "PAYMENT_AUTHORIZATION_REQUESTED": {
+                    "type": "object",
+                    "properties": {
+                      "time": {
+                        "format": "int32",
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "PAYMENT_REQUESTED": {
+                    "type": "object",
+                    "properties": {
+                      "time": {
+                        "format": "int32",
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              },
+              "payerInfo": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "targetURI": {
+                    "type": "string"
+                  },
+                  "resourceID": {
+                    "type": "string"
+                  },
+                  "formFactorURI": {
+                    "type": "string"
+                  }
+                }
+              },
+              "payerResource": {
+                "type": "object",
+                "properties": {
+                  "vectors": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "attributes": {
+                    "type": "object"
+                  },
+                  "resourceId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "payeeInfo": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "type": "string"
+                  }
+                }
+              },
+              "receipt": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "receiptType": {
+                      "type": "string"
+                    },
+                    "paymentID": {
+                      "type": "string"
+                    },
+                    "paymentRequestID": {
+                      "type": "string"
+                    },
+                    "receiptID": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "transactionHash": {
+                      "type": "string"
+                    },
+                    "transactionCode": {
+                      "type": "string"
+                    },
+                    "paymentTo": {
+                      "type": "string"
+                    },
+                    "time": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "debits": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "postingID": {
+                            "type": "string"
+                          },
+                          "ifi": {
+                            "format": "int32",
+                            "type": "integer"
+                          },
+                          "value": {
+                            "type": "object",
+                            "properties": {
+                              "currency": {
+                                "type": "string"
+                              },
+                              "amount": {
+                                "format": "int32",
+                                "type": "integer"
+                              }
+                            }
+                          },
+                          "newBalance": {
+                            "type": "object",
+                            "properties": {
+                              "currency": {
+                                "type": "string"
+                              },
+                              "amount": {
+                                "format": "int32",
+                                "type": "integer"
+                              }
+                            }
+                          },
+                          "instrumentType": {
+                            "type": "string"
+                          },
+                          "attributes": {
+                            "type": "object"
+                          },
+                          "coupons": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "value": {
+                                  "type": "object",
+                                  "properties": {
+                                    "amount": {
+                                      "format": "int32",
+                                      "type": "integer"
+                                    },
+                                    "currency": {
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "couponID": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "credits": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "postingID": {
+                            "type": "string"
+                          },
+                          "ifi": {
+                            "format": "int32",
+                            "type": "integer"
+                          },
+                          "value": {
+                            "type": "object",
+                            "properties": {
+                              "currency": {
+                                "type": "string"
+                              },
+                              "amount": {
+                                "format": "int32",
+                                "type": "integer"
+                              }
+                            }
+                          },
+                          "newBalance": {
+                            "type": "object",
+                            "properties": {
+                              "currency": {
+                                "type": "string"
+                              },
+                              "amount": {
+                                "format": "int32",
+                                "type": "integer"
+                              }
+                            }
+                          },
+                          "instrumentType": {
+                            "type": "string"
+                          },
+                          "attributes": {
+                            "type": "object"
+                          },
+                          "coupons": {
+                            "type": "array",
+                            "items": {}
+                          }
+                        }
+                      }
+                    },
+                    "towards": {
+                      "type": "string"
+                    },
+                    "attributes": {
+                      "type": "object",
+                      "properties": {
+                        "super-card.ifi": {
+                          "type": "string"
+                        },
+                        "super-card.ink": {
+                          "type": "string"
+                        },
+                        "super-card.mcc": {
+                          "type": "string"
+                        },
+                        "super-card.mid": {
+                          "type": "string"
+                        },
+                        "super-card.rrn": {
+                          "type": "string"
+                        },
+                        "super-card.tid": {
+                          "type": "string"
+                        },
+                        "super-card.stan": {
+                          "type": "string"
+                        },
+                        "super-card.card-id": {
+                          "type": "string"
+                        },
+                        "journal.voucherCode": {
+                          "type": "string"
+                        },
+                        "payment.channelType": {
+                          "type": "string"
+                        },
+                        "super-card.acquirer": {
+                          "type": "string"
+                        },
+                        "super-card.card-6x4": {
+                          "type": "string"
+                        },
+                        "super-card.card-bin": {
+                          "type": "string"
+                        },
+                        "super-card.trans-id": {
+                          "type": "string"
+                        },
+                        "super-card.txn-type": {
+                          "type": "string"
+                        },
+                        "super-card.acs-txnId": {
+                          "type": "string"
+                        },
+                        "super-card.init-time": {
+                          "type": "string"
+                        },
+                        "super-card.merchant-lat": {
+                          "type": "string"
+                        },
+                        "super-card.merchant-lon": {
+                          "type": "string"
+                        },
+                        "super-card.merchant-city": {
+                          "type": "string"
+                        },
+                        "super-card.merchant-name": {
+                          "type": "string"
+                        },
+                        "super-card.otp-enter-mode": {
+                          "type": "string"
+                        },
+                        "super-card.merchant-country": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "value": {
+                      "type": "object",
+                      "properties": {
+                        "currency": {
+                          "type": "string"
+                        },
+                        "amount": {
+                          "format": "int32",
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "payerInfo": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string"
+                        },
+                        "targetURI": {
+                          "type": "string"
+                        },
+                        "resourceID": {
+                          "type": "string"
+                        },
+                        "formFactorURI": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "payeeInfo": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string"
+                        },
+                        "location": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "attributes": {
+                "type": "object"
+              }
+            }
+          },
+          "publisher": {
+            "type": "object",
+            "properties": {
+              "appDomain": {
+                "type": "string"
+              },
+              "serviceName": {
+                "type": "string"
+              },
+              "nodeId": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "example": {
+          "topic": "_tenant_140827_RESOURCE",
+          "name": "RESOURCE_PAYMENT_UPDATED",
+          "eventID": "67af6a23-7247-4e9b-b990-6c9d46afe3f3",
+          "source": {
+            "uri": "resource://140827/0c97e84f-999d-4fdf-a53f-24cb99b11e76/870544000001",
+            "tags": [
+              "tag://VBO/ABC001",
+              "tag://VBO/ABC001"
+            ],
+            "state": "PAYMENT_CAPTURED"
+          },
+          "origin": {
+            "instance": "instance://default/payment/870545",
+            "time": 1582108026074,
+            "flowID": "ae2101d2-6ead-47ec-a1c3-3afd9327e752"
+          },
+          "data": {
+            "paymentID": 870544000001,
+            "currentState": "PAYMENT_CAPTURED",
+            "stateTransitions": {
+              "PAYMENT_EFFECTED": {
+                "time": 1582108025692
+              },
+              "PAYMENT_CAPTURED": {
+                "time": 1582108025898
+              },
+              "PAYMENT_AUTHORIZATION_RECEIVED": {
+                "time": 1582108024554
+              },
+              "PAYMENT_AUTHORIZATION_REQUESTED": {
+                "time": 1582108024120
+              },
+              "PAYMENT_REQUESTED": {
+                "time": 1582108023741
+              }
+            },
+            "payerInfo": {
+              "type": "RESOURCE",
+              "targetURI": "account://6b2dfb83-9276-422c-8781-07eda71fc261",
+              "resourceID": "0c97e84f-999d-4fdf-a53f-24cb99b11e76",
+              "formFactorURI": "card://ff936322-287f-43e4-9497-a86d94bd97a9"
+            },
+            "payerResource": {
+              "vectors": [
+                "vector://USER/102172",
+                "vector://WALLET/102172"
+              ],
+              "attributes": {},
+              "resourceId": "02b15e3a-77be-41db-ab5b-fbf0d7d36ff7"
+            },
+            "payeeInfo": {
+              "name": "TEST MERCHANT",
+              "type": "EXTERNAL_BUSINESS",
+              "location": "MUMBAI"
+            },
+            "receipt": [
+              {
+                "receiptType": "PAYMENT",
+                "paymentID": "7ac269d3-3bdb-4c11-9fba-d993770f8881",
+                "paymentRequestID": "M00001_T00001_111111_022030_486837818528_200219102702",
+                "receiptID": 870544000001,
+                "transactionHash": "9WXGBg==",
+                "transactionCode": "402615",
+                "paymentTo": "1971050374361855296@ledger.zeta.in",
+                "time": 1582108025885,
+                "debits": [
+                  {
+                    "postingID": "556210",
+                    "ifi": 140827,
+                    "value": {
+                      "currency": "INR",
+                      "amount": 100
+                    },
+                    "newBalance": {
+                      "currency": "INR",
+                      "amount": 30564
+                    },
+                    "instrumentType": "MCC_VOUCHER_RECIPIENT",
+                    "attributes": {},
+                    "coupons": [
+                      {
+                        "value": {
+                          "amount": 100,
+                          "currency": "INR"
+                        },
+                        "couponID": "4a482f6e-fd8f-4e37-a9ab-8fffc408fc9d"
+                      }
+                    ]
+                  }
+                ],
+                "credits": [
+                  {
+                    "postingID": "267301",
+                    "ifi": 140827,
+                    "value": {
+                      "currency": "INR",
+                      "amount": 100
+                    },
+                    "newBalance": {
+                      "currency": "INR",
+                      "amount": 752507
+                    },
+                    "instrumentType": "SYSTEM",
+                    "attributes": {},
+                    "coupons": []
+                  }
+                ],
+                "towards": "Physical Super Card ECOM Purchase",
+                "attributes": {
+                  "super-card.ifi": "140827",
+                  "super-card.ink": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36",
+                  "super-card.mcc": "5411",
+                  "super-card.mid": "M00001",
+                  "super-card.rrn": "486837818528",
+                  "super-card.tid": "T00001",
+                  "super-card.stan": "022030",
+                  "super-card.card-id": "resource://0c97e84f-999d-4fdf-a53f-24cb99b11e76_ff936322-287f-43e4-9497-a86d94bd97a9",
+                  "journal.voucherCode": "RUPAY-508645_ECOM_AUTH",
+                  "payment.channelType": "SUPER_CARD",
+                  "super-card.acquirer": "111111",
+                  "super-card.card-6x4": "508645-xxxxxx-0289",
+                  "super-card.card-bin": "508645",
+                  "super-card.trans-id": "M00001_T00001_111111_022030_486837818528_200219102702",
+                  "super-card.txn-type": "ECOM",
+                  "super-card.acs-txnId": "028852720888773631103971827607",
+                  "super-card.init-time": "200219102702",
+                  "super-card.merchant-lat": "18.975",
+                  "super-card.merchant-lon": "72.825833",
+                  "super-card.merchant-city": "MUMBAI",
+                  "super-card.merchant-name": "TEST MERCHANT",
+                  "super-card.otp-enter-mode": "manual",
+                  "super-card.merchant-country": "IN"
+                },
+                "value": {
+                  "currency": "INR",
+                  "amount": 100
+                },
+                "payerInfo": {
+                  "type": "RESOURCE",
+                  "targetURI": "account://6b2dfb83-9276-422c-8781-07eda71fc261",
+                  "resourceID": "0c97e84f-999d-4fdf-a53f-24cb99b11e76",
+                  "formFactorURI": "card://ff936322-287f-43e4-9497-a86d94bd97a9"
+                },
+                "payeeInfo": {
+                  "name": "TEST MERCHANT",
+                  "type": "EXTERNAL_BUSINESS",
+                  "location": "MUMBAI"
+                }
+              }
+            ],
+            "attributes": {}
+          },
+          "publisher": {
+            "appDomain": "services.olympus",
+            "serviceName": "payment",
+            "nodeId": "870545"
+          }
+        }
+      },
+      "PAYMENT_REVERSED": {
+        "title": "PAYMENT_REVERSED",
+        "description": "",
+        "type": "object",
+        "properties": {
+          "topic": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "eventID": {
+            "type": "string"
+          },
+          "source": {
+            "type": "object",
+            "properties": {
+              "uri": {
+                "type": "string"
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "state": {
+                "type": "string"
+              }
+            }
+          },
+          "origin": {
+            "type": "object",
+            "properties": {
+              "instance": {
+                "type": "string"
+              },
+              "time": {
+                "format": "int32",
+                "type": "integer"
+              },
+              "flowID": {
+                "type": "string"
+              }
+            }
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "paymentID": {
+                "format": "int32",
+                "type": "integer"
+              },
+              "currentState": {
+                "type": "string"
+              },
+              "stateTransitions": {
+                "type": "object",
+                "properties": {
+                  "PAYMENT_EFFECTED": {
+                    "type": "object",
+                    "properties": {
+                      "time": {
+                        "format": "int32",
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "PAYMENT_CAPTURED": {
+                    "type": "object",
+                    "properties": {
+                      "time": {
+                        "format": "int32",
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "PAYMENT_AUTHORIZATION_RECEIVED": {
+                    "type": "object",
+                    "properties": {
+                      "time": {
+                        "format": "int32",
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "PAYMENT_AUTHORIZATION_REQUESTED": {
+                    "type": "object",
+                    "properties": {
+                      "time": {
+                        "format": "int32",
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "PAYMENT_REQUESTED": {
+                    "type": "object",
+                    "properties": {
+                      "time": {
+                        "format": "int32",
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "REVERSAL_INITIATED": {
+                    "type": "object",
+                    "properties": {
+                      "time": {
+                        "format": "int32",
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "PAYMENT_REVERSED": {
+                    "type": "object",
+                    "properties": {
+                      "time": {
+                        "format": "int32",
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              },
+              "payerInfo": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "targetURI": {
+                    "type": "string"
+                  },
+                  "resourceID": {
+                    "type": "string"
+                  },
+                  "formFactorURI": {
+                    "type": "string"
+                  }
+                }
+              },
+              "payerResource": {
+                "type": "object",
+                "properties": {
+                  "vectors": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "attributes": {
+                    "type": "object"
+                  },
+                  "resourceId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "payeeInfo": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "type": "string"
+                  }
+                }
+              },
+              "receipt": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "receiptType": {
+                      "type": "string"
+                    },
+                    "paymentID": {
+                      "type": "string"
+                    },
+                    "receiptID": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "transactionHash": {
+                      "type": "string"
+                    },
+                    "paymentFrom": {
+                      "type": "string"
+                    },
+                    "paymentTo": {
+                      "type": "string"
+                    },
+                    "time": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "debits": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "postingID": {
+                            "type": "string"
+                          },
+                          "ifi": {
+                            "format": "int32",
+                            "type": "integer"
+                          },
+                          "value": {
+                            "type": "object",
+                            "properties": {
+                              "currency": {
+                                "type": "string"
+                              },
+                              "amount": {
+                                "format": "int32",
+                                "type": "integer"
+                              }
+                            }
+                          },
+                          "newBalance": {
+                            "type": "object",
+                            "properties": {
+                              "currency": {
+                                "type": "string"
+                              },
+                              "amount": {
+                                "format": "int32",
+                                "type": "integer"
+                              }
+                            }
+                          },
+                          "instrumentType": {
+                            "type": "string"
+                          },
+                          "attributes": {
+                            "type": "object"
+                          },
+                          "coupons": {
+                            "type": "array",
+                            "items": {}
+                          }
+                        }
+                      }
+                    },
+                    "credits": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "postingID": {
+                            "type": "string"
+                          },
+                          "ifi": {
+                            "format": "int32",
+                            "type": "integer"
+                          },
+                          "value": {
+                            "type": "object",
+                            "properties": {
+                              "currency": {
+                                "type": "string"
+                              },
+                              "amount": {
+                                "format": "int32",
+                                "type": "integer"
+                              }
+                            }
+                          },
+                          "newBalance": {
+                            "type": "object",
+                            "properties": {
+                              "currency": {
+                                "type": "string"
+                              },
+                              "amount": {
+                                "format": "int32",
+                                "type": "integer"
+                              }
+                            }
+                          },
+                          "instrumentType": {
+                            "type": "string"
+                          },
+                          "attributes": {
+                            "type": "object"
+                          },
+                          "coupons": {
+                            "type": "array",
+                            "items": {}
+                          }
+                        }
+                      }
+                    },
+                    "towards": {
+                      "type": "string"
+                    },
+                    "attributes": {
+                      "type": "object",
+                      "properties": {
+                        "super-card.tid": {
+                          "type": "string"
+                        },
+                        "super-card.trans-id": {
+                          "type": "string"
+                        },
+                        "super-card.mcc": {
+                          "type": "string"
+                        },
+                        "super-card.card-6x4": {
+                          "type": "string"
+                        },
+                        "super-card.merchant-country": {
+                          "type": "string"
+                        },
+                        "journal.voucherCode": {
+                          "type": "string"
+                        },
+                        "super-card.merchant-city": {
+                          "type": "string"
+                        },
+                        "paymentReceipt.time.IST": {
+                          "type": "string"
+                        },
+                        "super-card.acquirer": {
+                          "type": "string"
+                        },
+                        "super-card.merchant-name": {
+                          "type": "string"
+                        },
+                        "super-card.card-id": {
+                          "type": "string"
+                        },
+                        "super-card.mid": {
+                          "type": "string"
+                        },
+                        "super-card.init-time": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "value": {
+                      "type": "object",
+                      "properties": {
+                        "currency": {
+                          "type": "string"
+                        },
+                        "amount": {
+                          "format": "int32",
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "payerInfo": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string"
+                        },
+                        "targetURI": {
+                          "type": "string"
+                        },
+                        "resourceID": {
+                          "type": "string"
+                        },
+                        "formFactorURI": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "payeeInfo": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string"
+                        },
+                        "location": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "reversedReceiptID": {
+                      "format": "int32",
+                      "type": "integer"
+                    }
+                  }
+                }
+              },
+              "attributes": {
+                "type": "object"
+              }
+            }
+          },
+          "publisher": {
+            "type": "object",
+            "properties": {
+              "appDomain": {
+                "type": "string"
+              },
+              "serviceName": {
+                "type": "string"
+              },
+              "nodeId": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "example": {
+          "topic": "_tenant_140827_RESOURCE",
+          "name": "RESOURCE_PAYMENT_UPDATED",
+          "eventID": "d800197c-b2c9-45f8-a4e7-97be51caaa99",
+          "source": {
+            "uri": "resource://140827/0c97e84f-999d-4fdf-a53f-24cb99b11e76/870544000001",
+            "tags": [
+              "tag://VBO/ABC001",
+              "tag://VBO/ABC001"
+            ],
+            "state": "PAYMENT_REVERSED"
+          },
+          "origin": {
+            "instance": "instance://default/payment/870545",
+            "time": 1582108663085,
+            "flowID": "a6266a73-64fb-4a41-a38d-f184b69ac76d"
+          },
+          "data": {
+            "paymentID": 870544000001,
+            "currentState": "PAYMENT_REVERSED",
+            "stateTransitions": {
+              "PAYMENT_EFFECTED": {
+                "time": 1582108025692
+              },
+              "PAYMENT_CAPTURED": {
+                "time": 1582108025898
+              },
+              "PAYMENT_AUTHORIZATION_RECEIVED": {
+                "time": 1582108024554
+              },
+              "PAYMENT_AUTHORIZATION_REQUESTED": {
+                "time": 1582108024120
+              },
+              "PAYMENT_REQUESTED": {
+                "time": 1582108023741
+              },
+              "REVERSAL_INITIATED": {
+                "time": 1582108662479
+              },
+              "PAYMENT_REVERSED": {
+                "time": 1582108663012
+              }
+            },
+            "payerInfo": {
+              "type": "RESOURCE",
+              "targetURI": "account://6b2dfb83-9276-422c-8781-07eda71fc261",
+              "resourceID": "0c97e84f-999d-4fdf-a53f-24cb99b11e76",
+              "formFactorURI": "card://ff936322-287f-43e4-9497-a86d94bd97a9"
+            },
+            "payerResource": {
+              "vectors": [
+                "vector://USER/102172",
+                "vector://WALLET/102172"
+              ],
+              "attributes": {},
+              "resourceId": "02b15e3a-77be-41db-ab5b-fbf0d7d36ff7"
+            },
+            "payeeInfo": {
+              "name": "TEST MERCHANT",
+              "type": "EXTERNAL_BUSINESS",
+              "location": "MUMBAI"
+            },
+            "receipt": [
+              {
+                "receiptType": "REVERSAL",
+                "paymentID": "7ac269d3-3bdb-4c11-9fba-d993770f8881",
+                "receiptID": 870545000002,
+                "transactionHash": "1mnUnw==",
+                "paymentFrom": "card://ff936322-287f-43e4-9497-a86d94bd97a9",
+                "paymentTo": "1971050374361855296@ledger.zeta.in",
+                "time": 1582108663009,
+                "debits": [
+                  {
+                    "postingID": "267302",
+                    "ifi": 140827,
+                    "value": {
+                      "currency": "INR",
+                      "amount": 100
+                    },
+                    "newBalance": {
+                      "currency": "INR",
+                      "amount": 752407
+                    },
+                    "instrumentType": "SYSTEM",
+                    "attributes": {},
+                    "coupons": []
+                  }
+                ],
+                "credits": [
+                  {
+                    "postingID": "556211",
+                    "ifi": 140827,
+                    "value": {
+                      "currency": "INR",
+                      "amount": 100
+                    },
+                    "newBalance": {
+                      "currency": "INR",
+                      "amount": 30664
+                    },
+                    "instrumentType": "MCC_VOUCHER_RECIPIENT",
+                    "attributes": {},
+                    "coupons": []
+                  }
+                ],
+                "towards": "Reversal",
+                "attributes": {
+                  "super-card.tid": "T00001",
+                  "super-card.trans-id": "486837818528",
+                  "super-card.mcc": "5411",
+                  "super-card.card-6x4": "508645-xxxxxx-0289",
+                  "super-card.merchant-country": "IN",
+                  "journal.voucherCode": "RUPAY-508645_ECOM_AUTH-REVERSAL",
+                  "super-card.merchant-city": "MUMBAI",
+                  "paymentReceipt.time.IST": "Feb 19,2020 15:57:05",
+                  "super-card.acquirer": "111111",
+                  "super-card.merchant-name": "TEST MERCHANT",
+                  "super-card.card-id": "508645-xxxxxx-0289",
+                  "super-card.mid": "M00001",
+                  "super-card.init-time": "200219102702"
+                },
+                "value": {
+                  "currency": "INR",
+                  "amount": 100
+                },
+                "payerInfo": {
+                  "type": "RESOURCE",
+                  "targetURI": "account://6b2dfb83-9276-422c-8781-07eda71fc261",
+                  "resourceID": "0c97e84f-999d-4fdf-a53f-24cb99b11e76",
+                  "formFactorURI": "card://ff936322-287f-43e4-9497-a86d94bd97a9"
+                },
+                "payeeInfo": {
+                  "name": "TEST MERCHANT",
+                  "type": "EXTERNAL_BUSINESS",
+                  "location": "MUMBAI"
+                },
+                "reversedReceiptID": 870544000001
+              }
+            ],
+            "attributes": {}
+          },
+          "publisher": {
+            "appDomain": "services.olympus",
+            "serviceName": "payment",
+            "nodeId": "870545"
+          }
+        }
+      },
+      "PAYMENT_REQUEST_DECLINED": {
+        "title": "PAYMENT_REQUEST_DECLINED",
+        "description": "",
+        "type": "object",
+        "properties": {
+          "topic": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "eventID": {
+            "type": "string"
+          },
+          "source": {
+            "type": "object",
+            "properties": {
+              "uri": {
+                "type": "string"
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "state": {
+                "type": "string"
+              }
+            }
+          },
+          "origin": {
+            "type": "object",
+            "properties": {
+              "instance": {
+                "type": "string"
+              },
+              "time": {
+                "format": "int32",
+                "type": "integer"
+              },
+              "flowID": {
+                "type": "string"
+              }
+            }
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "paymentID": {
+                "format": "int32",
+                "type": "integer"
+              },
+              "currentState": {
+                "type": "string"
+              },
+              "stateTransitions": {
+                "type": "object",
+                "properties": {
+                  "PAYMENT_AUTHORIZATION_REQUESTED": {
+                    "type": "object",
+                    "properties": {
+                      "time": {
+                        "format": "int32",
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "PAYMENT_REQUEST_DECLINED": {
+                    "type": "object",
+                    "properties": {
+                      "time": {
+                        "format": "int32",
+                        "type": "integer"
+                      },
+                      "code": {
+                        "type": "string"
+                      },
+                      "details": {
+                        "type": "object",
+                        "properties": {
+                          "errorCode": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "PAYMENT_REQUESTED": {
+                    "type": "object",
+                    "properties": {
+                      "time": {
+                        "format": "int32",
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              },
+              "payerInfo": {
+                "type": "object",
+                "properties": {
+                  "resourceID": {
+                    "type": "string"
+                  },
+                  "formFactorURI": {
+                    "type": "string"
+                  },
+                  "targetURI": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                }
+              },
+              "payerResource": {
+                "type": "object",
+                "properties": {
+                  "vectors": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "attributes": {
+                    "type": "object"
+                  },
+                  "resourceId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "payeeInfo": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "type": "string"
+                  }
+                }
+              },
+              "receipt": {
+                "type": "array",
+                "items": {}
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "super-card.trans-id": {
+                    "type": "string"
+                  },
+                  "super-card.tid": {
+                    "type": "string"
+                  },
+                  "super-card.rrn": {
+                    "type": "string"
+                  },
+                  "super-card.mcc": {
+                    "type": "string"
+                  },
+                  "super-card.ifi": {
+                    "type": "string"
+                  },
+                  "super-card.merchant-lon": {
+                    "type": "string"
+                  },
+                  "super-card.card-6x4": {
+                    "type": "string"
+                  },
+                  "super-card.merchant-country": {
+                    "type": "string"
+                  },
+                  "super-card.txn-type": {
+                    "type": "string"
+                  },
+                  "journal.voucherCode": {
+                    "type": "string"
+                  },
+                  "super-card.merchant-city": {
+                    "type": "string"
+                  },
+                  "super-card.acquirer": {
+                    "type": "string"
+                  },
+                  "super-card.merchant-name": {
+                    "type": "string"
+                  },
+                  "super-card.merchant-lat": {
+                    "type": "string"
+                  },
+                  "super-card.card-id": {
+                    "type": "string"
+                  },
+                  "super-card.card-bin": {
+                    "type": "string"
+                  },
+                  "super-card.stan": {
+                    "type": "string"
+                  },
+                  "super-card.init-time": {
+                    "type": "string"
+                  },
+                  "super-card.mid": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "publisher": {
+            "type": "object",
+            "properties": {
+              "appDomain": {
+                "type": "string"
+              },
+              "serviceName": {
+                "type": "string"
+              },
+              "nodeId": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "example": {
+          "topic": "_tenant_140827_RESOURCE",
+          "name": "RESOURCE_PAYMENT_UPDATED",
+          "eventID": "3d5c5730-6788-4c51-a331-64e550468cda",
+          "source": {
+            "uri": "resource://140827/0c97e84f-999d-4fdf-a53f-24cb99b11e76/870545000001",
+            "tags": [
+              "tag://VBO/ABC001",
+              "tag://VBO/ABC001"
+            ],
+            "state": "PAYMENT_REQUEST_DECLINED"
+          },
+          "origin": {
+            "instance": "instance://default/payment/870545",
+            "time": 1582108402031,
+            "flowID": "4b73ca51-4ea7-42f7-bb5d-c10e9cd6fe2d"
+          },
+          "data": {
+            "paymentID": 870545000001,
+            "currentState": "PAYMENT_REQUEST_DECLINED",
+            "stateTransitions": {
+              "PAYMENT_AUTHORIZATION_REQUESTED": {
+                "time": 1582108401895
+              },
+              "PAYMENT_REQUEST_DECLINED": {
+                "time": 1582108401973,
+                "code": "AUTHENTICATION_FAILED",
+                "details": {
+                  "errorCode": "AUTHENTICATION_FAILED",
+                  "message": "Resource Authentication Failed"
+                }
+              },
+              "PAYMENT_REQUESTED": {
+                "time": 1582108401591
+              }
+            },
+            "payerInfo": {
+              "resourceID": "0c97e84f-999d-4fdf-a53f-24cb99b11e76",
+              "formFactorURI": "card://ff936322-287f-43e4-9497-a86d94bd97a9",
+              "targetURI": "account://6b2dfb83-9276-422c-8781-07eda71fc261",
+              "type": "RESOURCE"
+            },
+            "payerResource": {
+              "vectors": [
+                "vector://USER/102172",
+                "vector://WALLET/102172"
+              ],
+              "attributes": {},
+              "resourceId": "02b15e3a-77be-41db-ab5b-fbf0d7d36ff7"
+            },
+            "payeeInfo": {
+              "type": "EXTERNAL_BUSINESS",
+              "name": "TEST MERCHANT",
+              "location": "MUMBAI"
+            },
+            "receipt": [],
+            "attributes": {
+              "super-card.trans-id": "M00001_T00001_111111_022031_943206558780_200219103321",
+              "super-card.tid": "T00001",
+              "super-card.rrn": "943206558780",
+              "super-card.mcc": "5411",
+              "super-card.ifi": "140827",
+              "super-card.merchant-lon": "72.825833",
+              "super-card.card-6x4": "508645-xxxxxx-0289",
+              "super-card.merchant-country": "IN",
+              "super-card.txn-type": "ECOM",
+              "journal.voucherCode": "RUPAY-508645_ECOM_AUTH",
+              "super-card.merchant-city": "MUMBAI",
+              "super-card.acquirer": "111111",
+              "super-card.merchant-name": "TEST MERCHANT",
+              "super-card.merchant-lat": "18.975",
+              "super-card.card-id": "resource://0c97e84f-999d-4fdf-a53f-24cb99b11e76_ff936322-287f-43e4-9497-a86d94bd97a9",
+              "super-card.card-bin": "508645",
+              "super-card.stan": "022031",
+              "super-card.init-time": "200219103321",
+              "super-card.mid": "M00001"
+            }
+          },
+          "publisher": {
+            "appDomain": "services.olympus",
+            "serviceName": "payment",
+            "nodeId": "870545"
+          }
+        }
+      },
+      "updateFormFactorRequest": {
+        "title": "",
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "status of the card",
+            "enum": [
+              "ACTIVE",
+              "INACTIVE",
+              "DELETED"
+            ]
+          },
+          "reason": {
+            "description": "Reason for changing the status of the card. Optional for activating/deactivating the card. Required for deleting the card.",
+            "type": "object",
+            "required": [
+              "description"
+            ],
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "Code of the reason for cancelling the card. Optional for activating/deactivating the card. Required for deleting the card.",
+                "enum": [
+                  "LOST_OR_STOLEN",
+                  "DAMAGED",
+                  "HOTLISTED",
+                  "OFAC_BLOCKED",
+                  "OTHER"
+                ]
+              },
+              "description": {
+                "type": "string",
+                "description": "Human-readable description of the reason for changing the status of the card. Length must be less than 200 characters. Optional for activating/deactivating the card. Required for deleting the card.",
+                "minLength": 0,
+                "maxLength": 200
+              }
+            }
+          }
+        }
+      },
+      "errorCode": {
+        "required": [
+          "code",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "number"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "code": "INTERNAL_SERVER_ERROR",
+          "message": "Unexpected error"
+        }
+      },
+      "BadRequest": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Bad Request"
+          },
+          "code": {
+            "type": "string",
+            "example": "BAD_REQUEST"
+          }
+        }
+      },
+      "Unauthorized": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "example": "UNAUTHORIZED"
+          },
+          "message": {
+            "type": "string",
+            "example": "Unauthorized"
+          }
+        }
+      },
+      "NotFound": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "example": "NOT_FOUND"
+          },
+          "message": {
+            "type": "string",
+            "example": "Not found"
+          }
+        }
+      },
+      "UnprocessableEntity": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Unprocessable entity"
+          },
+          "code": {
+            "type": "string",
+            "example": "UNPROCESSABLE_ENTITY"
+          }
+        }
+      },
+      "OrderRetreive": {
+        "title": "OrderRetreive",
+        "description": "",
+        "type": "object",
+        "properties": {
+          "quantity": {
+            "format": "int32",
+            "type": "integer",
+            "description": "Number of cards ordered."
+          },
+          "orderID": {
+            "type": "string",
+            "description": "Unique identifier of the card order for which details are being retrieved."
+          },
+          "cardSkuID": {
+            "type": "string",
+            "description": "Unique identifier for card's configurational properties like card network, BIN, card-type, embossing vendor details."
+          },
+          "plasticCode": {
+            "type": "string",
+            "description": "Unique identifier for the program configured for card. In case of multiple benefit programs, each program is represented by a separate `plasticCode`."
+          },
+          "expiry": {
+            "description": "Expiration date for the card.",
+            "type": "object",
+            "properties": {
+              "month": {
+                "format": "int32",
+                "type": "integer"
+              },
+              "year": {
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          },
+          "thirdLineEmbossing": {
+            "description": "Cardholder's name displayed on the card.",
+            "type": "string"
+          },
+          "fourthLineEmbossing": {
+            "description": "Additional cardholder details, like company name, displayed on the card.",
+            "type": "string"
+          },
+          "deliveryAddress": {
+            "description": "Address where the card is delivered to.",
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "addressLine1": {
+                "type": "string"
+              },
+              "addressLine2": {
+                "type": "string"
+              },
+              "addressLine3": {
+                "type": "string"
+              },
+              "addressLine4": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              },
+              "postalCode": {
+                "type": "string"
+              },
+              "contactNumber": {
+                "type": "string"
+              }
+            }
+          },
+          "tenantAttributes": {
+            "description": "IFI related information.",
+            "type": "object",
+            "properties": {
+              "templateID": {
+                "type": "string"
+              },
+              "corporateID": {
+                "type": "string"
+              },
+              "corporateName": {
+                "type": "string"
+              }
+            }
+          },
+          "vendorAttributes": {
+            "description": "Vendor related information like shipping partner, tracking ID, and welcome kit.",
+            "type": "object",
+            "properties": {
+              "consignmentID": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalAttributes": {
+            "description": "Additional information",
+            "type": "object"
+          },
+          "orderStatus": {
+            "description": "Current status of the order.",
+            "type": "string",
+            "enum": [
+              "ORDER_PLACED",
+              "CARD_REQUEST_GENERATED",
+              "EMBOSSING_FILE_GENERATED",
+              "ORDER_COMPLETED",
+              "ORDER_FAILED",
+              "ORDER_CANCELLED"
+            ]
+          },
+          "orderedAt": {
+            "description": "Timestamp of order placment in the ISO 8601 format YYYY-MM-DD'T'HH:MM:SS:sss'Z' ",
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "example": {
+          "quantity": 1,
+          "orderID": "cardfarzan6u8kbm",
+          "cardSkuID": "RUPAY_ABC_VBO_PHYSICAL",
+          "plasticCode": "WHITEC",
+          "expiry": {
+            "month": 1,
+            "year": 2023
+          },
+          "thirdLineEmbossing": "NA",
+          "fourthLineEmbossing": "NA",
+          "deliveryAddress": {
+            "name": "DirectiPlex",
+            "addressLine1": "Directiplex, Old Nagardas road",
+            "addressLine2": "Andheri (East)",
+            "addressLine3": "Mumbai",
+            "addressLine4": "NA",
+            "city": "Mumbai",
+            "state": "Maharashtra",
+            "country": "India",
+            "postalCode": "400053",
+            "contactNumber": "02228875511"
+          },
+          "tenantAttributes": {
+            "templateID": "",
+            "corporateID": "",
+            "corporateName": ""
+          },
+          "vendorAttributes": {
+            "consignmentID": ""
+          },
+          "additionalAttributes": {},
+          "orderStatus": "CARD_REQUEST_GENERATED",
+          "orderedAt": "2020-03-19T19:21:09.286Z"
+        }
+      },
+      "dispatchCardEmbossingRequest": {
+        "title": "dispatchCardEmbossingRequest",
+        "description": "",
+        "type": "object",
+        "required": [
+          "plasticCode",
+          "thirdLineEmbossing",
+          "deliveryAddress"
+        ],
+        "properties": {
+          "plasticCode": {
+            "description": "Unique identifier for the program configured for card. In case of multiple benefit programs, each program is represented by a separate `plasticCode`.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 10
+          },
+          "thirdLineEmbossing": {
+            "description": "Cardholder's name displayed on the card.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "fourthLineEmbossing": {
+            "description": "Additional cardholder details, like company name, displayed on the card.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "deliveryAddress": {
+            "description": "Address where the card should be delivered to.",
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "addressLine1": {
+                "type": "string"
+              },
+              "addressLine2": {
+                "type": "string"
+              },
+              "addressLine3": {
+                "type": "string"
+              },
+              "addressLine4": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              },
+              "postalCode": {
+                "type": "string"
+              },
+              "contactNumber": {
+                "type": "string"
+              }
+            }
+          },
+          "vendorAttributes": {
+            "description": "Vendor related information like shipping partner, tracking ID, and welcome kit.",
+            "type": "object",
+            "properties": {
+              "shipping-partner.name": {
+                "type": "string"
+              },
+              "shipping-partner.trackingNumber": {
+                "type": "string"
+              },
+              "welcome-kit.fullName": {
+                "type": "string"
+              },
+              "welcome-kit.qrCode": {
+                "type": "string"
+              },
+              "welcome-kit.templateID": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "DispatchCardResponse": {
+        "title": "DispatchCardResponse",
+        "description": "",
+        "type": "object",
+        "properties": {
+          "quantity": {
+            "description": "Quantity of cards.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "orderID": {
+            "description": "Unique identifier of the card order for which embossing file is generated",
+            "type": "string"
+          },
+          "cardSkuID": {
+            "description": "Unique identifier for card's configurational properties like card network, BIN, card-type, embossing vendor details.",
+            "type": "string"
+          },
+          "plasticCode": {
+            "description": "Unique identifier for the program configured for card. In case of multiple benefit programs, each program is represented by a separate `plasticCode`.",
+            "type": "string"
+          },
+          "expiry": {
+            "description": "Expiration date for the card.",
+            "type": "object",
+            "properties": {
+              "month": {
+                "format": "int32",
+                "type": "integer"
+              },
+              "year": {
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          },
+          "thirdLineEmbossing": {
+            "description": "Cardholder's name displayed on the card.",
+            "type": "string"
+          },
+          "fourthLineEmbossing": {
+            "description": "Additional cardholder details, like company name, displayed on the card.",
+            "type": "string"
+          },
+          "deliveryAddress": {
+            "description": "Address where the card is delivered to.",
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "addressLine1": {
+                "type": "string"
+              },
+              "addressLine2": {
+                "type": "string"
+              },
+              "addressLine3": {
+                "type": "string"
+              },
+              "addressLine4": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              },
+              "postalCode": {
+                "type": "string"
+              },
+              "contactNumber": {
+                "type": "string"
+              }
+            }
+          },
+          "tenantAttributes": {
+            "description": "IFI related information.",
+            "type": "object"
+          },
+          "vendorAttributes": {
+            "description": "Vendor related information like shipping partner, tracking ID, and welcome kit.",
+            "type": "object",
+            "properties": {
+              "welcome-kit.qrCode": {
+                "type": "string"
+              },
+              "welcome-kit.fullName": {
+                "type": "string"
+              },
+              "shipping-partner.name": {
+                "type": "string"
+              },
+              "welcome-kit.templateID": {
+                "type": "string"
+              },
+              "shipping-partner.trackingNumber": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalAttributes": {
+            "description": "Additional information that Fintech wants to pass to the embossing vendor.",
+            "type": "object"
+          },
+          "orderStatus": {
+            "description": "Current status of the order.",
+            "type": "string",
+            "enum": [
+              "ORDER_PLACED",
+              "CARD_REQUEST_GENERATED",
+              "EMBOSSING_FILE_GENERATED",
+              "ORDER_COMPLETED",
+              "ORDER_FAILED",
+              "ORDER_CANCELLED"
+            ]
+          },
+          "orderedAt": {
+            "description": "Timestamp of order placment in the ISO 8601 format YYYY-MM-DD'T'HH:MM:SS:sss'Z'",
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "example": {
+          "quantity": 1,
+          "orderID": "b43f7dc8-c4fe-4518-836c-eab9e62d8d25",
+          "cardSkuID": "RUPAY_ABC_VBO_PHYSICAL",
+          "plasticCode": "WHITEC",
+          "expiry": {
+            "month": 0,
+            "year": 10
+          },
+          "thirdLineEmbossing": "Rohit",
+          "fourthLineEmbossing": "Tondo",
+          "deliveryAddress": {
+            "name": "Atash Shaikh",
+            "addressLine1": "Directiplex",
+            "addressLine2": "Near Andheri Subway",
+            "addressLine3": "Old Nagardas Road",
+            "addressLine4": "Andheri East",
+            "city": "Mumbai",
+            "state": "Maharashtra",
+            "country": "India",
+            "postalCode": "400069",
+            "contactNumber": 919090909090
+          },
+          "tenantAttributes": {},
+          "vendorAttributes": {
+            "welcome-kit.qrCode": "c48tn73793cfh93cg24c872t478r4ft3ubdcy8g3cr",
+            "welcome-kit.fullName": "Rohit Tondon",
+            "shipping-partner.name": "BLUEDART",
+            "welcome-kit.templateID": "template-id",
+            "shipping-partner.trackingNumber": "098137643242412312414"
+          },
+          "additionalAttributes": {},
+          "orderStatus": "EMBOSSING_FILE_PENDING",
+          "orderedAt": "2020-03-19T19:25:26.513Z"
+        }
+      }
+    },
+    "securitySchemes": {
+      "securityKey": {
+        "type": "apiKey",
+        "name": "X-Zeta-Authtoken",
+        "in": "header"
+      }
+    }
+  }
+}
