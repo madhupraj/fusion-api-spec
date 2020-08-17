@@ -31,7 +31,7 @@
           {
             "in": "body",
             "name": "registerWebhookSubscriptionRequest",
-            "description": "registerWebhookSubscriptionRequest",
+            "description": "Specify the webhook subscription details",
             "required": true,
             "schema": {
               "$ref": "#/definitions/RegisterWebhookSubscriptionRequest"
