@@ -1,0 +1,965 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "",
+    
+    "contact": {}
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "api/v1/ifi/{ifiID}/payment/events/{eventName}/subscribe": {
+      "post": {
+        "tags": [
+          "Webhook APIs"
+        ],
+        "description": "This endpoint allows you to register a webhook to receive notifications about transactional events in the payment flow. Below is a list of all payment events that you can subscribe to: <ul><li>PAYMENT_REQUESTED</li> <li>PAYMENT_AUTHORIZATION_REQUESTED</li> <li>PAYMENT_AUTHORIZATION_RECEIVED</li><li>PAYMENT_EFFECTED</li><li>PAYMENT_CAPTURED</li><li>PAYMENT_REVERSED</li><li>PAYMENT_REQUEST_DECLINED</li> </ul>",
+        "operationId": "paymentTransactionsWebhookSubscribe",
+        "parameters": [
+          {
+            "name": "ifiID",
+            "in": "path",
+            "description": "ID of the on-boarded organization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "eventName",
+            "in": "path",
+            "description": "Specify the name of the event that you want to subscribe to and receive the event notification. See supported payment events in the description above.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "callbackUrl",
+            "description": "Specify a webhook endpoint where you want to receive the payment event notification.</li></ul>",
+            "required": true,
+            "schema": {
+                "required": [
+                  "callbackUrl"
+                ],
+                "type": "object",
+                "properties": {
+                  "callbackUrl": {
+                    "format": "uri",
+                    "type": "string",
+                    "example": "https://127.0.0.1/callback"
+                  }
+                }
+              }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Webhook created.",
+            }
+          },
+        "summary": "Subscribe for a payment event"
+      }
+    },
+    "api/v1/ifi/{ifiID}/payment/events/{eventName}/unsubscribe": {
+      "post": {
+        "tags": [
+          "Webhook APIs"
+        ],
+        "description": "This endpoint allows you to deregister an existing webhook to stop receiving transactional payment events on the set webhook endpoint. ",
+        "operationId": "paymentTransactionsWebhookUnsubscribe",
+        "parameters": [
+          {
+            "name": "ifiID",
+            "in": "path",
+            "description": "ID of the on-boarded organization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "eventName",
+            "in": "path",
+            "description": "Specify the name of the event that you want to unsubscribe from and prevent receiving the event notification on the configured URL. ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "callbackUrl",
+            "description": "Specify a webhook endpoint to which you want to stop receiving the event notification.</li></ul>",
+            "required": true,
+            "schema": {
+                "required": [
+                  "callbackUrl"
+                ],
+                "type": "object",
+                "properties": {
+                  "callbackUrl": {
+                    "format": "uri",
+                    "type": "string",
+                    "example": "https://127.0.0.1/callback"
+                  }
+                }
+              }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Webhook deleted.",
+            }
+          },
+        "summary": "Unsubscribe for a payment event"
+      }
+    }
+  },
+  "definitions": {
+    "Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "details": {
+          "$ref": "#/definitions/JsonElement"
+        }
+      },
+      "title": "Error"
+    },
+    "Expiry": {
+      "type": "object",
+      "properties": {
+        "month": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "year": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "Expiry"
+    },
+   
+    "JID": {
+      "type": "object",
+      "properties": {
+        "appDomain": {
+          "type": "string"
+        },
+        "bareJID": {
+          "$ref": "#/definitions/JID"
+        },
+        "defaultServiceNode": {
+          "type": "boolean"
+        },
+        "jidOfAGroup": {
+          "type": "boolean"
+        },
+        "nodeId": {
+          "type": "string"
+        },
+        "primaryServiceName": {
+          "type": "string"
+        },
+        "proxyServiceJID": {
+          "type": "boolean"
+        },
+        "resource": {
+          "type": "string"
+        },
+        "serviceInstanceJID": {
+          "type": "boolean"
+        },
+        "serviceName": {
+          "type": "string"
+        },
+        "serviceViewJID": {
+          "type": "boolean"
+        },
+        "serviceViewName": {
+          "type": "string"
+        }
+      },
+      "title": "JID"
+    },
+    "JsonArray": {
+      "type": "object",
+      "properties": {
+        "asBigDecimal": {
+          "type": "number"
+        },
+        "asBigInteger": {
+          "type": "integer"
+        },
+        "asBoolean": {
+          "type": "boolean"
+        },
+        "asByte": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": -128,
+          "maximum": 127
+        },
+        "asCharacter": {
+          "type": "string"
+        },
+        "asDouble": {
+          "type": "number",
+          "format": "double"
+        },
+        "asFloat": {
+          "type": "number",
+          "format": "float"
+        },
+        "asInt": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "asJsonArray": {
+          "$ref": "#/definitions/JsonArray"
+        },
+        "asJsonNull": {
+          "$ref": "#/definitions/JsonNull"
+        },
+        "asJsonObject": {
+          "$ref": "#/definitions/JsonObject"
+        },
+        "asJsonPrimitive": {
+          "$ref": "#/definitions/JsonPrimitive"
+        },
+        "asLong": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "asNumber": {
+          "$ref": "#/definitions/Number"
+        },
+        "asShort": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "asString": {
+          "type": "string"
+        },
+        "jsonArray": {
+          "type": "boolean"
+        },
+        "jsonNull": {
+          "type": "boolean"
+        },
+        "jsonObject": {
+          "type": "boolean"
+        },
+        "jsonPrimitive": {
+          "type": "boolean"
+        }
+      },
+      "title": "JsonArray"
+    },
+    "JsonElement": {
+      "type": "object",
+      "properties": {
+        "asBigDecimal": {
+          "type": "number"
+        },
+        "asBigInteger": {
+          "type": "integer"
+        },
+        "asBoolean": {
+          "type": "boolean"
+        },
+        "asByte": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": -128,
+          "maximum": 127
+        },
+        "asCharacter": {
+          "type": "string"
+        },
+        "asDouble": {
+          "type": "number",
+          "format": "double"
+        },
+        "asFloat": {
+          "type": "number",
+          "format": "float"
+        },
+        "asInt": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "asJsonArray": {
+          "$ref": "#/definitions/JsonArray"
+        },
+        "asJsonNull": {
+          "$ref": "#/definitions/JsonNull"
+        },
+        "asJsonObject": {
+          "$ref": "#/definitions/JsonObject"
+        },
+        "asJsonPrimitive": {
+          "$ref": "#/definitions/JsonPrimitive"
+        },
+        "asLong": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "asNumber": {
+          "$ref": "#/definitions/Number"
+        },
+        "asShort": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "asString": {
+          "type": "string"
+        },
+        "jsonArray": {
+          "type": "boolean"
+        },
+        "jsonNull": {
+          "type": "boolean"
+        },
+        "jsonObject": {
+          "type": "boolean"
+        },
+        "jsonPrimitive": {
+          "type": "boolean"
+        }
+      },
+      "title": "JsonElement"
+    },
+    "JsonNull": {
+      "type": "object",
+      "properties": {
+        "asBigDecimal": {
+          "type": "number"
+        },
+        "asBigInteger": {
+          "type": "integer"
+        },
+        "asBoolean": {
+          "type": "boolean"
+        },
+        "asByte": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": -128,
+          "maximum": 127
+        },
+        "asCharacter": {
+          "type": "string"
+        },
+        "asDouble": {
+          "type": "number",
+          "format": "double"
+        },
+        "asFloat": {
+          "type": "number",
+          "format": "float"
+        },
+        "asInt": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "asJsonArray": {
+          "$ref": "#/definitions/JsonArray"
+        },
+        "asJsonNull": {
+          "$ref": "#/definitions/JsonNull"
+        },
+        "asJsonObject": {
+          "$ref": "#/definitions/JsonObject"
+        },
+        "asJsonPrimitive": {
+          "$ref": "#/definitions/JsonPrimitive"
+        },
+        "asLong": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "asNumber": {
+          "$ref": "#/definitions/Number"
+        },
+        "asShort": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "asString": {
+          "type": "string"
+        },
+        "jsonArray": {
+          "type": "boolean"
+        },
+        "jsonNull": {
+          "type": "boolean"
+        },
+        "jsonObject": {
+          "type": "boolean"
+        },
+        "jsonPrimitive": {
+          "type": "boolean"
+        }
+      },
+      "title": "JsonNull"
+    },
+    "JsonObject": {
+      "type": "object",
+      "properties": {
+        "asBigDecimal": {
+          "type": "number"
+        },
+        "asBigInteger": {
+          "type": "integer"
+        },
+        "asBoolean": {
+          "type": "boolean"
+        },
+        "asByte": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": -128,
+          "maximum": 127
+        },
+        "asCharacter": {
+          "type": "string"
+        },
+        "asDouble": {
+          "type": "number",
+          "format": "double"
+        },
+        "asFloat": {
+          "type": "number",
+          "format": "float"
+        },
+        "asInt": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "asJsonArray": {
+          "$ref": "#/definitions/JsonArray"
+        },
+        "asJsonNull": {
+          "$ref": "#/definitions/JsonNull"
+        },
+        "asJsonObject": {
+          "$ref": "#/definitions/JsonObject"
+        },
+        "asJsonPrimitive": {
+          "$ref": "#/definitions/JsonPrimitive"
+        },
+        "asLong": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "asNumber": {
+          "$ref": "#/definitions/Number"
+        },
+        "asShort": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "asString": {
+          "type": "string"
+        },
+        "jsonArray": {
+          "type": "boolean"
+        },
+        "jsonNull": {
+          "type": "boolean"
+        },
+        "jsonObject": {
+          "type": "boolean"
+        },
+        "jsonPrimitive": {
+          "type": "boolean"
+        }
+      },
+      "title": "JsonObject"
+    },
+    "JsonPrimitive": {
+      "type": "object",
+      "properties": {
+        "asBigDecimal": {
+          "type": "number"
+        },
+        "asBigInteger": {
+          "type": "integer"
+        },
+        "asBoolean": {
+          "type": "boolean"
+        },
+        "asByte": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": -128,
+          "maximum": 127
+        },
+        "asCharacter": {
+          "type": "string"
+        },
+        "asDouble": {
+          "type": "number",
+          "format": "double"
+        },
+        "asFloat": {
+          "type": "number",
+          "format": "float"
+        },
+        "asInt": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "asJsonArray": {
+          "$ref": "#/definitions/JsonArray"
+        },
+        "asJsonNull": {
+          "$ref": "#/definitions/JsonNull"
+        },
+        "asJsonObject": {
+          "$ref": "#/definitions/JsonObject"
+        },
+        "asJsonPrimitive": {
+          "$ref": "#/definitions/JsonPrimitive"
+        },
+        "asLong": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "asNumber": {
+          "$ref": "#/definitions/Number"
+        },
+        "asShort": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "asString": {
+          "type": "string"
+        },
+        "boolean": {
+          "type": "boolean"
+        },
+        "jsonArray": {
+          "type": "boolean"
+        },
+        "jsonNull": {
+          "type": "boolean"
+        },
+        "jsonObject": {
+          "type": "boolean"
+        },
+        "jsonPrimitive": {
+          "type": "boolean"
+        },
+        "number": {
+          "type": "boolean"
+        },
+        "string": {
+          "type": "boolean"
+        }
+      },
+      "title": "JsonPrimitive"
+    },
+
+    "Money": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "currency": {
+          "type": "string"
+        }
+      },
+      "title": "Money"
+    },
+    "Number": {
+      "type": "object",
+      "title": "Number"
+    },
+    "Optional«int»": {
+      "type": "object",
+      "properties": {
+        "present": {
+          "type": "boolean"
+        }
+      },
+      "title": "Optional«int»"
+    },
+    
+    "Payment": {
+      "type": "object",
+      "properties": {
+        "attributes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "error": {
+          "$ref": "#/definitions/Error"
+        },
+        "headers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "ifi": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "payee": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "payer": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "paymentRequest": {
+          "$ref": "#/definitions/PublicPaymentRequestWrapper"
+        },
+        "receipts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Receipt"
+          }
+        },
+        "requestChannelType": {
+          "type": "string",
+          "enum": [
+            "ZETA_POS",
+            "SUPER_CARD",
+            "COLLECT_CARD",
+            "COLLECT_CALL",
+            "ZETA_PAYMENT_PAGE",
+            "ZETA_USER_APP",
+            "ZETA_API",
+            "ZETA_EXPRESS_REMOTE",
+            "ZETA_EXPRESS_KIOSK",
+            "ZETA_SHADOW_CARD",
+            "ZETA_UNKNOWN",
+            "UPI",
+            "VOID",
+            "IMPS",
+            "NEFT"
+          ]
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "VOID",
+            "PAYMENT_REQUESTED",
+            "PAYMENT_AUTHORIZATION_REQUESTED",
+            "CHALLENGE_REQUIRED",
+            "CHALLENGE_SUBMITTED",
+            "PAYMENT_AUTHORIZATION_RECEIVED",
+            "PAYMENT_EFFECTED",
+            "PAYMENT_CAPTURED",
+            "REVERSAL_INITIATED",
+            "PAYMENT_REVERSED",
+            "PAYMENT_REQUEST_CANCELLED",
+            "PAYMENT_REQUEST_DECLINED",
+            "PAYMENT_REQUEST_FAILED",
+            "PAYMENT_DECLINED",
+            "PAYMENT_FAILED"
+          ]
+        },
+        "stateTransitions": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "value": {
+          "$ref": "#/definitions/Money"
+        }
+      },
+      "title": "Payment"
+    },
+    
+    "Posting": {
+      "type": "object",
+      "properties": {
+        "attributes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "cardProgramID": {
+          "type": "string"
+        },
+        "coupons": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonObject"
+          }
+        },
+        "ifi": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "instrumentType": {
+          "type": "string"
+        },
+        "newBalance": {
+          "$ref": "#/definitions/Money"
+        },
+        "postingID": {
+          "type": "string"
+        },
+        "productType": {
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/definitions/Money"
+        }
+      },
+      "title": "Posting"
+    },
+    "PublicPaymentRequestWrapper": {
+      "type": "object",
+      "properties": {
+        "attributes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "dueBy": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "paymentRequestID": {
+          "type": "string"
+        },
+        "requestFrom": {
+          "type": "string"
+        },
+        "requestTo": {
+          "type": "string"
+        },
+        "towards": {
+          "type": "string"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Money"
+          }
+        }
+      },
+      "title": "PublicPaymentRequestWrapper"
+    },
+    "Receipt": {
+      "type": "object",
+      "properties": {
+        "attributes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "credits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Posting"
+          }
+        },
+        "debits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Posting"
+          }
+        },
+        "headers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "payeeInfo": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "payerInfo": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "payloadVersion": {
+          "$ref": "#/definitions/Optional«int»"
+        },
+        "paymentFrom": {
+          "type": "string"
+        },
+        "paymentID": {
+          "type": "string"
+        },
+        "paymentRequestID": {
+          "type": "string"
+        },
+        "paymentTo": {
+          "type": "string"
+        },
+        "receiptID": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "receiptType": {
+          "type": "string",
+          "enum": [
+            "AUTHORIZATION",
+            "PAYMENT",
+            "REVERSAL"
+          ]
+        },
+        "reversedReceiptID": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "signatoryJID": {
+          "$ref": "#/definitions/JID"
+        },
+        "signature": {
+          "type": "string"
+        },
+        "signed": {
+          "type": "boolean"
+        },
+        "time": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "towards": {
+          "type": "string"
+        },
+        "transactionCode": {
+          "type": "string"
+        },
+        "transactionHash": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/definitions/Money"
+        },
+        "zetaSignature": {
+          "$ref": "#/definitions/ZetaSignature"
+        }
+      },
+      "title": "Receipt"
+    },
+   
+    "SignatureAlgorithm": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "SignatureAlgorithm"
+    },
+    "SigningAuthority": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "Victor@victor.com",
+          "description": "Email ID of the signing authority",
+          "allowEmptyValue": false
+        },
+        "name": {
+          "type": "string",
+          "example": "Victor",
+          "description": "Name of the signing authority",
+          "allowEmptyValue": false
+        },
+        "phoneNumber": {
+          "type": "string",
+          "example": "+919876543210",
+          "description": "Phone number of the signing authority",
+          "allowEmptyValue": false
+        }
+      },
+      "title": "SigningAuthority"
+    },
+    "View": {
+      "type": "object",
+      "properties": {
+        "contentType": {
+          "type": "string"
+        }
+      },
+      "title": "View"
+    },
+    "ZetaSignature": {
+      "type": "object",
+      "properties": {
+        "algoID": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "publicKeyID": {
+          "type": "string"
+        },
+        "signature": {
+          "type": "string",
+          "format": "byte"
+        },
+        "signatureAlgorithm": {
+          "$ref": "#/definitions/SignatureAlgorithm"
+        }
+      },
+      "title": "ZetaSignature"
+    },
+    "Unauthorized": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": "UNAUTHORIZED"
+        },
+        "message": {
+          "type": "string",
+          "example": "Unauthorized"
+        }
+      }
+    },
+    "NotFound": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": "NOT_FOUND"
+        },
+        "message": {
+          "type": "string",
+          "example": "Not found"
+        }
+      }
+    },
+   
+   
+  },
+}
