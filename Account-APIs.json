@@ -9,16 +9,19 @@
       "name": "Account"
     },
     {
-      "name": "Account Vector"
+      "name": "Account vector"
     },
     {
-      "name": "Balance"
+      "name": "Account balance"
     },
     {
       "name": "Account transactions"
     },
     {
-      "name": "Transfer"
+      "name": "Account transfer"
+    },
+    {
+      "name": "Account status"
     },
     {
       "name": "Bundles"
@@ -230,7 +233,7 @@
     "/api/v1/ifi/{ifiID}/accounts/{accountID}/vectors": {
       "post": {
         "tags": [
-          "Account Vector"
+          "Account vector"
         ],
         "summary": "Add Vector to Account",
         "description": "Add a new Vector to an Account. You can add a new Vector type or a new Vector of the same type. For example, add a new email ID or an alternate phone number to the Account.",
@@ -287,7 +290,7 @@
       },
       "get": {
         "tags": [
-          "Account Vector"
+          "Account vector"
         ],
         "summary": "Get all Vectors for Account",
         "description": "Get the details of all the Vectors added to an Account. The response returns a list of Vectors, with related details for each Vector.",
@@ -337,7 +340,7 @@
     "/api/v1/ifi/{ifiID}/accounts/{accountID}/vectors/{vectorID}": {
       "get": {
         "tags": [
-          "Account Vector"
+          "Account vector"
         ],
         "summary": "Get Vector by ID",
         "description": "Get the details of a particular Vector added to the Account. The response returns  value, status, associated Account ID, and other details.",
@@ -397,7 +400,7 @@
     "/api/v1/ifi/{ifiID}/accounts/{accountID}/balance": {
       "get": {
         "tags": [
-          "Balance"
+          "Account balance"
         ],
         "summary": "Get balance for Account",
         "description": "Get the balance of a particular Account. The response also returns balance currency, last transaction ID, accounting type, and other details.",
@@ -601,7 +604,7 @@
     "/api/v1/ifi/{ifiID}/transfers": {
       "post": {
         "tags": [
-          "Transfer"
+          "Account transfer"
         ],
         "summary": "Transfer funds",
         "description": "Transfer funds from Account to another. </br></br>_Important_: Each fund transfer must have a unique identifier, `requestID`.",
@@ -645,6 +648,66 @@
               "application/json; charset=utf-8": {
                 "schema": {
                   "$ref": "#/components/schemas/FundTransfer400Error"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/api/v1/ifi/{ifiID}/accounts/{accountID}/updateStatus": {
+      "put": {
+        "tags": [
+          "Account status"
+        ],
+        "summary":"Update Account Status",
+        "description": "Change account status from Account to another. </br></br>_Important_: Each fund transfer must have a unique identifier, `requestID`.",
+        "operationId": "updateAccountStatusUsingPUT_1",
+        "parameters": [
+          {
+            "name": "ifiID",
+            "in": "path",
+            "description": "ID of the IFI.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": 140827
+            }
+          },
+          {
+            "name": "accountID",
+            "description": "ID of the Account whose status to be updated.",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "0e3ba859-1d1e-4682-a0a9-1e82986d2dcb"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Specify the account status. Supported status types are 
+<code>ENABLED</code>,<code>DEBITS_DISABLED</code>,
+<code>CREDITS_DISABLED</code>,
+<code>BLOCKED</code>,<code>CLOSED</code>",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAccountStatusRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateAccountStatusResponse"
                 }
               }
             }
@@ -1146,6 +1209,25 @@
           "headers": {}
         }
       },
+      "UpdateAccountStatusRequest":{
+        "type":"object",
+        "properties":{
+          "status":{
+            "type":"string",
+            "description":"Status of the account to be changed",
+            "allowEmptyValue": "false"
+          }
+        },
+        "title":"UpdateAccountStatusRequest"},  
+      "UpdateAccountStatusResponse":{
+        "type":"object",
+        "properties":{
+          "id":{
+            "type":"string"},
+            "ifiID":{
+              "type":"integer","format":"int64"},
+              "status":{"type":"string"}},
+          "title":"UpdateAccountStatusResponse"},
       "IssueAccountArtifactRequest": {
         "type": "object",
         "properties": {
