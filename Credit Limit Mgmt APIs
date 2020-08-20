@@ -5,15 +5,15 @@
     "title" : "API Reference"
   },
   "tags" : [ {
-    "name" : "Account controller"
+    "name" : "Credit account"
   }, {
-    "name" : "Audit log controller"
+    "name" : "Credit audit log"
   }
   ],
   "paths" : {
     "/api/v1/ifi/{ifiID}/credits/account" : {
       "post" : {
-        "tags" : [ "Account controller" ],
+        "tags" : [ "Credit account" ],
         "summary" : "Create credit account",
         "description" : "Set up a credit account for an account holder level.",
         "operationId" : "createAccount",
@@ -48,7 +48,7 @@
     },
     "/api/v1/ifi/{ifiID}/credits/account/{accountID}" : {
       "get" : {
-        "tags" : [ "Account controller" ],
+        "tags" : [ "Credit account" ],
         "summary" : "Get credit account",
         "description" : "Retrieve credit details for a credit account.",
         "operationId" : "getAccountById",
@@ -75,7 +75,7 @@
         }
       },
       "put" : {
-        "tags" : [ "Account controller" ],
+        "tags" : [ "Credit account" ],
         "summary" : "Update credit account limit",
         "description" : "Set or update credit limit of a credit account for an account holder.",
         "operationId" : "changeAccountLimit",
@@ -109,7 +109,7 @@
         }
       },
       "patch" : {
-        "tags" : [ "Account controller" ],
+        "tags" : [ "Credit account" ],
         "summary" : "Update credit account status",
         "description" : "Update status of a credit account. Possible transition states to update the credit account status are:
         <ul><li>ACTIVE: Set credit limit as active to allow account holders to use the limit</li><li>INACTIVE: Set credit limit as temporarily inactive to disable account holders to use the limit</li> <li>DELETED: Set credit limit as permanently disabled</li></ul>",
@@ -148,7 +148,7 @@
     },
     "/api/v1/ifi/{ifiID}/credits/account/{accountID}/audit/logs" : {
       "get" : {
-        "tags" : [ "Audit log controller" ],
+        "tags" : [ "Credit audit log" ],
         "summary" : "Get all credit audit logs for a credit account",
         "description" : "Retrieve the credit logs of a specific credit account under an IFI. Use pageNumber and `page` and `size` query parameters for a paginated view.",
         "operationId" : "getAuditLogByAccountId",
@@ -192,7 +192,7 @@
     },
     "/api/v1/ifi/{ifiID}/credits/audit/logs" : {
       "get" : {
-        "tags" : [ "Audit log controller" ],
+        "tags" : [ "Credit audit log" ],
         "summary" : "Get all credit audit logs",
         "description" : "Retrieve the details of credit logs of all credit accounts under an IFI. Use pageNumber and `page` and `size` query parameters for a paginated view.",
         "operationId" : "getAuditLogByVboId",
