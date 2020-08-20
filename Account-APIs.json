@@ -663,7 +663,8 @@
           "Account status"
         ],
         "summary":"Update Account Status",
-        "description": "Change account status from Account to another. </br></br>_Important_: Each fund transfer must have a unique identifier, `requestID`.",
+        "description": "Block or unblock debits, credits, or both for an account holder's account. Possible transition states to update the account status are:
+        <ul><li>ENABLED: Set to enable account holders to perform both credit and debit using the account</li><li>DEBITS_DISABLED: Set to disable account holders to perform debit using the account</li> <li>CREDITS_DISABLED: Set to disable account holders to perform credit using the account</li><li>BLOCKED: Set to disable account holders to perform both credit and debit using the account</li><li>CLOSED: Set to permanently close the account</li></ul>",
         "operationId": "updateAccountStatusUsingPUT_1",
         "parameters": [
           {
