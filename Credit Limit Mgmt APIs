@@ -22,12 +22,14 @@
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI.",
           "required" : true,
           "type" : "integer",
           "format" : "int64"
         }, {
           "in" : "body",
           "name" : "body",
+          "description" : "Specify the account and credit limit details in the request body.",
           "required" : false,
           "schema" : {
             "$ref" : "#/definitions/CreateAccountPayload"
@@ -56,12 +58,14 @@
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI.",
           "required" : true,
           "type" : "integer",
           "format" : "int64"
         }, {
           "name" : "accountID",
           "in" : "path",
+          "description" : "ID of the Account whose credit details to be retrieved.",
           "required" : true,
           "type" : "string"
         } ],
@@ -83,17 +87,20 @@
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI.",
           "required" : true,
           "type" : "integer",
           "format" : "int64"
         }, {
           "name" : "accountID",
           "in" : "path",
+          "description" : "ID of the Account whose credit details to be updated.",
           "required" : true,
           "type" : "string"
         }, {
           "in" : "body",
           "name" : "body",
+          "description" : "Update the credit limit in the request body.",
           "required" : false,
           "schema" : {
             "$ref" : "#/definitions/UpdateAccountPayload"
@@ -118,12 +125,14 @@
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI.",
           "required" : true,
           "type" : "integer",
           "format" : "int64"
         }, {
           "name" : "accountID",
           "in" : "path",
+          "description" : "ID of the Account whose credit status to be updated.",
           "required" : true,
           "type" : "string"
         }, {
@@ -150,29 +159,33 @@
       "get" : {
         "tags" : [ "Credit audit log" ],
         "summary" : "Get all credit audit logs for a credit account",
-        "description" : "Retrieve the credit logs of a specific credit account under an IFI. Use pageNumber and `page` and `size` query parameters for a paginated view.",
+        "description" : "Retrieve the credit logs of a specific credit account under an IFI. Use `page` and `size` query parameters for a paginated view.",
         "operationId" : "getAuditLogByAccountId",
         "produces" : [ "application/json" ],
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI.",
           "required" : true,
           "type" : "integer",
           "format" : "int64"
         }, {
           "name" : "accountID",
           "in" : "path",
+          "description" : "ID of the Account whose credit logs to be retrieved.",
           "required" : true,
           "type" : "string"
         }, {
           "name" : "page",
           "in" : "query",
+          "description" : "Index of the page requested.",
           "required" : true,
           "type" : "integer",
           "format" : "int32"
         }, {
           "name" : "size",
           "in" : "query",
+          "description" : "Maximum number of results to be returned per request.",
           "required" : true,
           "type" : "integer",
           "format" : "int32"
@@ -194,24 +207,27 @@
       "get" : {
         "tags" : [ "Credit audit log" ],
         "summary" : "Get all credit audit logs",
-        "description" : "Retrieve the details of credit logs of all credit accounts under an IFI. Use pageNumber and `page` and `size` query parameters for a paginated view.",
+        "description" : "Retrieve the details of credit logs of all credit accounts under an IFI. Use `page` and `size` query parameters for a paginated view.",
         "operationId" : "getAuditLogByVboId",
         "produces" : [ "application/json" ],
         "parameters" : [ {
           "name" : "ifiID",
           "in" : "path",
+          "description" : "ID of the IFI.",
           "required" : true,
           "type" : "integer",
           "format" : "int64"
         }, {
           "name" : "page",
           "in" : "query",
+          "description" : "Index of the page requested.",
           "required" : true,
           "type" : "integer",
           "format" : "int32"
         }, {
           "name" : "size",
           "in" : "query",
+          "description" : "Maximum number of results to be returned per request.",
           "required" : true,
           "type" : "integer",
           "format" : "int32"
