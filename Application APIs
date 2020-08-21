@@ -1,1 +1,294 @@
-new file
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": ""
+  },
+  "tags": [
+    {
+      "name": "Create application"
+    },
+    {
+      "name": "Manage application"
+    }
+  ],
+  "paths": {
+    "/api/v2/ifi/{ifiID}/applications/newIndividualApplication": {
+      "post": {
+        "tags": [
+          "Create application"
+        ],
+        "summary": "Create new application",
+        "description": "Create a new application with status as `PROCESSING`. The API call returns a unique application identifier `applicationID` in response.",
+        "operationId": "newIndividualApplication",
+        "parameters": [
+          {
+            "name": "ifiID",
+            "in": "path",
+            "description": "ID of the IFI.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "example": 140827
+            }
+          },
+        ],
+        "requestBody": {
+          "description": "Provide applicant’s personal information, contact number and KYC information in the request body.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/newIndividualApplicationRequest"
+              },
+              "example": {
+                "requestID": "request_final_RAHApplication",
+                "firstName": "RAH_1_final",
+                "dob": "2001-04-22T00:00+05:30",
+                "vectors": [
+                  {
+                    "type": "p",
+                    "value": "+919200382301"
+                  }
+                ],
+                "kycDetails": {
+                  "kycStatus": "AADHAAR_OTP",
+                  "kycStatusPostExpiry": "MINIMAL",
+                  "authType": "AADHAAR"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "servers": [
+          {
+            "url": "http://example.com/ifi/140827/applications",
+            "variables": {}
+          }
+        ]
+      }
+    },
+    "/api/v2/ifi/{ifiID}/applications/{applicationID}/mark/{newStatus}": {
+      "put": {
+        "tags": [
+          "Manage application"
+        ],
+        "summary": "Review application",
+        "description": "Based on the details submitted and the qualifying criteria set, mark an application either `COMPLETED` or `REJECTED`. <ul><li>Move completed application to the approval stage.</li> <li>Address the reason of rejected application and re-submit again.</li></ul>",
+        "operationId": "markCompleted",
+        "parameters": [
+          {
+            "name": "ifiID",
+            "in": "path",
+            "description": "ID of the IFI.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "example": 140827
+            }
+          },
+          {
+            "name": "applicationID",
+            "in": "path",
+            "description": "Unique identifier of the Application.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "",
+              "example": 147247
+            }
+          },
+          {
+            "name": "newStatus",
+            "in": "path",
+            "description": "Supported status types are `COMPLETED` or `REJECTED`.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "",
+              "example": COMPLETED
+            }
+          },
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "servers": [
+          {
+            "url": "https://fusion.preprod.zeta.in/api/v2/ifi/140827/applications/272230",
+            "variables": {}
+          }
+        ]
+      }
+    },
+    "/api/v2/ifi/{ifiID}/applications/{applicationID}/status/{newStatus}": {
+      "put": {
+        "tags": [
+          "Manage application"
+        ],
+        "summary": "Update application",
+        "description": "Approve the application to complete the workflow. Mark an application either `APPROVED` or `REJECTED`. <BR><BR>
+        Issuer reviews the approved application as per KYC regulations and confirms to create the account holder.",
+        "operationId": "markRejected",
+        "parameters": [
+          {
+            "name": "ifiID",
+            "in": "path",
+            "description": "ID of the IFI.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "example": 140827
+            }
+          },
+          {
+            "name": "applicationID",
+            "in": "path",
+            "description": "Unique identifier of the Application.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "",
+              "example": 147247
+            }
+          },
+          {
+            "name": "newStatus",
+            "in": "path",
+            "description": "Supported status types are `APPROVED` or `REJECTED`.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "",
+              "example": APPROVED
+            }
+          },
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "servers": [
+          {
+            "url": "https://fusion.preprod.zeta.in/api/v2/ifi/140827/applications/272230",
+            "variables": {}
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "newIndividualApplicationRequest": {
+        "title": "newIndividualApplicationRequest",
+        "required": [
+          "requestID",
+          "firstName",
+          "dob",
+          "vectors",
+          "kycDetails"
+        ],
+        "type": "object",
+        "properties": {
+          "requestID": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "dob": {
+            "type": "string"
+          },
+          "vectors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Vector"
+            },
+            "description": ""
+          },
+          "kycDetails": {
+            "$ref": "#/components/schemas/KycDetails"
+          }
+        },
+        "example": {
+          "requestID": "request_final_RAHApplication",
+          "firstName": "RAH_1_final",
+          "dob": "2001-04-22T00:00+05:30",
+          "vectors": [
+            {
+              "type": "p",
+              "value": "+919200382301"
+            }
+          ],
+          "kycDetails": {
+            "kycStatus": "AADHAAR_OTP",
+            "kycStatusPostExpiry": "MINIMAL",
+            "authType": "AADHAAR"
+          }
+        }
+      },
+      "Vector": {
+        "title": "Vector",
+        "required": [
+          "type",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "type": "p",
+          "value": "+919200382301"
+        }
+      },
+      "KycDetails": {
+        "title": "KycDetails",
+        "required": [
+          "kycStatus",
+          "kycStatusPostExpiry",
+          "authType"
+        ],
+        "type": "object",
+        "properties": {
+          "kycStatus": {
+            "type": "string"
+          },
+          "kycStatusPostExpiry": {
+            "type": "string"
+          },
+          "authType": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "kycStatus": "AADHAAR_OTP",
+          "kycStatusPostExpiry": "MINIMAL",
+          "authType": "AADHAAR"
+        }
+      }
+    }
+  },
+}
